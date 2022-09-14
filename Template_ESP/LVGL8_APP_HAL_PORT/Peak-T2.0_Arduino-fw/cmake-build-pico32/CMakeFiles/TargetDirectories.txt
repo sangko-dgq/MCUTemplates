@@ -1,0 +1,5 @@
+C:/Users/22012/Desktop/MCUTemplates/Template_ESP/LVGL8_APP_HAL_PORT/Peak-T2.0_Arduino-fw/cmake-build-pico32/CMakeFiles/Production.dir
+C:/Users/22012/Desktop/MCUTemplates/Template_ESP/LVGL8_APP_HAL_PORT/Peak-T2.0_Arduino-fw/cmake-build-pico32/CMakeFiles/edit_cache.dir
+C:/Users/22012/Desktop/MCUTemplates/Template_ESP/LVGL8_APP_HAL_PORT/Peak-T2.0_Arduino-fw/cmake-build-pico32/CMakeFiles/Debug.dir
+C:/Users/22012/Desktop/MCUTemplates/Template_ESP/LVGL8_APP_HAL_PORT/Peak-T2.0_Arduino-fw/cmake-build-pico32/CMakeFiles/Z_DUMMY_TARGET.dir
+C:/Users/22012/Desktop/MCUTemplates/Template_ESP/LVGL8_APP_HAL_PORT/Peak-T2.0_Arduino-fw/cmake-build-pico32/CMakeFiles/rebuild_cache.dir

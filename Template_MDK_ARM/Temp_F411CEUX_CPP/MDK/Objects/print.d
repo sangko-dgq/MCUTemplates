@@ -1,0 +1,16 @@
+.\objects\print.o: ..\Libs\ArduinoAPI\Print.cpp
+.\objects\print.o: ..\Libs\ArduinoAPI\Print.h
+.\objects\print.o: ..\Libs\ArduinoAPI\libmaple_types.h
+.\objects\print.o: E:\Keil_MDK5.35\Core\ARM\ARMCC\Bin\..\include\stdint.h
+.\objects\print.o: ..\Libs\ArduinoAPI\WString.h
+.\objects\print.o: ..\Libs\ArduinoAPI\dtostrf.h
+.\objects\print.o: E:\Keil_MDK5.35\Core\ARM\ARMCC\Bin\..\include\stdio.h
+.\objects\print.o: E:\Keil_MDK5.35\Core\ARM\ARMCC\Bin\..\include\stdlib.h
+.\objects\print.o: E:\Keil_MDK5.35\Core\ARM\ARMCC\Bin\..\include\string.h
+.\objects\print.o: E:\Keil_MDK5.35\Core\ARM\ARMCC\Bin\..\include\ctype.h
+.\objects\print.o: ..\Libs\ArduinoAPI\itoa.h
+.\objects\print.o: ..\Libs\ArduinoAPI\Printable.h
+.\objects\print.o: ..\Libs\ArduinoAPI\wirish_math.h
+.\objects\print.o: E:\Keil_MDK5.35\Core\ARM\ARMCC\Bin\..\include\math.h
+.\objects\print.o: E:\Keil_MDK5.35\Core\ARM\ARMCC\Bin\..\include\limits.h
+.\objects\print.o: E:\Keil_MDK5.35\Core\ARM\ARMCC\Bin\..\include\stdarg.h

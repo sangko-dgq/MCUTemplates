@@ -1,0 +1,67 @@
+<html>
+<body>
+<pre>
+<h1>µVision Build Log</h1>
+<h2>Tool Versions:</h2>
+IDE-Version: ¦ÌVision V5.35.0.0
+Copyright (C) 2021 ARM Ltd and ARM Germany GmbH. All rights reserved.
+License Information: Sangko Deng, 1, LIC=Z3C6R-KSQ55-NT43G-VZLXG-BQK6A-360DA
+ 
+Tool Versions:
+Toolchain:       MDK-ARM Professional  Version: 5.35.0.2
+Toolchain Path:  E:\Keil_MDK5.35\Core\ARM\ARMCC\Bin
+C Compiler:      Armcc.exe V5.06 update 7 (build 960)
+Assembler:       Armasm.exe V5.06 update 7 (build 960)
+Linker/Locator:  ArmLink.exe V5.06 update 7 (build 960)
+Library Manager: ArmAr.exe V5.06 update 7 (build 960)
+Hex Converter:   FromElf.exe V5.06 update 7 (build 960)
+CPU DLL:         SARMCM3.DLL V5.35.0.2
+Dialog DLL:      DCM.DLL V1.17.3.0
+Target DLL:      STLink\ST-LINKIII-KEIL_SWO.dll V3.0.9.0
+Dialog DLL:      TCM.DLL V1.53.0.0
+ 
+<h2>Project:</h2>
+C:\Users\Administrator\Desktop\MCUTemplates\Template_MDK_ARM\Temp_F411CEUX_LVGL_CPP\LV7.11\Temp_F411CEUX_CPP_LVGL\MDK\Temp_F411CEUX_CPP_SPI_LCD.uvprojx
+Project File Date:  10/24/2021
+
+<h2>Output:</h2>
+*** Using Compiler 'V5.06 update 7 (build 960)', folder: 'E:\Keil_MDK5.35\Core\ARM\ARMCC\Bin'
+Build target 'Temp_F411CEUX_CPP_SPI_LCD'
+compiling Test002.cpp...
+..\User\APP\LV_APP\Page\Test002.cpp(25): error:  #20: identifier "fullblack" is undefined
+      lbgc_m(StartupScreen, fullblack);
+..\User\APP\LV_APP\Page\Test002.cpp(33): error:  #20: identifier "softred" is undefined
+      lbgc_m(AnimLine_L, softred);
+..\User\APP\LV_APP\Page\Test002.cpp(49): error:  #20: identifier "Sarasa_Mono_SC_regular_16" is undefined
+      lfont(LOGO, &Sarasa_Mono_SC_regular_16, softwhite);
+..\User\APP\LV_APP\Page\Test002.cpp(49): error:  #20: identifier "softwhite" is undefined
+      lfont(LOGO, &Sarasa_Mono_SC_regular_16, softwhite);
+..\User\APP\LV_APP\Page\Test002.cpp(78): error:  #167: argument of type "void (*)()" is incompatible with parameter of type "lv_anim_ready_cb_t"
+      lanimed_cb(mask_L, (lv_anim_exec_xcb_t)lv_obj_set_x, 800, 24, -SCR_W + 50, lv_anim_path_linear, LOGO_anim_start);
+..\User\APP\LV_APP\Page\Test002.cpp(79): error:  #167: argument of type "void (*)()" is incompatible with parameter of type "lv_anim_ready_cb_t"
+      lanimed_cb(mask_R, (lv_anim_exec_xcb_t)lv_obj_set_x, 800, 24,  SCR_W, lv_anim_path_linear, LOGO_anim_start);
+..\User\APP\LV_APP\Page\Test002.cpp(81): error:  #167: argument of type "void (*)()" is incompatible with parameter of type "lv_anim_ready_cb_t"
+      lanimed_cb(LOGO,  (lv_anim_exec_xcb_t)lv_obj_set_y, 1250, 138, 106, lv_anim_path_linear, tempVoidAnim);
+..\User\APP\LV_APP\Page\Test002.cpp(89): error:  #167: argument of type "void (*)()" is incompatible with parameter of type "lv_anim_ready_cb_t"
+      lanimed_cb(tempVoidObj,  (lv_anim_exec_xcb_t)lv_obj_set_width, 700, 0, 0, lv_anim_path_linear, loadMainScreen);
+..\User\APP\LV_APP\Page\Test002.cpp: 0 warnings, 8 errors
+compiling LvQuick.cpp...
+compiling lv_obj.c...
+".\Objects\Temp_F411CEUX_CPP_SPI_LCD.axf" - 8 Error(s), 0 Warning(s).
+
+<h2>Software Packages used:</h2>
+
+Package Vendor: Keil
+                http://www.keil.com/pack/Keil.STM32F4xx_DFP.2.12.0.pack
+                Keil.STM32F4xx_DFP.2.12.0
+                STMicroelectronics STM32F4 Series Device Support, Drivers and Examples
+
+<h2>Collection of Component include folders:</h2>
+  E:\Keil_MDK5.35\Packs\Keil\STM32F4xx_DFP\2.12.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include
+
+<h2>Collection of Component Files used:</h2>
+Target not created.
+Build Time Elapsed:  00:00:10
+</pre>
+</body>
+</html>

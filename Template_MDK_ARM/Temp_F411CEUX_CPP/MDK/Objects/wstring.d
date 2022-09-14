@@ -1,0 +1,9 @@
+.\objects\wstring.o: ..\Libs\ArduinoAPI\WString.cpp
+.\objects\wstring.o: ..\Libs\ArduinoAPI\WString.h
+.\objects\wstring.o: ..\Libs\ArduinoAPI\dtostrf.h
+.\objects\wstring.o: E:\Keil_MDK5.35\Core\ARM\ARMCC\Bin\..\include\stdio.h
+.\objects\wstring.o: E:\Keil_MDK5.35\Core\ARM\ARMCC\Bin\..\include\stdlib.h
+.\objects\wstring.o: E:\Keil_MDK5.35\Core\ARM\ARMCC\Bin\..\include\string.h
+.\objects\wstring.o: E:\Keil_MDK5.35\Core\ARM\ARMCC\Bin\..\include\ctype.h
+.\objects\wstring.o: ..\Libs\ArduinoAPI\itoa.h
+.\objects\wstring.o: E:\Keil_MDK5.35\Core\ARM\ARMCC\Bin\..\include\stdarg.h

@@ -1,0 +1,9 @@
+.\objects\lv_printf.o: ..\Libs\LittleVGL\lvgl\src\lv_misc\lv_printf.c
+.\objects\lv_printf.o: ..\Libs\LittleVGL\lvgl\src\lv_misc\lv_printf.h
+.\objects\lv_printf.o: ..\Libs\LittleVGL\lvgl\src\lv_misc\../lv_conf_internal.h
+.\objects\lv_printf.o: E:\Keil_MDK5.35\Core\ARM\ARMCC\Bin\..\include\stdint.h
+.\objects\lv_printf.o: ..\Libs\LittleVGL\lvgl\src\lv_misc\../lv_conf_kconfig.h
+.\objects\lv_printf.o: ..\Libs\LittleVGL\lvgl\src\lv_misc\../../../lv_conf.h
+.\objects\lv_printf.o: E:\Keil_MDK5.35\Core\ARM\ARMCC\Bin\..\include\stdarg.h
+.\objects\lv_printf.o: E:\Keil_MDK5.35\Core\ARM\ARMCC\Bin\..\include\stddef.h
+.\objects\lv_printf.o: E:\Keil_MDK5.35\Core\ARM\ARMCC\Bin\..\include\stdbool.h

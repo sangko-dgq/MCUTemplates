@@ -1,0 +1,5 @@
+lvgl/lvgl@^8.1.0
+bodmer/TFT_eSPI@^2.4.42
+NimBLE-Arduino
+lvgl/lv_examples@^8.1.1-dev
+mikalhart/TinyGPSPlus@^1.0.3

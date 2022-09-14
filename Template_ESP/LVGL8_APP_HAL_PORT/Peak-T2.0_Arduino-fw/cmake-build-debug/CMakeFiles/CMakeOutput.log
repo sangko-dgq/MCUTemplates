@@ -1,0 +1,28 @@
+The target system is: Generic -  - 
+The host system is: Windows - 10.0.22622 - AMD64
+Compiling the C compiler identification source file "CMakeCCompilerId.c" succeeded.
+Compiler: D:/Application/CLion 2021.3.4/bin/mingw/bin/gcc.exe 
+Build flags: 
+Id flags:  
+
+The output was:
+0
+
+
+Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "a.exe"
+
+The C compiler identification is GNU, found in "C:/Users/22012/Desktop/MCUTemplates/Template_ESP/LVGL8_APP_HAL_PORT/Peak-T2.0_Arduino-fw/cmake-build-debug/CMakeFiles/3.21.1/CompilerIdC/a.exe"
+
+Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" succeeded.
+Compiler: D:/Application/CLion 2021.3.4/bin/mingw/bin/g++.exe 
+Build flags: 
+Id flags:  
+
+The output was:
+0
+
+
+Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "a.exe"
+
+The CXX compiler identification is GNU, found in "C:/Users/22012/Desktop/MCUTemplates/Template_ESP/LVGL8_APP_HAL_PORT/Peak-T2.0_Arduino-fw/cmake-build-debug/CMakeFiles/3.21.1/CompilerIdCXX/a.exe"
+
