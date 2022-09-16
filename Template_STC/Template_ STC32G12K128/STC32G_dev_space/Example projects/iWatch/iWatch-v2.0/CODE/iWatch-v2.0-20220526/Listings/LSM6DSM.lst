@@ -1,0 +1,322 @@
+C251 COMPILER V5.60.0,  LSM6DSM                                                            24/08/22  14:45:54  PAGE 1   
+
+
+C251 COMPILER V5.60.0, COMPILATION OF MODULE LSM6DSM
+OBJECT MODULE PLACED IN .\Objects\LSM6DSM.obj
+COMPILER INVOKED BY: D:\Application\keilC251_v560\C251\BIN\C251.EXE User\Sensor\LSM6DSM.c XSMALL ROM(HUGE) OPTIMIZE(8,SP
+                    -EED) BROWSE INCDIR(.\User;.\User\oled_gui;.\User\oled_gui\oled_core;.\User\oled_gui\oled_widget;.\User\PageManage;.\User
+                    -\Sensor;.\User\System;.\User\Bluetooth) DEBUG PRINT(.\Listings\LSM6DSM.lst) TABS(2) OBJECT(.\Objects\LSM6DSM.obj) 
+
+stmt  level    source
+
+    1          #include "IIC.h"
+    2          #include "LSM6DSM.h"
+    3          #include "math.h"
+    4          #include "Delay.h"
+    5          
+    6          static unsigned char embedded_func_usage = 0; // 0x01: AWT enable
+    7                                                        // 0x02: Pedometer enable
+    8                                                        // 0x04: Tap-detect enable
+    9          
+   10          void LSM6DSMWriteByte(unsigned char addr, unsigned char dat)
+   11          {
+   12   1        Single_WriteIIC(LSM6DSM_IIC_ADDR, addr, dat);
+   13   1      }
+   14          unsigned char LSM6DSMReadByte(unsigned char addr)
+   15          {
+   16   1        unsigned char temp;
+   17   1        temp = Single_ReadIIC(LSM6DSM_IIC_ADDR, addr);
+   18   1        return temp;
+   19   1      }
+   20          void LSM6DSMRSetRegisterBits(unsigned char addr, unsigned char dat, unsigned char SC)
+   21          {
+   22   1        unsigned char temp;
+   23   1        temp = LSM6DSMReadByte(addr);
+   24   1        if(SC == 1)
+   25   1          temp |= dat;
+   26   1        else if(SC == 0)
+   27   1          temp &= ~dat;
+   28   1        LSM6DSMWriteByte(addr, temp);
+   29   1      }
+   30          unsigned char LSM6DSMCheckConnection()
+   31          {
+   32   1        unsigned char temp;
+   33   1        temp = LSM6DSMReadByte(WHO_AM_I);
+   34   1        if(temp == 0x6a)
+   35   1          return 1;
+   36   1        else
+   37   1          return 0;
+   38   1      }
+   39          void LSM6DSMConfigAcc(unsigned char acc_odr, unsigned char acc_scale)
+   40          {
+   41   1        LSM6DSMWriteByte(CTRL1_XL, acc_odr | acc_scale);
+   42   1      }
+   43          void LSM6DSMConfigGyr(unsigned char gyr_odr, unsigned char gyr_scale)
+   44          {
+   45   1        LSM6DSMWriteByte(CTRL2_G, gyr_odr | gyr_scale);
+   46   1      }
+   47          void LSM6DSMReadGYRAndACC(t_sLSM6DSM *p)
+   48          {
+   49   1        int buf[6];
+   50   1        I2C_Read_MultiBytes(LSM6DSM_IIC_ADDR, OUTX_L_G, 12, (unsigned char *)buf);
+   51   1        p->gyr_x = -buf[0];
+   52   1        p->gyr_y = buf[1];
+   53   1        p->gyr_z = -buf[2];
+   54   1        p->acc_x = -buf[3];
+   55   1        p->acc_y = buf[4];
+   56   1        p->acc_z = -buf[5];
+   57   1      }
+C251 COMPILER V5.60.0,  LSM6DSM                                                            24/08/22  14:45:54  PAGE 2   
+
+   58          /*
+   59          int LSM6DSMReadTemperature(void)
+   60          {
+   61            unsigned char buf[2];
+   62            int temp;
+   63            I2C_Read_MultiBytes(LSM6DSM_IIC_ADDR, OUT_TEMP_L, 2, buf);
+   64            temp = (buf[1] << 8) | buf[0];
+   65            return temp;
+   66          }
+   67          */
+   68          void LSM6DSMSoftReset(void)
+   69          {
+   70   1        LSM6DSMRSetRegisterBits(CTRL3_C, 0x01, 1);
+   71   1        Delay1ms(50);
+   72   1      }
+   73          void LSM6DSMEnableEMbeddedFunc(void)
+   74          {
+   75   1        LSM6DSMRSetRegisterBits(CTRL10_C, 0x04, 1);   // Enable embedded functions
+   76   1      }
+   77          void LSM6DSMDisableEMbeddedFunc(void)
+   78          {
+   79   1        LSM6DSMRSetRegisterBits(CTRL10_C, 0x04, 0);   // Disable embedded functions
+   80   1      }
+   81          void LSM6DSMEnableAWT(int angle, int delay)
+   82          {
+   83   1        unsigned char set_delay;
+   84   1        unsigned char set_angle;
+   85   1        set_delay = (unsigned char)(delay / 40);
+   86   1        set_angle = (unsigned char)(sin(angle * 3.1415926 / 180) * 64);
+   87   1        if(embedded_func_usage == 0)  //如果没有任何功能启动的话，则需要启动加速度传感器
+   88   1          LSM6DSMConfigAcc(ACC_ODR_26_HZ, ACC_SCALE_4_G);
+   89   1        LSM6DSMEnableEMbeddedFunc();
+   90   1        Delay1ms(50);
+   91   1        LSM6DSMDisableEMbeddedFunc();
+   92   1        LSM6DSMWriteByte(FUNC_CFG_ACCESS,   0xa0);        // Enable access to embedded registers (bank B) 
+   93   1        LSM6DSMWriteByte(A_WRIST_TILT_LAT,  set_delay);   // Set new latency in A_WRIST_TILT_LAT 
+   94   1        LSM6DSMWriteByte(A_WRIST_TILT_THS,  set_angle);   // Set new threshold in A_WRIST_TILT_THS 
+   95   1        LSM6DSMWriteByte(A_WRIST_TILT_Mask, WRIST_TILT_MASK_Ypos);  // Set new mask in A_WRIST_TILT_Mask 
+   96   1        LSM6DSMWriteByte(FUNC_CFG_ACCESS,   0x00);        // Disable access to embedded registers (bank B) 
+   97   1        LSM6DSMRSetRegisterBits(CTRL10_C, 0x84, 1);       // Enable embedded functions(0x04)
+   98   1                                                          // Enable AWT detection (0x80)
+   99   1        LSM6DSMRSetRegisterBits(DRDY_PULSE_CFG, 0x01, 1); // AWT interrupt driven to INT2 pin
+  100   1        embedded_func_usage |= 0x01;
+  101   1      }
+  102          /*
+  103          void LSM6DSMSetAWTMask(unsigned char mask)
+  104          {
+  105            if(embedded_func_usage & 0x01)
+  106              LSM6DSMWriteByte(A_WRIST_TILT_Mask, mask);
+  107          }
+  108          unsigned char LSM6DSMGetAWTIntSrc(void)
+  109          {
+  110            unsigned char temp;
+  111            temp = LSM6DSMReadByte(WRIST_TILT_IA);
+  112            LSM6DSMWriteByte(WRIST_TILT_IA, 0x00);
+  113            return temp;
+  114          }
+  115          */
+  116          void LSM6DSMDisableAWT(void)
+  117          {
+  118   1        LSM6DSMRSetRegisterBits(CTRL10_C, 0x80, 0);       // Disable AWT detection (0x80)
+  119   1        LSM6DSMRSetRegisterBits(DRDY_PULSE_CFG, 0x01, 0); // AWT interrupt disconnect to INT2 pin
+  120   1        embedded_func_usage &= ~0x01;
+  121   1        if(embedded_func_usage == 0)
+  122   1        {
+  123   2          LSM6DSMDisableEMbeddedFunc();
+C251 COMPILER V5.60.0,  LSM6DSM                                                            24/08/22  14:45:54  PAGE 3   
+
+  124   2          LSM6DSMConfigAcc(ACC_POWER_DOWN, ACC_SCALE_4_G);
+  125   2        }
+  126   1      }
+  127          /*
+  128          void LSM6DSMEnableTapDetection(void)
+  129          {
+  130            LSM6DSMRSetRegisterBits(TAP_CFG, 0x82, 1);    // Enable interrupts(0x80) and tap detection on X-axis(0x08)
+             -, Y-axis(0x04), Z-axis(0x02)
+  131            LSM6DSMRSetRegisterBits(TAP_THS_6D, 0x8c, 1); // Set tap threshold(LSB0 - MSB4, dafult value 00000) 
+  132            LSM6DSMWriteByte(INT_DUR2, 0x7f);             // Set Duration, Quiet and Shock time windows 
+  133            LSM6DSMRSetRegisterBits(WAKE_UP_THS, 0x80, 1);// Single & double-tap enabled (0x80)SINGLE_DOUBLE_TAP = 1
+             -, if = 0, SINGLE_TAP only)
+  134            //LSM6DSMRSetRegisterBits(MD1_CFG, 0x08, 1);    // (0x40)Single-tap interrupt driven to INT1 pin
+  135                                                          // (0x08)Double-tap interrupt driven to INT1 pin
+  136            LSM6DSMRSetRegisterBits(MD2_CFG, 0x08, 1);  // (0x40)Single-tap interrupt driven to INT2 pin
+  137                                                          // (0x08)Double-tap interrupt driven to INT2 pin
+  138          }
+  139          void LSM6DSMDisableTapDetection(void)
+  140          {
+  141            LSM6DSMRSetRegisterBits(TAP_CFG, 0x08|0x04|0x02, 0);  //tap detection on X-axis(0x08), Y-axis(0x04), Z-ax
+             -is(0x02)
+  142          }
+  143          */
+  144          void LSM6DSMEnablePedometer(unsigned int debounce_time, unsigned char debounce_step)
+  145          {
+  146   1        LSM6DSMWriteByte(FUNC_CFG_ACCESS, 0x80);              // Enable access to embedded functions registers (bank A)
+  147   1        LSM6DSMWriteByte(CONFIG_PEDO_THS_MIN, 0x8e);          // PEDO_FS = ±4 g and configure pedometer minimum thre
+             -shold value
+  148   1        LSM6DSMWriteByte(PEDO_DEB_REG, ((unsigned char)(debounce_time / 80) << 3) | (debounce_step & 0x07));
+  149   1        LSM6DSMWriteByte(FUNC_CFG_ACCESS, 0x00);              // Disable access to embedded functions registers (bank A
+             -)
+  150   1        if(embedded_func_usage == 0)  //如果没有任何功能启动的话，则需要启动加速度传感器
+  151   1          LSM6DSMConfigAcc(ACC_ODR_26_HZ, ACC_SCALE_4_G);
+  152   1        LSM6DSMRSetRegisterBits(CTRL10_C, 0x14, 1);           // Enable embedded functions and pedometer algorithm
+  153   1        //LSM6DSMRSetRegisterBits(INT1_CTRL, 0x80, 1);          // Step detector interrupt driven to INT1 pin
+  154   1        embedded_func_usage |= 0x02;
+  155   1      }
+  156          unsigned int LSM6DSMGetCurrentStep(void)
+  157          {
+  158   1        unsigned char tempL, tempH;
+  159   1        tempL = LSM6DSMReadByte(STEP_COUNTER_L);
+  160   1        tempH = LSM6DSMReadByte(STEP_COUNTER_H);
+  161   1        return ((tempH << 8) | tempL);
+  162   1      }
+  163          void LSM6DSMResetStepCounter(void)
+  164          {
+  165   1        LSM6DSMRSetRegisterBits(CTRL10_C, 0x02, 1);
+  166   1        Delay1ms(1);
+  167   1        LSM6DSMRSetRegisterBits(CTRL10_C, 0x02, 0);
+  168   1      }
+  169          void LSM6DSMDisablePedometer(void)
+  170          {
+  171   1        LSM6DSMRSetRegisterBits(CTRL10_C, 0x10, 0);           // Disable pedometer algorithm
+  172   1        embedded_func_usage &= ~0x02;
+  173   1        if(embedded_func_usage == 0)
+  174   1        {
+  175   2          LSM6DSMDisableEMbeddedFunc();
+  176   2          LSM6DSMConfigAcc(ACC_POWER_DOWN, ACC_SCALE_4_G);
+  177   2        }
+  178   1      }
+  179          
+  180          /*LSM6DSMInit初始化*/
+  181          unsigned char LSM6DSMInit(void)
+  182          {
+  183   1        /*超时时间*/
+  184   1        unsigned int time_out = 50; 
+C251 COMPILER V5.60.0,  LSM6DSM                                                            24/08/22  14:45:54  PAGE 4   
+
+  185   1        
+  186   1        Delay1ms(50);
+  187   1        
+  188   1        /*在超时时间内阻塞循环请求连接*/
+  189   1        while(LSM6DSMCheckConnection() == 0)
+  190   1        {
+  191   2          Delay1ms(1);
+  192   2          
+  193   2          /*未检测到LSM6DSM(超时时间到)*/
+  194   2          if(--time_out == 0)
+  195   2            return 0;
+  196   2        }
+  197   1        
+  198   1        /*检测到LSM6DSM*/
+  199   1        LSM6DSMSoftReset();
+  200   1        LSM6DSMRSetRegisterBits(CTRL3_C, 0x02, 1);  //data MSB @ lower address
+  201   1        LSM6DSMRSetRegisterBits(CTRL6_C, 0x10, 1);  //disable High-performance operating mode
+  202   1        //LSM6DSMConfigAcc(ACC_ODR_26_HZ, ACC_SCALE_4_G);
+  203   1        //LSM6DSMConfigGyr(GYR_POWER_DOWN, GYR_SCALE_500_DPS);
+  204   1        //LSM6DSMRSetRegisterBits(CTRL3_C, 0x20, 1);  //interrupt output pads active low
+  205   1        //LSM6DSMWriteByte(CTRL7_G,   0x04);          //Source register rounding function enable
+  206   1        //LSM6DSMEnableAWT(10, 100);              //20 degree, 400ms
+  207   1        //LSM6DSMEnableTapDetection();
+  208   1        //LSM6DSMEnablePedometer(1040, 6);        //debounce time = 1040ms, debounce step = 6 steps
+  209   1        //LSM6DSMEnableEMbeddedFunc();
+  210   1        return 1;
+  211   1      }
+  212          /******************************姿态解算相关************************************/
+  213          #define pi    3.14159265f                           
+  214          #define Kp    0.8f                        
+  215          #define Ki    0.001f                         
+  216          #define halfT 0.005f           
+  217          float idata q0=1,q1=0,q2=0,q3=0;   
+  218          float idata exInt=0,eyInt=0,ezInt=0; 
+  219          void IMUupdate(t_sLSM6DSM *p)
+  220          {
+  221   1        float data norm;
+  222   1        float idata ax, ay, az;
+  223   1        float idata gx, gy, gz;
+  224   1        float idata vx, vy, vz;
+  225   1        float idata ex, ey, ez;
+  226   1        
+  227   1        ax = p->acc_x;
+  228   1        ay = p->acc_y;
+  229   1        az = p->acc_z;
+  230   1        
+  231   1        gx = p->gyr_x * 0.0174533f / 65.536;
+  232   1        gy = p->gyr_y * 0.0174533f / 65.536;
+  233   1        gz = p->gyr_z * 0.0174533f / 65.536;
+  234   1      
+  235   1        norm = sqrt(ax*ax + ay*ay + az*az); //把加速度计的三维向量转成单维向量   
+  236   1        ax = ax / norm;
+  237   1        ay = ay / norm;
+  238   1        az = az / norm;
+  239   1      
+  240   1          //  下面是把四元数换算成《方向余弦矩阵》中的第三列的三个元素。 
+  241   1          //  根据余弦矩阵和欧拉角的定义，地理坐标系的重力向量，转到机体坐标系，正好是这三个元素
+  242   1          //  所以这里的vx vy vz，其实就是当前的欧拉角（即四元数）的机体坐标参照系上，换算出来的
+  243   1          //  重力单位向量。
+  244   1        vx = 2*(q1*q3 - q0*q2);
+  245   1        vy = 2*(q0*q1 + q2*q3);
+  246   1        vz = q0*q0 - q1*q1 - q2*q2 + q3*q3 ;
+  247   1      
+  248   1        ex = (ay*vz - az*vy) ;
+  249   1        ey = (az*vx - ax*vz) ;
+  250   1        ez = (ax*vy - ay*vx) ;
+C251 COMPILER V5.60.0,  LSM6DSM                                                            24/08/22  14:45:54  PAGE 5   
+
+  251   1      
+  252   1        exInt = exInt + ex * Ki;
+  253   1        eyInt = eyInt + ey * Ki;
+  254   1        ezInt = ezInt + ez * Ki;
+  255   1      
+  256   1        gx = gx + Kp*ex + exInt;
+  257   1        gy = gy + Kp*ey + eyInt;
+  258   1        gz = gz + Kp*ez + ezInt;
+  259   1      
+  260   1        q0 = q0 + (-q1*gx - q2*gy - q3*gz) * halfT;
+  261   1        q1 = q1 + ( q0*gx + q2*gz - q3*gy) * halfT;
+  262   1        q2 = q2 + ( q0*gy - q1*gz + q3*gx) * halfT;
+  263   1        q3 = q3 + ( q0*gz + q1*gy - q2*gx) * halfT;
+  264   1      
+  265   1        norm = sqrt(q0*q0 + q1*q1 + q2*q2 + q3*q3);
+  266   1        q0 = q0 / norm;
+  267   1        q1 = q1 / norm;
+  268   1        q2 = q2 / norm;
+  269   1        q3 = q3 / norm;
+  270   1      
+  271   1        p->AngleX = asin(2*(q0*q2 - q1*q3 )) * 57.2957795f; // 俯仰   换算成度
+  272   1        p->AngleY = asin(2*(q0*q1 + q2*q3 )) * 57.2957795f; // 横滚
+  273   1        p->AngleZ = atan((2*(q1*q2+q0*q3))/(q0*q0+q1*q1-q2*q2-q3*q3)) * 57.2957795f; // 偏航
+  274   1      }
+
+
+Module Information          Static   Overlayable
+------------------------------------------------
+  code size            =    ------     ------
+  ecode size           =      2147     ------
+  data size            =    ------     ------
+  idata size           =         8         12
+  pdata size           =    ------     ------
+  xdata size           =    ------     ------
+  xdata-const size     =    ------     ------
+  edata size           =        21         28
+  bit size             =    ------     ------
+  ebit size            =    ------     ------
+  bitaddressable size  =    ------     ------
+  ebitaddressable size =    ------     ------
+  far data size        =    ------     ------
+  huge data size       =    ------     ------
+  const size           =    ------     ------
+  hconst size          =        61     ------
+End of Module Information.
+
+
+C251 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

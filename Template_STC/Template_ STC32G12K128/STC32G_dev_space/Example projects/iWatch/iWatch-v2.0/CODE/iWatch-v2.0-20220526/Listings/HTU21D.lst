@@ -1,0 +1,121 @@
+C251 COMPILER V5.60.0,  HTU21D                                                             24/08/22  18:57:13  PAGE 1   
+
+
+C251 COMPILER V5.60.0, COMPILATION OF MODULE HTU21D
+OBJECT MODULE PLACED IN .\Objects\HTU21D.obj
+COMPILER INVOKED BY: D:\Application\keilC251_v560\C251\BIN\C251.EXE User\Sensor\HTU21D.c XSMALL ROM(HUGE) OPTIMIZE(8,SPE
+                    -ED) BROWSE INCDIR(.\User;.\User\oled_gui;.\User\oled_gui\oled_core;.\User\oled_gui\oled_widget;.\User\PageManage;.\User\
+                    -Sensor;.\User\System;.\User\Bluetooth) DEBUG PRINT(.\Listings\HTU21D.lst) TABS(2) OBJECT(.\Objects\HTU21D.obj) 
+
+stmt  level    source
+
+    1          #include "HTU21D.h"
+    2          #include "System.h"
+    3          
+    4          static unsigned char step = 0;
+    5          
+    6          void HTU21DSendCommand(unsigned char command)
+    7          {
+    8   1        P_SW2 |= 0x80;
+    9   1        I2C_Start();
+   10   1        I2C_SendByte(HTU21D_IIC_ADDR);
+   11   1        I2C_RecvACK();
+   12   1        I2C_SendByte(command);
+   13   1        I2C_RecvACK();
+   14   1        I2C_Stop();
+   15   1        P_SW2 &= 0x7f;
+   16   1      }
+   17          unsigned int HTU21DReadData()
+   18          {
+   19   1        unsigned int temp;
+   20   1        P_SW2 |= 0x80;
+   21   1        I2C_Start();
+   22   1        I2C_SendByte(HTU21D_IIC_ADDR | 0x01);
+   23   1        I2C_RecvACK();
+   24   1        temp = I2C_RecvByte() << 8;
+   25   1        I2C_SendACK();
+   26   1        temp |= I2C_RecvByte();
+   27   1        I2C_SendACK();
+   28   1        I2C_RecvByte();
+   29   1        I2C_SendNAK();
+   30   1        I2C_Stop();
+   31   1        P_SW2 &= 0x7f;
+   32   1        temp &= 0xfffc;
+   33   1        return temp;
+   34   1      }
+   35          void HTU21DStart(void)
+   36          {
+   37   1        step = 0;
+   38   1      }
+   39          unsigned char HTU21DGetTemperature(t_sHTU21D *p)
+   40          {
+   41   1        if(step == 0)
+   42   1        {
+   43   2          HTU21DSendCommand(TRG_TEMP_MEA_NOHOLD);
+   44   2          step = 1;
+   45   2          return 0;
+   46   2        }
+   47   1        else if(step == 1)
+   48   1        {
+   49   2          unsigned int temp = HTU21DReadData();
+   50   2          p->temperature = 175.72 * (long)temp / 65536.0 - 46.85;
+   51   2          step = 0;
+   52   2          return 1;
+   53   2        }
+   54   1        return 0;
+   55   1      }
+   56          unsigned char HTU21DGetHumidity(t_sHTU21D *p)
+   57          {
+C251 COMPILER V5.60.0,  HTU21D                                                             24/08/22  18:57:13  PAGE 2   
+
+   58   1        if(step == 0)
+   59   1        {
+   60   2          HTU21DSendCommand(TRG_HUMI_MEA_NOHOLD);
+   61   2          step = 1;
+   62   2          return 0;
+   63   2        }
+   64   1        else if(step == 1)
+   65   1        {
+   66   2          unsigned int temp = HTU21DReadData();
+   67   2          p->humidity = 125.0 * (long)temp / 65536.0 - 6.0;
+   68   2          step = 0;
+   69   2          return 1;
+   70   2        }
+   71   1        return 0;
+   72   1      }
+   73          void HTU21DReset(void)
+   74          {
+   75   1        P_SW2 |= 0x80;
+   76   1        I2C_Start();
+   77   1        I2C_SendByte(HTU21D_IIC_ADDR);
+   78   1        I2C_RecvACK();
+   79   1        I2C_SendByte(SOFT_RESET);
+   80   1        I2C_RecvACK();
+   81   1        I2C_Stop();
+   82   1        P_SW2 &= 0x7f;
+   83   1        Delay1ms(15);
+   84   1      }
+
+
+Module Information          Static   Overlayable
+------------------------------------------------
+  code size            =    ------     ------
+  ecode size           =       346     ------
+  data size            =    ------     ------
+  idata size           =    ------     ------
+  pdata size           =    ------     ------
+  xdata size           =    ------     ------
+  xdata-const size     =    ------     ------
+  edata size           =         1     ------
+  bit size             =    ------     ------
+  ebit size            =    ------     ------
+  bitaddressable size  =    ------     ------
+  ebitaddressable size =    ------     ------
+  far data size        =    ------     ------
+  huge data size       =    ------     ------
+  const size           =    ------     ------
+  hconst size          =         5     ------
+End of Module Information.
+
+
+C251 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

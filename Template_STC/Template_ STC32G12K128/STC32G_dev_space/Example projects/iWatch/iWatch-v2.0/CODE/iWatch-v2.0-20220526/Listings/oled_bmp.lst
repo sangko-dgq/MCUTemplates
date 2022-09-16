@@ -1,0 +1,179 @@
+C251 COMPILER V5.60.0,  oled_bmp                                                           23/08/22  22:51:17  PAGE 1   
+
+
+C251 COMPILER V5.60.0, COMPILATION OF MODULE oled_bmp
+OBJECT MODULE PLACED IN .\Objects\oled_bmp.obj
+COMPILER INVOKED BY: D:\Application\keilC251_v560\C251\BIN\C251.EXE User\oled_gui\oled_widget\oled_bmp.c XSMALL ROM(HUGE
+                    -) OPTIMIZE(8,SPEED) BROWSE INCDIR(.\User;.\User\oled_gui;.\User\oled_gui\oled_core;.\User\oled_gui\oled_widget;.\User\Pa
+                    -geManage;.\User\Sensor;.\User\System;.\User\Bluetooth) DEBUG PRINT(.\Listings\oled_bmp.lst) TABS(2) OBJECT(.\Objects\ole
+                    -d_bmp.obj) 
+
+stmt  level    source
+
+    1          #include "oled_bmp.h"
+    2          
+    3          t_psWidget og_bmp_create(t_psBMP psBMP, int16_t x, int16_t y)
+    4          {
+    5   1        t_psWidget pWidget = og_widget_create();
+    6   1        #ifdef OLED_DEBUG
+                 if(pWidget == NULL)
+                 {
+                   OG_PRINTERROR("bmp widget create fail");
+                   return NULL;
+                 }
+                 #endif
+   13   1        pWidget->pFeature = &(psBMP->bmp);
+   14   1        pWidget->w = psBMP->w;
+   15   1        pWidget->h = psBMP->h;
+   16   1        pWidget->x = x;
+   17   1        pWidget->y = y;
+   18   1        pWidget->config |= BMP_WIDGET;
+   19   1        og_widget_add(pWidget);
+   20   1        return pWidget;
+   21   1      }
+   22          void og_bmp_setBmp(t_psWidget pWidget, t_psBMP psBMP)
+   23          {
+   24   1        #ifdef OLED_DEBUG
+                 if(pWidget == NULL)
+                 { 
+                   OG_PRINTERROR("try to set a null widget");    
+                   return;
+                 }
+                 if((pWidget->config & 0x0f) != BMP_WIDGET)
+                 {
+                   OG_PRINTERROR("wrong type of widget for this method");
+                   return;
+                 } 
+                 #endif
+   36   1        pWidget->w = psBMP->w;
+   37   1        pWidget->h = psBMP->h;
+   38   1        pWidget->pFeature = &(psBMP->bmp);
+   39   1      }
+   40          /*
+   41          void og_bmp_setRotation(t_psWidget pWidget, uint8_t rotation)
+   42          {
+   43            #ifdef OLED_DEBUG
+   44            if(pWidget == NULL)
+   45            { 
+   46              OG_PRINTERROR("try to set a null widget");    
+   47              return;
+   48            }
+   49            if((pWidget->config & 0x0f) != BMP_WIDGET)
+   50            {
+   51              OG_PRINTERROR("wrong type of widget for this method");
+   52              return;
+   53            } 
+   54            #endif
+   55            pWidget->config &= ~0xC0;
+   56            pWidget->config |= (rotation << 6);
+C251 COMPILER V5.60.0,  oled_bmp                                                           23/08/22  22:51:17  PAGE 2   
+
+   57          }
+   58          uint8_t aabb(uint8_t x, uint8_t y, t_psWidget pWidget)
+   59          {
+   60            uint8_t *ptr = (uint8_t *)pWidget->pFeature;
+   61            uint8_t *offset = ptr + (pWidget->h/8 - 1 - x/8)*pWidget->w + y * 8;
+   62            uint8_t bit_mask = (0x80 >> (x%8));
+   63            uint8_t i, temp = 0;;
+   64            for(i = 0; i < 8; i++)
+   65            {
+   66              if(offset[i] & bit_mask)
+   67              {
+   68                temp |= (0x01 << i);
+   69              }
+   70            }
+   71            return temp;
+   72          }
+   73          */
+   74          void og_bmp_draw(t_psWidget pWidget)
+   75          {
+   76   1        #ifdef OLED_DEBUG
+                 if(pWidget == NULL)
+                 { 
+                   OG_PRINTERROR("try to set a null widget");    
+                   return;
+                 }
+                 if((pWidget->config & 0x0f) != BMP_WIDGET)
+                 {
+                   OG_PRINTERROR("wrong type of widget for this method");
+                   return;
+                 } 
+                 #endif
+   88   1        BMPtoBuf(pWidget->x, pWidget->y, pWidget->w, pWidget->h, pWidget->config & WIDGET_FOCUS, (uint8_t *)pWid
+             -get->pFeature);
+   89   1        /*
+   90   1        if((pWidget->config >> 6) == 0)
+   91   1          BMPtoBuf(pWidget->x, pWidget->y, pWidget->w, pWidget->h, pWidget->config & WIDGET_FOCUS, (uint8_t *)pWi
+             -dget->pFeature);
+   92   1        else
+   93   1        {
+   94   1          uint8_t rotation = pWidget->config >> 6;
+   95   1          uint8_t *ptr1;
+   96   1          if(rotation == 1)
+   97   1          {   
+   98   1            uint8_t w, h;
+   99   1            uint8_t i, j;
+  100   1            h = pWidget->w / 8 + ((pWidget->w % 8)!=0?1:0);
+  101   1            w = pWidget->h;
+  102   1            ptr1 = malloc(w * h);
+  103   1            for(i = 0; i < h; i++)
+  104   1            {
+  105   1              for(j = 0; j < w; j++)
+  106   1              {
+  107   1                ptr1[i * w + j] = aabb(j, i, pWidget);
+  108   1              }
+  109   1            }
+  110   1            BMPtoBuf(pWidget->x, pWidget->y, w, h * 8, pWidget->config & WIDGET_FOCUS, ptr1);
+  111   1            free(ptr1);
+  112   1          }
+  113   1          else if(rotation == 2)
+  114   1          {
+  115   1            uint16_t temp = pWidget->w * pWidget->h / 8;
+  116   1            uint8_t *ptr2 = (uint8_t *)pWidget->pFeature + temp - 1;
+  117   1            uint16_t i, j;
+  118   1            ptr1 = malloc(temp);
+  119   1            for(i = 0; i < temp; i++)
+  120   1            {
+C251 COMPILER V5.60.0,  oled_bmp                                                           23/08/22  22:51:17  PAGE 3   
+
+  121   1              ptr1[i] = 0;
+  122   1              for(j = 0; j < 8; j++)
+  123   1              {
+  124   1                if(*ptr2 & (0x01 << j))
+  125   1                  ptr1[i] |= (0x80 >> j);
+  126   1              }
+  127   1              ptr2--;
+  128   1            }
+  129   1            BMPtoBuf(pWidget->x, pWidget->y, pWidget->w, pWidget->h, pWidget->config & WIDGET_FOCUS, ptr1);
+  130   1            free(ptr1);
+  131   1          }
+  132   1          else if(rotation == 3)
+  133   1          {
+  134   1          }
+  135   1        }
+  136   1        */
+  137   1      }
+
+
+Module Information          Static   Overlayable
+------------------------------------------------
+  code size            =    ------     ------
+  ecode size           =       170     ------
+  data size            =    ------     ------
+  idata size           =    ------     ------
+  pdata size           =    ------     ------
+  xdata size           =    ------     ------
+  xdata-const size     =    ------     ------
+  edata size           =    ------          8
+  bit size             =    ------     ------
+  ebit size            =    ------     ------
+  bitaddressable size  =    ------     ------
+  ebitaddressable size =    ------     ------
+  far data size        =    ------     ------
+  huge data size       =    ------     ------
+  const size           =    ------     ------
+  hconst size          =    ------     ------
+End of Module Information.
+
+
+C251 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

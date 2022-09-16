@@ -1,0 +1,231 @@
+C251 COMPILER V5.60.0,  page_compass                                                       24/08/22  19:19:16  PAGE 1   
+
+
+C251 COMPILER V5.60.0, COMPILATION OF MODULE page_compass
+OBJECT MODULE PLACED IN .\Objects\page_compass.obj
+COMPILER INVOKED BY: D:\Application\keilC251_v560\C251\BIN\C251.EXE User\PageManage\page_compass.c XSMALL ROM(HUGE) OPTI
+                    -MIZE(8,SPEED) BROWSE INCDIR(.\User;.\User\oled_gui;.\User\oled_gui\oled_core;.\User\oled_gui\oled_widget;.\User\PageMana
+                    -ge;.\User\Sensor;.\User\System;.\User\Bluetooth) DEBUG PRINT(.\Listings\page_compass.lst) TABS(2) OBJECT(.\Objects\page_
+                    -compass.obj) 
+
+stmt  level    source
+
+    1          #include "iWatch.h"
+    2          
+    3          static unsigned char CODE Icon[] = {
+    4            48, 48,
+    5            0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x80,0xC0,0xE0,0x70,0x30,0x18,0x18,0x0C,0x0C,
+    6            0x0C,0x06,0x06,0x06,0x06,0x06,0x03,0xF3,0xF3,0x03,0x06,0x06,0x06,0x06,0x06,0x0C,
+    7            0x0C,0x1C,0x18,0x38,0x30,0x70,0xE0,0xC0,0x80,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+    8            0x00,0x00,0xC0,0xF0,0x3C,0x0E,0x07,0x03,0x01,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+    9            0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x0F,0x0F,0x00,0x00,0x00,0x80,0x80,0xC0,0xC0,
+   10            0xE0,0xE0,0xF0,0x30,0x00,0x00,0x00,0x01,0x03,0x07,0x1E,0x7C,0xF0,0xC0,0x00,0x00,
+   11            0xF0,0xFF,0x1F,0x00,0x80,0x80,0x80,0x80,0x80,0x80,0x80,0x00,0x00,0x00,0x00,0x00,
+   12            0x00,0x00,0x80,0xC0,0xF0,0x70,0x78,0xFC,0xFC,0xFE,0xFF,0xFF,0xFF,0xFF,0x7F,0x3F,
+   13            0x0F,0x03,0x00,0x00,0x00,0x80,0x80,0x80,0x80,0x80,0x80,0x80,0x01,0x3F,0xFE,0xC0,
+   14            0x0F,0xFF,0xF8,0x00,0x01,0x01,0x01,0x01,0x01,0x01,0x01,0x00,0x00,0x00,0xC0,0xF0,
+   15            0x7C,0x1E,0x8F,0xC3,0xC0,0x60,0x70,0x30,0x39,0x1F,0x0F,0x07,0x03,0x01,0x00,0x00,
+   16            0x00,0x00,0x00,0x00,0x00,0x01,0x01,0x01,0x01,0x01,0x01,0x01,0x80,0xFC,0x7F,0x0F,
+   17            0x00,0x00,0x03,0x0F,0x3C,0x70,0xE0,0xC0,0x80,0x00,0x00,0x08,0x0C,0x0F,0x07,0x07,
+   18            0x03,0x03,0x01,0x01,0x00,0x00,0x00,0xE0,0xE0,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+   19            0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x80,0xC0,0xE0,0x78,0x3E,0x0F,0x03,0x00,0x00,
+   20            0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x01,0x03,0x07,0x0E,0x0C,0x18,0x18,0x30,0x30,
+   21            0x70,0x60,0x60,0x60,0x60,0x60,0xC0,0xCF,0xCF,0xC0,0x60,0x60,0x60,0x60,0x60,0x30,
+   22            0x30,0x30,0x18,0x1C,0x0C,0x0E,0x07,0x03,0x01,0x00,0x00,0x00,0x00,0x00,0x00,0x00
+   23            /* (48 X 48 )*/
+   24          };
+   25          static t_psWidget text1;
+   26          static t_psWidget bmp1;
+   27          static t_psWidget canvas1;
+   28          static t_psWidget pp[8];
+   29          static t_psGroup group1;
+   30          
+   31          static char *code CH[8] = {
+   32            "北",
+   33            "东",
+   34            "南",
+   35            "西",
+   36            "东北",
+   37            "东南",
+   38            "西南",
+   39            "西北"
+   40          };
+   41          static unsigned char CODE POINTER[] = {
+   42            9, 32,
+   43            0x00,0x00,0x00,0x00,0xC0,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0xF8,0x07,0xF8,0x00,
+   44            0x00,0x00,0x00,0x00,0xF8,0x07,0x00,0x07,0xFC,0x00,0x00,0x00,0xF8,0x07,0x00,0x00,
+   45            0x00,0x07,0xF8,0x00
+   46            /* (9 X 32 )*/
+   47          };
+   48          
+   49          /**
+   50            * @brief  页面初始化事件
+   51            * @param  无
+   52            * @retval 无
+   53            */
+   54          static void Setup(unsigned char condition)
+   55          {
+   56   1        unsigned char i;
+C251 COMPILER V5.60.0,  page_compass                                                       24/08/22  19:19:16  PAGE 2   
+
+   57   1        group1 = og_group_create(11);
+   58   1        for(i = 0; i < 8; i++)
+   59   1        {
+   60   2          pp[i] = og_label_create(FONT_GB2312_15X16, 128, 64);
+   61   2          og_label_setText(pp[i], CH[i]);
+   62   2          og_group_addWidget(group1, pp[i], 0);
+   63   2        }
+   64   1        text1 = og_label_create(FONT_ASCII_8X16, 64, 0);
+   65   1        bmp1 = og_bmp_create((t_psBMP)POINTER, 60, 32);
+   66   1        canvas1 = og_canvas_create(128, 32, 0, 16);
+   67   1        og_group_addWidget(group1, text1, 0);
+   68   1        og_group_addWidget(group1, bmp1, 0);
+   69   1        og_group_addWidget(group1, canvas1, 0);
+   70   1        og_group_setPosOffset(group1, 0, 64);
+   71   1        og_group_addAnimOffset(group1, 0, -64, ANIM_TIME_NORM, ANIM_NULL_CB);
+   72   1        #if (MAG_SENSOR_SELECT == 1)
+   73   1        QMC5883LSetMode(1);
+   74   1        #endif
+   75   1        LSM6DSMConfigAcc(ACC_ODR_208_HZ, ACC_SCALE_4_G);
+   76   1        LSM6DSMConfigGyr(GYR_ODR_208_HZ, GYR_SCALE_500_DPS);
+   77   1      }
+*** WARNING C47 IN LINE 54 OF User\PageManage\page_compass.c: 'condition': unreferenced parameter
+   78          static void delet(void)
+   79          {
+   80   1        og_group_delet(group1);
+   81   1        pageSetStatus(page_compass, PAGE_IDLE);
+   82   1      }
+   83          /**
+   84            * @brief  页面退出事件
+   85            * @param  无
+   86            * @retval 无
+   87            */
+   88          static void Exit(unsigned char condition)
+   89          {
+   90   1        #if (MAG_SENSOR_SELECT == 1)
+   91   1        QMC5883LSetMode(0);
+   92   1        #endif
+   93   1        if(config.lsm6dsm_cfg == 0)
+   94   1          LSM6DSMConfigAcc(ACC_POWER_DOWN, ACC_SCALE_4_G);
+   95   1        else
+   96   1          LSM6DSMConfigAcc(ACC_ODR_26_HZ, ACC_SCALE_4_G);
+   97   1        LSM6DSMConfigGyr(GYR_POWER_DOWN, GYR_SCALE_500_DPS);
+   98   1        og_group_addAnimOffset(group1, 0, 64, ANIM_TIME_NORM, delet);
+   99   1      }
+*** WARNING C47 IN LINE 88 OF User\PageManage\page_compass.c: 'condition': unreferenced parameter
+  100          /**
+  101            * @brief  页面循环执行的内容
+  102            * @param  无
+  103            * @retval 无
+  104            */
+  105          static void Loop()
+  106          {
+  107   1        if(pageExecuteRate(&Rate100Hz))
+  108   1        {
+  109   2          /*
+  110   2          LSM6DSMReadGYRAndACC(&LSM6DSM);
+  111   2          IMUupdate(&LSM6DSM);
+  112   2          */
+  113   2        }
+  114   1        if(pageExecuteRate(&Rate50Hz))
+  115   1        {
+  116   2          float temp;
+  117   2          static float last_temp = 0;
+  118   2          int angle_from_north;
+  119   2          int cosA, sinA;
+  120   2          unsigned char i, j;
+C251 COMPILER V5.60.0,  page_compass                                                       24/08/22  19:19:16  PAGE 3   
+
+  121   2          #if (MAG_SENSOR_SELECT == 1)
+  122   2          QMC5883LRead(mag);
+  123   2          temp = QMC5883LCalYaw(mag, LSM6DSM.AngleX, LSM6DSM.AngleY);
+  124   2          #endif
+  125   2          if((temp > 360.0) || (temp < 0.0))
+  126   2            return;
+  127   2          if((temp - last_temp < -250.0) || (temp - last_temp > 250.0)) 
+  128   2            last_temp = temp;
+  129   2          else
+  130   2            last_temp = temp * 0.4 + last_temp * 0.6;
+  131   2          angle_from_north = last_temp + 0.5;
+  132   2          angle_from_north -= 90;
+  133   2          if(angle_from_north < 0)
+  134   2            angle_from_north += 360;
+  135   2          #if (MAG_SENSOR_SELECT == 0)
+                   og_label_setText(text1, NULL);
+                   #elif (MAG_SENSOR_SELECT == 1)
+  138   2          lablel_printf(text1, "%d", angle_from_north);
+  139   2          #endif
+  140   2          og_widget_setAlignment(text1, ALIGN_HORIZONMID);
+  141   2          cosA = cos(angle_from_north*0.017453292)*72;
+  142   2          sinA = sin(angle_from_north*0.017453292)*72;
+  143   2          og_widget_setPos(pp[0], 64 - sinA - 8, 96 - cosA - 8);
+  144   2          og_widget_setPos(pp[1], 64 + cosA - 8, 96 - sinA - 8);
+  145   2          og_widget_setPos(pp[2], 64 + sinA - 8, 96 + cosA - 8);
+  146   2          og_widget_setPos(pp[3], 64 - cosA - 8, 96 + sinA - 8);
+  147   2          og_canvas_clear(canvas1);
+  148   2          for(i = 0; i < 5; i++)
+  149   2          {
+  150   3            angle_from_north -= 15;
+  151   3            for(j = 0; j < 5; j++)
+  152   3            {
+  153   4              cosA = cos(angle_from_north * 0.017453292) * (68 + j * 2);
+  154   4              sinA = sin(angle_from_north * 0.017453292) * (68 + j * 2);
+  155   4              og_canvas_drawDot(canvas1, 64 - sinA, 80 - cosA);
+*** WARNING C188 IN LINE 155 OF User\PageManage\page_compass.c: 'parameter 2': value truncated
+*** WARNING C188 IN LINE 155 OF User\PageManage\page_compass.c: 'parameter 3': value truncated
+  156   4              og_canvas_drawDot(canvas1, 64 + cosA, 80 - sinA);
+*** WARNING C188 IN LINE 156 OF User\PageManage\page_compass.c: 'parameter 2': value truncated
+*** WARNING C188 IN LINE 156 OF User\PageManage\page_compass.c: 'parameter 3': value truncated
+  157   4              og_canvas_drawDot(canvas1, 64 + sinA, 80 + cosA);
+*** WARNING C188 IN LINE 157 OF User\PageManage\page_compass.c: 'parameter 2': value truncated
+*** WARNING C188 IN LINE 157 OF User\PageManage\page_compass.c: 'parameter 3': value truncated
+  158   4              og_canvas_drawDot(canvas1, 64 - cosA, 80 + sinA);
+*** WARNING C188 IN LINE 158 OF User\PageManage\page_compass.c: 'parameter 2': value truncated
+*** WARNING C188 IN LINE 158 OF User\PageManage\page_compass.c: 'parameter 3': value truncated
+  159   4            }
+  160   3          }
+  161   2        }
+  162   1      }
+  163          /**
+  164            * @brief  页面事件
+  165            * @param  btn:发出事件的按键
+  166            * @param  event:事件编号
+  167            * @retval 无
+  168            */
+  169          static void Event(unsigned char event)
+  170          {
+  171   1        if(event == KEY1_PRESSED)
+  172   1          pageShift(page_menu, PAGE_RETURN);
+  173   1        else if(event == KEY2_PRESSED)
+  174   1          pageShift(page_magcal, PAGE_ENTER);
+  175   1      }
+  176          void pageRegister_page_compass(unsigned char pageID)
+  177          {
+  178   1        pageRegister(pageID, "COMPASS", Icon, Setup, Loop, Exit, Event);
+C251 COMPILER V5.60.0,  page_compass                                                       24/08/22  19:19:16  PAGE 4   
+
+  179   1      }
+
+
+Module Information          Static   Overlayable
+------------------------------------------------
+  code size            =       360     ------
+  ecode size           =      1127     ------
+  data size            =    ------     ------
+  idata size           =    ------     ------
+  pdata size           =    ------     ------
+  xdata size           =    ------     ------
+  xdata-const size     =    ------     ------
+  edata size           =        52          4
+  bit size             =    ------     ------
+  ebit size            =    ------     ------
+  bitaddressable size  =    ------     ------
+  ebitaddressable size =    ------     ------
+  far data size        =    ------     ------
+  huge data size       =    ------     ------
+  const size           =    ------     ------
+  hconst size          =        51     ------
+End of Module Information.
+
+
+C251 COMPILATION COMPLETE.  10 WARNING(S),  0 ERROR(S)

@@ -1,0 +1,165 @@
+C251 COMPILER V5.60.0,  page_lsm6dsl                                                       24/08/22  19:19:43  PAGE 1   
+
+
+C251 COMPILER V5.60.0, COMPILATION OF MODULE page_lsm6dsl
+OBJECT MODULE PLACED IN .\Objects\page_lsm6dsl.obj
+COMPILER INVOKED BY: D:\Application\keilC251_v560\C251\BIN\C251.EXE User\PageManage\page_lsm6dsl.c XSMALL ROM(HUGE) OPTI
+                    -MIZE(8,SPEED) BROWSE INCDIR(.\User;.\User\oled_gui;.\User\oled_gui\oled_core;.\User\oled_gui\oled_widget;.\User\PageMana
+                    -ge;.\User\Sensor;.\User\System;.\User\Bluetooth) DEBUG PRINT(.\Listings\page_lsm6dsl.lst) TABS(2) OBJECT(.\Objects\page_
+                    -lsm6dsl.obj) 
+
+stmt  level    source
+
+    1          
+    2          
+    3          
+    4          #include "iWatch.h"
+    5          
+    6          static unsigned char CODE Icon[] = {
+    7            48, 48,
+    8            0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x80,0xC0,0xC0,0x60,0x60,
+    9            0x30,0x30,0x10,0x18,0x18,0x18,0x18,0x18,0x18,0x18,0x18,0x18,0x18,0x30,0x30,0x30,
+   10            0x60,0x60,0xC0,0xC0,0x80,0x00,0x00,0x80,0xE0,0xF0,0xF0,0x60,0x00,0x00,0x00,0x00,
+   11            0x00,0x00,0x00,0x00,0x00,0xC0,0xF0,0x38,0x0E,0x07,0x03,0xF1,0xF8,0x18,0x18,0x18,
+   12            0x98,0xF0,0xF0,0x60,0xF0,0xF8,0x98,0x98,0x0C,0x0C,0x04,0x06,0x06,0x06,0x06,0x06,
+   13            0x0C,0x0C,0x18,0x39,0xF3,0xC3,0x0F,0x1F,0x79,0xE0,0xC0,0x00,0x00,0x00,0x00,0x00,
+   14            0x00,0x00,0x00,0xF8,0xFF,0x03,0x00,0x00,0x00,0x00,0x00,0xE1,0xC7,0x1E,0x38,0xF3,
+   15            0xC3,0x81,0x08,0x3C,0xF8,0xF8,0xB1,0x73,0xE7,0xCE,0x9C,0x38,0x70,0xE0,0xC0,0x80,
+   16            0x00,0x00,0x00,0x80,0xF1,0x7F,0x00,0x00,0x00,0x01,0x0F,0xFE,0xF0,0x00,0x00,0x00,
+   17            0x00,0x00,0x00,0x1F,0xFF,0xE0,0x00,0x00,0x00,0xF8,0xFF,0x03,0x00,0x00,0x00,0x00,
+   18            0x01,0x03,0x07,0x0E,0x1C,0x39,0x73,0xE7,0xC6,0x8F,0x1F,0x1E,0x1C,0x80,0x81,0xE3,
+   19            0x7F,0x3C,0xFE,0xE7,0x83,0x00,0x00,0x00,0x00,0x80,0xF0,0x7F,0x07,0x00,0x00,0x00,
+   20            0x00,0x00,0x00,0x00,0x00,0x03,0x0F,0x9C,0xF8,0xF0,0xC3,0xCF,0x9C,0x18,0x30,0x30,
+   21            0x30,0x20,0x20,0x20,0x30,0x30,0x30,0x18,0x19,0x19,0x03,0x07,0x06,0x0C,0x0D,0x1C,
+   22            0x18,0x18,0x18,0x8F,0xC7,0xE0,0x70,0x38,0x0E,0x07,0x01,0x00,0x00,0x00,0x00,0x00,
+   23            0x00,0x00,0x00,0x00,0x06,0x0F,0x0F,0x07,0x01,0x00,0x00,0x01,0x01,0x03,0x07,0x06,
+   24            0x06,0x0C,0x0C,0x0C,0x18,0x18,0x18,0x18,0x18,0x18,0x18,0x08,0x0C,0x0C,0x0C,0x06,
+   25            0x06,0x03,0x03,0x01,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00
+   26            /* (48 X 48 )*/
+   27          };
+   28          static t_psWidget text1, text2;
+   29          static t_psWidget slider1, slider2;
+   30          static t_psGroup group1;
+   31          
+   32          static int g[3] = {0, 0, 0};
+   33          
+   34          
+   35          /**
+   36            * @brief  页面初始化事件
+   37            * @param  无
+   38            * @retval 无
+   39            */
+   40          static void Setup(unsigned char condition)
+   41          {
+   42   1        text1 = og_label_create(FONT_GB2312_15X16, 0, 0);
+   43   1        text2 = og_label_create(FONT_ASCII_8X16, 0, 16);
+   44   1        og_label_setText(text1, "姿态角：");
+   45   1        og_label_setText(text2, "x:00.0, y:00.0");
+   46   1        slider1 = og_slider_create(-90, 90, 0, 128, 0, 32);
+   47   1        slider2 = og_slider_create(-90, 90, 0, 128, 0, 48);
+   48   1        group1 = og_group_create(4);
+   49   1        og_group_addWidget(group1, text1, 0);
+   50   1        og_group_addWidget(group1, text2, 0);
+   51   1        og_group_addWidget(group1, slider1, 0);
+   52   1        og_group_addWidget(group1, slider2, 0);
+   53   1        og_group_setPosOffset(group1, 0, OLED_HEIGHT);
+   54   1        og_group_addAnimOffset(group1, 0, -OLED_HEIGHT, ANIM_TIME_NORM, ANIM_NULL_CB);
+   55   1        LSM6DSMConfigAcc(ACC_ODR_208_HZ, ACC_SCALE_4_G);
+   56   1        LSM6DSMConfigGyr(GYR_ODR_208_HZ, GYR_SCALE_500_DPS);
+C251 COMPILER V5.60.0,  page_lsm6dsl                                                       24/08/22  19:19:43  PAGE 2   
+
+   57   1      }
+*** WARNING C47 IN LINE 40 OF User\PageManage\page_lsm6dsl.c: 'condition': unreferenced parameter
+   58          static void delet(void)
+   59          {
+   60   1        og_group_delet(group1);
+   61   1        //pageSetStatus(page_lsm6dsl, PAGE_IDLE); //TODO page_lsm6dsl
+   62   1      }
+   63          /**
+   64            * @brief  页面退出事件
+   65            * @param  无
+   66            * @retval 无
+   67            */
+   68          static void Exit(unsigned char condition)
+   69          {
+   70   1        if(config.lsm6dsm_cfg == 0)
+   71   1          LSM6DSMConfigAcc(ACC_POWER_DOWN, ACC_SCALE_4_G);
+   72   1        else
+   73   1          LSM6DSMConfigAcc(ACC_ODR_26_HZ, ACC_SCALE_4_G);
+   74   1        LSM6DSMConfigGyr(GYR_POWER_DOWN, GYR_SCALE_500_DPS);
+   75   1        og_group_addAnimOffset(group1, 0, OLED_HEIGHT, ANIM_TIME_NORM, delet);
+   76   1      }
+*** WARNING C47 IN LINE 68 OF User\PageManage\page_lsm6dsl.c: 'condition': unreferenced parameter
+   77          /**
+   78            * @brief  页面循环执行的内容
+   79            * @param  无
+   80            * @retval 无
+   81            */
+   82          static void Loop()
+   83          {
+   84   1        if(pageExecuteRate(&Rate100Hz))
+   85   1        {
+   86   2          /*Fix
+   87   2          LSM6DSMReadGYRAndACC(&LSM6DSM);
+   88   2          LSM6DSM.gyr_x -= g[0];
+   89   2          LSM6DSM.gyr_y -= g[1];
+   90   2          LSM6DSM.gyr_z -= g[2];
+   91   2          IMUupdate(&LSM6DSM);
+   92   2          */
+   93   2        }
+   94   1        if(pageExecuteRate(&Rate50Hz))
+   95   1        {
+   96   2          lablel_printf(text2, "X:%5.1f,Y:%5.1f", LSM6DSM.AngleX + 0.05, LSM6DSM.AngleY + 0.05);
+   97   2          og_slider_setValue(slider1, LSM6DSM.AngleX);
+   98   2          og_slider_setValue(slider2, LSM6DSM.AngleY);
+   99   2          //printf("%.1f#%.1f#%.1f\r\n", LSM6DSM.AngleX, LSM6DSM.AngleY, LSM6DSM.AngleZ);
+  100   2        }
+  101   1      }
+  102          /**
+  103            * @brief  页面事件
+  104            * @param  btn:发出事件的按键
+  105            * @param  event:事件编号
+  106            * @retval 无
+  107            */
+  108          static void Event(unsigned char event)
+  109          {
+  110   1        if(event == KEY1_PRESSED)
+  111   1          pageShift(page_menu, PAGE_RETURN);
+  112   1        else if(event == KEY2_PRESSED)
+  113   1        {
+  114   2          g[0] = LSM6DSM.gyr_x;
+  115   2          g[1] = LSM6DSM.gyr_y;
+  116   2          g[2] = LSM6DSM.gyr_z;
+  117   2        }
+  118   1      }
+  119          void pageRegister_page_lsm6dsl(unsigned char pageID)
+  120          {
+C251 COMPILER V5.60.0,  page_lsm6dsl                                                       24/08/22  19:19:43  PAGE 3   
+
+  121   1        pageRegister(pageID, "LSM6DSL", Icon, Setup, Loop, Exit, Event);
+  122   1      }
+  123          
+
+
+Module Information          Static   Overlayable
+------------------------------------------------
+  code size            =       290     ------
+  ecode size           =       576     ------
+  data size            =    ------     ------
+  idata size           =    ------     ------
+  pdata size           =    ------     ------
+  xdata size           =    ------     ------
+  xdata-const size     =    ------     ------
+  edata size           =        26     ------
+  bit size             =    ------     ------
+  ebit size            =    ------     ------
+  bitaddressable size  =    ------     ------
+  ebitaddressable size =    ------     ------
+  far data size        =    ------     ------
+  huge data size       =    ------     ------
+  const size           =    ------     ------
+  hconst size          =        58     ------
+End of Module Information.
+
+
+C251 COMPILATION COMPLETE.  2 WARNING(S),  0 ERROR(S)

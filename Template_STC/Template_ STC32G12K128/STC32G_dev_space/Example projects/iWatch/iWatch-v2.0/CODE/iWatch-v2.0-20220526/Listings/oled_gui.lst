@@ -1,0 +1,93 @@
+C251 COMPILER V5.60.0,  oled_gui                                                           24/08/22  14:13:57  PAGE 1   
+
+
+C251 COMPILER V5.60.0, COMPILATION OF MODULE oled_gui
+OBJECT MODULE PLACED IN .\Objects\oled_gui.obj
+COMPILER INVOKED BY: D:\Application\keilC251_v560\C251\BIN\C251.EXE User\oled_gui\oled_core\oled_gui.c XSMALL ROM(HUGE) 
+                    -OPTIMIZE(8,SPEED) BROWSE INCDIR(.\User;.\User\oled_gui;.\User\oled_gui\oled_core;.\User\oled_gui\oled_widget;.\User\Page
+                    -Manage;.\User\Sensor;.\User\System;.\User\Bluetooth) DEBUG PRINT(.\Listings\oled_gui.lst) TABS(2) OBJECT(.\Objects\oled_
+                    -gui.obj) 
+
+stmt  level    source
+
+    1          #define __OELD_GUI_C
+    2          #include "oled_gui.h"
+    3          
+    4          void og_timeTick(void)
+    5          {
+    6   1        og_tick ++;
+    7   1      }
+    8          //返回当前时间戳
+    9          uint16_t og_getTimestamp(void)
+   10          {
+   11   1        return og_tick;
+   12   1      }
+   13          // 返回当前时间戳和给定时间戳之间的时间间隔（ms）
+   14          uint16_t og_tickElaps(uint16_t pre_tick)
+   15          {
+   16   1        if(og_tick >= pre_tick)
+   17   1        {
+   18   2          pre_tick = og_tick - pre_tick;
+   19   2        } 
+   20   1        else
+   21   1        {
+   22   2          pre_tick = 0xffff - pre_tick + 1;
+   23   2          pre_tick += og_tick;
+   24   2        }
+   25   1        return pre_tick;
+   26   1      }
+   27          void og_init(void)
+   28          {
+   29   1        #if defined(__C251__) || defined(__C51__) 
+   30   1        uint16_t i;
+   31   1        for(i = 0; i < HEAP_SIZE; i++)    // 初始化栈     
+   32   1          mem_buf[i] = 0;
+   33   1        init_mempool(mem_buf, HEAP_SIZE); // 初始化内存池
+   34   1        #endif
+   35   1        og_widget_init();   // 初始化控件管理器
+   36   1        #if OLED_USE_ANIM == 1
+   37   1        og_anim_init();     // 初始化动画系统
+   38   1        #endif
+   39   1      }
+   40          void og_run(void)
+   41          {
+   42   1        static uint16_t gui_timestamp = 0; /* 时间戳 */
+   43   1        
+   44   1        /* 当前时间戳 大于 屏幕刷新时间间隔 */
+   45   1        if(og_tickElaps(gui_timestamp) >= OLED_REFRESH_T)
+   46   1        {
+   47   2          gui_timestamp = og_getTimestamp();
+   48   2          #if OLED_USE_ANIM == 1
+   49   2          og_anim_run();
+   50   2          #endif
+   51   2          og_widget_draw();
+   52   2        }
+   53   1      }
+   54          
+   55          
+
+C251 COMPILER V5.60.0,  oled_gui                                                           24/08/22  14:13:57  PAGE 2   
+
+
+Module Information          Static   Overlayable
+------------------------------------------------
+  code size            =    ------     ------
+  ecode size           =       132     ------
+  data size            =    ------     ------
+  idata size           =    ------     ------
+  pdata size           =    ------     ------
+  xdata size           =      4096     ------
+  xdata-const size     =    ------     ------
+  edata size           =         4     ------
+  bit size             =    ------     ------
+  ebit size            =    ------     ------
+  bitaddressable size  =    ------     ------
+  ebitaddressable size =    ------     ------
+  far data size        =    ------     ------
+  huge data size       =    ------     ------
+  const size           =    ------     ------
+  hconst size          =        12     ------
+End of Module Information.
+
+
+C251 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

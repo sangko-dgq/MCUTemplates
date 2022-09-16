@@ -1,0 +1,332 @@
+C251 COMPILER V5.60.0,  System                                                             23/08/22  22:51:20  PAGE 1   
+
+
+C251 COMPILER V5.60.0, COMPILATION OF MODULE System
+OBJECT MODULE PLACED IN .\Objects\System.obj
+COMPILER INVOKED BY: D:\Application\keilC251_v560\C251\BIN\C251.EXE User\System\System.c XSMALL ROM(HUGE) OPTIMIZE(8,SPE
+                    -ED) BROWSE INCDIR(.\User;.\User\oled_gui;.\User\oled_gui\oled_core;.\User\oled_gui\oled_widget;.\User\PageManage;.\User\
+                    -Sensor;.\User\System;.\User\Bluetooth) DEBUG PRINT(.\Listings\System.lst) TABS(2) OBJECT(.\Objects\System.obj) 
+
+stmt  level    source
+
+    1          #define _SYSTEM_C
+    2          #include "System.h"
+    3          
+    4          /*GPIO初始化配置 -直接通过直接操作寄存器配置GPIO*/
+    5          void GPIOInit(void)
+    6          {
+    7   1        //P03:BTTX, P02:BTRX, P00:BTSTA
+    8   1        //P07:KEY4, P06:KEY3
+    9   1        P0M0 = 0x00;
+   10   1        P0M1 = 0x01;
+   11   1        P0 = 0x00;    
+   12   1        //P13:CHAR_SENSE, P11:RES, P10:CS1
+   13   1        //P17:3V3_EN, P15:SCL, P14:SDA
+   14   1        P1M0 = 0x30;
+   15   1        P1M1 = 0x30;
+   16   1        P_SW2 |= 0x80;
+   17   1        P1PU = 0x30;
+   18   1        P_SW2 &= 0x7f;
+   19   1        P1 = 0x01;
+   20   1        //P23:MOSI, P20:BUZZER
+   21   1        //P25:SCLK, P24:MISO
+   22   1        P2M0 = 0x29;
+   23   1        P2M1 = 0x00;
+   24   1        P2 = 0x00;
+   25   1        //P33:INT1, P32:PWR_SENSE, P31:TXD, P30:RXD
+   26   1        //P37:KEY2, P36:INT2, P34:T0
+   27   1        P3M0 = 0x00;
+   28   1        P3M1 = 0x04;
+   29   1        P3 = 0x50;
+   30   1        //P43:KEY1
+   31   1        //P47:DC, P45:BTEN, P44:CS2
+   32   1        P4M0 = 0x00;
+   33   1        P4M1 = 0x00;
+   34   1        P4 = 0x10;
+   35   1      
+   36   1        P5M0 = 0x00;
+   37   1        P5M1 = 0x00;
+   38   1        P5 = 0x00;
+   39   1        
+   40   1        /*默认上下拉*/
+   41   1        KEY1 = 1;
+   42   1        KEY2 = 1;
+   43   1        KEY3 = 1;
+   44   1        KEY4 = 1; 
+   45   1        EN_3V3 = 1;
+   46   1        CHRG_SENSE = 1;//充电IC内部开漏，所以MCU这端上拉
+   47   1        BTSTA = 0;
+   48   1        BTEN = 1;
+   49   1        BUZZER = 0;
+   50   1      }
+   51          void UartInit(void)   //115200bps@35.0MHz
+   52          {
+   53   1        SCON = 0x50;    //8位数据,可变波特率
+   54   1        AUXR |= 0x01;   //串口1选择定时器2为波特率发生器
+   55   1        AUXR |= 0x04;   //定时器时钟1T模式
+   56   1        T2L = 0xB4;   //设置定时初始值
+   57   1        T2H = 0xFF;   //设置定时初始值
+C251 COMPILER V5.60.0,  System                                                             23/08/22  22:51:20  PAGE 2   
+
+   58   1        AUXR |= 0x10;   //定时器2开始计时
+   59   1        TI = 1;
+   60   1      }
+   61          void Uart4Init(void)    //115200bps@35.0MHz
+   62          {
+   63   1        //P_SW2 |= 0x04;  //RXD4_2/P5.2, TXD4_2/P5.3
+   64   1        S4CON = 0x10;   //8位数据,可变波特率
+   65   1        S4CON |= 0x40;  //串口4选择定时器4为波特率发生器
+   66   1        T4T3M |= 0x20;  //定时器时钟1T模式
+   67   1        T4L = 0xB4;     //设置定时初始值
+   68   1        T4H = 0xFF;     //设置定时初始值
+   69   1        T4T3M |= 0x80;  //定时器4开始计时
+   70   1      }
+   71          void Timer1Init(void)   //1毫秒@35.0MHz
+   72          {
+   73   1        AUXR |= 0x40;   //定时器时钟1T模式
+   74   1        TMOD &= 0x0F;   //设置定时器模式
+   75   1        TL1 = 0x48;   //设置定时初始值
+   76   1        TH1 = 0x77;   //设置定时初始值
+   77   1        TF1 = 0;    //清除TF1标志
+   78   1        TR1 = 1;    //定时器1开始计时
+   79   1        ET1 = 1;
+   80   1      }
+   81          void Timer0Init(void)
+   82          {
+   83   1        TMOD |= 0x04;    //外部计数模式
+   84   1        TL0 = 0x00;
+   85   1        TH0 = 0x00;
+   86   1        TR0 = 0;        //关闭定时器
+   87   1        ET0 = 1;        //使能定时器中断
+   88   1      }
+   89          void IntInit(void)
+   90          {
+   91   1        //电源线插入检测中断
+   92   1        IT0 = 0;            //使能INT0上升沿和下降沿中断
+   93   1        EX0 = 1;            //使能INT0中断
+   94   1        IT1 = 1;            //使能INT1下降沿中断
+   95   1        EX1 = 1;            //使能INT1中断，LSM6DSM中断源
+   96   1        INTCLKO |= 0x10;    //使能INT2中断，RCT中断源
+   97   1        INTCLKO |= 0x20;    //使能INT3中断，KEY2中断
+   98   1        //INTCLKO |= 0x40;  //使能INT4中断
+   99   1      }
+  100          /*
+  101          void INT4_int (void) interrupt 16
+  102          {
+  103            MCUSoftReset();
+  104          }
+  105          */
+  106          void MCUSoftReset(void)
+  107          {
+  108   1        P3 |= 0x03;
+  109   1        Delay1ms(50);
+  110   1        IAP_CONTR = 0x60;
+  111   1      }
+  112          void EnableWatchDog(void)
+  113          {
+  114   1        WDT_CONTR = 0x27;     //如果超过大约1.43s没喂狗，MCU自动复位
+  115   1      }
+  116          void FeedWatchDog(void)
+  117          {
+  118   1        WDT_CONTR |= 0x10;    //喂狗，清除看门狗计数器
+  119   1      }
+  120          void ADC_Init(void)
+  121          {
+  122   1        P_SW2 |= 0x80;
+  123   1        ADCTIM = 0x3f;    
+C251 COMPILER V5.60.0,  System                                                             23/08/22  22:51:20  PAGE 3   
+
+  124   1        P_SW2 &= 0x7f;
+  125   1        ADCCFG = 0x20 | 0x08;  //ADC_RES保存结果高4位，ADC_RESL保存结果后8位
+  126   1                               //ADC时钟：SYSclk/2/(0x08+1)
+  127   1        ADC_CONTR = 0x80; //0x80:开ADC电源
+  128   1      }
+  129          void ADC_Deinit(void)
+  130          {
+  131   1        ADC_CONTR = 0x00;
+  132   1      }
+  133          unsigned int Get_ADC12bitResult(unsigned char channel)  //channel = 0~15
+  134          {
+  135   1        ADC_RES = 0;
+  136   1        ADC_RESL = 0;
+  137   1      
+  138   1        ADC_CONTR = (ADC_CONTR & 0xF0) | 0x40 | channel;
+  139   1        _nop_();
+  140   1        _nop_();
+  141   1        _nop_();
+  142   1        _nop_();
+  143   1      
+  144   1        while((ADC_CONTR & 0x20) == 0);   //wait for ADC finish
+  145   1        ADC_CONTR &= ~0x20;               
+  146   1      
+  147   1        return (((unsigned int)ADC_RES << 8) | ADC_RESL);
+  148   1      }
+  149          float GetBatVoltage(void)
+  150          {
+  151   1        unsigned int temp;
+  152   1        temp = Get_ADC12bitResult(15);  //1.2575414 
+  153   1        return (4096.0 * 1.1787277 / (float)temp);
+  154   1      }
+  155          void SystemSleep(void)
+  156          {
+  157   1        KEY1 = 0;
+  158   1        KEY3 = 0;
+  159   1        KEY4 = 0;
+  160   1        BuzzerOff();
+  161   1        ET0 = 0;
+  162   1        ET1 = 0;
+  163   1        
+  164   1        //IIC_Deinit();
+  165   1        //SPI_Deinit();
+  166   1        ADC_Deinit();
+  167   1        /*
+  168   1        P1M0 = 0x00;
+  169   1        P1M1 = 0x00;
+  170   1        P_SW2 |= 0x80;
+  171   1        P1PU = 0x00;
+  172   1        P_SW2 &= 0x7f;
+  173   1        */
+  174   1        P14 = 1;
+  175   1        P15 = 1;
+  176   1        //CHRG_SENSE = 0;
+  177   1        PCON = 0x02;    //MCU进入掉电模式
+  178   1        _nop_();
+  179   1        _nop_();
+  180   1      }
+  181          void SystemPowerDown(void)
+  182          {
+  183   1        KEY1 = 0;
+  184   1        KEY3 = 0;
+  185   1        KEY4 = 0;
+  186   1        BuzzerOff();
+  187   1        ET0 = 0;
+  188   1        ET1 = 0;
+  189   1      
+C251 COMPILER V5.60.0,  System                                                             23/08/22  22:51:20  PAGE 4   
+
+  190   1        IIC_Deinit();
+  191   1        SPI_Deinit();
+  192   1        //ADC_Deinit();
+  193   1        /*
+  194   1        P1M0 = 0x00;
+  195   1        P1M1 = 0x00;
+  196   1        */
+  197   1        P_SW2 |= 0x80;
+  198   1        P1PU = 0x00;
+  199   1        P_SW2 &= 0x7f;
+  200   1        
+  201   1        P14 = 0;
+  202   1        P15 = 0;
+  203   1        /*
+  204   1        P23 = 0;
+  205   1        P24 = 0;
+  206   1        P25 = 0;
+  207   1        
+  208   1        P11 = 0;
+  209   1        P47 = 0;
+  210   1        
+  211   1        P23 = 0;
+  212   1        P24 = 0;
+  213   1        P25 = 0;
+  214   1      
+  215   1        P10 = 0;
+  216   1        //P44 = 0;
+  217   1      
+  218   1        //P33:INT1, P32:PWR_SENSE, P31:TXD, P30:RXD
+  219   1        //P37:KEY2,P36:INT2
+  220   1      
+  221   1        P3M0 = 0x00;
+  222   1        P3M1 = 0x00;
+  223   1        PWR_SENSE = 1;
+  224   1        //P3 = 0x00;
+  225   1      
+  226   1        //P36 = 0;
+  227   1        //P5 = 0;
+  228   1        //P4 = 0x10;
+  229   1        //BTEN = 0;
+  230   1        */
+  231   1        EN_3V3 = 0;
+  232   1        PCON = 0x02;
+  233   1      }
+  234          void SystemWake(void)
+  235          {
+  236   1        //GPIOInit();
+  237   1        KEY1 = 1;
+  238   1        KEY3 = 1;
+  239   1        KEY4 = 1;
+  240   1        ET0 = 1;
+  241   1        ET1 = 1;
+  242   1        //IIC_Init();
+  243   1        //SPI_Init();
+  244   1        
+  245   1        ADC_Init();
+  246   1      }
+  247          
+  248          
+  249          /*系统初始化*/
+  250          void SystemInit(void)
+  251          {
+  252   1        WTST = 0; //TODO 
+  253   1        
+  254   1        /*GPIO配置*/
+  255   1        GPIOInit(); 
+C251 COMPILER V5.60.0,  System                                                             23/08/22  22:51:20  PAGE 5   
+
+  256   1        
+  257   1        /*串口配置*/
+  258   1        UartInit();     //串口1,用于Debug
+  259   1        Uart4Init();    //串口4，用于蓝牙
+  260   1        
+  261   1        /*I2C配置  用于传感器*/
+  262   1        IIC_Init();
+  263   1        
+  264   1        /*SPI配置 - 用于OLED*/
+  265   1        SPI_Init();
+  266   1        
+  267   1        /*定时器配置*/
+  268   1        Timer1Init();
+  269   1        Timer0Init();
+  270   1        
+  271   1        /*蜂鸣器配置*/
+  272   1        BuzzerInit();
+  273   1        
+  274   1        /*外部中断初始化*/
+  275   1        IntInit();    
+  276   1        
+  277   1        /*ADC配置*/
+  278   1        ADC_Init();
+  279   1        
+  280   1        Delay1ms(50);
+  281   1        
+  282   1        //printf("Hello iWatch-v2.1\n");
+  283   1        
+  284   1        /*使能全局中断*/
+  285   1        EA = 1;
+  286   1      
+  287   1        /*使能看门狗*/
+  288   1        EnableWatchDog(); 
+  289   1      }
+
+
+Module Information          Static   Overlayable
+------------------------------------------------
+  code size            =    ------     ------
+  ecode size           =       452     ------
+  data size            =    ------     ------
+  idata size           =    ------     ------
+  pdata size           =    ------     ------
+  xdata size           =    ------     ------
+  xdata-const size     =    ------     ------
+  edata size           =         3     ------
+  bit size             =    ------     ------
+  ebit size            =    ------     ------
+  bitaddressable size  =    ------     ------
+  ebitaddressable size =    ------     ------
+  far data size        =    ------     ------
+  huge data size       =    ------     ------
+  const size           =    ------     ------
+  hconst size          =    ------     ------
+End of Module Information.
+
+
+C251 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

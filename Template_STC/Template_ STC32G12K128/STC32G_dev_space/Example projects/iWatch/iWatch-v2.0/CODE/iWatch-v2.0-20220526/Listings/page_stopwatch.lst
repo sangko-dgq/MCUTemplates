@@ -1,0 +1,248 @@
+C251 COMPILER V5.60.0,  page_stopwatch                                                     24/08/22  19:19:21  PAGE 1   
+
+
+C251 COMPILER V5.60.0, COMPILATION OF MODULE page_stopwatch
+OBJECT MODULE PLACED IN .\Objects\page_stopwatch.obj
+COMPILER INVOKED BY: D:\Application\keilC251_v560\C251\BIN\C251.EXE User\PageManage\page_stopwatch.c XSMALL ROM(HUGE) OP
+                    -TIMIZE(8,SPEED) BROWSE INCDIR(.\User;.\User\oled_gui;.\User\oled_gui\oled_core;.\User\oled_gui\oled_widget;.\User\PageMa
+                    -nage;.\User\Sensor;.\User\System;.\User\Bluetooth) DEBUG PRINT(.\Listings\page_stopwatch.lst) TABS(2) OBJECT(.\Objects\p
+                    -age_stopwatch.obj) 
+
+stmt  level    source
+
+    1          #include "iWatch.h"
+    2          
+    3          static unsigned char CODE Icon[] = {
+    4            48, 48,
+    5            0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+    6            0x00,0x00,0x00,0x00,0x3E,0x3E,0xFE,0xFE,0xFE,0xFE,0x3E,0x3E,0x00,0x00,0x00,0x00,
+    7            0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+    8            0x00,0x00,0x00,0x00,0x30,0x38,0x1C,0x3E,0x7F,0x3B,0x90,0xC0,0xE0,0xF0,0xF0,0x78,
+    9            0x78,0x3C,0x3C,0x1C,0x1E,0x1E,0x1E,0x1E,0x1E,0x1E,0x1E,0x1E,0x1E,0x3C,0x3C,0x7C,
+   10            0x78,0xF8,0xF0,0xE0,0xC0,0xC0,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+   11            0x00,0x00,0x00,0x00,0x00,0x00,0xE0,0xF8,0xFE,0x7F,0x1F,0x07,0x03,0x81,0xE0,0xF0,
+   12            0xF8,0xFC,0xFC,0xFE,0xFE,0xFF,0xFF,0xFF,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+   13            0x00,0x00,0x01,0x03,0x07,0x0F,0x7F,0xFE,0xFC,0xF0,0x80,0x00,0x00,0x00,0x00,0x00,
+   14            0x00,0x00,0x00,0x00,0x00,0xFF,0xFF,0xFF,0xFF,0x00,0x00,0x00,0x7E,0xFF,0xFF,0xFF,
+   15            0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xF0,0xF0,0xF0,0xF0,0xF0,0xF0,0xF0,0xF0,
+   16            0xF0,0xF0,0xF0,0xF0,0x00,0x00,0x00,0xE7,0xFF,0xFF,0xFF,0x00,0x00,0x00,0x00,0x00,
+   17            0x00,0x00,0x00,0x00,0x00,0x00,0x07,0x1F,0x7F,0xFE,0xF8,0xE0,0xC0,0x81,0x07,0x0F,
+   18            0x1F,0x3F,0x3F,0x7F,0x7F,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0x7F,0x7F,0x3F,0x1F,
+   19            0x1F,0x0F,0x83,0xC0,0xE0,0xF0,0xFC,0x7F,0x3F,0x0F,0x01,0x00,0x00,0x00,0x00,0x00,
+   20            0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x01,0x03,0x07,0x0F,0x0F,0x1E,
+   21            0x1E,0x3C,0x3C,0x78,0x78,0x78,0x78,0x78,0x78,0x78,0x78,0x78,0x78,0x3C,0x3C,0x3E,
+   22            0x1E,0x1F,0x0F,0x07,0x03,0x03,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00
+   23            /* (48 X 48 )*/
+   24          };
+   25          static t_psWidget text1;
+   26          static t_psWidget text_record[3];
+   27          static t_psWidget bmp1, bmp2, bmp3;
+   28          static t_psGroup group1;
+   29          
+   30          static unsigned char code RESET[] = {
+   31            16, 16, 
+   32            0x08,0x1C,0x2A,0x49,0x08,0x08,0x08,0x08,0x08,0x08,0x08,0x08,0x10,0x20,0xC0,0x00,
+   33            0x80,0x80,0x80,0x80,0x80,0x80,0x80,0x80,0x80,0x80,0x80,0x80,0x40,0x20,0x1F,0x00
+   34            /* (16 X 16 )*/
+   35          
+   36          };
+   37          static unsigned char code START[] = {
+   38            16, 16, 
+   39            0x00,0x00,0x00,0x00,0xFE,0xFC,0xFC,0xF8,0xF8,0xF0,0xF0,0xE0,0xE0,0xC0,0xC0,0x80,
+   40            0x00,0x00,0x00,0x00,0x3F,0x1F,0x1F,0x0F,0x0F,0x07,0x07,0x03,0x03,0x01,0x01,0x00
+   41            /* (16 X 16 )*/
+   42          };
+   43          
+   44          static unsigned char code PAUSE[] = {
+   45            16, 16, 
+   46            0x00,0x00,0xFC,0xFC,0xFC,0xFC,0x00,0x00,0x00,0x00,0xFC,0xFC,0xFC,0xFC,0x00,0x00,
+   47            0x00,0x00,0x7F,0x7F,0x7F,0x7F,0x00,0x00,0x00,0x00,0x7F,0x7F,0x7F,0x7F,0x00,0x00
+   48            /* (16 X 16 )*/
+   49          };
+   50          static unsigned char code CHECK[] = {
+   51            16, 16, 
+   52            0xC8,0x88,0x88,0x10,0x10,0x20,0x20,0x40,0x84,0xC4,0xEC,0x78,0x30,0x60,0xC0,0x00,
+   53            0x00,0x00,0x01,0x01,0x03,0x06,0x0C,0x18,0x30,0xE1,0x82,0x0C,0x70,0x80,0x00,0x00
+   54            /* (16 X 16 )*/
+   55          };
+   56          
+C251 COMPILER V5.60.0,  page_stopwatch                                                     24/08/22  19:19:21  PAGE 2   
+
+   57          
+   58          unsigned char record_cnt = 0;
+   59          static unsigned long ms_cnt;
+   60          static unsigned char ms = 0, sec = 0, min = 0;
+   61          unsigned int timer_cnt = 0; //定时器0溢出次数
+   62          unsigned char tp[3][3];
+   63          
+   64          void TM0_Isr() interrupt 1 using 1    //计数器0溢出中断
+   65          {
+   66   1        timer_cnt++;
+   67   1      }
+   68          /**
+   69            * @brief  页面初始化事件
+   70            * @param  无
+   71            * @retval 无
+   72            */
+   73          static void Setup(unsigned char condition)
+   74          {
+   75   1        unsigned char i;
+   76   1        text1 = og_label_create(FONT_ASCII_8X16, 32, 0);
+   77   1        for(i = 0; i < 3; i++)
+   78   1          text_record[i] = og_label_create(FONT_ASCII_8X16, 16, 0);
+   79   1        bmp1 = og_bmp_create((t_psBMP)RESET, 112, 48);
+   80   1        bmp2 = og_bmp_create((t_psBMP)START, 112, 0);
+   81   1        bmp3 = og_bmp_create((t_psBMP)CHECK, 112, 24);
+   82   1        if(iWatchCheckStatus(IWATCH_TIMERON))
+   83   1          og_bmp_setBmp(bmp2, (t_psBMP)PAUSE);
+   84   1        if(record_cnt == 0)
+   85   1        {
+   86   2          og_widget_setShow(text_record[0], 0);
+   87   2          og_widget_setShow(text_record[1], 0);
+   88   2          og_widget_setShow(text_record[2], 0);
+   89   2        }
+   90   1        else
+   91   1        {
+   92   2          for(i = 0; i < record_cnt; i++)
+   93   2          {
+   94   3            lablel_printf(text_record[i], "%u.%u:%02u:%02u", i + 1, tp[i][0], tp[i][1], tp[i][2]);
+   95   3            og_widget_setPos(text_record[i], 0, (i + 1) * 16);
+   96   3            og_widget_setShow(text_record[i], 1);
+   97   3          }
+   98   2        }
+   99   1        group1 = og_group_create(7);
+  100   1        og_group_addWidget(group1, text1, 0);
+  101   1        og_group_addWidget(group1, text_record[0], 0);
+  102   1        og_group_addWidget(group1, text_record[1], 0);
+  103   1        og_group_addWidget(group1, text_record[2], 0);
+  104   1        og_group_addWidget(group1, bmp1, 0);
+  105   1        og_group_addWidget(group1, bmp2, 0);
+  106   1        og_group_addWidget(group1, bmp3, 0);
+  107   1        og_group_setPosOffset(group1, 0, 64);
+  108   1        og_group_addAnimOffset(group1, 0, -64, ANIM_TIME_NORM, ANIM_NULL_CB);
+  109   1      }
+*** WARNING C47 IN LINE 73 OF User\PageManage\page_stopwatch.c: 'condition': unreferenced parameter
+  110          static void delet(void)
+  111          {
+  112   1        og_group_delet(group1);
+  113   1        pageSetStatus(page_timer, PAGE_IDLE);
+  114   1      }
+  115          /**
+  116            * @brief  页面退出事件
+  117            * @param  无
+  118            * @retval 无
+  119            */
+  120          static void Exit(unsigned char condition)
+  121          {
+C251 COMPILER V5.60.0,  page_stopwatch                                                     24/08/22  19:19:21  PAGE 3   
+
+  122   1        og_group_addAnimOffset(group1, 0, 64, ANIM_TIME_NORM, delet);
+  123   1      }
+*** WARNING C47 IN LINE 120 OF User\PageManage\page_stopwatch.c: 'condition': unreferenced parameter
+  124          /**
+  125            * @brief  页面循环执行的内容
+  126            * @param  无
+  127            * @retval 无
+  128            */
+  129          static void Loop()
+  130          {
+  131   1        if(pageExecuteRate(&Rate50Hz))
+  132   1        {
+  133   2          ms_cnt = (((unsigned long)timer_cnt << 16) | (TH0 << 8) | TL0) / 10.24;
+  134   2          ms = ms_cnt % 100;  
+  135   2          sec = (ms_cnt / 100) % 60; 
+  136   2          min = (ms_cnt / 100) / 60;
+  137   2          lablel_printf(text1, "%u:%02u:%02u", min, sec, ms);
+  138   2        }
+  139   1      }
+  140          /**
+  141            * @brief  页面事件
+  142            * @param  btn:发出事件的按键
+  143            * @param  event:事件编号
+  144            * @retval 无
+  145            */
+  146          static void Event(unsigned char event)
+  147          {
+  148   1        if(event == KEY1_PRESSED)
+  149   1          pageShift(page_menu, PAGE_RETURN);
+  150   1        else if(event == KEY2_PRESSED)
+  151   1        {
+  152   2          if(iWatchCheckStatus(IWATCH_TIMERON))
+  153   2          {
+  154   3            iWatchClearStatus(IWATCH_TIMERON);
+  155   3            TR0 = 0;
+  156   3            RX8130CESetClockOuput(CLKOUT_DISABLE);
+  157   3            og_bmp_setBmp(bmp2, (t_psBMP)START);
+  158   3          }
+  159   2          else
+  160   2          {
+  161   3            RX8130CESetClockOuput(CLKOUT_1024_HZ);
+  162   3            iWatchSetStatus(IWATCH_TIMERON);
+  163   3            TR0 = 1;
+  164   3            og_bmp_setBmp(bmp2, (t_psBMP)PAUSE);
+  165   3          }
+  166   2        }
+  167   1        else if(event == KEY3_PRESSED)
+  168   1        {
+  169   2          if(iWatchCheckStatus(IWATCH_TIMERON))
+  170   2          {
+  171   3            if(record_cnt != 3)
+  172   3            {
+  173   4              lablel_printf(text_record[record_cnt], "%u.%u:%02u:%02u", record_cnt+1, min, sec, ms);
+  174   4              og_widget_setShow(text_record[record_cnt], 1);
+  175   4              og_anim_create(text_record[record_cnt], 0, (record_cnt + 1) * 16, ANIM_TIME_NORM, ANIM_NULL_CB);
+  176   4              tp[record_cnt][0] = min;
+  177   4              tp[record_cnt][1] = sec;
+  178   4              tp[record_cnt][2] = ms;
+  179   4            }
+  180   3            if(++record_cnt >= 3)
+  181   3              record_cnt = 3;
+  182   3          }
+  183   2        }
+  184   1        else if(event == KEY4_PRESSED)
+  185   1        {
+  186   2          unsigned char i;
+C251 COMPILER V5.60.0,  page_stopwatch                                                     24/08/22  19:19:21  PAGE 4   
+
+  187   2          record_cnt = 0;
+  188   2          for(i = 0; i < 3; i++)
+  189   2          {
+  190   3            og_widget_setShow(text_record[i], 0);
+  191   3            og_widget_setPos(text_record[i], 16, 0);
+  192   3          }
+  193   2          if(iWatchCheckStatus(IWATCH_TIMERON) == 0)
+  194   2          {
+  195   3            TH0 = 0;
+  196   3            TL0 = 0;
+  197   3            timer_cnt = 0;
+  198   3          }
+  199   2        }
+  200   1      }
+  201          void pageRegister_page_timer(unsigned char pageID)
+  202          {
+  203   1        pageRegister(pageID, "STOPWATCH", Icon, Setup, Loop, Exit, Event);
+  204   1      }
+
+
+Module Information          Static   Overlayable
+------------------------------------------------
+  code size            =       430     ------
+  ecode size           =      1201     ------
+  data size            =    ------     ------
+  idata size           =    ------     ------
+  pdata size           =    ------     ------
+  xdata size           =    ------     ------
+  xdata-const size     =    ------     ------
+  edata size           =        51     ------
+  bit size             =    ------     ------
+  ebit size            =    ------     ------
+  bitaddressable size  =    ------     ------
+  ebitaddressable size =    ------     ------
+  far data size        =    ------     ------
+  huge data size       =    ------     ------
+  const size           =    ------     ------
+  hconst size          =        65     ------
+End of Module Information.
+
+
+C251 COMPILATION COMPLETE.  2 WARNING(S),  0 ERROR(S)

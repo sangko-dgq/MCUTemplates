@@ -1,0 +1,91 @@
+C251 COMPILER V5.60.0,  SPI                                                                23/08/22  22:51:19  PAGE 1   
+
+
+C251 COMPILER V5.60.0, COMPILATION OF MODULE SPI
+OBJECT MODULE PLACED IN .\Objects\SPI.obj
+COMPILER INVOKED BY: D:\Application\keilC251_v560\C251\BIN\C251.EXE User\System\SPI.c XSMALL ROM(HUGE) OPTIMIZE(8,SPEED)
+                    - BROWSE INCDIR(.\User;.\User\oled_gui;.\User\oled_gui\oled_core;.\User\oled_gui\oled_widget;.\User\PageManage;.\User\Sen
+                    -sor;.\User\System;.\User\Bluetooth) DEBUG PRINT(.\Listings\SPI.lst) TABS(2) OBJECT(.\Objects\SPI.obj) 
+
+stmt  level    source
+
+    1          #include "STC32G.h"
+    2          #include "SPI.h"
+    3          
+    4          void SPI_Init(void)
+    5          { 
+    6   1        /*
+    7   1        P_SW2 |= 0x80;
+    8   1        HSCLKDIV = 0;
+    9   1        HSSPI_CFG2 |= 0x20;
+   10   1        P_SW2 &= ~0x80;
+   11   1        */
+   12   1        SPCTL = 0xd3;
+   13   1        P_SW1 = (P_SW1 & ~(0x03<<2)) | (0x01<<2);     //IO¿ÚÇÐ»». 0: P1.2/P5.4 P1.3 P1.4 P1.5, 1: P2.2 P2.3 P2.4
+             - P2.5, 2: P5.4 P4.0 P4.1 P4.3, 3: P3.5 P3.4 P3.3 P3.2
+   14   1        SPSTAT = 0xc0;
+   15   1      }
+   16          void SPI_Deinit(void)
+   17          {
+   18   1        SPCTL = 0x00;
+   19   1      }
+   20          void SPI_WriteByte(unsigned char out)
+   21          {
+   22   1        SPDAT = out;
+   23   1        while((SPSTAT & 0x80) == 0);
+   24   1        SPSTAT = 0xc0;
+   25   1      }
+   26          unsigned char SPI_ReadByte(void)
+   27          {
+   28   1        SPDAT = 0xff;
+   29   1        while((SPSTAT & 0X80) == 0);
+   30   1        SPSTAT = 0xc0;
+   31   1        return SPDAT;
+   32   1      }
+   33          void SPI_WriteMultiBytes(unsigned char *tx_ptr, unsigned int n)
+   34          {
+   35   1        unsigned int idata i;
+   36   1        for(i = 0; i < n; i++)
+   37   1        {
+   38   2          SPDAT = tx_ptr[i];
+   39   2          while((SPSTAT & 0X80) == 0);
+   40   2          SPSTAT = 0xc0;
+   41   2        }
+   42   1      }
+   43          void SPI_ReadMultiBytes(unsigned char *rx_ptr, unsigned int n)
+   44          {
+   45   1        unsigned int idata i;
+   46   1        for(i = 0; i < n; i++)
+   47   1        {
+   48   2          SPDAT = 0xff;
+   49   2          while((SPSTAT & 0X80) == 0);
+   50   2          SPSTAT = 0xc0;
+   51   2          rx_ptr[i] = SPDAT;
+   52   2        }
+   53   1      }
+
+
+Module Information          Static   Overlayable
+------------------------------------------------
+C251 COMPILER V5.60.0,  SPI                                                                23/08/22  22:51:19  PAGE 2   
+
+  code size            =    ------     ------
+  ecode size           =       112     ------
+  data size            =    ------     ------
+  idata size           =    ------     ------
+  pdata size           =    ------     ------
+  xdata size           =    ------     ------
+  xdata-const size     =    ------     ------
+  edata size           =    ------     ------
+  bit size             =    ------     ------
+  ebit size            =    ------     ------
+  bitaddressable size  =    ------     ------
+  ebitaddressable size =    ------     ------
+  far data size        =    ------     ------
+  huge data size       =    ------     ------
+  const size           =    ------     ------
+  hconst size          =    ------     ------
+End of Module Information.
+
+
+C251 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

@@ -1,12 +1,12 @@
 .\objects\exti.o: ..\Libs\Quick_STD\exti.c
 .\objects\exti.o: ..\Libs\Quick_STD\exti.h
 .\objects\exti.o: ..\Libs\ArduinoAPI\Arduino.h
-.\objects\exti.o: E:\Keil_MDK5.35\Core\ARM\ARMCC\Bin\..\include\stdlib.h
-.\objects\exti.o: E:\Keil_MDK5.35\Core\ARM\ARMCC\Bin\..\include\stdbool.h
+.\objects\exti.o: D:\Application\Keil\ARM\ARMCC\Bin\..\include\stdlib.h
+.\objects\exti.o: D:\Application\Keil\ARM\ARMCC\Bin\..\include\stdbool.h
 .\objects\exti.o: ..\Libs\ArduinoAPI\binary.h
 .\objects\exti.o: ..\Libs\ArduinoAPI\avr/pgmspace.h
-.\objects\exti.o: E:\Keil_MDK5.35\Core\ARM\ARMCC\Bin\..\include\inttypes.h
-.\objects\exti.o: E:\Keil_MDK5.35\Core\ARM\ARMCC\Bin\..\include\stdint.h
+.\objects\exti.o: D:\Application\Keil\ARM\ARMCC\Bin\..\include\inttypes.h
+.\objects\exti.o: D:\Application\Keil\ARM\ARMCC\Bin\..\include\stdint.h
 .\objects\exti.o: ..\Libs\Quick_STD\mcu_type.h
 .\objects\exti.o: ..\Core\core_basic_driver\stm32f4xx.h
 .\objects\exti.o: ..\Core\core_cm\core_cm4.h

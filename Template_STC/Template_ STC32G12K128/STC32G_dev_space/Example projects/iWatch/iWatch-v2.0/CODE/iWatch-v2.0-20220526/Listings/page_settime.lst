@@ -1,0 +1,218 @@
+C251 COMPILER V5.60.0,  page_settime                                                       24/08/22  19:19:19  PAGE 1   
+
+
+C251 COMPILER V5.60.0, COMPILATION OF MODULE page_settime
+OBJECT MODULE PLACED IN .\Objects\page_settime.obj
+COMPILER INVOKED BY: D:\Application\keilC251_v560\C251\BIN\C251.EXE User\PageManage\page_settime.c XSMALL ROM(HUGE) OPTI
+                    -MIZE(8,SPEED) BROWSE INCDIR(.\User;.\User\oled_gui;.\User\oled_gui\oled_core;.\User\oled_gui\oled_widget;.\User\PageMana
+                    -ge;.\User\Sensor;.\User\System;.\User\Bluetooth) DEBUG PRINT(.\Listings\page_settime.lst) TABS(2) OBJECT(.\Objects\page_
+                    -settime.obj) 
+
+stmt  level    source
+
+    1          #include "iWatch.h"
+    2          
+    3          static t_psWidget text1, text2, text3, text4;
+    4          static t_psWidget text_time[7];
+    5          static t_psGroup group1;
+    6          
+    7          static t_sRX8130CE xdata set_time;
+    8          static unsigned char CODE WEEKDAY[7][8] = {
+    9            {"ÐÇÆÚÒ»\0"},
+   10            {"ÐÇÆÚ¶þ\0"},
+   11            {0xd0, 0xc7, 0xc6, 0xda, 0xc8, 0xfd, '\0'},  //ÎªÊ²Ã´ÕâÀïÒªÕâÑù£¿ÒòÎª²»ÖªµÀÊ²Ã´Ô­Òò£¬±àÒëÆ÷ÎÞ·¨ÕýÈ·×ªÒëÖ
+             -ÐÎÄ¡°Èý¡±µ½GB2312±àÂë
+   12            {"ÐÇÆÚËÄ\0"},
+   13            {"ÐÇÆÚÎå\0"},
+   14            {"ÐÇÆÚÁù\0"},
+   15            {"ÐÇÆÚÈÕ\0"}
+   16          };
+   17          
+   18          /**
+   19            * @brief  Ò³Ãæ³õÊ¼»¯ÊÂ¼þ
+   20            * @param  ÎÞ
+   21            * @retval ÎÞ
+   22            */
+   23          static void Setup(unsigned char condition)
+   24          {
+   25   1        unsigned char xdata i;
+   26   1        RX8130CEReadTime(&set_time);
+   27   1        group1 = og_group_create(11);
+   28   1        text_time[0] = og_label_create(FONT_ASCII_8X16, 0, 16);
+   29   1        text_time[1] = og_label_create(FONT_ASCII_8X16, 32, 16);
+   30   1        text_time[2] = og_label_create(FONT_ASCII_8X16, 64, 16);
+   31   1        text_time[3] = og_label_create(FONT_ASCII_8X16, 0, 48);
+   32   1        text_time[4] = og_label_create(FONT_ASCII_8X16, 48, 48);
+   33   1        text_time[5] = og_label_create(FONT_ASCII_8X16, 80, 48);
+   34   1        text_time[6] = og_label_create(FONT_GB2312_15X16, 0, 64);
+   35   1        for(i = 0; i < 7; i++)
+   36   1        {
+   37   2          og_group_addWidget(group1, text_time[i], 1);
+   38   2        }
+   39   1        text1 = og_label_create(FONT_GB2312_15X16, 0, 0);
+   40   1        text2 = og_label_create(FONT_GB2312_15X16, 16, 16);
+   41   1        text3 = og_label_create(FONT_GB2312_15X16, 0, 32);
+   42   1        text4 = og_label_create(FONT_GB2312_15X16, 32, 48);
+   43   1        og_label_setText(text1, "Ê±¼ä£º");
+   44   1        og_label_setText(text2, "Ê±¡¡·Ö¡¡Ãë");
+   45   1        og_label_setText(text3, "ÈÕÆÚ£º");
+   46   1        og_label_setText(text4, "Äê¡¡ÔÂ¡¡ÈÕ");
+   47   1        og_group_addWidget(group1, text1, 0);
+   48   1        og_group_addWidget(group1, text2, 0);
+   49   1        og_group_addWidget(group1, text3, 0);
+   50   1        og_group_addWidget(group1, text4, 0);
+   51   1        og_group_setPosOffset(group1, 128, 0);
+   52   1        og_group_addAnimOffset(group1, -128, 0, ANIM_TIME_NORM, ANIM_NULL_CB);
+   53   1      }
+*** WARNING C47 IN LINE 23 OF User\PageManage\page_settime.c: 'condition': unreferenced parameter
+   54          static void delet(void)
+C251 COMPILER V5.60.0,  page_settime                                                       24/08/22  19:19:19  PAGE 2   
+
+   55          {
+   56   1        og_group_delet(group1);
+   57   1        pageSetStatus(page_settime, PAGE_IDLE);
+   58   1      }
+   59          /**
+   60            * @brief  Ò³ÃæÍË³öÊÂ¼þ
+   61            * @param  ÎÞ
+   62            * @retval ÎÞ
+   63            */
+   64          static void Exit(unsigned char condition)
+   65          {
+   66   1        RX8130CEWriteTime(&set_time);
+   67   1        og_group_addAnimOffset(group1, 128, 0, ANIM_TIME_NORM, delet);
+   68   1      }
+*** WARNING C47 IN LINE 64 OF User\PageManage\page_settime.c: 'condition': unreferenced parameter
+   69          /**
+   70            * @brief  Ò³ÃæÑ­»·Ö´ÐÐµÄÄÚÈÝ
+   71            * @param  ÎÞ
+   72            * @retval ÎÞ
+   73            */
+   74          static void Loop()
+   75          {
+   76   1        if(pageExecuteRate(&Rate20Hz))
+   77   1        {
+   78   2          lablel_printf(text_time[0], "%02d", set_time.hour);
+   79   2          lablel_printf(text_time[1], "%02d", set_time.minute);
+   80   2          lablel_printf(text_time[2], "%02d", set_time.second);
+   81   2          lablel_printf(text_time[3], "%02d", set_time.year + 2000);
+   82   2          lablel_printf(text_time[4], "%02d", set_time.month);
+   83   2          lablel_printf(text_time[5], "%02d", set_time.day);
+   84   2          og_label_setText(text_time[6], WEEKDAY[set_time.weekday - 1]);
+   85   2        }
+   86   1      }
+   87          /**
+   88            * @brief  Ò³ÃæÊÂ¼þ
+   89            * @param  btn:·¢³öÊÂ¼þµÄ°´¼ü
+   90            * @param  event:ÊÂ¼þ±àºÅ
+   91            * @retval ÎÞ
+   92            */
+   93          static void Event(unsigned char event)
+   94          {
+   95   1        if(event == KEY1_PRESSED || event == AWT)
+   96   1          pageShift(page_setting, PAGE_RETURN);
+   97   1        if(event == KEY2_PRESSED)//++
+   98   1        {
+   99   2          switch(og_group_getFocusIndex(group1))
+  100   2          {
+  101   3            case 0:
+  102   3              if(++set_time.hour == 24)
+  103   3                set_time.hour = 0;
+  104   3              break;
+  105   3            case 1:
+  106   3              if(++set_time.minute == 60)
+  107   3                set_time.minute = 0;
+  108   3              break;
+  109   3            case 2:
+  110   3              if(++set_time.second == 60)
+  111   3                set_time.second = 0;
+  112   3              break;
+  113   3            case 3:
+  114   3              if(++set_time.year == 100)
+  115   3                set_time.year = 0;
+  116   3              break;
+  117   3            case 4:
+  118   3              if(++set_time.month == 13)
+  119   3                set_time.month = 1;
+C251 COMPILER V5.60.0,  page_settime                                                       24/08/22  19:19:19  PAGE 3   
+
+  120   3              break;
+  121   3            case 5:
+  122   3              if(++set_time.day == 32)
+  123   3                set_time.day = 1;
+  124   3              break;
+  125   3            case 6:
+  126   3              if(++set_time.weekday == 8)
+  127   3                set_time.weekday = 1;
+  128   3              break;
+  129   3          }
+  130   2        }
+  131   1        if(event == KEY4_PRESSED)//--
+  132   1        {
+  133   2          switch(og_group_getFocusIndex(group1))
+  134   2          {
+  135   3            case 0:
+  136   3              if(--set_time.hour == 255) //ÏòÏÂÒç³öÁË
+  137   3                set_time.hour = 23;
+  138   3              break;
+  139   3            case 1:
+  140   3              if(--set_time.minute == 255)
+  141   3                set_time.minute = 59;
+  142   3              break;
+  143   3            case 2:
+  144   3              if(--set_time.second == 255)
+  145   3                set_time.second = 59;
+  146   3              break;
+  147   3            case 3:
+  148   3              if(--set_time.year == 255)
+  149   3                set_time.year = 0;
+  150   3              break;
+  151   3            case 4:
+  152   3              if(--set_time.month == 0)
+  153   3                set_time.month = 12;
+  154   3              break;
+  155   3            case 5:
+  156   3              if(--set_time.day == 0)
+  157   3                set_time.day = 31;
+  158   3              break;
+  159   3            case 6:
+  160   3              if(--set_time.weekday == 0)
+  161   3                set_time.weekday = 7;
+  162   3              break;
+  163   3          }
+  164   2        }
+  165   1        if(event == KEY3_PRESSED)
+  166   1        {
+  167   2          og_group_focusWidget(group1, FOCUS_NEXT);
+  168   2        }
+  169   1      }
+  170          void pageRegister_page_settime(unsigned char pageID)
+  171          {
+  172   1        pageRegister(pageID, NULL, NULL, Setup, Loop, Exit, Event);
+  173   1      }
+
+
+Module Information          Static   Overlayable
+------------------------------------------------
+  code size            =        56     ------
+  ecode size           =      1145     ------
+  data size            =    ------     ------
+  idata size           =    ------     ------
+  pdata size           =    ------     ------
+  xdata size           =         7     ------
+  xdata-const size     =    ------     ------
+  edata size           =        48     ------
+  bit size             =    ------     ------
+C251 COMPILER V5.60.0,  page_settime                                                       24/08/22  19:19:19  PAGE 4   
+
+  ebit size            =    ------     ------
+  bitaddressable size  =    ------     ------
+  ebitaddressable size =    ------     ------
+  far data size        =    ------     ------
+  huge data size       =    ------     ------
+  const size           =    ------     ------
+  hconst size          =        41     ------
+End of Module Information.
+
+
+C251 COMPILATION COMPLETE.  2 WARNING(S),  0 ERROR(S)

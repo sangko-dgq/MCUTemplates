@@ -1,0 +1,149 @@
+C251 COMPILER V5.60.0,  Buzzer                                                             23/08/22  22:51:18  PAGE 1   
+
+
+C251 COMPILER V5.60.0, COMPILATION OF MODULE Buzzer
+OBJECT MODULE PLACED IN .\Objects\Buzzer.obj
+COMPILER INVOKED BY: D:\Application\keilC251_v560\C251\BIN\C251.EXE User\System\Buzzer.c XSMALL ROM(HUGE) OPTIMIZE(8,SPE
+                    -ED) BROWSE INCDIR(.\User;.\User\oled_gui;.\User\oled_gui\oled_core;.\User\oled_gui\oled_widget;.\User\PageManage;.\User\
+                    -Sensor;.\User\System;.\User\Bluetooth) DEBUG PRINT(.\Listings\Buzzer.lst) TABS(2) OBJECT(.\Objects\Buzzer.obj) 
+
+stmt  level    source
+
+    1          #include "STC32G.h"
+    2          #include "Buzzer.h"
+    3          
+    4          unsigned char bee_mode = 0;
+    5          unsigned int bee_time = 0;
+    6          
+    7          void BuzzerInit(void)
+    8          {
+    9   1        P_SW2 |= 0x80;
+   10   1        
+   11   1        PWMB_CCER1 = 0x00; //写 CCMRx 前必须先清零 CCxE 关闭通道
+   12   1        PWMB_CCER2 = 0x00;
+   13   1        
+   14   1        PWMB_CCMR1 = 0x60;
+   15   1        PWMB_CCER1 = 0x03;  //配置通道输出使能和极性
+   16   1        
+   17   1        PWMB_PSCRH = 0x00;
+   18   1        PWMB_PSCRL = 0x00;
+   19   1        PWMB_ARRH = 0x44; //设置PWM频率为2000Hz
+   20   1        PWMB_ARRL = 0x5C;
+   21   1        
+   22   1        PWMB_CCR1H = 0x22;//设置占空比为50%
+   23   1        PWMB_CCR1L = 0x2E;
+   24   1        
+   25   1        
+   26   1        PWMB_ENO = 0x01; //使能PWM5P输出
+   27   1        PWMB_PS = 0x00; //选择PWM5输出管脚P20
+   28   1      
+   29   1        PWMB_BKR = 0x80; //使能主输出
+   30   1        //PWMB_CR1 |= 0x01; //开始计时
+   31   1        P_SW2 &= 0x7f;
+   32   1        
+   33   1        T4T3M &= 0xFD;    //定时器时钟12T模式
+   34   1        T3L = 0x58;   //设置定时初始值
+   35   1        T3H = 0x9E;   //设置定时初始值
+   36   1        //T4T3M |= 0x08;    //定时器3开始计时
+   37   1        //ET3 = 1;
+   38   1        IE2 |= 0X20;
+   39   1        
+   40   1        BUZZER = 0;
+   41   1      }
+   42          void PWMOff(void)
+   43          {
+   44   1        P_SW2 |= 0x80;
+   45   1        PWMB_CR1 &= ~0x01;    //PWM计数器开始计数
+   46   1        PWMB_ENO &= ~0x01;
+   47   1        P_SW2 &= ~0x80;
+   48   1      }
+   49          void PWMOn(void)
+   50          {
+   51   1        P_SW2 |= 0x80;
+   52   1        PWMB_CR1 |= 0x01;   //PWM计数器开始计数
+   53   1        PWMB_ENO |= 0x01;
+   54   1        P_SW2 &= ~0x80;
+   55   1      }
+   56          void BuzzerOff(void)
+   57          {
+C251 COMPILER V5.60.0,  Buzzer                                                             23/08/22  22:51:18  PAGE 2   
+
+   58   1        T4T3M &= ~0x08;
+   59   1        PWMOff();
+   60   1        BUZZER = 0;
+   61   1      }
+   62          void Bee(void)
+   63          {
+   64   1        bee_mode = 0;
+   65   1        bee_time = 0;
+   66   1        
+   67   1        PWMOn();
+   68   1        T4T3M |= 0x08;      
+   69   1      }
+   70          void Beebeebee(void)
+   71          {
+   72   1        bee_mode = 1;
+   73   1        bee_time = 0;
+   74   1        
+   75   1        PWMOn();
+   76   1        T4T3M |= 0x08;    
+   77   1      }
+   78          void TM3_Isr() interrupt 19
+   79          {
+   80   1        AUXINTIF &= ~0x02;
+   81   1        if(bee_mode == 0)
+   82   1        {
+   83   2          if(++bee_time == 10)
+   84   2          {
+   85   3            bee_time = 0;
+   86   3            BuzzerOff();
+   87   3          }
+   88   2        }
+   89   1        else if(bee_mode == 1)
+   90   1        {
+   91   2          if(bee_time < 60)
+   92   2          {
+   93   3            if(bee_time % 10 == 0)
+   94   3            {
+   95   4              if(((bee_time / 10) % 2) == 1)
+   96   4              {
+   97   5                PWMOff();
+   98   5              }
+   99   4              else
+  100   4              {
+  101   5                PWMOn();
+  102   5              }
+  103   4            }
+  104   3          }
+  105   2          if(++bee_time == 100)
+  106   2          {
+  107   3            bee_time = 0;
+  108   3          }
+  109   2        }
+  110   1      }
+
+
+Module Information          Static   Overlayable
+------------------------------------------------
+  code size            =         4     ------
+  ecode size           =       381     ------
+  data size            =    ------     ------
+  idata size           =    ------     ------
+  pdata size           =    ------     ------
+  xdata size           =    ------     ------
+  xdata-const size     =    ------     ------
+  edata size           =         3     ------
+  bit size             =    ------     ------
+  ebit size            =    ------     ------
+C251 COMPILER V5.60.0,  Buzzer                                                             23/08/22  22:51:18  PAGE 3   
+
+  bitaddressable size  =    ------     ------
+  ebitaddressable size =    ------     ------
+  far data size        =    ------     ------
+  huge data size       =    ------     ------
+  const size           =    ------     ------
+  hconst size          =        11     ------
+End of Module Information.
+
+
+C251 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

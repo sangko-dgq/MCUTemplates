@@ -1,0 +1,212 @@
+C251 COMPILER V5.60.0,  oled_slider                                                        23/08/22  22:51:18  PAGE 1   
+
+
+C251 COMPILER V5.60.0, COMPILATION OF MODULE oled_slider
+OBJECT MODULE PLACED IN .\Objects\oled_slider.obj
+COMPILER INVOKED BY: D:\Application\keilC251_v560\C251\BIN\C251.EXE User\oled_gui\oled_widget\oled_slider.c XSMALL ROM(H
+                    -UGE) OPTIMIZE(8,SPEED) BROWSE INCDIR(.\User;.\User\oled_gui;.\User\oled_gui\oled_core;.\User\oled_gui\oled_widget;.\User
+                    -\PageManage;.\User\Sensor;.\User\System;.\User\Bluetooth) DEBUG PRINT(.\Listings\oled_slider.lst) TABS(2) OBJECT(.\Objec
+                    -ts\oled_slider.obj) 
+
+stmt  level    source
+
+    1          #define _OLED_SLIDER_C
+    2          #include "oled_slider.h"
+    3          
+    4          //将一个16位有符号整型数转换成字符串，并返回字符串的长度
+    5          uint8_t int16ToStr(char *str, int16_t num)
+    6          {
+    7   1        unsigned char i = 0;
+    8   1        if(num < 0)
+    9   1        {
+   10   2          str[i++] = '-';
+   11   2          num = -num;
+   12   2        }
+   13   1        if(num >= 10000)
+   14   1        {
+   15   2          str[i++] = num / 10000 + '0';
+   16   2          goto step1;
+   17   2        }
+   18   1        else if(num >= 1000)
+   19   1        {
+   20   2          str[i++] = num / 1000 + '0';
+   21   2          goto step2;
+   22   2        }
+   23   1        else if(num >= 100)
+   24   1        {
+   25   2          str[i++] = num / 100 + '0';
+   26   2          goto step3;
+   27   2        }
+   28   1        else if(num >= 10)
+   29   1        {
+   30   2          str[i++] = num / 10 + '0';
+   31   2          goto step4;
+   32   2        }
+   33   1        else
+   34   1        {
+   35   2          str[i++] = num + '0';
+   36   2          return i;
+   37   2        }
+   38   1        step1:
+   39   1        str[i++] = num % 10000 / 1000 + '0';
+   40   1        step2:
+   41   1        str[i++] = num % 1000 / 100 + '0';
+   42   1        step3:
+   43   1        str[i++] = num % 100 / 10 + '0';
+   44   1        step4:
+   45   1        str[i++] = num % 10 + '0';
+   46   1        return i;
+   47   1      }
+   48          t_psWidget og_slider_create(int16_t min, int16_t max, int16_t value, uint8_t length, int16_t x, int16_t y
+             -)
+   49          {
+   50   1        t_psWidget pWidget;
+   51   1        t_sSlider *pSlider;
+   52   1        pWidget = og_widget_create();
+   53   1        pSlider = malloc(sizeof(t_sSlider));
+   54   1        #ifdef OLED_DEBUG
+                 if(max <= min)
+C251 COMPILER V5.60.0,  oled_slider                                                        23/08/22  22:51:18  PAGE 2   
+
+                 {
+                   OG_PRINTERROR("the maximum value of slider is smaller than its minimum value");
+                   return NULL;
+                 }
+                 if(pWidget == NULL)
+                 {
+                   OG_PRINTERROR("slider widget create fail");
+                   return NULL;
+                 }
+                 if(pSlider == NULL)
+                 {
+                   free(pWidget);
+                   og_widget_delet(pWidget);
+                   return NULL;
+                 } 
+                 #endif
+   72   1        pWidget->x = x;
+   73   1        pWidget->y = y;
+   74   1        pWidget->config |= SLIDER_WIDGET;
+   75   1        pWidget->pFeature = pSlider;
+   76   1        pWidget->w = length;
+   77   1        pWidget->h = 8;
+   78   1        pSlider->min = min;
+   79   1        pSlider->max = max;
+   80   1        og_slider_setValue(pWidget, value);
+   81   1        og_widget_add(pWidget);
+   82   1        return pWidget;
+   83   1      }
+   84          void og_slider_setValue(t_psWidget pWidget, int16_t value)
+   85          {
+   86   1        t_sSlider *pSlider = (t_sSlider *)pWidget->pFeature;
+   87   1        #ifdef OLED_DEBUG
+                 if(pWidget == NULL)
+                 {
+                   OG_PRINTERROR("try to set a null widget");    
+                   return;
+                 }
+                 if((pWidget->config & 0x0f) != SLIDER_WIDGET)
+                 {
+                   OG_PRINTERROR("wrong type of widget for this method");
+                   return;
+                 }
+                 #endif
+   99   1        if(pSlider->value == value)
+  100   1          return;
+  101   1        pSlider->value = value < pSlider->max ? value : pSlider->max;
+  102   1        pSlider->value = value > pSlider->min ? value : pSlider->min;
+  103   1      }
+  104          int16_t og_slider_getValue(t_psWidget pWidget)
+  105          {
+  106   1        t_sSlider *pSlider = (t_sSlider *)pWidget->pFeature;
+  107   1        #ifdef OLED_DEBUG
+                 if(pWidget == NULL)
+                 {
+                   OG_PRINTERROR("try to set a null widget");    
+                   return 0;
+                 }
+                 if((pWidget->config & 0x0f) != SLIDER_WIDGET)
+                 {
+                   OG_PRINTERROR("wrong type of widget for this method");
+                   return 0;
+                 }
+                 #endif
+  119   1        return pSlider->value;
+  120   1      }
+  121          void og_slider_draw(t_psWidget pWidget)
+C251 COMPILER V5.60.0,  oled_slider                                                        23/08/22  22:51:18  PAGE 3   
+
+  122          {
+  123   1        t_sSlider *pSlider = (t_sSlider *)pWidget->pFeature;
+  124   1        char str[8];
+  125   1        uint8_t i, temp;
+  126   1        uint8_t *ptr;
+  127   1        uint8_t slider_len;
+  128   1        #ifdef OLED_DEBUG
+                 if(pWidget == NULL)
+                 {
+                   OG_PRINTERROR("try to set a null widget");    
+                   return;
+                 }
+                 if((pWidget->config & 0x0f) != SLIDER_WIDGET)
+                 {
+                   OG_PRINTERROR("wrong type of widget for this method");
+                   return;
+                 }
+                 #endif
+  140   1        ptr = calloc(pWidget->w, 1);
+  141   1        #ifdef OLED_DEBUG
+                 if(ptr == NULL)
+                 {
+                   OG_PRINTERROR("slider draw fail");
+                   return;
+                 }
+                 #endif
+  148   1        temp = int16ToStr(str, pSlider->value);
+  149   1        slider_len = pWidget->w - temp * 6;
+  150   1        for(i = 0; i < temp; i++)
+  151   1        {
+  152   2          #if OLED_USE_BUILDIN_FONT == 1
+                   font_getCharASCII_6X8(str[i], ptr + slider_len + i * 6);
+                   #else
+  155   2          font_getCharASCII_5X7(str[i], ptr + slider_len + i * 6);
+  156   2          #endif
+  157   2        }
+  158   1        slider_len -= 2;
+  159   1        for(i = 1; i < slider_len; i++)
+  160   1        {
+  161   2          ptr[i] = 0x18;
+  162   2        }
+  163   1        temp = 1 + (float)(pSlider->value - pSlider->min) / (pSlider->max - pSlider->min) * (slider_len - 2);
+  164   1        ptr[temp - 1] = 0xFF;
+  165   1        ptr[temp] = 0xFF;
+  166   1        ptr[temp + 1] = 0xFF;
+  167   1        BMPtoBuf(pWidget->x, pWidget->y, pWidget->w, pWidget->h, pWidget->config & WIDGET_FOCUS, ptr);
+  168   1        free(ptr);
+  169   1      }
+
+
+Module Information          Static   Overlayable
+------------------------------------------------
+  code size            =    ------     ------
+  ecode size           =       823     ------
+  data size            =    ------     ------
+  idata size           =    ------     ------
+  pdata size           =    ------     ------
+  xdata size           =    ------     ------
+  xdata-const size     =    ------     ------
+  edata size           =    ------         31
+  bit size             =    ------     ------
+  ebit size            =    ------     ------
+  bitaddressable size  =    ------     ------
+  ebitaddressable size =    ------     ------
+  far data size        =    ------     ------
+  huge data size       =    ------     ------
+  const size           =    ------     ------
+C251 COMPILER V5.60.0,  oled_slider                                                        23/08/22  22:51:18  PAGE 4   
+
+  hconst size          =    ------     ------
+End of Module Information.
+
+
+C251 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

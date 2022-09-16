@@ -3,7 +3,7 @@
 .\objects\gpio.o: ..\Libs\Quick_STD\mcu_type.h
 .\objects\gpio.o: ..\Core\core_basic_driver\stm32f4xx.h
 .\objects\gpio.o: ..\Core\core_cm\core_cm4.h
-.\objects\gpio.o: E:\Keil_MDK5.35\Core\ARM\ARMCC\Bin\..\include\stdint.h
+.\objects\gpio.o: D:\Application\Keil\ARM\ARMCC\Bin\..\include\stdint.h
 .\objects\gpio.o: ..\Core\core_cm\core_cmInstr.h
 .\objects\gpio.o: ..\Core\core_cm\core_cmFunc.h
 .\objects\gpio.o: ..\Core\core_cm\core_cmSimd.h

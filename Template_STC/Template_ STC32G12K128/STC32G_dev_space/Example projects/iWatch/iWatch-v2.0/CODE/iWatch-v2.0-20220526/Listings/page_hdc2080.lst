@@ -1,0 +1,195 @@
+C251 COMPILER V5.60.0,  page_hdc2080                                                       24/08/22  19:19:17  PAGE 1   
+
+
+C251 COMPILER V5.60.0, COMPILATION OF MODULE page_hdc2080
+OBJECT MODULE PLACED IN .\Objects\page_hdc2080.obj
+COMPILER INVOKED BY: D:\Application\keilC251_v560\C251\BIN\C251.EXE User\PageManage\page_hdc2080.c XSMALL ROM(HUGE) OPTI
+                    -MIZE(8,SPEED) BROWSE INCDIR(.\User;.\User\oled_gui;.\User\oled_gui\oled_core;.\User\oled_gui\oled_widget;.\User\PageMana
+                    -ge;.\User\Sensor;.\User\System;.\User\Bluetooth) DEBUG PRINT(.\Listings\page_hdc2080.lst) TABS(2) OBJECT(.\Objects\page_
+                    -hdc2080.obj) 
+
+stmt  level    source
+
+    1          #include "iWatch.h"
+    2          
+    3          static unsigned char CODE Icon[] = {
+    4            48, 48,
+    5            0x00,0x00,0x00,0x00,0x00,0xE0,0x70,0x10,0x18,0x18,0x18,0x10,0x70,0xE0,0x00,0x00,
+    6            0x00,0x00,0x00,0x00,0x00,0x00,0x30,0x60,0xC0,0x80,0x00,0x08,0xB8,0x80,0x80,0xC0,
+    7            0xDF,0xCE,0xC0,0x80,0x90,0x38,0x08,0x00,0xC0,0xE0,0x70,0x20,0x00,0x00,0x00,0x00,
+    8            0x00,0x00,0x00,0x00,0xFF,0xFF,0x98,0x98,0x18,0x18,0x18,0x00,0x00,0xFF,0xFF,0x00,
+    9            0x00,0x00,0xC0,0xC0,0xC4,0xC4,0x0C,0x00,0xF0,0xFC,0x0E,0x03,0x01,0x01,0x00,0x00,
+   10            0x00,0x00,0x00,0x00,0x01,0x03,0x07,0x0E,0xF8,0xE0,0x04,0x8C,0xC6,0xC0,0xC0,0x80,
+   11            0x00,0x00,0x00,0x00,0xFF,0xFF,0x73,0x73,0x00,0x00,0x00,0x00,0x00,0xFF,0xFF,0x00,
+   12            0x00,0x00,0x00,0x00,0x18,0x18,0x08,0x80,0xC3,0x8F,0x18,0x30,0x60,0x40,0xC0,0xC0,
+   13            0xC0,0xC0,0xC0,0xC0,0x60,0x60,0x30,0x1C,0xCF,0x81,0x08,0x08,0x18,0x00,0x00,0x00,
+   14            0x00,0x00,0x00,0x80,0xFF,0x7F,0x0E,0x0E,0x00,0x00,0x00,0x00,0x00,0x7F,0xFF,0x80,
+   15            0x00,0x00,0x00,0x00,0x00,0x00,0x03,0x03,0x01,0x00,0x00,0x0C,0x0E,0x00,0x00,0x00,
+   16            0x3C,0x3C,0x00,0x00,0x02,0x0E,0x00,0x00,0x00,0x01,0x03,0x02,0x00,0x00,0x00,0x00,
+   17            0xF0,0xFE,0x07,0x01,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0xC0,0x40,0x01,
+   18            0x03,0x1E,0xF8,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+   19            0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+   20            0x01,0x07,0x1C,0x30,0x20,0x60,0x40,0xC0,0xC0,0xC4,0xC4,0xC6,0x43,0x61,0x60,0x30,
+   21            0x1C,0x0F,0x03,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+   22            0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00
+   23            /* (48 X 48 )*/
+   24          };
+   25          static t_psWidget text[6];
+   26          static t_psGroup group1;
+   27          char * code CH1[3] = 
+   28          {
+   29            "温度：　　℃",
+   30            "湿度：",
+   31            "压强："
+   32          };
+   33          
+   34          /**
+   35            * @brief  页面初始化事件
+   36            * @param  无
+   37            * @retval 无
+   38            */
+   39          static void Setup(unsigned char condition)
+   40          {
+   41   1        unsigned char i;
+   42   1        for(i = 0; i < 3; i++)
+   43   1        {
+   44   2          text[i] = og_label_create(FONT_GB2312_15X16, 0, i * 16);
+   45   2          og_label_setText(text[i], CH1[i]);
+   46   2          text[i + 3] = og_label_create(FONT_ASCII_8X16, 48, i * 16);
+   47   2        }
+   48   1        group1 = og_group_create(6);
+   49   1        for(i = 0; i < 6; i++)
+   50   1        {
+   51   2          og_group_addWidget(group1, text[i], 0);
+   52   2        }
+   53   1        og_group_setPosOffset(group1, 0, 64);
+   54   1        og_group_addAnimOffset(group1, 0, -64, ANIM_TIME_NORM, ANIM_NULL_CB);
+   55   1        #if (TH_SENSOR_SELECT == 1)
+                 HDC2080SetMode(7);
+C251 COMPILER V5.60.0,  page_hdc2080                                                       24/08/22  19:19:17  PAGE 2   
+
+                 HDC2080StartConversion();
+                 #elif (TH_SENSOR_SELECT == 2)
+                 HDC1080Start();
+                 #elif (TH_SENSOR_SELECT == 3)
+   61   1        HTU21DStart();
+   62   1        #endif
+   63   1        #if (P_SENSOR_SELECT == 1)
+   64   1        BMP390SetMode(NORMAL_MODE);
+   65   1        #endif
+   66   1        
+   67   1      }
+*** WARNING C47 IN LINE 39 OF User\PageManage\page_hdc2080.c: 'condition': unreferenced parameter
+   68          static void delet(void)
+   69          {
+   70   1        og_group_delet(group1);
+   71   1        pageSetStatus(page_hdc2080, PAGE_IDLE);
+   72   1      }
+   73          /**
+   74            * @brief  页面退出事件
+   75            * @param  无
+   76            * @retval 无
+   77            */
+   78          static void Exit(unsigned char condition)
+   79          {
+   80   1        #if (TH_SENSOR_SELECT == 1)
+                 HDC2080SetMode(0);
+                 #elif (TH_SENSOR_SELECT == 2)
+                 #elif (TH_SENSOR_SELECT == 3)
+   84   1        #endif
+   85   1        #if (P_SENSOR_SELECT == 1)
+   86   1        BMP390SetMode(SLEEP_MODE);
+   87   1        #endif
+   88   1        og_group_addAnimOffset(group1, 0, 64, ANIM_TIME_NORM, delet);
+   89   1      }
+*** WARNING C47 IN LINE 78 OF User\PageManage\page_hdc2080.c: 'condition': unreferenced parameter
+   90          /**
+   91            * @brief  页面循环执行的内容
+   92            * @param  无
+   93            * @retval 无
+   94            */
+   95          static void Loop()
+   96          {
+   97   1        if(pageExecuteRate(&Rate10Hz))
+   98   1        {
+   99   2          #if (TH_SENSOR_SELECT == 0)
+                   og_label_setText(text[3], "NULL");
+                   og_label_setText(text[4], "NULL");
+                   #elif (TH_SENSOR_SELECT == 1)
+                   HDC2080GetTH(&HDC2080);
+                   lablel_printf(text[3], "%2.1f", HDC2080.temperature + 0.05);
+                   lablel_printf(text[4], "%2.1f%%", HDC2080.humidity + 0.05);
+                   #elif (TH_SENSOR_SELECT == 2)
+                   if(HDC1080GetTH(&HDC1080))
+                   {
+                     lablel_printf(text[3], "%2.1f", HDC1080.temperature + 0.05);
+                     lablel_printf(text[4], "%2.1f%%", HDC1080.humidity + 0.05);
+                   }
+                   #elif (TH_SENSOR_SELECT == 3)
+  113   2          static unsigned char step = 0;
+  114   2          if(step == 0)
+  115   2          {
+  116   3            if(HTU21DGetTemperature(&HTU21D))
+  117   3            {
+  118   4              lablel_printf(text[3], "%2.1f", HTU21D.temperature);
+  119   4              step = 1;
+  120   4            }
+C251 COMPILER V5.60.0,  page_hdc2080                                                       24/08/22  19:19:17  PAGE 3   
+
+  121   3          }
+  122   2          else if(step == 1)
+  123   2          {
+  124   3            if(HTU21DGetHumidity(&HTU21D))
+  125   3            {
+  126   4              lablel_printf(text[4], "%2.1f%%", HTU21D.humidity);
+  127   4              step = 0;
+  128   4            }
+  129   3          }
+  130   2          #endif
+  131   2          #if (P_SENSOR_SELECT == 0)
+                   og_label_setText(text[5], "NULL");
+                   #elif (P_SENSOR_SELECT == 1)
+  134   2          BMP390GetSensorData(&BMP390);
+  135   2          lablel_printf(text[5], "%.1fPa", BMP390.pressure + 0.05);
+  136   2          #endif
+  137   2        }
+  138   1      }
+  139          /**
+  140            * @brief  页面事件
+  141            * @param  btn:发出事件的按键
+  142            * @param  event:事件编号
+  143            * @retval 无
+  144            */
+  145          static void Event(unsigned char event)
+  146          {
+  147   1        if(event == KEY1_PRESSED)
+  148   1          pageShift(page_menu, PAGE_RETURN);
+  149   1      }
+  150          void pageRegister_page_hdc2080(unsigned char pageID)
+  151          {
+  152   1        pageRegister(pageID, "HDC2080", Icon, Setup, Loop, Exit, Event);
+  153   1      }
+
+
+Module Information          Static   Overlayable
+------------------------------------------------
+  code size            =       302     ------
+  ecode size           =       540     ------
+  data size            =    ------     ------
+  idata size           =    ------     ------
+  pdata size           =    ------     ------
+  xdata size           =    ------     ------
+  xdata-const size     =    ------     ------
+  edata size           =        29     ------
+  bit size             =    ------     ------
+  ebit size            =    ------     ------
+  bitaddressable size  =    ------     ------
+  ebitaddressable size =    ------     ------
+  far data size        =    ------     ------
+  huge data size       =    ------     ------
+  const size           =    ------     ------
+  hconst size          =        61     ------
+End of Module Information.
+
+
+C251 COMPILATION COMPLETE.  2 WARNING(S),  0 ERROR(S)

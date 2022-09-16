@@ -1,0 +1,86 @@
+C251 COMPILER V5.60.0,  oled_font                                                          23/08/22  22:51:16  PAGE 1   
+
+
+C251 COMPILER V5.60.0, COMPILATION OF MODULE oled_font
+OBJECT MODULE PLACED IN .\Objects\oled_font.obj
+COMPILER INVOKED BY: D:\Application\keilC251_v560\C251\BIN\C251.EXE User\oled_gui\oled_core\oled_font.c XSMALL ROM(HUGE)
+                    - OPTIMIZE(8,SPEED) BROWSE INCDIR(.\User;.\User\oled_gui;.\User\oled_gui\oled_core;.\User\oled_gui\oled_widget;.\User\Pag
+                    -eManage;.\User\Sensor;.\User\System;.\User\Bluetooth) DEBUG PRINT(.\Listings\oled_font.lst) TABS(2) OBJECT(.\Objects\ole
+                    -d_font.obj) 
+
+stmt  level    source
+
+    1          #define _OLED_FONT_C
+    2          #include "oled_font.h"
+    3          
+    4          #if (OLED_USE_BUILDIN_FONT == 1)
+               #if (USE_FONT_ASIIC_6X8 == 1)
+               void font_getCharASCII_6X8(uint8_t s, uint8_t *ptr)
+               {
+                 uint8_t i;
+                 s -= ' ';
+                 for(i = 0; i < 6; i++)
+                 {
+                   ptr[i] = ASCII_6X8[s][i];
+                 }
+               }
+               #endif
+               #if (USE_FONT_ASIIC_8X16 == 1)
+               void font_getCharASCII_8X16(uint8_t s, uint8_t *ptr, uint16_t offset)
+               {
+                 uint8_t i;
+                 s -= ' ';
+                 for(i = 0; i < 8; i++)
+                 {
+                   ptr[i] = ASCII_8X16[s][i];
+                 }
+                 ptr += (offset - 8);
+                 for(i = 8; i < 16; i++)
+                 {
+                   ptr[i] = ASCII_8X16[s][i];
+                 }
+               }
+               #endif
+               #if (USE_FONT_ASIIC_16X32 == 1)
+               void font_getCharASCII_16X32(uint8_t s, uint8_t *ptr, uint16_t offset)
+               {
+                 uint8_t i, j, k;
+                 s -= ' ';
+                 for(j = 0; j < 4; j++)
+                 {
+                   k = j << 4;
+                   for(i = 0; i < 16; i++)
+                   {
+                     ptr[i] = ASCII_16X32[s][k + i];
+                   }
+                   ptr += offset;
+                 }
+               }
+               #endif
+               #endif
+
+
+Module Information          Static   Overlayable
+------------------------------------------------
+  code size            =    ------     ------
+  ecode size           =    ------     ------
+  data size            =    ------     ------
+  idata size           =    ------     ------
+  pdata size           =    ------     ------
+C251 COMPILER V5.60.0,  oled_font                                                          23/08/22  22:51:16  PAGE 2   
+
+  xdata size           =    ------     ------
+  xdata-const size     =    ------     ------
+  edata size           =    ------     ------
+  bit size             =    ------     ------
+  ebit size            =    ------     ------
+  bitaddressable size  =    ------     ------
+  ebitaddressable size =    ------     ------
+  far data size        =    ------     ------
+  huge data size       =    ------     ------
+  const size           =    ------     ------
+  hconst size          =    ------     ------
+End of Module Information.
+
+
+C251 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

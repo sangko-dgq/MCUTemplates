@@ -1,7 +1,7 @@
 .\objects\system_stm32f4xx.o: ..\Core\core_basic_driver\system_stm32f4xx.c
 .\objects\system_stm32f4xx.o: ..\Core\core_basic_driver\stm32f4xx.h
 .\objects\system_stm32f4xx.o: ..\Core\core_cm\core_cm4.h
-.\objects\system_stm32f4xx.o: E:\Keil_MDK5.35\Core\ARM\ARMCC\Bin\..\include\stdint.h
+.\objects\system_stm32f4xx.o: D:\Application\Keil\ARM\ARMCC\Bin\..\include\stdint.h
 .\objects\system_stm32f4xx.o: ..\Core\core_cm\core_cmInstr.h
 .\objects\system_stm32f4xx.o: ..\Core\core_cm\core_cmFunc.h
 .\objects\system_stm32f4xx.o: ..\Core\core_cm\core_cmSimd.h

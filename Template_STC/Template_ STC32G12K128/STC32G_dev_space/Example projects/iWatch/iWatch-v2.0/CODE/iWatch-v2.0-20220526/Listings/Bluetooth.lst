@@ -1,0 +1,113 @@
+C251 COMPILER V5.60.0,  Bluetooth                                                          23/08/22  22:51:27  PAGE 1   
+
+
+C251 COMPILER V5.60.0, COMPILATION OF MODULE Bluetooth
+OBJECT MODULE PLACED IN .\Objects\Bluetooth.obj
+COMPILER INVOKED BY: D:\Application\keilC251_v560\C251\BIN\C251.EXE User\Bluetooth\Bluetooth.c XSMALL ROM(HUGE) OPTIMIZE
+                    -(8,SPEED) BROWSE INCDIR(.\User;.\User\oled_gui;.\User\oled_gui\oled_core;.\User\oled_gui\oled_widget;.\User\PageManage;.
+                    -\User\Sensor;.\User\System;.\User\Bluetooth) DEBUG PRINT(.\Listings\Bluetooth.lst) TABS(2) OBJECT(.\Objects\Bluetooth.ob
+                    -j) 
+
+stmt  level    source
+
+    1          #include "Bluetooth.h"
+    2          #include "System.h"
+    3          
+    4          #define RX4_BUF_SIZE  64
+    5          unsigned char xdata uart4_busy_flag = 0;
+    6          unsigned char xdata rx4_cnt = 0;
+    7          unsigned char xdata rx4_buf[RX4_BUF_SIZE];  //串口4接收缓冲区
+    8          
+    9          void Uart4Isr() interrupt 18
+   10          {
+   11   1        if (S4CON & 0x02)   //发送中断
+   12   1        {
+   13   2          S4CON &= ~0x02;
+   14   2          uart4_busy_flag = 0;
+   15   2        }
+   16   1        if (S4CON & 0x01)   //接收中断
+   17   1        {
+   18   2          S4CON &= ~0x01;
+   19   2          rx4_buf[rx4_cnt] = S4BUF;
+   20   2          if(++rx4_cnt == RX4_BUF_SIZE)
+   21   2            rx4_cnt = 0;
+   22   2        }
+   23   1      }
+   24          void Uart4SendChar(char c)
+   25          {
+   26   1        while(uart4_busy_flag);
+   27   1        uart4_busy_flag = 1;
+   28   1        S4BUF = c;
+   29   1      }
+   30          
+   31          void BtOn(void)
+   32          {
+   33   1        unsigned char i;
+   34   1        for(i = 0; i < RX4_BUF_SIZE; i++)
+   35   1          rx4_buf[i] = 0;
+   36   1        rx4_cnt = 0;
+   37   1        IE2 |= 0x10;  //开串口4中断
+   38   1        P0 |= 0x0c;
+   39   1        BTEN = 0;     //打开蓝牙
+   40   1      }
+   41          void BtOff(void)
+   42          {
+   43   1        BTEN = 1;     //关闭蓝牙
+   44   1        IE2 &= ~0x10; //关串口4中断
+   45   1        P0 &= ~0x0c;  //取消串口4IO上拉
+   46   1      }
+   47          unsigned char BtCheckConnection(void)
+   48          {
+   49   1        return BTSTA;
+   50   1      }
+   51          unsigned char BtReceiveString(char *dptr)
+   52          {
+   53   1        if(rx4_cnt != 0)
+   54   1        {
+   55   2          unsigned char i;
+   56   2          unsigned char temp = rx4_cnt;
+C251 COMPILER V5.60.0,  Bluetooth                                                          23/08/22  22:51:27  PAGE 2   
+
+   57   2          rx4_cnt = 0;
+   58   2          for(i = 0; i < temp; i++)
+   59   2          {
+   60   3            dptr[i] = rx4_buf[i];
+   61   3          }
+   62   2          dptr[i] = '\0';
+   63   2          return temp;
+   64   2        }
+   65   1        else
+   66   1          return 0;
+   67   1      }
+   68          void BtSendString(const char *str)
+   69          {
+   70   1        while(*str)
+   71   1        {
+   72   2          Uart4SendChar(*str);
+   73   2          str++;
+   74   2        }
+   75   1      }
+
+
+Module Information          Static   Overlayable
+------------------------------------------------
+  code size            =         4     ------
+  ecode size           =       226     ------
+  data size            =    ------     ------
+  idata size           =    ------     ------
+  pdata size           =    ------     ------
+  xdata size           =        66     ------
+  xdata-const size     =    ------     ------
+  edata size           =    ------     ------
+  bit size             =    ------     ------
+  ebit size            =    ------     ------
+  bitaddressable size  =    ------     ------
+  ebitaddressable size =    ------     ------
+  far data size        =    ------     ------
+  huge data size       =    ------     ------
+  const size           =    ------     ------
+  hconst size          =        12     ------
+End of Module Information.
+
+
+C251 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

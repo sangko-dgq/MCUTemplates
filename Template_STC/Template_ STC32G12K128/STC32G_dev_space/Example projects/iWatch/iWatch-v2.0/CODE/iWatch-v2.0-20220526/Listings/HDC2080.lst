@@ -1,0 +1,129 @@
+C251 COMPILER V5.60.0,  HDC2080                                                            23/08/22  22:51:22  PAGE 1   
+
+
+C251 COMPILER V5.60.0, COMPILATION OF MODULE HDC2080
+OBJECT MODULE PLACED IN .\Objects\HDC2080.obj
+COMPILER INVOKED BY: D:\Application\keilC251_v560\C251\BIN\C251.EXE User\Sensor\HDC2080.c XSMALL ROM(HUGE) OPTIMIZE(8,SP
+                    -EED) BROWSE INCDIR(.\User;.\User\oled_gui;.\User\oled_gui\oled_core;.\User\oled_gui\oled_widget;.\User\PageManage;.\User
+                    -\Sensor;.\User\System;.\User\Bluetooth) DEBUG PRINT(.\Listings\HDC2080.lst) TABS(2) OBJECT(.\Objects\HDC2080.obj) 
+
+stmt  level    source
+
+    1          #include "IIC.h"
+    2          #include "Delay.h"
+    3          #include "HDC2080.h"
+    4          
+    5          unsigned char code TRES = 0;  //Temperature resolution
+    6                                        //00: 14 bit
+    7                                        //01: 11 bit
+    8                                        //10: 9 bit
+    9                                        //11: NA
+   10          unsigned char code HRES = 0;  //Humidity resolution
+   11                                        //00: 14 bit
+   12                                        //01: 11 bit
+   13                                        //10: 9 bit
+   14                                        //11: NA
+   15          unsigned char code MEAS_CFG = 0;    //Measurement configuration
+   16                                              //00: Humidity + Temperature
+   17                                              //01: Temperature only
+   18                                              //10: NA
+   19                                              //11: NA
+   20          
+   21          void HDC2080WriteByte(unsigned char addr, unsigned char dat)
+   22          {
+   23   1        Single_WriteIIC(HDC2080_IIC_ADDR, addr, dat);
+   24   1      }
+   25          unsigned char HDC2080ReadByte(unsigned char addr)
+   26          {
+   27   1        return Single_ReadIIC(HDC2080_IIC_ADDR, addr);
+   28   1      }
+   29          unsigned char HDC2080CheckConnection()
+   30          {
+   31   1        unsigned char temp1, temp2;
+   32   1        temp1 = HDC2080ReadByte(DEVICE_ID_LOW);
+   33   1        temp2 = HDC2080ReadByte(DEVICE_ID_HIGH);
+   34   1        if((temp2 == (HDC2080_devID >> 8)) && (temp1 == (HDC2080_devID & 0x00ff)))
+   35   1          return 1;
+   36   1        else
+   37   1          return 0;
+   38   1      }
+   39          /*
+   40          Auto Measurement Mode (AMM)
+   41          000 = Disabled. Initiate measurement via I2C (single convertion mode)
+   42          001 = 1/120Hz (1 samples every 2 minutes)
+   43          010 = 1/60Hz (1 samples every minute)
+   44          011 = 0.1Hz (1 samples every 10 seconds)
+   45          100 = 0.2 Hz (1 samples every 5 second)
+   46          101 = 1Hz (1 samples every second)
+   47          110 = 2Hz (2 samples every second)
+   48          111 = 5Hz (5 samples every second)
+   49          */
+   50          void HDC2080SetMode(unsigned char mode)
+   51          {
+   52   1        HDC2080WriteByte(INT_CONF, mode << 4);
+   53   1      }
+   54          /*
+   55          void HDC2080SoftReset(void)
+   56          {
+   57            HDC2080WriteByte(INT_CONF, 0x80);
+C251 COMPILER V5.60.0,  HDC2080                                                            23/08/22  22:51:22  PAGE 2   
+
+   58          }
+   59          */
+   60          void HDC2080StartConversion(void)
+   61          {
+   62   1        unsigned char temp;
+   63   1        temp = HDC2080ReadByte(MEAS_CONF);
+   64   1        temp |= 0x01;
+   65   1        HDC2080WriteByte(MEAS_CONF, temp);
+   66   1      }
+   67          void HDC2080GetTH(t_sHDC2080 *p)
+   68          {
+   69   1        unsigned char temp[4];
+   70   1        unsigned long temp1, temp2;
+   71   1        I2C_Read_MultiBytes(HDC2080_IIC_ADDR, TEMPERATURE_LOW, 4, temp);
+   72   1        temp1 = (temp[1] << 8) | temp[0];
+   73   1        temp2 = (temp[3] << 8) | temp[2];
+   74   1        //For highest accuracy, correction for a slight PSSR sensitivity 
+   75   1        //should be applied to ·½³ÌÊ½ 1 for supplies > 1.8 V
+   76   1        p->temperature = temp1 * 165.0 / 65536.0 - (40.5 + TEMPpsrr * (3.3 - 1.8));
+   77   1        p->humidity = temp2 * 100.0 / 65536.0;
+   78   1      }
+   79          unsigned char HDC2080Init(void)
+   80          {
+   81   1        unsigned int time_out = 100;
+   82   1        Delay1ms(50);
+   83   1        while(HDC2080CheckConnection() == 0)
+   84   1        {
+   85   2          Delay1ms(1);
+   86   2          if(--time_out == 0)
+   87   2            return 0;
+   88   2        }
+   89   1        HDC2080WriteByte(MEAS_CONF, (TRES << 6) | (HRES << 4) | (MEAS_CFG << 1));
+   90   1        HDC2080SetMode(0);
+   91   1        return 1;
+   92   1      }
+
+
+Module Information          Static   Overlayable
+------------------------------------------------
+  code size            =         3     ------
+  ecode size           =       338     ------
+  data size            =    ------     ------
+  idata size           =    ------     ------
+  pdata size           =    ------     ------
+  xdata size           =    ------     ------
+  xdata-const size     =    ------     ------
+  edata size           =    ------          4
+  bit size             =    ------     ------
+  ebit size            =    ------     ------
+  bitaddressable size  =    ------     ------
+  ebitaddressable size =    ------     ------
+  far data size        =    ------     ------
+  huge data size       =    ------     ------
+  const size           =    ------     ------
+  hconst size          =    ------     ------
+End of Module Information.
+
+
+C251 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

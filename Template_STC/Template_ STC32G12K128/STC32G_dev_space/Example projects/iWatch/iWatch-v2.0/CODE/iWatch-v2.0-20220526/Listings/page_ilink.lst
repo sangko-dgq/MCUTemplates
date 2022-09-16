@@ -1,0 +1,563 @@
+C251 COMPILER V5.60.0,  page_ilink                                                         24/08/22  19:19:18  PAGE 1   
+
+
+C251 COMPILER V5.60.0, COMPILATION OF MODULE page_ilink
+OBJECT MODULE PLACED IN .\Objects\page_ilink.obj
+COMPILER INVOKED BY: D:\Application\keilC251_v560\C251\BIN\C251.EXE User\PageManage\page_ilink.c XSMALL ROM(HUGE) OPTIMI
+                    -ZE(8,SPEED) BROWSE INCDIR(.\User;.\User\oled_gui;.\User\oled_gui\oled_core;.\User\oled_gui\oled_widget;.\User\PageManage
+                    -;.\User\Sensor;.\User\System;.\User\Bluetooth) DEBUG PRINT(.\Listings\page_ilink.lst) TABS(2) OBJECT(.\Objects\page_ilin
+                    -k.obj) 
+
+stmt  level    source
+
+    1          #include "iWatch.h"
+    2          #include "Bluetooth.h"
+    3          #include "stdio.h"
+    4          #include <string.h>
+    5          #include <stdlib.h>
+    6          
+    7          static unsigned char xdata mode = 0;
+    8          static unsigned char xdata data_mode = 0;
+    9          
+   10          #define RX1_BUF_SIZE    64  //串口接收缓冲区64字节
+   11          static unsigned char xdata uart1_busy_flag = 0;
+   12          static unsigned char xdata rx1_cnt = 0;
+   13          static unsigned char xdata rx1_buf[RX1_BUF_SIZE];   //串口1接收缓冲区
+   14          extern unsigned char xdata rx4_cnt;
+   15          extern unsigned char xdata rx4_buf[64];             //串口4接收缓冲区
+   16          static unsigned char temp[64];                      //数据转发缓冲区
+   17          
+   18          #define MAX_VA_LIST   10  //每个指令最大10个参数
+   19          #define COM_BUF_SIZE  64  //指令接收缓冲区64字节
+   20          static unsigned char xdata com_buf[COM_BUF_SIZE]; //指令接收缓冲区
+   21          static unsigned char xdata com_index = 0;
+   22          static unsigned char *rx_buf;
+   23          static unsigned char *rx_tail;
+   24          static unsigned char xdata rx_head = 0;
+   25          char *pVaList[MAX_VA_LIST];
+   26          char *code CommandList[] =
+   27          {
+   28            "setTime",
+   29            "setConfig",
+   30            "setAlarm",
+   31            "setDataMode",
+   32            "getConfig",
+   33            "getAlarm",
+   34            "getStep"
+   35          };
+   36          #define COMMNAND_LIST_SUM 7
+   37          
+   38          void Uart1Reset(void)
+   39          {
+   40   1        unsigned char i;
+   41   1        com_index = 0;
+   42   1        rx_head = 0;
+   43   1        for(i = 0; i < COM_BUF_SIZE; i++)
+   44   1          com_buf[i] = 0;
+   45   1        for(i = 0; i < RX1_BUF_SIZE; i++)
+   46   1        {
+   47   2          rx1_buf[i] = 0;
+   48   2          rx4_buf[i] = 0;
+   49   2        }
+   50   1        rx1_cnt = 0;
+   51   1        rx4_cnt = 0;
+   52   1      }
+   53          void UART1_Isr() interrupt 4
+   54          {
+   55   1        if(TI)
+   56   1        {
+C251 COMPILER V5.60.0,  page_ilink                                                         24/08/22  19:19:18  PAGE 2   
+
+   57   2          TI = 0;
+   58   2          uart1_busy_flag = 0;
+   59   2        }
+   60   1        if(RI)
+   61   1        {
+   62   2          RI = 0;     //清中断标志
+   63   2          rx1_buf[rx1_cnt] = SBUF;
+   64   2          if(++rx1_cnt == RX1_BUF_SIZE)
+   65   2            rx1_cnt = 0;
+   66   2        }
+   67   1      }
+   68          void Uart1SendString(const char *str)
+   69          {
+   70   1        while(*str)
+   71   1        {
+   72   2          while(uart1_busy_flag);
+   73   2          uart1_busy_flag = 1;
+   74   2          SBUF = *str;
+   75   2          str++;
+   76   2        }
+   77   1      }
+   78          void MuxSendString(const char *str)
+   79          {
+   80   1        if(mode == 0)
+   81   1          Uart1SendString(str);
+   82   1        else
+   83   1          BtSendString(str);
+   84   1      }
+   85          
+   86          //这个从串口接收区中识别指令，分离指令和参数
+   87          void DecVaList(char *pInput, char **argv)
+   88          {
+   89   1        unsigned char i;
+   90   1        unsigned char j;
+   91   1        //先清空指令解析存储区
+   92   1        for (i = 0; i < MAX_VA_LIST; i++)
+   93   1        {
+   94   2          argv[i] = NULL;
+   95   2        }
+   96   1        j = 0;
+   97   1        while (j < COM_BUF_SIZE)                            // 越过首部的空白字符;
+   98   1        {
+   99   2          if (*pInput == '\0')
+  100   2            break;
+  101   2          if (*pInput >= '0' && *pInput <= '9' ||
+  102   2              *pInput >= 'A' && *pInput <= 'Z' ||
+  103   2              *pInput >= 'a' && *pInput <= 'z' ||
+  104   2              *pInput == '-' || *pInput == '.')
+  105   2          {
+  106   3            break;
+  107   3          }
+  108   2          *pInput = '\0';
+  109   2          pInput++;
+  110   2          j++;
+  111   2        }
+  112   1        for (i = 0; i < MAX_VA_LIST; i++)                   // 最多处理 MAX_VA_LIST 个参数;
+  113   1        {
+  114   2          while (j < COM_BUF_SIZE)                        // 保存找到的指令码、参数值；
+  115   2          {
+  116   3            if (*pInput == '\0')
+  117   3              break;
+  118   3            if (*pInput >= '0' && *pInput <= '9' ||
+  119   3                *pInput >= 'A' && *pInput <= 'Z' ||
+  120   3                *pInput >= 'a' && *pInput <= 'z' ||
+  121   3                *pInput == '-' || *pInput == '.')
+  122   3            {
+C251 COMPILER V5.60.0,  page_ilink                                                         24/08/22  19:19:18  PAGE 3   
+
+  123   4              if (argv[i] == NULL)
+  124   4              {
+  125   5                argv[i] = pInput;
+  126   5              }
+  127   4            }
+  128   3            else
+  129   3            {
+  130   4              break;
+  131   4            }
+  132   3            pInput++;
+  133   3            j++;
+  134   3          }
+  135   2          while (j < COM_BUF_SIZE)                        // 越过分隔符;
+  136   2          {
+  137   3            if (*pInput == '\0')
+  138   3              break;
+  139   3            if (*pInput >= '0' && *pInput <= '9' ||
+  140   3                *pInput >= 'A' && *pInput <= 'Z' ||
+  141   3                *pInput >= 'a' && *pInput <= 'z' ||
+  142   3                *pInput == '-' || *pInput == '.')
+  143   3            {
+  144   4              break;
+  145   4            }
+  146   3            *pInput = '\0';
+  147   3            pInput++;
+  148   3            j++;
+  149   3          }
+  150   2        }
+  151   1        return;
+  152   1      }
+  153          void CommandProc(void)
+  154          {
+  155   1        char ucRecByte;
+  156   1        while(rx_head != *rx_tail)
+  157   1        {
+  158   2          ucRecByte = rx_buf[rx_head++];
+  159   2          if(rx_head >= *rx_tail)
+  160   2            rx_head = *rx_tail = 0;
+  161   2          if(ucRecByte == '\r' || ucRecByte == '\n') //每当检测到串口接收到换行符或回车符，执行指令识别
+  162   2          {
+  163   3            unsigned char i;
+  164   3            com_buf[com_index] = '\0';
+  165   3            DecVaList(com_buf, pVaList);    //解析指令，存储到pVaList中
+  166   3            com_index = 0;
+  167   3            if(NULL == pVaList[0])
+  168   3              continue;
+  169   3            for (i = 0; i < COMMNAND_LIST_SUM; i++)      // 将接收到的指令与指令列表中的指令逐一比较
+  170   3            {
+  171   4              if(strcmp(pVaList[0], CommandList[i]) == 0)
+  172   4              {
+  173   5                break;      //接收的指令与存在与指令列表之中，跳出循环
+  174   5              }
+  175   4            }
+  176   3            if (i >= COMMNAND_LIST_SUM)     // 接收的指令不存在
+  177   3            {
+  178   4              continue;
+  179   4            }
+  180   3            switch(i)
+  181   3            {
+  182   4              case 0:   //setTime
+  183   4              {
+  184   5                time.year = atoi(pVaList[1]) - 2000;
+  185   5                time.month = atoi(pVaList[2]);
+  186   5                time.day = atoi(pVaList[3]);
+  187   5                time.hour = atoi(pVaList[4]);
+  188   5                time.minute = atoi(pVaList[5]);
+C251 COMPILER V5.60.0,  page_ilink                                                         24/08/22  19:19:18  PAGE 4   
+
+  189   5                time.second = atoi(pVaList[6]);
+  190   5                time.weekday = atoi(pVaList[7]) + 1;
+  191   5                RX8130CEWriteTime(&time);
+  192   5                MuxSendString("OK\r\n");
+  193   5                break;
+  194   5              }
+  195   4              case 1:   //setConfig
+  196   4              {
+  197   5                config.t_inactive_max = atoi(pVaList[1]);
+  198   5                config.screen_brightness = atoi(pVaList[2]);
+  199   5                config.screen_inverse = atoi(pVaList[3]);
+  200   5                config.lsm6dsm_cfg = atoi(pVaList[4]);
+  201   5                config.key_sound = atoi(pVaList[5]);
+  202   5                OLED_Set_Brightness((config.screen_brightness - 1) * 50 + 1);
+*** WARNING C188 IN LINE 202 OF User\PageManage\page_ilink.c: 'parameter 1': value truncated
+  203   5                OLED_Inverse(config.screen_inverse);
+  204   5                MuxSendString("OK\r\n");
+  205   5                break;
+  206   5              }
+  207   4              case 2:   //setAlarm
+  208   4              {
+  209   5                config.alarm.mode = atoi(pVaList[1]);
+  210   5                config.alarm.hour = atoi(pVaList[2]);
+  211   5                config.alarm.minute = atoi(pVaList[3]);
+  212   5                config.alarm.day = atoi(pVaList[4]);
+  213   5                RX8130CESetAlarm(&config.alarm);
+  214   5                MuxSendString("OK\r\n");
+  215   5                break;
+  216   5              }
+  217   4              case 3:   //setDataMode
+  218   4              {
+  219   5                data_mode = atoi(pVaList[1]);
+  220   5                MuxSendString("OK\r\n");
+  221   5                break;
+  222   5              }
+  223   4              case 4:   //getConfig
+  224   4              {
+  225   5                sprintf(temp, "CF#%u#%u#%u#%u#%u\r\n", config.t_inactive_max, config.screen_brightness, 
+  226   5                                                config.screen_inverse, config.lsm6dsm_cfg, config.key_sound);
+  227   5                MuxSendString(temp);
+  228   5                break;
+  229   5              }
+  230   4              case 5:   //getAlarm
+  231   4              {
+  232   5                sprintf(temp, "AL#%u#%u#%u#%u\r\n", config.alarm.mode, config.alarm.hour, config.alarm.minute, confi
+             -g.alarm.day);
+  233   5                MuxSendString(temp);
+  234   5                break;
+  235   5              }
+  236   4              case 6:   //getStep
+  237   4              {
+  238   5                tsSTEP *pStep = (tsSTEP *)config.step_data;
+  239   5                MuxSendString("ST");
+  240   5                for(i = 0; i < 7; i++)
+  241   5                {
+  242   6                  sprintf(temp, "#%u/%u %u", pStep[i].month, pStep[i].day, pStep[i].step);
+  243   6                  MuxSendString(temp);
+  244   6                }
+  245   5                MuxSendString("\r\n");
+  246   5                break;
+  247   5              }
+  248   4            }
+  249   3          }
+  250   2          else
+  251   2          {
+  252   3            com_buf[com_index++] = ucRecByte;
+C251 COMPILER V5.60.0,  page_ilink                                                         24/08/22  19:19:18  PAGE 5   
+
+  253   3            if(com_index >= COM_BUF_SIZE)
+  254   3              com_index = 0;
+  255   3          }
+  256   2        }
+  257   1      }
+  258          
+  259          static unsigned char CODE Icon[] = {
+  260            48, 48,
+  261            0xE0,0xF0,0x30,0x18,0x18,0x18,0x18,0x18,0x18,0x18,0x18,0x18,0x18,0x18,0x18,0x18,
+  262            0x18,0x18,0x18,0x18,0x18,0x18,0x18,0x18,0x18,0x18,0x18,0x18,0x18,0x18,0x18,0x18,
+  263            0x18,0x18,0x18,0x18,0x18,0x18,0x18,0x18,0x18,0x18,0x18,0x18,0x18,0x30,0xF0,0xE0,
+  264            0xFF,0xFF,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x40,
+  265            0x60,0x70,0xF8,0xFC,0xF8,0x70,0x60,0x40,0x00,0x00,0x00,0x80,0x80,0x80,0x00,0x00,
+  266            0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0xFF,0xFF,
+  267            0xFF,0xFF,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+  268            0x00,0x00,0x1F,0x1F,0x1F,0x00,0x00,0x00,0x20,0x60,0xE0,0xFF,0xFF,0xFF,0xE0,0x60,
+  269            0x20,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0xFF,0xFF,
+  270            0xFF,0xFF,0xC0,0x80,0x80,0x80,0x80,0x80,0x80,0x80,0x80,0x80,0x80,0x80,0x80,0x80,
+  271            0x80,0x80,0x80,0x80,0x80,0x80,0x80,0x80,0x80,0x80,0x80,0x81,0x83,0x81,0x80,0x80,
+  272            0x80,0x80,0x80,0x80,0x80,0x80,0x80,0x80,0x80,0x80,0x80,0x80,0x80,0xC0,0xFF,0xFF,
+  273            0x0F,0x1F,0x3F,0x3F,0x3F,0x3F,0x3F,0x3F,0x3F,0x3F,0x3F,0x3F,0x3F,0x3F,0x3F,0x3F,
+  274            0x3F,0x3F,0x3F,0x3F,0x3F,0x3F,0xFF,0xFF,0xFF,0xFF,0x3F,0x3F,0x3F,0x3F,0x3F,0x3F,
+  275            0x3F,0x3F,0x3F,0x3F,0x3F,0x3F,0x3F,0x3F,0x3F,0x3F,0x3F,0x3F,0x3F,0x3F,0x1F,0x0F,
+  276            0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x18,0x1C,0x1E,0x1E,0x1E,0x1E,0x1E,0x1E,
+  277            0x1E,0x1E,0x1E,0x1E,0x1E,0x1E,0x1F,0x1F,0x1F,0x1F,0x1E,0x1E,0x1E,0x1E,0x1E,0x1E,
+  278            0x1E,0x1E,0x1E,0x1E,0x1E,0x1E,0x1C,0x18,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00
+  279            /* (48 X 48 )*/
+  280          };
+  281          static t_psWidget text1, text2;
+  282          static t_psGroup group1;
+  283          static unsigned char code MODE[3][9] = 
+  284          {
+  285            {"有线连接\0"},
+  286            {"蓝牙连接\0"},
+  287            {"蓝牙配置\0"}
+  288          };
+  289          
+  290          /**
+  291            * @brief  页面初始化事件
+  292            * @param  无
+  293            * @retval 无
+  294            */
+  295          static void Setup(unsigned char condition)
+  296          {
+  297   1        text1 = og_label_create(FONT_GB2312_15X16, 0, 0);
+  298   1        text2 = og_label_create(FONT_GB2312_15X16, 32, 16);
+  299   1        og_label_setText(text1, "选择模式：");
+  300   1        og_label_setText(text2, MODE[mode]);
+  301   1        group1 = og_group_create(2);
+  302   1        og_group_addWidget(group1, text1, 0);
+  303   1        og_group_addWidget(group1, text2, 0);
+  304   1        og_group_setPosOffset(group1, 0, 64);
+  305   1        og_group_addAnimOffset(group1, 0, -64, ANIM_TIME_NORM, ANIM_NULL_CB);
+  306   1        #if (TH_SENSOR_SELECT == 1)
+                 HDC2080SetMode(7);
+                 HDC2080StartConversion();
+                 #elif (TH_SENSOR_SELECT == 2)
+                 HDC1080Start();
+                 #elif (TH_SENSOR_SELECT == 3)
+  312   1        HTU21DStart();
+  313   1        #endif
+  314   1        #if (P_SENSOR_SELECT == 1)
+  315   1        BMP390SetMode(NORMAL_MODE);
+  316   1        #endif
+  317   1        #if (MAG_SENSOR_SELECT == 1)
+  318   1        QMC5883LSetMode(1);
+C251 COMPILER V5.60.0,  page_ilink                                                         24/08/22  19:19:18  PAGE 6   
+
+  319   1        #endif
+  320   1        LSM6DSMConfigAcc(ACC_ODR_208_HZ, ACC_SCALE_4_G);
+  321   1        LSM6DSMConfigGyr(GYR_ODR_208_HZ, GYR_SCALE_500_DPS);
+  322   1        
+  323   1        Uart1Reset();
+  324   1        ES = 1;       //开串口1中断
+  325   1        P3 |= 0x03;   //串口1IO口上拉
+  326   1        BtOn();
+  327   1        mode = 0;
+  328   1        rx_buf = rx1_buf;
+  329   1        rx_tail = &rx1_cnt;
+  330   1      }
+*** WARNING C47 IN LINE 295 OF User\PageManage\page_ilink.c: 'condition': unreferenced parameter
+  331          static void delet(void)
+  332          {
+  333   1        og_group_delet(group1);
+  334   1        pageSetStatus(page_ilink, PAGE_IDLE);
+  335   1      }
+  336          /**
+  337            * @brief  页面退出事件
+  338            * @param  无
+  339            * @retval 无
+  340            */
+  341          static void Exit(unsigned char condition)
+  342          {
+  343   1        iWatchSaveConfig(&config);
+  344   1        #if (TH_SENSOR_SELECT == 1)
+                 HDC2080SetMode(0);
+                 #elif (TH_SENSOR_SELECT == 2)
+                 #elif (TH_SENSOR_SELECT == 3)
+  348   1        #endif
+  349   1        #if (P_SENSOR_SELECT == 1)
+  350   1        BMP390SetMode(SLEEP_MODE);
+  351   1        #endif
+  352   1        #if (MAG_SENSOR_SELECT == 1)
+  353   1        QMC5883LSetMode(0);
+  354   1        #endif
+  355   1        if(config.lsm6dsm_cfg == 0)
+  356   1          LSM6DSMConfigAcc(ACC_POWER_DOWN, ACC_SCALE_4_G);
+  357   1        else
+  358   1          LSM6DSMConfigAcc(ACC_ODR_26_HZ, ACC_SCALE_4_G);
+  359   1        LSM6DSMConfigGyr(GYR_POWER_DOWN, GYR_SCALE_500_DPS);
+  360   1        ES = 0;       //关串口1中断
+  361   1        P3 &= ~0x03;  //取消串口1IO口上拉
+  362   1        BtOff();      //关闭蓝牙
+  363   1        og_group_addAnimOffset(group1, 0, 64, ANIM_TIME_NORM, delet);
+  364   1      }
+*** WARNING C47 IN LINE 341 OF User\PageManage\page_ilink.c: 'condition': unreferenced parameter
+  365          /**
+  366            * @brief  页面循环执行的内容
+  367            * @param  无
+  368            * @retval 无
+  369            */
+  370          static void Loop()
+  371          {
+  372   1        iWatchKeepActive();
+  373   1        if(mode < 2)  // 数据传输模式，USB串口或者蓝牙串口
+  374   1        {
+  375   2          CommandProc();
+  376   2          if(data_mode == 1)  //发送温度，湿度，气压数据
+  377   2          {
+  378   3            if(pageExecuteRate(&Rate10Hz))
+  379   3            {
+  380   4              #if (TH_SENSOR_SELECT == 0)
+                       sprintf(temp, "TH#%.2f#%.2f\r\n", 0, 0);
+                       MuxSendString(temp);
+C251 COMPILER V5.60.0,  page_ilink                                                         24/08/22  19:19:18  PAGE 7   
+
+                       #elif (TH_SENSOR_SELECT == 1)
+                       HDC2080GetTH(&HDC2080);
+                       sprintf(temp, "TH#%.2f#%.2f\r\n", HDC2080.temperature + 0.005, HDC2080.humidity + 0.005);
+                       MuxSendString(temp);
+                       #elif (TH_SENSOR_SELECT == 2)
+                       if(HDC1080GetTH(&HDC1080))
+                       {
+                         sprintf(temp, "TH#%.2f#%.2f\r\n", HDC1080.temperature + 0.005, HDC1080.humidity + 0.005);
+                         MuxSendString(temp);
+                       }
+                       #elif (TH_SENSOR_SELECT == 3)
+  394   4              static unsigned char step = 0;
+  395   4              if(step == 0)
+  396   4              {
+  397   5                if(HTU21DGetTemperature(&HTU21D))
+  398   5                  step = 1;
+  399   5              }
+  400   4              else if(step == 1)
+  401   4              {
+  402   5                if(HTU21DGetHumidity(&HTU21D))
+  403   5                {
+  404   6                  step = 0;
+  405   6                  sprintf(temp, "TH#%.2f#%.2f\r\n", HTU21D.temperature + 0.005, HTU21D.humidity + 0.005);
+  406   6                  MuxSendString(temp);
+  407   6                }
+  408   5              }
+  409   4              #endif
+  410   4            }
+  411   3            if(pageExecuteRate(&Rate20Hz))
+  412   3            {
+  413   4              #if (P_SENSOR_SELECT == 0)
+                       sprintf(temp, "PA#%.1f\r\n", 0);
+                       #elif (P_SENSOR_SELECT == 1)
+  416   4              BMP390GetSensorData(&BMP390);
+  417   4              sprintf(temp, "PA#%.1f\r\n", BMP390.pressure + 0.05);
+  418   4              #endif
+  419   4              MuxSendString(temp);
+  420   4            }
+  421   3          }
+  422   2          else if(data_mode == 2) //发送加速度，角速度数据
+  423   2          {
+  424   3            if(pageExecuteRate(&Rate50Hz))
+  425   3            {
+  426   4              LSM6DSMReadGYRAndACC(&LSM6DSM);
+  427   4              sprintf(temp, "AG#%d#%d#%d#%d#%d#%d\r\n", LSM6DSM.acc_x, LSM6DSM.acc_y, LSM6DSM.acc_z
+  428   4                                                      , LSM6DSM.gyr_x, LSM6DSM.gyr_y, LSM6DSM.gyr_z);
+  429   4              MuxSendString(temp);
+  430   4            }
+  431   3          }
+  432   2          else if(data_mode == 3) //发送磁场数据
+  433   2          {
+  434   3            if(pageExecuteRate(&Rate50Hz))
+  435   3            {
+  436   4              #if (MAG_SENSOR_SELECT == 0)
+                       sprintf(temp, "MG#%d#%d#%d\r\n", 0, 0, 0);
+                       #elif (MAG_SENSOR_SELECT == 1)
+  439   4              QMC5883LRead(mag);
+  440   4              sprintf(temp, "MG#%d#%d#%d\r\n", mag[0], mag[1], mag[2]);
+  441   4              #endif
+  442   4              MuxSendString(temp);
+  443   4            }
+  444   3          }
+  445   2        }
+  446   1        else  //蓝牙设置模式，将USB串口接收到的内容转发到蓝牙串口，蓝牙串口接收到的内容转发到USB串口
+  447   1        {
+  448   2          if(pageExecuteRate(&Rate10Hz))
+C251 COMPILER V5.60.0,  page_ilink                                                         24/08/22  19:19:18  PAGE 8   
+
+  449   2          {
+  450   3            if(BtReceiveString(temp))
+  451   3            {
+  452   4              Uart1SendString(temp);
+  453   4            }
+  454   3            if(rx1_cnt != 0)
+  455   3            {
+  456   4              unsigned char i;
+  457   4              for(i = 0; i < rx1_cnt; i++)
+  458   4              {
+  459   5                temp[i] = rx1_buf[i];
+  460   5              }
+  461   4              temp[i] = '\0';
+  462   4              rx1_cnt = 0;
+  463   4              BtSendString(temp);
+  464   4            }
+  465   3          }
+  466   2        }
+  467   1      }
+  468          /**
+  469            * @brief  页面事件
+  470            * @param  btn:发出事件的按键
+  471            * @param  event:事件编号
+  472            * @retval 无
+  473            */
+  474          static void Event(unsigned char event)
+  475          {
+  476   1        if(event == KEY1_PRESSED)
+  477   1          pageShift(page_menu, PAGE_RETURN);
+  478   1        else 
+  479   1        {
+  480   2          if(event == KEY2_PRESSED)
+  481   2          {
+  482   3            if(++mode == 3)
+  483   3              mode = 0;
+  484   3          }
+  485   2          else if(event == KEY4_PRESSED)
+  486   2          {
+  487   3            if(--mode == 255)
+  488   3              mode = 2;
+  489   3          }
+  490   2          og_label_setText(text2, MODE[mode]);
+  491   2          if(mode == 0)
+  492   2          {
+  493   3            rx_buf = rx1_buf;
+  494   3            rx_tail = &rx1_cnt;
+  495   3          }
+  496   2          else if(mode == 1)
+  497   2          {
+  498   3            rx_buf = rx4_buf;
+  499   3            rx_tail = &rx4_cnt;
+  500   3          }
+  501   2          Uart1Reset();
+  502   2        }
+  503   1      }
+  504          void pageRegister_page_ilink(unsigned char pageID)
+  505          {
+  506   1        pageRegister(pageID, "iLink", Icon, Setup, Loop, Exit, Event);
+  507   1      }
+
+
+Module Information          Static   Overlayable
+------------------------------------------------
+  code size            =       349     ------
+  ecode size           =      2318     ------
+  data size            =    ------     ------
+  idata size           =    ------     ------
+C251 COMPILER V5.60.0,  page_ilink                                                         24/08/22  19:19:18  PAGE 9   
+
+  pdata size           =    ------     ------
+  xdata size           =       134     ------
+  xdata-const size     =    ------     ------
+  edata size           =       125          4
+  bit size             =    ------     ------
+  ebit size            =    ------     ------
+  bitaddressable size  =    ------     ------
+  ebitaddressable size =    ------     ------
+  far data size        =    ------     ------
+  huge data size       =    ------     ------
+  const size           =    ------     ------
+  hconst size          =       244     ------
+End of Module Information.
+
+
+C251 COMPILATION COMPLETE.  3 WARNING(S),  0 ERROR(S)

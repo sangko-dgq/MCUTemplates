@@ -1,0 +1,314 @@
+C251 COMPILER V5.60.0,  page_setting                                                       24/08/22  19:19:19  PAGE 1   
+
+
+C251 COMPILER V5.60.0, COMPILATION OF MODULE page_setting
+OBJECT MODULE PLACED IN .\Objects\page_setting.obj
+COMPILER INVOKED BY: D:\Application\keilC251_v560\C251\BIN\C251.EXE User\PageManage\page_setting.c XSMALL ROM(HUGE) OPTI
+                    -MIZE(8,SPEED) BROWSE INCDIR(.\User;.\User\oled_gui;.\User\oled_gui\oled_core;.\User\oled_gui\oled_widget;.\User\PageMana
+                    -ge;.\User\Sensor;.\User\System;.\User\Bluetooth) DEBUG PRINT(.\Listings\page_setting.lst) TABS(2) OBJECT(.\Objects\page_
+                    -setting.obj) 
+
+stmt  level    source
+
+    1          #include "iWatch.h"
+    2          
+    3          static unsigned char CODE Icon[] = {
+    4            48, 48,
+    5            0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x80,0xC0,0xC0,0xC0,0x80,0x00,0x00,
+    6            0x00,0x00,0x00,0xE0,0xFC,0xFC,0x1C,0x0C,0x0C,0x1C,0xFC,0xFC,0xC0,0x00,0x00,0x00,
+    7            0x00,0x00,0x80,0xC0,0xC0,0xC0,0x80,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+    8            0x00,0x00,0x00,0x00,0x00,0x00,0x0C,0x1E,0x7F,0xF7,0xE3,0x81,0x03,0x03,0x07,0x0E,
+    9            0x0E,0x07,0x07,0x03,0x83,0x81,0x80,0x80,0x80,0x80,0x81,0x83,0x03,0x07,0x07,0x0E,
+   10            0x0E,0x07,0x03,0x03,0x81,0xE3,0xF7,0x7F,0x1E,0x0C,0x00,0x00,0x00,0x00,0x00,0x00,
+   11            0x00,0x00,0xF0,0xF0,0x70,0x38,0x38,0x38,0x3E,0x3F,0x0F,0x01,0x00,0x00,0x00,0xF0,
+   12            0xFC,0x7E,0x0F,0x07,0xC3,0xE3,0xF1,0x71,0x71,0xF1,0xE3,0xC3,0x07,0x0F,0x7E,0xFC,
+   13            0xF0,0x00,0x00,0x00,0x01,0x0F,0x3F,0x3E,0x38,0x38,0x38,0x70,0xF0,0xF0,0x00,0x00,
+   14            0x00,0x00,0x0F,0x0F,0x0E,0x0C,0x0C,0x1C,0x7C,0xFC,0xF0,0xC0,0x00,0x00,0x00,0x07,
+   15            0x1F,0x3E,0x78,0xF0,0xE1,0xC7,0xC7,0xCE,0xCE,0xC7,0xC7,0xE1,0xE0,0x78,0x3E,0x1F,
+   16            0x07,0x00,0x00,0x00,0xC0,0xF0,0xFC,0x7C,0x1C,0x0C,0x0C,0x0E,0x0F,0x0F,0x00,0x00,
+   17            0x00,0x00,0x00,0x00,0x00,0x00,0x30,0x7C,0xFE,0xEF,0xC7,0x81,0xC0,0xE0,0xE0,0x70,
+   18            0x70,0xF0,0xE0,0xE0,0xC0,0xC1,0x01,0x01,0x01,0x01,0xC1,0xC0,0xE0,0xE0,0xF0,0x70,
+   19            0x70,0xE0,0xE0,0xC0,0x81,0xC7,0xEF,0xFE,0x7C,0x30,0x00,0x00,0x00,0x00,0x00,0x00,
+   20            0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x01,0x03,0x03,0x01,0x01,0x00,0x00,
+   21            0x00,0x00,0x00,0x03,0x3F,0x3F,0x38,0x30,0x30,0x38,0x3F,0x3F,0x03,0x00,0x00,0x00,
+   22            0x00,0x00,0x00,0x01,0x03,0x03,0x01,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00
+   23            /* (48 X 48 )*/
+   24          };
+   25          
+   26          static t_psWidget text[7];
+   27          static t_psWidget slider1, slider2;
+   28          static t_psWidget sw1, sw2, sw3, sw4;
+   29          static t_psGroup group1;
+   30          static unsigned char xdata nfocus = 0;
+   31          
+   32          char * code item[7] = 
+   33          {
+   34            {"设置时间\0"},
+   35            {"息屏时间\0"},
+   36            {"屏幕亮度\0"},
+   37            {"颜色反转\0"},
+   38            {"抬腕唤醒\0"},
+   39            {"计步器\0"},
+   40            {"按键音\0"},
+   41          };
+   42          
+   43          /**
+   44            * @brief  页面初始化事件
+   45            * @param  无
+   46            * @retval 无
+   47            */
+   48          static void Setup(unsigned char condition)
+   49          {
+   50   1        unsigned char i;
+   51   1        iWatchReadConfig(&config);
+   52   1        group1 = og_group_create(14);
+   53   1        for(i = 0; i < 7; i++)
+   54   1        {
+   55   2          text[i] = og_label_create(FONT_GB2312_15X16, 0, i * 16);
+   56   2          og_label_setText(text[i], item[i]);
+C251 COMPILER V5.60.0,  page_setting                                                       24/08/22  19:19:19  PAGE 2   
+
+   57   2          og_group_addWidget(group1, text[i], 1);
+   58   2        }
+   59   1        slider1 = og_slider_create(0, 30, config.t_inactive_max, 58, 70, 20);
+   60   1        slider2 = og_slider_create(1, 5, config.screen_brightness, 58, 70, 36);
+   61   1        sw1 = og_switch_create(16, config.screen_inverse, 104, 48);
+   62   1        sw2 = og_switch_create(16, (config.lsm6dsm_cfg & 0x01)?1:0, 104, 64);
+   63   1        sw3 = og_switch_create(16, (config.lsm6dsm_cfg & 0x02)?1:0, 104, 80);
+   64   1        sw4 = og_switch_create(16, config.key_sound, 104, 96);
+   65   1        og_group_addWidget(group1, slider1, 0);
+   66   1        og_group_addWidget(group1, slider2, 0);
+   67   1        og_group_addWidget(group1, sw1, 0);
+   68   1        og_group_addWidget(group1, sw2, 0);
+   69   1        og_group_addWidget(group1, sw3, 0);
+   70   1        og_group_addWidget(group1, sw4, 0);
+   71   1        og_group_setPosOffset(group1, condition==PAGE_ENTER?0:-128, condition==PAGE_ENTER?64:0);
+   72   1        og_group_addAnimOffset(group1, condition==PAGE_ENTER?0:128, condition==PAGE_ENTER?-64:0, ANIM_TIME_NORM,
+             - ANIM_NULL_CB);
+   73   1        nfocus = 0;
+   74   1      }
+   75          static void delet(void)
+   76          {
+   77   1        og_group_delet(group1);
+   78   1        pageSetStatus(page_setting, PAGE_IDLE);
+   79   1      }
+   80          /**
+   81            * @brief  页面退出事件
+   82            * @param  无
+   83            * @retval 无
+   84            */
+   85          static void Exit(unsigned char condition)
+   86          {
+   87   1        iWatchSaveConfig(&config);
+   88   1        og_group_hideOffScreenWidget(group1);
+   89   1        og_group_addAnimOffset(group1, condition==PAGE_ENTER?-128:0, condition==PAGE_ENTER?0:64, ANIM_TIME_NORM,
+             - delet);
+   90   1      }
+   91          /**
+   92            * @brief  页面循环执行的内容
+   93            * @param  无
+   94            * @retval 无
+   95            */
+   96          static void Loop()
+   97          {
+   98   1        if(pageExecuteRate(&Rate20Hz))
+   99   1        {
+  100   2        }
+  101   1      }
+  102          /**
+  103            * @brief  页面事件
+  104            * @param  btn:发出事件的按键
+  105            * @param  event:事件编号
+  106            * @retval 无
+  107            */
+  108          static void Event(unsigned char event)
+  109          {
+  110   1        if(event == KEY1_PRESSED || event == AWT)
+  111   1        {
+  112   2          if(nfocus != 0)
+  113   2          {
+  114   3            t_psWidget pWidget = og_group_getFocusWidget(group1);
+  115   3            pWidget->config |= WIDGET_FOCUS;
+  116   3            if(nfocus == 1)
+  117   3              slider1->config &= ~WIDGET_FOCUS;
+  118   3            else
+  119   3              slider2->config &= ~WIDGET_FOCUS;
+  120   3            nfocus = 0;
+C251 COMPILER V5.60.0,  page_setting                                                       24/08/22  19:19:19  PAGE 3   
+
+  121   3          }
+  122   2          else
+  123   2            pageShift(page_menu, PAGE_RETURN);
+  124   2        }
+  125   1        if(event == KEY3_PRESSED) 
+  126   1        {
+  127   2          unsigned char i = og_group_getFocusIndex(group1);
+  128   2          if(i == 0)
+  129   2            pageShift(page_settime, PAGE_ENTER);
+  130   2          else if(i == 1)
+  131   2          {
+  132   3            t_psWidget pWidget = og_group_getFocusWidget(group1);
+  133   3            if(nfocus == 0)
+  134   3            {
+  135   4              nfocus = 1;
+  136   4              pWidget->config &= ~WIDGET_FOCUS;
+  137   4              slider1->config |= WIDGET_FOCUS;
+  138   4            }
+  139   3            else
+  140   3            {
+  141   4              nfocus = 0;
+  142   4              pWidget->config |= WIDGET_FOCUS;
+  143   4              slider1->config &= ~WIDGET_FOCUS;
+  144   4            }
+  145   3          }
+  146   2          else if(i == 2)
+  147   2          {
+  148   3            t_psWidget pWidget = og_group_getFocusWidget(group1);
+  149   3            if(nfocus == 0)
+  150   3            {
+  151   4              nfocus = 2;
+  152   4              pWidget->config &= ~WIDGET_FOCUS;
+  153   4              slider2->config |= WIDGET_FOCUS;
+  154   4            }
+  155   3            else
+  156   3            {
+  157   4              nfocus = 0;
+  158   4              pWidget->config |= WIDGET_FOCUS;
+  159   4              slider2->config &= ~WIDGET_FOCUS;
+  160   4            }
+  161   3          }
+  162   2          else if(i == 3)
+  163   2          {
+  164   3            if(config.screen_inverse)
+  165   3              config.screen_inverse = 0;
+  166   3            else
+  167   3              config.screen_inverse = 1;
+  168   3            og_switch_setStatus(sw1, config.screen_inverse);
+  169   3            OLED_Inverse(config.screen_inverse);
+  170   3          }
+  171   2          else if(i == 4)
+  172   2          {
+  173   3            if((config.lsm6dsm_cfg & 0x01) != 0)
+  174   3            {
+  175   4              config.lsm6dsm_cfg &= ~0x01;
+  176   4              LSM6DSMDisableAWT();
+  177   4              og_switch_setStatus(sw2, 0);
+  178   4            }
+  179   3            else
+  180   3            {       
+  181   4              config.lsm6dsm_cfg |= 0x01;
+  182   4              LSM6DSMEnableAWT(10, 100);        //10 degree, 100ms
+  183   4              og_switch_setStatus(sw2, 1);
+  184   4            }
+  185   3          }
+  186   2          else if(i == 5)
+C251 COMPILER V5.60.0,  page_setting                                                       24/08/22  19:19:19  PAGE 4   
+
+  187   2          {
+  188   3            if((config.lsm6dsm_cfg & 0x02) != 0)
+  189   3            {
+  190   4              config.lsm6dsm_cfg &= ~0x02;
+  191   4              LSM6DSMDisablePedometer();
+  192   4              og_switch_setStatus(sw3, 0);
+  193   4            }
+  194   3            else
+  195   3            {
+  196   4              config.lsm6dsm_cfg |= 0x02;
+  197   4              LSM6DSMEnablePedometer(1040, 6);        //debounce time = 1040ms, debounce step = 6 steps
+  198   4              og_switch_setStatus(sw3, 1);
+  199   4            }
+  200   3            
+  201   3          }
+  202   2          else if(i == 6)
+  203   2          {
+  204   3            if(config.key_sound)
+  205   3            {
+  206   4              config.key_sound = 0;
+  207   4            }
+  208   3            else
+  209   3            {
+  210   4              config.key_sound = 1;
+  211   4              Bee();
+  212   4            }
+  213   3            og_switch_setStatus(sw4, config.key_sound);
+  214   3          }
+  215   2          /*
+  216   2          else if(i == 7)
+  217   2          {
+  218   2            pageShift(page_devinfo, PAGE_ENTER);
+  219   2          }
+  220   2          */
+  221   2        }
+  222   1        if(event == KEY2_PRESSED)
+  223   1        {
+  224   2          if(nfocus == 0)
+  225   2          {
+  226   3            og_group_focusWidget(group1, FOCUS_PREV);
+  227   3          }
+  228   2          else if(nfocus == 1)
+  229   2          {
+  230   3            if(++config.t_inactive_max > 30)
+  231   3              config.t_inactive_max = 30;
+  232   3            og_slider_setValue(slider1, config.t_inactive_max);
+  233   3          }
+  234   2          else if(nfocus == 2)
+  235   2          {
+  236   3            if(++config.screen_brightness == 6)
+  237   3              config.screen_brightness = 5;
+  238   3            og_slider_setValue(slider2, config.screen_brightness);
+  239   3            OLED_Set_Brightness((config.screen_brightness - 1) * 50 + 1);
+*** WARNING C188 IN LINE 239 OF User\PageManage\page_setting.c: 'parameter 1': value truncated
+  240   3          }
+  241   2        }
+  242   1        if(event == KEY4_PRESSED)
+  243   1        {
+  244   2          if(nfocus == 0)
+  245   2          {
+  246   3            og_group_focusWidget(group1, FOCUS_NEXT);
+  247   3          }
+  248   2          else if(nfocus == 1)
+  249   2          {
+  250   3            if(--config.t_inactive_max < 3)
+  251   3              config.t_inactive_max = 3;
+C251 COMPILER V5.60.0,  page_setting                                                       24/08/22  19:19:19  PAGE 5   
+
+  252   3            og_slider_setValue(slider1, config.t_inactive_max);
+  253   3          }
+  254   2          else if(nfocus == 2)
+  255   2          {
+  256   3            if(--config.screen_brightness == 0)
+  257   3              config.screen_brightness = 1;
+  258   3            og_slider_setValue(slider2, config.screen_brightness);
+  259   3            OLED_Set_Brightness((config.screen_brightness - 1) * 50 + 1);
+*** WARNING C188 IN LINE 259 OF User\PageManage\page_setting.c: 'parameter 1': value truncated
+  260   3          }
+  261   2        }
+  262   1      }
+  263          void pageRegister_page_setting(unsigned char pageID)
+  264          {
+  265   1        pageRegister(pageID, "SETTING", Icon, Setup, Loop, Exit, Event);
+  266   1      }
+
+
+Module Information          Static   Overlayable
+------------------------------------------------
+  code size            =       318     ------
+  ecode size           =      1346     ------
+  data size            =    ------     ------
+  idata size           =    ------     ------
+  pdata size           =    ------     ------
+  xdata size           =         1     ------
+  xdata-const size     =    ------     ------
+  edata size           =        56     ------
+  bit size             =    ------     ------
+  ebit size            =    ------     ------
+  bitaddressable size  =    ------     ------
+  ebitaddressable size =    ------     ------
+  far data size        =    ------     ------
+  huge data size       =    ------     ------
+  const size           =    ------     ------
+  hconst size          =        80     ------
+End of Module Information.
+
+
+C251 COMPILATION COMPLETE.  2 WARNING(S),  0 ERROR(S)

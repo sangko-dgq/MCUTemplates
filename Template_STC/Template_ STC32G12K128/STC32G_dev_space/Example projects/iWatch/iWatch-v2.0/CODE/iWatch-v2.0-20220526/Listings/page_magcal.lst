@@ -1,0 +1,153 @@
+C251 COMPILER V5.60.0,  page_magcal                                                        24/08/22  19:19:18  PAGE 1   
+
+
+C251 COMPILER V5.60.0, COMPILATION OF MODULE page_magcal
+OBJECT MODULE PLACED IN .\Objects\page_magcal.obj
+COMPILER INVOKED BY: D:\Application\keilC251_v560\C251\BIN\C251.EXE User\PageManage\page_magcal.c XSMALL ROM(HUGE) OPTIM
+                    -IZE(8,SPEED) BROWSE INCDIR(.\User;.\User\oled_gui;.\User\oled_gui\oled_core;.\User\oled_gui\oled_widget;.\User\PageManag
+                    -e;.\User\Sensor;.\User\System;.\User\Bluetooth) DEBUG PRINT(.\Listings\page_magcal.lst) TABS(2) OBJECT(.\Objects\page_ma
+                    -gcal.obj) 
+
+stmt  level    source
+
+    1          #include "iWatch.h"
+    2          
+    3          static t_psWidget text1;
+    4          static t_psWidget canvas1;
+    5          static unsigned int i = 0;
+    6          
+    7          /**
+    8            * @brief  页面初始化事件
+    9            * @param  无
+   10            * @retval 无
+   11            */
+   12          static void Setup(unsigned char condition)
+   13          {
+   14   1        text1 = og_label_create(FONT_GB2312_15X16, 0, 0);
+   15   1        og_label_setText(text1, "请在１５秒内\n控制手表\n画出几个８字");
+   16   1        canvas1 = og_canvas_create(128, 64, 0, 0);
+   17   1        #if (MAG_SENSOR_SELECT == 1)
+   18   1        QMC5883LClearCaliValue();
+   19   1        QMC5883LSetMode(1);
+   20   1        ResetMatrix();
+   21   1        #endif
+   22   1        LSM6DSMConfigAcc(ACC_ODR_208_HZ, ACC_SCALE_4_G);
+   23   1        LSM6DSMConfigGyr(GYR_ODR_208_HZ, GYR_SCALE_500_DPS);
+   24   1        i = 0;
+   25   1      }
+*** WARNING C47 IN LINE 12 OF User\PageManage\page_magcal.c: 'condition': unreferenced parameter
+   26          /*
+   27          static void delet(void)
+   28          {
+   29            //og_group_delet(group1);
+   30            pageSetStatus(PAGE_IDLE);
+   31          }
+   32          */
+   33          /**
+   34            * @brief  页面退出事件
+   35            * @param  无
+   36            * @retval 无
+   37            */
+   38          static void Exit(unsigned char condition)
+   39          {
+   40   1        #if (MAG_SENSOR_SELECT == 1)
+   41   1        Ellipsoid_fitting_Process(&config.mag_cal_Data);    //椭球校准算法
+   42   1        QMC5883LSetCaliValue(&config.mag_cal_Data);         //设置校准参数
+   43   1        QMC5883LSetMode(0);
+   44   1        #endif
+   45   1        iWatchSaveConfig(&config);
+   46   1        if(config.lsm6dsm_cfg == 0)
+   47   1          LSM6DSMConfigAcc(ACC_POWER_DOWN, ACC_SCALE_4_G);
+   48   1        else
+   49   1          LSM6DSMConfigAcc(ACC_ODR_26_HZ, ACC_SCALE_4_G);
+   50   1        LSM6DSMConfigGyr(GYR_POWER_DOWN, GYR_SCALE_500_DPS);
+   51   1        og_widget_delet(text1);
+   52   1        og_widget_delet(canvas1);
+   53   1        pageSetStatus(page_magcal, PAGE_IDLE);
+   54   1      }
+*** WARNING C47 IN LINE 38 OF User\PageManage\page_magcal.c: 'condition': unreferenced parameter
+C251 COMPILER V5.60.0,  page_magcal                                                        24/08/22  19:19:18  PAGE 2   
+
+   55          /**
+   56            * @brief  页面循环执行的内容
+   57            * @param  无
+   58            * @retval 无
+   59            */
+   60          static void Loop()
+   61          {
+   62   1        if(pageExecuteRate(&Rate100Hz))
+   63   1        {
+   64   2          /* Fix
+   65   2          LSM6DSMReadGYRAndACC(&LSM6DSM);
+   66   2          IMUupdate(&LSM6DSM);
+   67   2          */
+   68   2        }
+   69   1        if(pageExecuteRate(&Rate20Hz))
+   70   1        {
+   71   2          i++;
+   72   2          if(i == 30)
+   73   2          {
+   74   3            og_widget_setShow(text1, 0);
+   75   3          }
+   76   2          if(i > 30 && i < 300)
+   77   2          {
+   78   3            og_canvas_drawDot(canvas1, 64 + LSM6DSM.AngleX, 32 + LSM6DSM.AngleY);
+   79   3            og_canvas_drawDot(canvas1, 64 + LSM6DSM.AngleX, 31 + LSM6DSM.AngleY);
+   80   3            og_canvas_drawDot(canvas1, 63 + LSM6DSM.AngleX, 32 + LSM6DSM.AngleY);
+   81   3            og_canvas_drawDot(canvas1, 63 + LSM6DSM.AngleX, 31 + LSM6DSM.AngleY);
+   82   3            /*
+   83   3            if(mag[0] == 0 && mag[1] == 0 && mag[2] == 0)
+   84   3              return;
+   85   3            */
+   86   3            #if (MAG_SENSOR_SELECT == 1)
+   87   3            QMC5883LRead(mag);
+   88   3            CalcData_Input(mag[0], mag[1], mag[2]);
+   89   3            #endif
+   90   3          }
+   91   2          else if(i >= 300)
+   92   2          {
+   93   3            pageShift(page_compass, PAGE_RETURN);
+   94   3          }
+   95   2        }
+   96   1      }
+   97          /**
+   98            * @brief  页面事件
+   99            * @param  btn:发出事件的按键
+  100            * @param  event:事件编号
+  101            * @retval 无
+  102            */
+  103          static void Event(unsigned char event)
+  104          {
+  105   1        if(event == KEY1_PRESSED)
+  106   1          pageShift(page_compass, PAGE_RETURN);
+  107   1      }
+  108          void pageRegister_page_magcal(unsigned char pageID)
+  109          {
+  110   1        pageRegister(pageID, NULL, NULL, Setup, Loop, Exit, Event);
+  111   1      }
+
+
+Module Information          Static   Overlayable
+------------------------------------------------
+  code size            =    ------     ------
+  ecode size           =       655     ------
+  data size            =    ------     ------
+  idata size           =    ------     ------
+  pdata size           =    ------     ------
+  xdata size           =    ------     ------
+C251 COMPILER V5.60.0,  page_magcal                                                        24/08/22  19:19:18  PAGE 3   
+
+  xdata-const size     =    ------     ------
+  edata size           =        10     ------
+  bit size             =    ------     ------
+  ebit size            =    ------     ------
+  bitaddressable size  =    ------     ------
+  ebitaddressable size =    ------     ------
+  far data size        =    ------     ------
+  huge data size       =    ------     ------
+  const size           =    ------     ------
+  hconst size          =        41     ------
+End of Module Information.
+
+
+C251 COMPILATION COMPLETE.  2 WARNING(S),  0 ERROR(S)

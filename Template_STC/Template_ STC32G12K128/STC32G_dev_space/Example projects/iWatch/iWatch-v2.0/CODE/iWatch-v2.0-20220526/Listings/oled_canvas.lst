@@ -1,0 +1,264 @@
+C251 COMPILER V5.60.0,  oled_canvas                                                        23/08/22  22:51:18  PAGE 1   
+
+
+C251 COMPILER V5.60.0, COMPILATION OF MODULE oled_canvas
+OBJECT MODULE PLACED IN .\Objects\oled_canvas.obj
+COMPILER INVOKED BY: D:\Application\keilC251_v560\C251\BIN\C251.EXE User\oled_gui\oled_widget\oled_canvas.c XSMALL ROM(H
+                    -UGE) OPTIMIZE(8,SPEED) BROWSE INCDIR(.\User;.\User\oled_gui;.\User\oled_gui\oled_core;.\User\oled_gui\oled_widget;.\User
+                    -\PageManage;.\User\Sensor;.\User\System;.\User\Bluetooth) DEBUG PRINT(.\Listings\oled_canvas.lst) TABS(2) OBJECT(.\Objec
+                    -ts\oled_canvas.obj) 
+
+stmt  level    source
+
+    1          #include "oled_canvas.h"
+    2          #include "oled_font.h"
+    3          
+    4          t_psWidget og_canvas_create(uint8_t w, uint8_t h, uint16_t x, uint16_t y)
+    5          {
+    6   1        t_psWidget pWidget = og_widget_create();
+    7   1        #ifdef OLED_DEBUG
+                 if(pWidget == NULL)
+                 {
+                   OG_PRINTERROR("canvas widget create fail");
+                   return NULL;
+                 }
+                 #endif
+   14   1        w = w > OLED_WIDTH ? OLED_WIDTH : w;
+   15   1        h = h > OLED_HEIGHT ? OLED_HEIGHT : h;
+   16   1        h = h & 0xF8;  //向下取8的整数倍,h = (h / 8) * 8;
+   17   1        pWidget->pFeature = calloc((w * h) >> 3, 1);
+   18   1        #ifdef OLED_DEBUG
+                 if(pWidget->pFeature == NULL)
+                 {
+                   free(pWidget);
+                   OG_PRINTERROR("canvas widget create fail");
+                   return NULL;
+                 }
+                 #endif
+   26   1        pWidget->w = w;
+   27   1        pWidget->h = h;
+   28   1        pWidget->x = x;
+   29   1        pWidget->y = y;
+   30   1        pWidget->config |= CANVAS_WIDGET;
+   31   1        og_widget_add(pWidget);
+   32   1        return pWidget;
+   33   1      }
+   34          void og_canvas_clear(t_psWidget pWidget)
+   35          {
+   36   1        uint16_t i, temp;
+   37   1        uint8_t *ptr = (uint8_t *)pWidget->pFeature;
+   38   1        #ifdef OLED_DEBUG
+                 if(pWidget == NULL)
+                 {
+                   OG_PRINTERROR("try to set a null widget");
+                   return;
+                 }
+                 if((pWidget->config & 0x0f) != CANVAS_WIDGET)
+                 {
+                   OG_PRINTERROR("wrong type of widget for this method");
+                   return;
+                 }
+                 #endif
+   50   1        temp = (pWidget->w * pWidget->h) >> 3;
+   51   1        for(i = 0; i < temp; i++)
+   52   1        {
+   53   2          ptr[i] = 0x00;
+   54   2        }
+   55   1      }
+   56          #define DRAWDOT_FAST(x, y)  ((uint8_t *)pWidget->pFeature)[(y >> 3) * pWidget->w + x] |= (0x01 << (y % 8))
+C251 COMPILER V5.60.0,  oled_canvas                                                        23/08/22  22:51:18  PAGE 2   
+
+   57          void og_canvas_drawDot(t_psWidget pWidget, uint8_t x, uint8_t y)
+   58          {
+   59   1        #ifdef OLED_DEBUG
+                 if(pWidget == NULL)
+                 { 
+                   OG_PRINTERROR("try to set a null widget");    
+                   return;
+                 }
+                 if((pWidget->config & 0x0f) != CANVAS_WIDGET)
+                 {
+                   OG_PRINTERROR("wrong type of widget for this method");
+                   return;
+                 }
+                 #endif
+   71   1        if(x > (pWidget->w - 1) || y > (pWidget->h - 1))
+   72   1          return;
+   73   1        DRAWDOT_FAST(x, y);
+   74   1      }
+   75          void og_canvas_drawLine(t_psWidget pWidget, uint8_t x1, uint8_t y1, uint8_t x2, uint8_t y2)
+   76          {
+   77   1        float k;
+   78   1        float b;
+   79   1        #ifdef OLED_DEBUG
+                 if(pWidget == NULL)
+                 { 
+                   OG_PRINTERROR("try to set a null widget");    
+                   return;
+                 }
+                 if((pWidget->config & 0x0f) != CANVAS_WIDGET)
+                 {
+                   OG_PRINTERROR("wrong type of widget for this method");
+                   return;
+                 }
+                 #endif
+   91   1        if(x1 != x2)
+   92   1        {
+   93   2          k = ((float)y2 - y1) / ((float)x2 - x1);
+   94   2          b = y1 - k * x1;
+   95   2          if(k < 1 && k > -1)
+   96   2          {
+   97   3            if(x1 <= x2)
+   98   3            {
+   99   4              while(x1 <= x2)
+  100   4              {
+  101   5                DRAWDOT_FAST(x1, (uint8_t)(k * x1 + b));
+  102   5                x1++;
+  103   5              }
+  104   4            }
+  105   3            else
+  106   3            {
+  107   4              while(x2 <= x1)
+  108   4              {
+  109   5                DRAWDOT_FAST(x2, (uint8_t)(k * x2 + b));
+  110   5                x2++;
+  111   5              }
+  112   4            }
+  113   3          }
+  114   2          else
+  115   2          {
+  116   3            if(y1 <= y2)
+  117   3            {
+  118   4              while(y1 <= y2)
+  119   4              {
+  120   5                DRAWDOT_FAST((uint8_t)((y1 - b)/k), y1);
+  121   5                y1++;
+  122   5              }
+C251 COMPILER V5.60.0,  oled_canvas                                                        23/08/22  22:51:18  PAGE 3   
+
+  123   4            }
+  124   3            else
+  125   3            {
+  126   4              while(y2 <= y1)
+  127   4              {
+  128   5                DRAWDOT_FAST((uint8_t)((y2 - b)/k), y2);
+  129   5                y2++; 
+  130   5              }
+  131   4            }
+  132   3          }
+  133   2        }
+  134   1        else
+  135   1        {
+  136   2          if(y1 <= y2)
+  137   2          {
+  138   3            while(y1 <= y2)
+  139   3            {
+  140   4              DRAWDOT_FAST(x1, y1);
+  141   4              y1++;
+  142   4            }
+  143   3          }
+  144   2          else
+  145   2          {
+  146   3            while(y2 <= y1)
+  147   3            {
+  148   4              DRAWDOT_FAST(x2, y2);
+  149   4              y2++;
+  150   4            }
+  151   3          }
+  152   2        }
+  153   1      }
+  154          void og_canvas_drawRectangle(t_psWidget pWidget, uint8_t w, uint8_t h, uint8_t x, uint8_t y)
+  155          {
+  156   1        uint8_t x2, y2;
+  157   1        #ifdef OLED_DEBUG
+                 if(pWidget == NULL)
+                 { 
+                   OG_PRINTERROR("try to set a null widget");    
+                   return;
+                 }
+                 if((pWidget->config & 0x0f) != CANVAS_WIDGET)
+                 {
+                   OG_PRINTERROR("wrong type of widget for this method");
+                   return;
+                 }
+                 #endif
+  169   1        if(x > (pWidget->w - 1) || y > (pWidget->h - 1))
+  170   1          return;
+  171   1        x2 = (x + w) > (pWidget->w - 1) ? (pWidget->w - 1) : (x + w);
+  172   1        y2 = (y + h) > (pWidget->h - 1) ? (pWidget->h - 1) : (y + h);
+  173   1        og_canvas_drawLine(pWidget, x, y, x, y2);
+  174   1        og_canvas_drawLine(pWidget, x, y, x2, y);
+  175   1        og_canvas_drawLine(pWidget, x2, y, x2, y2);
+  176   1        og_canvas_drawLine(pWidget, x, y2, x2, y2);
+  177   1      }
+  178          void og_canvas_drawText(t_psWidget pWidget, const char* str, uint8_t x, uint8_t y)
+  179          {
+  180   1        uint8_t *offset;
+  181   1        #ifdef OLED_DEBUG
+                 if(pWidget == NULL)
+                 { 
+                   OG_PRINTERROR("try to set a null widget");    
+                   return;
+                 }
+                 if((pWidget->config & 0x0f) != CANVAS_WIDGET)
+                 {
+C251 COMPILER V5.60.0,  oled_canvas                                                        23/08/22  22:51:18  PAGE 4   
+
+                   OG_PRINTERROR("wrong type of widget for this method");
+                   return;
+                 }
+                 #endif
+  193   1        y = y >> 3;
+  194   1        offset = (uint8_t *)pWidget->pFeature + y * pWidget->w + x;
+  195   1        while(*str != '\0')
+  196   1        {
+  197   2          #if OLED_USE_BUILDIN_FONT == 1
+                   font_getCharASCII_6X8(*str, offset);
+                   #else
+  200   2          font_getCharASCII_5X7(*str, offset);
+  201   2          #endif
+  202   2          offset += 6;
+  203   2          str++;
+  204   2        }
+  205   1      }
+  206          void og_canvas_draw(t_psWidget pWidget)
+  207          {
+  208   1        #ifdef OLED_DEBUG
+                 if(pWidget == NULL)
+                 { 
+                   OG_PRINTERROR("try to set a null widget");    
+                   return;
+                 }
+                 if((pWidget->config & 0x0f) != CANVAS_WIDGET)
+                 {
+                   OG_PRINTERROR("wrong type of widget for this method");
+                   return;
+                 } 
+                 #endif
+  220   1        BMPtoBuf(pWidget->x, pWidget->y, pWidget->w, pWidget->h, pWidget->config & WIDGET_FOCUS, (uint8_t *)pWid
+             -get->pFeature);
+  221   1      }
+
+
+Module Information          Static   Overlayable
+------------------------------------------------
+  code size            =    ------     ------
+  ecode size           =      1331     ------
+  data size            =    ------     ------
+  idata size           =    ------     ------
+  pdata size           =    ------     ------
+  xdata size           =    ------     ------
+  xdata-const size     =    ------     ------
+  edata size           =    ------         17
+  bit size             =    ------     ------
+  ebit size            =    ------     ------
+  bitaddressable size  =    ------     ------
+  ebitaddressable size =    ------     ------
+  far data size        =    ------     ------
+  huge data size       =    ------     ------
+  const size           =    ------     ------
+  hconst size          =    ------     ------
+End of Module Information.
+
+
+C251 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

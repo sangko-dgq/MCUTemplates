@@ -1,0 +1,132 @@
+C251 COMPILER V5.60.0,  oled_draw                                                          23/08/22  22:51:16  PAGE 1   
+
+
+C251 COMPILER V5.60.0, COMPILATION OF MODULE oled_draw
+OBJECT MODULE PLACED IN .\Objects\oled_draw.obj
+COMPILER INVOKED BY: D:\Application\keilC251_v560\C251\BIN\C251.EXE User\oled_gui\oled_core\oled_draw.c XSMALL ROM(HUGE)
+                    - OPTIMIZE(8,SPEED) BROWSE INCDIR(.\User;.\User\oled_gui;.\User\oled_gui\oled_core;.\User\oled_gui\oled_widget;.\User\Pag
+                    -eManage;.\User\Sensor;.\User\System;.\User\Bluetooth) DEBUG PRINT(.\Listings\oled_draw.lst) TABS(2) OBJECT(.\Objects\ole
+                    -d_draw.obj) 
+
+stmt  level    source
+
+    1          #define __OLED_DRAW_C
+    2          #include "oled_draw.h"
+    3          
+    4          void og_clearDisplayBuf(void)
+    5          {
+    6   1        uint16_t DATA i;
+    7   1        for(i = 0; i < OLED_BUF_SIZE; i++)
+    8   1          display_buf[i] = 0x00;
+    9   1      }
+   10          void og_screenRefresh(void)
+   11          {
+   12   1        ScreenRefresh();
+   13   1      }
+   14          void BMPtoBuf(int16_t x, int16_t y, int16_t width, int16_t height, uint8_t inverse, const uint8_t *buf1)
+   15          {
+   16   1        uint8_t DATA temp;
+   17   1        uint8_t DATA y_b, w_b, h_b, offset1, offset2;
+   18   1        uint16_t DATA i, j;
+   19   1        uint16_t DATA num2 = 0, num3, num4, num5;
+   20   1        if(x > 127 || y > 63)
+   21   1          return;
+   22   1        if(inverse)
+   23   1          temp = 0xff;
+   24   1        else
+   25   1          temp = 0x00;
+   26   1        if(x < 0)
+   27   1        {
+   28   2          if(x + width < 0)
+   29   2            return;
+   30   2          else 
+   31   2          {
+   32   3            if(x + width < 128)
+   33   3              w_b = width + x;
+   34   3            else
+   35   3              w_b = 128;
+   36   3            num2 = -x;
+   37   3            x = 0;
+   38   3          }
+   39   2        }
+   40   1        else if(x < 128)
+   41   1          w_b = (x+width)>128?(128-x):width;
+   42   1        if(y < 0)
+   43   1        {
+   44   2          if((y + height) > 0)
+   45   2          {
+   46   3            h_b = (height + y - 1) >> 3;    //bmp图的行数（8个像素为一行）
+   47   3            offset2 = (-y) % 8;             //y坐标的偏移量
+   48   3            offset1 = 8 - offset2;
+   49   3            num4 = ((-y) >> 3) * width + num2;
+   50   3            for(j = 0; j < w_b; j++)
+   51   3              display_buf[x + j] |= (buf1[num4 + j] ^ temp) >> offset2;
+   52   3            for(i = 0; i < h_b; i++)    //当前所在行数
+   53   3            {
+   54   4              num3 = (i << 7) + x;
+   55   4              num5 = num3 + 128;
+   56   4              num4 = (i + ((-y) >> 3) + 1) * width + num2;
+C251 COMPILER V5.60.0,  oled_draw                                                          23/08/22  22:51:16  PAGE 2   
+
+   57   4              for(j = 0; j < w_b; j++)
+   58   4              {
+   59   5                display_buf[num3 + j] |= ((buf1[num4 + j] ^ temp) << offset1);
+   60   5                display_buf[num5 + j] |= ((buf1[num4 + j] ^ temp) >> offset2);
+   61   5              }
+   62   4            }
+   63   3          }
+   64   2          else 
+   65   2            return;
+   66   2        }
+   67   1        else if(y < 64)
+   68   1        {
+   69   2          y_b = y >>  3;          //y坐标对应的行数（8个像素为一行）
+   70   2          h_b = (y + height) > 63 ? (8 - y_b) : (height >> 3);    //bmp图的行数（8个像素为一行）
+   71   2          offset1 = y % 8;        //y坐标的偏移量
+   72   2          offset2 = 8 - offset1;
+   73   2          for(i = 0; i < h_b; i++)    //当前所在行数
+   74   2          {
+   75   3            num3 = ((y_b + i) << 7) + x;  //num3 = (y_b + i) * 128;
+   76   3            if(y_b + i == 7)
+   77   3            {
+   78   4              num4 = i * width + num2;
+   79   4              for(j = 0; j < w_b; j++)
+   80   4                display_buf[num3 + j] |= (buf1[num4 + j] ^ temp) << offset1;
+   81   4            }
+   82   3            else
+   83   3            {
+   84   4              num5 = num3 + 128;
+   85   4              num4 = i * width + num2;
+   86   4              for(j = 0; j < w_b; j++)
+   87   4              {
+   88   5                display_buf[num3 + j] |= (buf1[num4 + j] ^ temp) << offset1;
+   89   5                display_buf[num5 + j] |= (buf1[num4 + j] ^ temp) >> offset2;
+   90   5              }
+   91   4            }
+   92   3          }
+   93   2        }
+   94   1      }
+
+
+Module Information          Static   Overlayable
+------------------------------------------------
+  code size            =    ------     ------
+  ecode size           =       702     ------
+  data size            =    ------     ------
+  idata size           =    ------     ------
+  pdata size           =    ------     ------
+  xdata size           =    ------     ------
+  xdata-const size     =    ------     ------
+  edata size           =      1024          5
+  bit size             =    ------     ------
+  ebit size            =    ------     ------
+  bitaddressable size  =    ------     ------
+  ebitaddressable size =    ------     ------
+  far data size        =    ------     ------
+  huge data size       =    ------     ------
+  const size           =    ------     ------
+  hconst size          =    ------     ------
+End of Module Information.
+
+
+C251 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

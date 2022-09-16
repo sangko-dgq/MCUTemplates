@@ -1,0 +1,335 @@
+C251 COMPILER V5.60.0,  oled_widget                                                        24/08/22  13:53:41  PAGE 1   
+
+
+C251 COMPILER V5.60.0, COMPILATION OF MODULE oled_widget
+OBJECT MODULE PLACED IN .\Objects\oled_widget.obj
+COMPILER INVOKED BY: D:\Application\keilC251_v560\C251\BIN\C251.EXE User\oled_gui\oled_core\oled_widget.c XSMALL ROM(HUG
+                    -E) OPTIMIZE(8,SPEED) BROWSE INCDIR(.\User;.\User\oled_gui;.\User\oled_gui\oled_core;.\User\oled_gui\oled_widget;.\User\P
+                    -ageManage;.\User\Sensor;.\User\System;.\User\Bluetooth) DEBUG PRINT(.\Listings\oled_widget.lst) TABS(2) OBJECT(.\Objects
+                    -\oled_widget.obj) 
+
+stmt  level    source
+
+    1          #define _OLED_WIDGET_C
+    2          #include "oled_widget.h"
+    3          
+    4          #if OLED_USE_BMP == 1
+    5          #include "oled_bmp.h"
+    6          #endif
+    7          
+    8          #if OLED_USE_LABEL == 1
+    9          #include "oled_label.h"
+   10          #endif
+   11          
+   12          #if OLED_USE_CHECKBOX == 1
+               #include "oled_checkbox.h"
+               #endif
+   15          
+   16          #if OLED_USE_SLIDER == 1
+   17          #include "oled_slider.h"
+   18          #endif
+   19          
+   20          #if OLED_USE_SWITCH == 1
+   21          #include "oled_switch.h"
+   22          #endif
+   23          
+   24          #if OLED_USE_CANVAS == 1
+   25          #include "oled_canvas.h"
+   26          #endif
+   27          
+   28          static t_psWidget pFirst, pLast;
+   29          static uint8_t  ucSum;
+   30          
+   31          void og_widget_init(void)
+   32          {
+   33   1        pFirst = NULL;
+   34   1        pLast = NULL;
+   35   1        ucSum = 0;
+   36   1      }
+   37          t_psWidget og_widget_create(void)
+   38          {
+   39   1        t_psWidget pWidget = malloc(T_SWIDGET_SIZE);
+   40   1        #ifdef OLED_DEBUG
+                 if(pWidget == NULL)
+                 {
+                   OG_PRINTERROR("widget create fail");
+                   return NULL;
+                 }
+                 #endif
+   47   1        pWidget->config = WIDGET_SHOW;
+   48   1        pWidget->pFeature = NULL;
+   49   1        return pWidget;
+   50   1      }
+   51          void og_widget_add(t_psWidget pWidget)
+   52          {
+   53   1        #ifdef OLED_DEBUG
+                 if(pWidget == NULL)
+                 {
+                   OG_PRINTERROR("try to add a null widget to widget_list");
+C251 COMPILER V5.60.0,  oled_widget                                                        24/08/22  13:53:41  PAGE 2   
+
+                   return;
+                 }
+                 #endif
+   60   1        if(ucSum == 0)
+   61   1        {
+   62   2          pWidget->pPrev = NULL;
+   63   2          pWidget->pNext = NULL;
+   64   2          pFirst = pWidget;
+   65   2          pLast = pWidget;
+   66   2        }
+   67   1        else
+   68   1        {
+   69   2          pWidget->pPrev = pLast;
+   70   2          pWidget->pNext = NULL;
+   71   2          pLast->pNext = pWidget;
+   72   2          pLast = pWidget;
+   73   2        }
+   74   1        ucSum++;
+   75   1      }
+   76          void og_widget_delet(t_psWidget pWidget)
+   77          {
+   78   1        #ifdef OLED_DEBUG
+                 if(pWidget == NULL)
+                 {
+                   OG_PRINTERROR("try to delet a null widget from widget_list");
+                   return;
+                 }
+                 #endif
+   85   1        
+   86   1        if(pWidget == pFirst)
+   87   1        {
+   88   2          if(pWidget->pNext != NULL)
+   89   2          {
+   90   3            ((t_psWidget)pWidget->pNext)->pPrev = NULL;
+   91   3            pFirst = (t_psWidget)pWidget->pNext;
+   92   3          }
+   93   2          else
+   94   2          {
+   95   3            pFirst = NULL;
+   96   3            pLast = NULL;
+   97   3          }
+   98   2        }
+   99   1        else if(pWidget == pLast)
+  100   1        {
+  101   2          ((t_psWidget)pWidget->pPrev)->pNext = NULL; 
+  102   2          pLast = (t_psWidget)pWidget->pPrev;
+  103   2        }
+  104   1        else
+  105   1        {
+  106   2          ((t_psWidget)pWidget->pPrev)->pNext = pWidget->pNext;
+  107   2          ((t_psWidget)pWidget->pNext)->pPrev = pWidget->pPrev;
+  108   2        }
+  109   1        ucSum--;
+  110   1        switch(pWidget->config&0x0f)
+  111   1        {
+  112   2          case LABEL_WIDGET:
+  113   2          case SLIDER_WIDGET:
+  114   2          case CANVAS_WIDGET:
+  115   2          {
+  116   3            if(pWidget->pFeature != NULL)
+  117   3              free(pWidget->pFeature);
+  118   3            break;
+  119   3          }
+  120   2          case BMP_WIDGET:
+  121   2          case CHECKBOX_WIDGET:
+  122   2          case SWITCH_WIDGET:
+C251 COMPILER V5.60.0,  oled_widget                                                        24/08/22  13:53:41  PAGE 3   
+
+  123   2            break;
+  124   2        }
+  125   1        free(pWidget);
+  126   1        pWidget = NULL;
+  127   1      }
+  128          void og_widget_setShow(t_psWidget pWidget, uint8_t k)
+  129          {
+  130   1        #ifdef OLED_DEBUG
+                 if(pWidget == NULL)
+                 {
+                   OG_PRINTERROR("try to set a null widget");
+                   return;
+                 }
+                 #endif
+  137   1        if(k)
+  138   1          pWidget->config |= WIDGET_SHOW;
+  139   1        else
+  140   1          pWidget->config &= ~WIDGET_SHOW;
+  141   1      }
+  142          void og_widget_setPos(t_psWidget pWidget, int16_t x, int16_t y)
+  143          {
+  144   1        #ifdef OLED_DEBUG
+                 if(pWidget == NULL)
+                 {
+                   OG_PRINTERROR("try to set a null widget");
+                   return;
+                 }
+                 #endif
+  151   1        pWidget->x = x;
+  152   1        pWidget->y = y;
+  153   1      }
+  154          void og_widget_setPosOffset(t_psWidget pWidget, int16_t x, int16_t y)
+  155          {
+  156   1        #ifdef OLED_DEBUG
+                 if(pWidget == NULL)
+                 {
+                   OG_PRINTERROR("try to set a null widget");
+                   return;
+                 }
+                 #endif
+  163   1        pWidget->x += x;
+  164   1        pWidget->y += y;
+  165   1      }
+  166          void og_widget_setAlignment(t_psWidget pWidget, uint8_t alignment)
+  167          {
+  168   1        #ifdef OLED_DEBUG
+                 if(pWidget == NULL)
+                 {
+                   OG_PRINTERROR("try to set a null widget");
+                   return;
+                 }
+                 #endif
+  175   1        switch(alignment)
+  176   1        {
+  177   2          case ALIGN_TOP:
+  178   2            pWidget->y = 0;
+  179   2            break;
+  180   2          case ALIGN_BOTTOM:
+  181   2            pWidget->y = OLED_HEIGHT - pWidget->h;
+  182   2            break;
+  183   2          case ALIGN_LEFT:
+  184   2            pWidget->x = 0;
+  185   2            break;
+  186   2          case ALIGN_RIGHT:
+  187   2            pWidget->x = OLED_WIDTH - pWidget->w;
+  188   2            break;
+C251 COMPILER V5.60.0,  oled_widget                                                        24/08/22  13:53:41  PAGE 4   
+
+  189   2          case ALIGN_HORIZONMID:
+  190   2            pWidget->x = (OLED_WIDTH - pWidget->w) / 2;
+  191   2            break;
+  192   2          case ALIGN_VERTICALMID:
+  193   2            pWidget->y = (OLED_HEIGHT - pWidget->h) / 2;
+  194   2            break;
+  195   2          case ALIGN_TOPLEFT:
+  196   2            pWidget->x = 0;
+  197   2            pWidget->y = 0;
+  198   2            break;
+  199   2          case ALIGN_TOPMID:
+  200   2            pWidget->x = (OLED_WIDTH - pWidget->w) / 2;
+  201   2            pWidget->y = 0;
+  202   2            break;
+  203   2          case ALIGN_TOPRIGHT:
+  204   2            pWidget->x = OLED_WIDTH - pWidget->w;
+  205   2            pWidget->y = 0;
+  206   2            break;
+  207   2          case ALIGN_BOTTOMLEFT:
+  208   2            pWidget->x = 0;
+  209   2            pWidget->y = OLED_HEIGHT - pWidget->h;
+  210   2            break;
+  211   2          case ALIGN_BOTTOMMID:
+  212   2            pWidget->x = (OLED_WIDTH - pWidget->w) / 2;
+  213   2            pWidget->y = OLED_HEIGHT - pWidget->h;
+  214   2            break;
+  215   2          case ALIGN_BOTTOMRIGHT:
+  216   2            pWidget->x = OLED_WIDTH - pWidget->w;
+  217   2            pWidget->y = OLED_HEIGHT - pWidget->h;
+  218   2            break;
+  219   2        }
+  220   1      }
+  221          
+  222          /* »æÖÆ¿Ø¼þ */
+  223          void og_widget_draw(void)
+  224          {
+  225   1        t_psWidget pWidget = pFirst;
+  226   1        og_clearDisplayBuf();
+  227   1        
+  228   1        while(pWidget != NULL)
+  229   1        {
+  230   2          if((pWidget->config & WIDGET_SHOW) == 0)
+  231   2            goto next;
+  232   2          if((pWidget->x >= OLED_WIDTH) || (pWidget->x + pWidget->w) <= 0)
+  233   2            goto next;
+  234   2          if((pWidget->y >= OLED_HEIGHT) || (pWidget->y + pWidget->h) <= 0)
+  235   2            goto next;
+  236   2          
+  237   2          switch(pWidget->config & 0x0f)
+  238   2          {
+  239   3            #if OLED_USE_BMP == 1
+  240   3            case BMP_WIDGET:
+  241   3            {
+  242   4              og_bmp_draw(pWidget);
+  243   4              break;
+  244   4            }
+  245   3            #endif
+  246   3            
+  247   3            #if OLED_USE_SWITCH == 1
+  248   3            case SWITCH_WIDGET:
+  249   3            {
+  250   4              og_switch_draw(pWidget);
+  251   4              break;
+  252   4            }
+  253   3            #endif
+  254   3            
+C251 COMPILER V5.60.0,  oled_widget                                                        24/08/22  13:53:41  PAGE 5   
+
+  255   3            #if OLED_USE_CHECKBOX == 1
+                     case CHECKBOX_WIDGET:
+                     {
+                       og_checkbox_draw(pWidget);
+                       break;
+                     }
+                     #endif
+  262   3            
+  263   3            #if OLED_USE_LABEL == 1
+  264   3            case LABEL_WIDGET:
+  265   3            {
+  266   4              og_label_draw(pWidget);
+  267   4              break;
+  268   4            }
+  269   3            #endif
+  270   3            
+  271   3            #if OLED_USE_SLIDER == 1
+  272   3            case SLIDER_WIDGET:
+  273   3            {
+  274   4              og_slider_draw(pWidget);
+  275   4              break;
+  276   4            }
+  277   3            #endif
+  278   3            
+  279   3            #if OLED_USE_CANVAS == 1
+  280   3            case CANVAS_WIDGET:
+  281   3            {
+  282   4              og_canvas_draw(pWidget);
+  283   4              break;
+  284   4            }
+  285   3            #endif
+  286   3          }
+  287   2          next:
+  288   2          pWidget = (t_psWidget)pWidget->pNext;
+  289   2        }
+  290   1        og_screenRefresh();
+  291   1      }
+
+
+Module Information          Static   Overlayable
+------------------------------------------------
+  code size            =    ------     ------
+  ecode size           =       775     ------
+  data size            =    ------     ------
+  idata size           =    ------     ------
+  pdata size           =    ------     ------
+  xdata size           =    ------     ------
+  xdata-const size     =    ------     ------
+  edata size           =         9     ------
+  bit size             =    ------     ------
+  ebit size            =    ------     ------
+  bitaddressable size  =    ------     ------
+  ebitaddressable size =    ------     ------
+  far data size        =    ------     ------
+  huge data size       =    ------     ------
+  const size           =    ------     ------
+  hconst size          =    ------     ------
+End of Module Information.
+
+
+C251 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

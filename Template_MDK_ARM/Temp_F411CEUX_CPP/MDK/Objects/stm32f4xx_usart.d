@@ -2,7 +2,7 @@
 .\objects\stm32f4xx_usart.o: ..\Core\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_usart.h
 .\objects\stm32f4xx_usart.o: ..\Core\core_basic_driver\stm32f4xx.h
 .\objects\stm32f4xx_usart.o: ..\Core\core_cm\core_cm4.h
-.\objects\stm32f4xx_usart.o: E:\Keil_MDK5.35\Core\ARM\ARMCC\Bin\..\include\stdint.h
+.\objects\stm32f4xx_usart.o: D:\Application\Keil\ARM\ARMCC\Bin\..\include\stdint.h
 .\objects\stm32f4xx_usart.o: ..\Core\core_cm\core_cmInstr.h
 .\objects\stm32f4xx_usart.o: ..\Core\core_cm\core_cmFunc.h
 .\objects\stm32f4xx_usart.o: ..\Core\core_cm\core_cmSimd.h

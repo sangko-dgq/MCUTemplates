@@ -1,11 +1,11 @@
 .\objects\arduino.o: ..\Libs\ArduinoAPI\Arduino.c
 .\objects\arduino.o: ..\Libs\ArduinoAPI\Arduino.h
-.\objects\arduino.o: E:\Keil_MDK5.35\Core\ARM\ARMCC\Bin\..\include\stdlib.h
-.\objects\arduino.o: E:\Keil_MDK5.35\Core\ARM\ARMCC\Bin\..\include\stdbool.h
+.\objects\arduino.o: D:\Application\Keil\ARM\ARMCC\Bin\..\include\stdlib.h
+.\objects\arduino.o: D:\Application\Keil\ARM\ARMCC\Bin\..\include\stdbool.h
 .\objects\arduino.o: ..\Libs\ArduinoAPI\binary.h
 .\objects\arduino.o: ..\Libs\ArduinoAPI\avr/pgmspace.h
-.\objects\arduino.o: E:\Keil_MDK5.35\Core\ARM\ARMCC\Bin\..\include\inttypes.h
-.\objects\arduino.o: E:\Keil_MDK5.35\Core\ARM\ARMCC\Bin\..\include\stdint.h
+.\objects\arduino.o: D:\Application\Keil\ARM\ARMCC\Bin\..\include\inttypes.h
+.\objects\arduino.o: D:\Application\Keil\ARM\ARMCC\Bin\..\include\stdint.h
 .\objects\arduino.o: ..\Libs\Quick_STD\mcu_type.h
 .\objects\arduino.o: ..\Core\core_basic_driver\stm32f4xx.h
 .\objects\arduino.o: ..\Core\core_cm\core_cm4.h

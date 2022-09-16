@@ -1,0 +1,647 @@
+C251 COMPILER V5.60.0,  oled_label                                                         23/08/22  22:51:18  PAGE 1   
+
+
+C251 COMPILER V5.60.0, COMPILATION OF MODULE oled_label
+OBJECT MODULE PLACED IN .\Objects\oled_label.obj
+COMPILER INVOKED BY: D:\Application\keilC251_v560\C251\BIN\C251.EXE User\oled_gui\oled_widget\oled_label.c XSMALL ROM(HU
+                    -GE) OPTIMIZE(8,SPEED) BROWSE INCDIR(.\User;.\User\oled_gui;.\User\oled_gui\oled_core;.\User\oled_gui\oled_widget;.\User\
+                    -PageManage;.\User\Sensor;.\User\System;.\User\Bluetooth) DEBUG PRINT(.\Listings\oled_label.lst) TABS(2) OBJECT(.\Objects
+                    -\oled_label.obj) 
+
+stmt  level    source
+
+    1          #define _OLED_LABEL_C
+    2          #include "oled_label.h"
+    3          
+    4          uint16_t str_len(const char *str)
+    5          {
+    6   1        uint16_t cnt = 0;
+    7   1        if(str == NULL)
+    8   1          return 0;
+    9   1        while(*str)
+   10   1        {
+   11   2          str++;
+   12   2          cnt++;
+   13   2        };
+   14   1        return cnt;
+   15   1      }
+   16          void str_cpy(const char *str_source, char *str_target)
+   17          {
+   18   1        while(*str_source)
+   19   1        {
+   20   2          *str_target++ = *str_source++;
+   21   2        };
+   22   1        *str_target = '\0';
+   23   1      }
+   24          uint8_t str_cmp(const char *str_source, char *str_target)
+   25          {
+   26   1        while(*str_source)
+   27   1        {
+   28   2          if(*str_target++ != *str_source++)
+   29   2            return 0;
+   30   2        };
+   31   1        if(*str_target)
+   32   1          return 0;
+   33   1        return 1;
+   34   1      }
+   35          
+   36          t_psWidget og_label_create(uint8_t font, int16_t x, int16_t y)
+   37          {
+   38   1        t_psWidget pWidget = og_widget_create();
+   39   1        t_sLabel *pLabel;
+   40   1        #ifdef OLED_DEBUG
+                 if (pWidget == NULL)          // 如果内存分配失败，直接返回NULL
+                 {
+                   OG_PRINTERROR("label widget create fail");
+                   return NULL;
+                 }
+                 if(pLabel == NULL)
+                 {
+                   free(pWidget);
+                   OG_PRINTERROR("label widget create fail");
+                   return NULL;
+                 } 
+                 #endif
+   53   1        pWidget->x = x;                   // 在屏幕上的横坐标
+   54   1        pWidget->y = y;                   // 在屏幕上的纵坐标
+   55   1        pWidget->config |= LABEL_WIDGET;  // 控件类型为label
+   56   1        pWidget->pFeature = malloc(sizeof(t_sLabel));
+C251 COMPILER V5.60.0,  oled_label                                                         23/08/22  22:51:18  PAGE 2   
+
+   57   1        #ifdef OLED_DEBUG
+                 if(pWidget->pFeature == NULL)
+                 {
+                   free(pWidget);
+                   OG_PRINTERROR("label create fail");
+                   return NULL;
+                 }
+                 #endif
+   65   1        pLabel = (t_sLabel *)pWidget->pFeature;
+   66   1        pLabel->font = font;
+   67   1        pLabel->Str = '\0';
+   68   1        og_widget_add(pWidget);         // 将控件添加到控件显示器中
+   69   1        return pWidget;                 // 返回控件参数的指针
+   70   1      }
+   71          void og_label_setText(t_psWidget pWidget, const char *str)
+   72          {
+   73   1        t_sLabel *pLabel = (t_sLabel *)(pWidget->pFeature);
+   74   1        uint8_t line_cnt = 0;
+   75   1        uint8_t line_char_max = 0;
+   76   1        #ifdef OLED_DEBUG
+                 if(pWidget == NULL)
+                 {
+                   OG_PRINTERROR("try to set a null widget");    
+                   return;
+                 }
+                 if((pWidget->config & 0x0f) != LABEL_WIDGET)
+                 {
+                   OG_PRINTERROR("wrong type of widget for this method");
+                   return;
+                 }
+                 #endif
+   88   1        if(str_cmp(str, (char *)&pLabel->Str) == 1)
+   89   1          return;
+   90   1        else
+   91   1        {
+   92   2          uint8_t *ptr = (uint8_t *)str;
+   93   2          uint16_t str_sum = 0;
+   94   2          uint8_t line_char_cnt = 0;
+   95   2          while(*ptr)
+   96   2          {
+   97   3            if(*ptr == '\r' || *ptr == '\n')
+   98   3            {
+   99   4              line_cnt++;
+  100   4              if(line_char_cnt > line_char_max)
+  101   4                line_char_max = line_char_cnt;
+  102   4              line_char_cnt = 0;
+  103   4            }
+  104   3            else
+  105   3            {     
+  106   4              line_char_cnt++;
+  107   4            }
+  108   3            str_sum++;
+  109   3            ptr++;
+  110   3          }
+  111   2          if(line_char_cnt != 0)
+  112   2          {
+  113   3            line_cnt++;
+  114   3            if(line_char_cnt > line_char_max)
+  115   3              line_char_max = line_char_cnt;
+  116   3          }
+  117   2          ptr = realloc((uint8_t *)pWidget->pFeature, sizeof(t_sLabel) + str_sum);
+  118   2          #ifdef OLED_DEBUG
+                   if(ptr == NULL)
+                   {
+                     OG_PRINTERROR("label set text fail");
+                     return;
+C251 COMPILER V5.60.0,  oled_label                                                         23/08/22  22:51:18  PAGE 3   
+
+                   }
+                   #endif
+  125   2          pWidget->pFeature = ptr;
+  126   2          pLabel = (t_sLabel *)pWidget->pFeature;
+  127   2          str_cpy(str, (char *)&pLabel->Str);
+  128   2        }
+  129   1        pWidget->w = line_char_max * sFont[pLabel->font].w;
+  130   1        pWidget->h = line_cnt * sFont[pLabel->font].h;
+  131   1        #if (OLED_USE_BUILDIN_FONT == 0)
+  132   1        if(pLabel->font == FONT_GB2312_15X16)
+  133   1          pWidget->w >>= 1;
+  134   1        #endif
+  135   1      }
+  136          void og_label_appendText(t_psWidget pWidget, const char *str)
+  137          {
+  138   1        t_sLabel *pLabel = (t_sLabel *)(pWidget->pFeature);
+  139   1        uint8_t *ptr;
+  140   1        uint16_t str_sum1, str_sum2;
+  141   1        uint8_t line_cnt = 0;
+  142   1        uint8_t line_char_cnt = 0;
+  143   1        uint8_t line_char_max = 0;
+  144   1        #ifdef OLED_DEBUG
+                 if(pWidget == NULL)
+                 { 
+                   OG_PRINTERROR("try to set a null widget");    
+                   return;
+                 }
+                 if((pWidget->config & 0x0f) != LABEL_WIDGET)
+                 {
+                   OG_PRINTERROR("wrong type of widget for this method");
+                   return;
+                 }
+                 #endif
+  156   1        if(pLabel->Str == '\0')
+  157   1        {
+  158   2          og_label_setText(pWidget, str);
+  159   2          return;
+  160   2        }
+  161   1        str_sum1 = str_len(str);
+  162   1        if(str_sum1 == 0)
+  163   1          return;
+  164   1        str_sum2 = str_len((char *)(&pLabel->Str));
+  165   1        ptr = realloc((uint8_t *)pWidget->pFeature, sizeof(t_sLabel) + str_sum1 + str_sum2);
+  166   1        #ifdef OLED_DEBUG
+                 if(ptr == NULL)
+                 {
+                   OG_PRINTERROR("label append text fail");
+                   return;
+                 }
+                 #endif
+  173   1        pWidget->pFeature = ptr;
+  174   1        pLabel = (t_sLabel *)pWidget->pFeature;
+  175   1        str_cpy(str, (char *)(&pLabel->Str) + str_sum2);
+  176   1        ptr = &pLabel->Str;
+  177   1        while(*ptr)
+  178   1        {
+  179   2          if(*ptr == '\r' || *ptr == '\n')
+  180   2          {
+  181   3            line_cnt++;
+  182   3            if(line_char_cnt > line_char_max)
+  183   3              line_char_max = line_char_cnt;
+  184   3            line_char_cnt = 0;
+  185   3          }
+  186   2          else
+  187   2          {
+  188   3            line_char_cnt++;
+C251 COMPILER V5.60.0,  oled_label                                                         23/08/22  22:51:18  PAGE 4   
+
+  189   3          }
+  190   2          ptr++;
+  191   2        }
+  192   1        if(line_char_cnt != 0)
+  193   1        {
+  194   2          line_cnt++;
+  195   2          if(line_char_cnt > line_char_max)
+  196   2            line_char_max = line_char_cnt;
+  197   2        }
+  198   1        pWidget->w = line_char_max * sFont[pLabel->font].w;
+  199   1        pWidget->h = line_cnt * sFont[pLabel->font].h;
+  200   1        #if (OLED_USE_BUILDIN_FONT == 0)
+  201   1        if(pLabel->font == FONT_GB2312_15X16)
+  202   1          pWidget->w >>= 1;
+  203   1        #endif
+  204   1      }
+  205          void og_label_clear(t_psWidget pWidget)
+  206          {
+  207   1        t_sLabel *pLabel;
+  208   1        uint8_t *ptr;
+  209   1        #ifdef OLED_DEBUG
+                 if(pWidget == NULL)
+                 { 
+                   OG_PRINTERROR("try to set a null widget");    
+                   return;
+                 }
+                 if((pWidget->config & 0x0f) != LABEL_WIDGET)
+                 {
+                   OG_PRINTERROR("wrong type of widget for this method");
+                   return;
+                 }
+                 #endif
+  221   1        ptr = realloc(pWidget->pFeature, sizeof(t_sLabel));
+  222   1        #ifdef OLED_DEBUG
+                 if(ptr == NULL)
+                 {
+                   OG_PRINTERROR("label clear fail");
+                   return;
+                 }
+                 #endif
+  229   1        pWidget->pFeature = ptr;
+  230   1        pLabel = (t_sLabel *)pWidget->pFeature;
+  231   1        pLabel->Str = '\0';
+  232   1      }
+  233          void og_label_draw(t_psWidget pWidget)
+  234          {
+  235   1        t_sLabel *pLabel = (t_sLabel *)(pWidget->pFeature);
+  236   1        #ifdef OLED_DEBUG
+                 if(pWidget == NULL)
+                 { 
+                   OG_PRINTERROR("try to set a null widget");    
+                   return;
+                 }
+                 if((pWidget->config & 0x0f) != LABEL_WIDGET)
+                 {
+                   OG_PRINTERROR("wrong type of widget for this method");
+                   return;
+                 }
+                 #endif
+  248   1        if(pLabel->Str == '\0')
+  249   1          return;
+  250   1        else
+  251   1        { 
+  252   2          uint8_t *pStr = (uint8_t *)&pLabel->Str;
+  253   2          uint8_t *ptr;
+  254   2          int16_t y = 0;
+C251 COMPILER V5.60.0,  oled_label                                                         23/08/22  22:51:18  PAGE 5   
+
+  255   2          uint16_t i = 0, ptr_size;
+  256   2          #if (OLED_USE_BUILDIN_FONT == 1)
+                   switch(pLabel->font)
+                   {
+                     case FONT_ASCII_6X8:
+                     {
+                       ptr_size = pWidget->w;
+                       ptr = calloc(ptr_size, 1);
+                       #ifdef OLED_DEBUG
+                       if(ptr == NULL)
+                       {
+                         OG_PRINTERROR("label draw fail");
+                         return;
+                       }
+                       #endif
+                       while(1)
+                       {
+                         if(*pStr < ' ') 
+                         {
+                           if(((pWidget->y + y + 8) >= 0) && (i != 0))
+                           {
+                             uint8_t *ptr2 = pStr - i;
+                             uint16_t j;
+                             uint8_t *offset = ptr;
+                             for(j = 0; j < i; j++)
+                             {
+                               font_getCharASCII_6X8(ptr2[j], offset);
+                               offset += 7;  
+                             }
+                             BMPtoBuf(pWidget->x, pWidget->y + y, pWidget->w, 8, pWidget->config & WIDGET_FOCUS, ptr);
+                             for(j = 0; j < ptr_size; j++)
+                               ptr[j] = 0x00;
+                           }
+                           if(*pStr == '\0')
+                             break;
+                           i = 0;
+                           y += 8;
+                         }
+                         else
+                           i++;
+                         pStr++;
+                       }
+                       break;
+                     }
+                     case FONT_ASCII_8X16:
+                     {
+                       ptr_size = (pWidget->w << 1);
+                       ptr = calloc(ptr_size, 1);
+                       #ifdef OLED_DEBUG
+                       if(ptr == NULL)
+                       {
+                         OG_PRINTERROR("label draw fail");
+                         return;
+                       }
+                       #endif
+                       while(1)
+                       {
+                         if(*pStr < ' ') 
+                         {
+                           if(((pWidget->y + y + 16) >= 0) && (i != 0))
+                           {
+                             uint8_t *ptr2 = pStr - i;
+                             uint16_t j;
+                             uint8_t *offset = ptr;
+                             for(j = 0; j < i; j++)
+                             {
+C251 COMPILER V5.60.0,  oled_label                                                         23/08/22  22:51:18  PAGE 6   
+
+                               font_getCharASCII_8X16(ptr2[j], offset, pWidget->w);
+                               offset += 8;  
+                             }
+                             BMPtoBuf(pWidget->x, pWidget->y + y, pWidget->w, 16, pWidget->config & WIDGET_FOCUS, ptr);
+                             for(j = 0; j < ptr_size; j++)
+                               ptr[j] = 0x00;
+                           }
+                           if(*pStr == '\0')
+                             break;
+                           i = 0;
+                           y += 16;
+                         }
+                         else
+                           i++;
+                         pStr++;
+                       }
+                       break;
+                     }
+                     case FONT_ASCII_16X32:
+                     {
+                       ptr_size = (pWidget->w << 2);
+                       ptr = calloc(ptr_size, 1);
+                       #ifdef OLED_DEBUG
+                       if(ptr == NULL)
+                       {
+                         OG_PRINTERROR("label draw fail");
+                         return;
+                       }
+                       #endif
+                       while(1)
+                       {
+                         if(*pStr < ' ') 
+                         {
+                           if(((pWidget->y + y + 32) >= 0) && (i != 0))
+                           {
+                             uint8_t *ptr2 = pStr - i;
+                             uint16_t j;
+                             uint8_t *offset = ptr;
+                             for(j = 0; j < i; j++)
+                             {
+                               font_getCharASCII_16X32(ptr2[j], offset, pWidget->w);
+                               offset += 16; 
+                             }
+                             BMPtoBuf(pWidget->x, pWidget->y + y, pWidget->w, 32, pWidget->config & WIDGET_FOCUS, ptr);
+                             for(j = 0; j < ptr_size; j++)
+                               ptr[j] = 0x00;
+                           }
+                           if(*pStr == '\0')
+                             break;
+                           i = 0;
+                           y += 32;
+                         }
+                         else
+                           i++;
+                         pStr++;
+                       }
+                       break;
+                     }
+                   }
+                   #endif
+  381   2          #if (OLED_USE_BUILDIN_FONT == 0)
+  382   2          switch(pLabel->font)
+  383   2          {
+  384   3            case FONT_ASCII_5X7:
+  385   3            {
+  386   4              ptr_size = pWidget->w;
+C251 COMPILER V5.60.0,  oled_label                                                         23/08/22  22:51:18  PAGE 7   
+
+  387   4              ptr = calloc(ptr_size, 1);
+  388   4              #ifdef OLED_DEBUG
+                       if(ptr == NULL)
+                       {
+                         OG_PRINTERROR("label draw fail");
+                         return;
+                       }
+                       #endif
+  395   4              while(1)
+  396   4              {
+  397   5                if(*pStr < ' ') 
+  398   5                {
+  399   6                  if(((pWidget->y + y + 8) >= 0) && (i != 0))
+  400   6                  {
+  401   7                    uint8_t *ptr2 = pStr - i;
+  402   7                    uint16_t j;
+  403   7                    uint8_t *offset = ptr;
+  404   7                    for(j = 0; j < i; j++)
+  405   7                    {
+  406   8                      font_getCharASCII_5X7(ptr2[j], offset);
+  407   8                      offset += 6;  
+  408   8                    }
+  409   7                    BMPtoBuf(pWidget->x, pWidget->y + y, pWidget->w, 8, pWidget->config & WIDGET_FOCUS, ptr);
+  410   7                    for(j = 0; j < ptr_size; j++)
+  411   7                      ptr[j] = 0x00;
+  412   7                  }
+  413   6                  if(*pStr == '\0')
+  414   6                    break;
+  415   6                  i = 0;
+  416   6                  y += 8;
+  417   6                }
+  418   5                else
+  419   5                  i++;
+  420   5                pStr++;
+  421   5              }
+  422   4              break;
+  423   4            }
+  424   3            case FONT_ASCII_7X8:
+  425   3            {
+  426   4              ptr_size = pWidget->w;
+  427   4              ptr = calloc(ptr_size, 1);
+  428   4              #ifdef OLED_DEBUG
+                       if(ptr == NULL)
+                       {
+                         OG_PRINTERROR("label draw fail");
+                         return;
+                       }
+                       #endif
+  435   4              while(1)
+  436   4              {
+  437   5                if(*pStr < ' ') 
+  438   5                {
+  439   6                  if(((pWidget->y + y + 8) >= 0) && (i != 0))
+  440   6                  {
+  441   7                    uint8_t *ptr2 = pStr - i;
+  442   7                    uint16_t j;
+  443   7                    uint8_t *offset = ptr;
+  444   7                    for(j = 0; j < i; j++)
+  445   7                    {
+  446   8                      font_getCharASCII_7X8(ptr2[j], offset);
+  447   8                      offset += 8;  
+  448   8                    }
+  449   7                    BMPtoBuf(pWidget->x, pWidget->y + y, pWidget->w, 8, pWidget->config & WIDGET_FOCUS, ptr);
+  450   7                    for(j = 0; j < ptr_size; j++)
+  451   7                      ptr[j] = 0x00;
+  452   7                  }
+C251 COMPILER V5.60.0,  oled_label                                                         23/08/22  22:51:18  PAGE 8   
+
+  453   6                  if(*pStr == '\0')
+  454   6                    break;
+  455   6                  i = 0;
+  456   6                  y += 8;
+  457   6                }
+  458   5                else
+  459   5                  i++;
+  460   5                pStr++;
+  461   5              }
+  462   4              break;
+  463   4            }
+  464   3            case FONT_ASCII_8X16:
+  465   3            {
+  466   4              ptr_size = (pWidget->w << 1);
+  467   4              ptr = calloc(ptr_size, 1);
+  468   4              #ifdef OLED_DEBUG
+                       if(ptr == NULL)
+                       {
+                         OG_PRINTERROR("label draw fail");
+                         return;
+                       }
+                       #endif
+  475   4              while(1)
+  476   4              {
+  477   5                if(*pStr < ' ') 
+  478   5                {
+  479   6                  if(((pWidget->y + y + 16) >= 0) && (i != 0))
+  480   6                  {
+  481   7                    uint8_t *ptr2 = pStr - i;
+  482   7                    uint16_t j;
+  483   7                    uint8_t *offset = ptr;
+  484   7                    for(j = 0; j < i; j++)
+  485   7                    {
+  486   8                      font_getCharASCII_8X16(ptr2[j], offset, pWidget->w);
+  487   8                      offset += 8;  
+  488   8                    }
+  489   7                    BMPtoBuf(pWidget->x, pWidget->y + y, pWidget->w, 16, pWidget->config & WIDGET_FOCUS, ptr);
+  490   7                    for(j = 0; j < ptr_size; j++)
+  491   7                      ptr[j] = 0x00;
+  492   7                  }
+  493   6                  if(*pStr == '\0')
+  494   6                    break;
+  495   6                  i = 0;
+  496   6                  y += 16;
+  497   6                }
+  498   5                else
+  499   5                  i++;
+  500   5                pStr++;
+  501   5              }
+  502   4              break;
+  503   4            }
+  504   3            case FONT_ASCII_8X16_BOLD:
+  505   3            {
+  506   4              ptr_size = (pWidget->w << 1);
+  507   4              ptr = calloc(ptr_size, 1);
+  508   4              #ifdef OLED_DEBUG
+                       if(ptr == NULL)
+                       {
+                         OG_PRINTERROR("label draw fail");
+                         return;
+                       }
+                       #endif
+  515   4              while(1)
+  516   4              {
+  517   5                if(*pStr < ' ') 
+  518   5                {
+C251 COMPILER V5.60.0,  oled_label                                                         23/08/22  22:51:18  PAGE 9   
+
+  519   6                  if(((pWidget->y + y + 16) >= 0) && (i != 0))
+  520   6                  {
+  521   7                    uint8_t *ptr2 = pStr - i;
+  522   7                    uint16_t j;
+  523   7                    uint8_t *offset = ptr;
+  524   7                    for(j = 0; j < i; j++)
+  525   7                    {
+  526   8                      font_getCharASCII_8X16_BOLD(ptr2[j], offset, pWidget->w);
+  527   8                      offset += 8;  
+  528   8                    }
+  529   7                    BMPtoBuf(pWidget->x, pWidget->y + y, pWidget->w, 16, pWidget->config & WIDGET_FOCUS, ptr);
+  530   7                    for(j = 0; j < ptr_size; j++)
+  531   7                      ptr[j] = 0x00;
+  532   7                  }
+  533   6                  if(*pStr == '\0')
+  534   6                    break;
+  535   6                  i = 0;
+  536   6                  y += 16;
+  537   6                }
+  538   5                else
+  539   5                  i++;
+  540   5                pStr++;
+  541   5              }
+  542   4              break;
+  543   4            }
+  544   3            case FONT_GB2312_15X16:
+  545   3            {
+  546   4              ptr_size = (pWidget->w << 1);
+  547   4              ptr = calloc(ptr_size, 1);
+  548   4              #ifdef OLED_DEBUG
+                       if(ptr == NULL)
+                       {
+                         OG_PRINTERROR("label draw fail");
+                         return;
+                       }
+                       #endif
+  555   4              while(1)
+  556   4              {
+  557   5                if(*pStr < ' ') 
+  558   5                {
+  559   6                  if(((pWidget->y + y + 16) >= 0) && (i != 0))
+  560   6                  {
+  561   7                    uint16_t *ptr2 = (uint16_t *)(pStr - (i << 1));
+  562   7                    uint16_t j;
+  563   7                    uint8_t *offset = ptr;
+  564   7                    for(j = 0; j < i; j++)
+  565   7                    {
+  566   8                      font_getCharGB2312_15X16(ptr2[j], offset, pWidget->w);
+  567   8                      offset += 16; 
+  568   8                    }
+  569   7                    BMPtoBuf(pWidget->x, pWidget->y + y, pWidget->w, 16, pWidget->config & WIDGET_FOCUS, ptr);
+  570   7                    for(j = 0; j < ptr_size; j++)
+  571   7                      ptr[j] = 0x00;
+  572   7                  }
+  573   6                  if(*pStr == '\0')
+  574   6                    break;
+  575   6                  i = 0;
+  576   6                  y += 16;
+  577   6                  pStr += 1;
+  578   6                }
+  579   5                else
+  580   5                {
+  581   6                  i++;
+  582   6                  pStr += 2;
+  583   6                }
+  584   5              }
+C251 COMPILER V5.60.0,  oled_label                                                         23/08/22  22:51:18  PAGE 10  
+
+  585   4              break;
+  586   4            }
+  587   3          }
+  588   2          #endif
+  589   2          free(ptr);
+  590   2          return;
+  591   2        }
+  592   1      }
+  593          
+
+
+Module Information          Static   Overlayable
+------------------------------------------------
+  code size            =        10     ------
+  ecode size           =      2373     ------
+  data size            =    ------     ------
+  idata size           =    ------     ------
+  pdata size           =    ------     ------
+  xdata size           =    ------     ------
+  xdata-const size     =    ------     ------
+  edata size           =        64         61
+  bit size             =    ------     ------
+  ebit size            =    ------     ------
+  bitaddressable size  =    ------     ------
+  ebitaddressable size =    ------     ------
+  far data size        =    ------     ------
+  huge data size       =    ------     ------
+  const size           =    ------     ------
+  hconst size          =    ------     ------
+End of Module Information.
+
+
+C251 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

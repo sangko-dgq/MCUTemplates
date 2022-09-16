@@ -1,0 +1,186 @@
+C251 COMPILER V5.60.0,  IIC                                                                23/08/22  22:51:19  PAGE 1   
+
+
+C251 COMPILER V5.60.0, COMPILATION OF MODULE IIC
+OBJECT MODULE PLACED IN .\Objects\IIC.obj
+COMPILER INVOKED BY: D:\Application\keilC251_v560\C251\BIN\C251.EXE User\System\IIC.c XSMALL ROM(HUGE) OPTIMIZE(8,SPEED)
+                    - BROWSE INCDIR(.\User;.\User\oled_gui;.\User\oled_gui\oled_core;.\User\oled_gui\oled_widget;.\User\PageManage;.\User\Sen
+                    -sor;.\User\System;.\User\Bluetooth) DEBUG PRINT(.\Listings\IIC.lst) TABS(2) OBJECT(.\Objects\IIC.obj) 
+
+stmt  level    source
+
+    1          #include "IIC.h"
+    2          #include "STC32G.h"
+    3          #include "Delay.h"
+    4          
+    5          unsigned int data timeout;
+    6          
+    7          void IIC_Init(void)
+    8          {
+    9   1        P_SW2 |= 0x80;
+   10   1        I2CCFG = 0xC0 | 0x0A;                              //使能I2C主机模式
+   11   1        I2CMSST = 0x00;
+   12   1        P_SW2 &= 0x7f;
+   13   1      }
+   14          void IIC_Deinit(void)
+   15          {
+   16   1        P_SW2 |= 0x80;
+   17   1        I2CCFG = 0x00;
+   18   1        I2CMSST = 0x00;
+   19   1        P_SW2 &= 0x7f;
+   20   1      }
+   21          void Wait()
+   22          {
+   23   1        timeout = 300;
+   24   1        while (!(I2CMSST & 0x40))
+   25   1        {
+   26   2          if(--timeout == 0)
+   27   2            break;
+   28   2        }
+   29   1        I2CMSST &= ~0x40;
+   30   1      }
+   31          void I2C_Start()
+   32          {
+   33   1        I2CMSCR = 0x01;                             //发送START命令
+   34   1        Wait();
+   35   1      }
+   36          void I2C_Stop()
+   37          {
+   38   1        I2CMSCR = 0x06;                             //发送STOP命令
+   39   1        Wait();
+   40   1      }
+   41          void I2C_SendByte(unsigned char dat)
+   42          {
+   43   1        I2CTXD = dat;                               //写数据到数据缓冲区
+   44   1        I2CMSCR = 0x02;                             //发送SEND命令
+   45   1        Wait();
+   46   1      }
+   47          unsigned char I2C_RecvByte()
+   48          {
+   49   1        I2CMSCR = 0x04;                             //发送RECV命令
+   50   1        Wait();
+   51   1        return I2CRXD;
+   52   1      }
+   53          void I2C_RecvACK()
+   54          {
+   55   1        I2CMSCR = 0x03;                             //发送读ACK命令
+   56   1        Wait();
+   57   1      }
+C251 COMPILER V5.60.0,  IIC                                                                23/08/22  22:51:19  PAGE 2   
+
+   58          void I2C_SendACK()
+   59          {
+   60   1        I2CMSST = 0x00;                             //设置ACK信号
+   61   1        I2CMSCR = 0x05;                             //发送ACK命令
+   62   1        Wait();
+   63   1      }
+   64          void I2C_SendNAK()
+   65          {
+   66   1        I2CMSST = 0x01;                             //设置NAK信号
+   67   1        I2CMSCR = 0x05;                             //发送ACK命令
+   68   1        Wait();
+   69   1      }
+   70          //**************************************
+   71          //向I2C设备写入一个字节数据
+   72          //**************************************
+   73          void Single_WriteIIC(unsigned char SlaveAddress,unsigned char REG_Address,unsigned char REG_data)
+   74          {
+   75   1        P_SW2 |= 0x80;
+   76   1        I2C_Start();                  //起始信号
+   77   1        I2C_SendByte(SlaveAddress);   //发送设备地址+写信号
+   78   1        I2C_RecvACK();
+   79   1        I2C_SendByte(REG_Address);    //内部寄存器地址
+   80   1        I2C_RecvACK();
+   81   1        I2C_SendByte(REG_data);       //内部寄存器数据
+   82   1        I2C_RecvACK();
+   83   1        I2C_Stop();                   //发送停止信号
+   84   1        P_SW2 &= 0x7f;
+   85   1      }
+   86          //**************************************
+   87          //从I2C设备读取一个字节数据
+   88          //**************************************
+   89          unsigned char Single_ReadIIC(unsigned char SlaveAddress, unsigned char REG_Address)
+   90          {
+   91   1        unsigned char REG_data;
+   92   1        P_SW2 |= 0x80;
+   93   1        I2C_Start();                   //起始信号
+   94   1        I2C_SendByte(SlaveAddress);    //发送设备地址+写信号
+   95   1        I2C_RecvACK();
+   96   1        I2C_SendByte(REG_Address);     //发送存储单元地址
+   97   1        I2C_RecvACK();
+   98   1        I2C_Start();                   //起始信号
+   99   1        I2C_SendByte(SlaveAddress | 0x01);  //发送设备地址+读信号
+  100   1        I2C_RecvACK();
+  101   1        REG_data=I2C_RecvByte();       //读出寄存器数据
+  102   1        I2C_SendNAK();                 //发送应答信号
+  103   1        I2C_Stop();                    //停止信号
+  104   1        P_SW2 &= 0x7f;
+  105   1        return REG_data;
+  106   1      }
+  107          void I2C_Read_MultiBytes(unsigned char DeviceAddr, unsigned char address, unsigned char BytesNum, unsigne
+             -d char *buf)
+  108          {
+  109   1        unsigned char i;
+  110   1        P_SW2 |= 0x80;
+  111   1        I2C_Start();                  //起始信号
+  112   1        I2C_SendByte(DeviceAddr);   //发送设备地址+写信号
+  113   1        I2C_RecvACK();
+  114   1        I2C_SendByte(address);    //内部寄存器地址
+  115   1        I2C_RecvACK();
+  116   1        I2C_Start();
+  117   1        I2C_SendByte(DeviceAddr | 0x01);
+  118   1        I2C_RecvACK();
+  119   1        for(i = 0; i < (BytesNum - 1); i++)
+  120   1        {
+  121   2          buf[i] = I2C_RecvByte();
+  122   2          I2C_SendACK();  
+C251 COMPILER V5.60.0,  IIC                                                                23/08/22  22:51:19  PAGE 3   
+
+  123   2        }
+  124   1        buf[i] = I2C_RecvByte();
+  125   1        I2C_SendNAK();
+  126   1        I2C_Stop();                   //发送停止信号
+  127   1        P_SW2 &= 0x7f;
+  128   1      }
+  129          void I2C_Write_MultiBytes(unsigned char DeviceAddr, unsigned char address, unsigned char BytesNum, unsign
+             -ed char *buf)
+  130          {
+  131   1        unsigned char i;
+  132   1        P_SW2 |= 0x80;
+  133   1        I2C_Start();                  //起始信号
+  134   1        I2C_SendByte(DeviceAddr);   //发送设备地址+写信号
+  135   1        I2C_RecvACK();
+  136   1        I2C_SendByte(address);    //内部寄存器地址
+  137   1        I2C_RecvACK();
+  138   1        for(i = 0; i < BytesNum; i++)
+  139   1        {
+  140   2          I2C_SendByte(buf[i]);
+  141   2          I2C_RecvACK();  
+  142   2        }
+  143   1        I2C_Stop();                   //发送停止信号
+  144   1        P_SW2 &= 0x7f;
+  145   1      }
+
+
+Module Information          Static   Overlayable
+------------------------------------------------
+  code size            =    ------     ------
+  ecode size           =       636     ------
+  data size            =         2     ------
+  idata size           =    ------     ------
+  pdata size           =    ------     ------
+  xdata size           =    ------     ------
+  xdata-const size     =    ------     ------
+  edata size           =    ------          8
+  bit size             =    ------     ------
+  ebit size            =    ------     ------
+  bitaddressable size  =    ------     ------
+  ebitaddressable size =    ------     ------
+  far data size        =    ------     ------
+  huge data size       =    ------     ------
+  const size           =    ------     ------
+  hconst size          =    ------     ------
+End of Module Information.
+
+
+C251 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

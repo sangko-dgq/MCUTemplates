@@ -777,16 +777,16 @@ ARM Macro Assembler    Page 12
               00000000 
 Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M4.fp.sp --apcs=
 interwork --depend=.\objects\startup_stm32f411xe.d -o.\objects\startup_stm32f41
-1xe.o -IE:\Keil_MDK5.35\Packs\Keil\STM32F4xx_DFP\2.12.0\Drivers\CMSIS\Device\ST
+1xe.o -ID:\Application\Keil\Packs\Keil\STM32F4xx_DFP\2.12.0\Drivers\CMSIS\Devic
 
 
 
 ARM Macro Assembler    Page 13 
 
 
-\STM32F4xx\Include --predefine="__UVISION_VERSION SETA 535" --predefine="STM32F
-411xE SETA 1" --list=.\listings\startup_stm32f411xe.lst ..\Core\startup\startup
-_stm32f411xe.s
+e\ST\STM32F4xx\Include --predefine="__UVISION_VERSION SETA 536" --predefine="ST
+M32F411xE SETA 1" --list=.\listings\startup_stm32f411xe.lst ..\Core\startup\sta
+rtup_stm32f411xe.s
 
 
 

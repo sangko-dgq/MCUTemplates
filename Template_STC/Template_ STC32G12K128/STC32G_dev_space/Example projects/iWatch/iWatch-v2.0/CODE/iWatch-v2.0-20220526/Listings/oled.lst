@@ -1,0 +1,211 @@
+C251 COMPILER V5.60.0,  oled                                                               23/08/22  22:51:20  PAGE 1   
+
+
+C251 COMPILER V5.60.0, COMPILATION OF MODULE oled
+OBJECT MODULE PLACED IN .\Objects\oled.obj
+COMPILER INVOKED BY: D:\Application\keilC251_v560\C251\BIN\C251.EXE User\oled.c XSMALL ROM(HUGE) OPTIMIZE(8,SPEED) BROWS
+                    -E INCDIR(.\User;.\User\oled_gui;.\User\oled_gui\oled_core;.\User\oled_gui\oled_widget;.\User\PageManage;.\User\Sensor;.\
+                    -User\System;.\User\Bluetooth) DEBUG PRINT(.\Listings\oled.lst) TABS(2) OBJECT(.\Objects\oled.obj) 
+
+stmt  level    source
+
+    1          #include "oled.h"
+    2          #include "System.h"
+    3                 
+    4          
+    5          void OLED_WR_CMD(unsigned char cmd)
+    6          {
+    7   1        OLED_DC_Clr();
+    8   1        SPI_WriteByte(cmd);
+    9   1      }
+   10          void OLED_WR_DAT(unsigned char dat)
+   11          {
+   12   1        OLED_DC_Set();
+   13   1        SPI_WriteByte(dat);
+   14   1      }
+   15          /*
+   16          void OLED_Set_Pos(unsigned char x, unsigned char y) 
+   17          { 
+   18            OLED_WR_CMD(0xb0 + y);
+   19            OLED_WR_CMD(((x & 0xf0) >> 4) | 0x10);
+   20            OLED_WR_CMD((x & 0x0f)); 
+   21          }   
+   22          */
+   23          //开启OLED显示    
+   24          void OLED_Display_On(void)    //开启显示
+   25          {
+   26   1        OLED_CS_Clr();
+   27   1        OLED_WR_CMD(0X8D);  //SET DCDC命令
+   28   1        OLED_WR_CMD(0X14);  //DCDC ON
+   29   1        OLED_WR_CMD(0XAF);  //DISPLAY ON
+   30   1        OLED_CS_Set();
+   31   1      }
+   32          //关闭OLED显示     
+   33          void OLED_Display_Off(void)   //关闭显示
+   34          {
+   35   1        OLED_CS_Clr();
+   36   1        OLED_WR_CMD(0X8D);  //SET DCDC命令
+   37   1        OLED_WR_CMD(0X10);  //DCDC OFF
+   38   1        OLED_WR_CMD(0XAE);  //DISPLAY OFF
+   39   1        OLED_CS_Set();
+   40   1      }   
+   41          void OLED_Set_Brightness(unsigned char brightness)  //设置对比度（亮度）
+   42          {
+   43   1        OLED_CS_Clr();
+   44   1        OLED_WR_CMD(0x81);        //--set contrast control register
+   45   1        OLED_WR_CMD(brightness);  // Set SEG Output Current Brightness
+   46   1        OLED_CS_Set();
+   47   1      }
+   48          void OLED_setBreathing(unsigned char k, unsigned char interval)
+   49          {
+   50   1        OLED_CS_Clr();
+   51   1        OLED_WR_CMD(0x23);
+   52   1        if(k)
+   53   1          OLED_WR_CMD(0x30 | (interval & 0x0f));
+   54   1        else
+   55   1          OLED_WR_CMD(0x00);
+   56   1        OLED_CS_Set();
+   57   1      }
+C251 COMPILER V5.60.0,  oled                                                               23/08/22  22:51:20  PAGE 2   
+
+   58          /*
+   59          void OLED_Horizental_Reverse(unsigned char reverse) //水平翻转
+   60          {
+   61            if(reverse)
+   62              OLED_WR_Byte(0xA0, OLED_CMD);
+   63            else
+   64              OLED_WR_Byte(0xA1, OLED_CMD);
+   65          }
+   66          void OLED_Vertical_Reverse(unsigned char reverse)   //垂直翻转
+   67          {
+   68            if(reverse)
+   69              OLED_WR_Byte(0xC0, OLED_CMD);
+   70            else
+   71              OLED_WR_Byte(0xC8, OLED_CMD);
+   72          }
+   73          */
+   74          void OLED_Inverse(unsigned char k)                  //反色
+   75          {
+   76   1        OLED_CS_Clr();
+   77   1        if(k)
+   78   1          OLED_WR_CMD(0xA7);
+   79   1        else
+   80   1          OLED_WR_CMD(0xA6);
+   81   1        OLED_CS_Set();
+   82   1      }
+   83          void OLED_Clear(void)   //清屏
+   84          {  
+   85   1        unsigned int n;       
+   86   1        //OLED_WR_CMD(0xb0);    //设置页地址（0~7）
+   87   1        //OLED_WR_CMD(0x00);    //设置显示位置—列低地址
+   88   1        //OLED_WR_CMD(0x10);    //设置显示位置—列高地址   
+   89   1        OLED_CS_Clr();
+   90   1        for(n = 0; n < 1024; n++)
+   91   1          OLED_WR_DAT(0); 
+   92   1        OLED_CS_Set();
+   93   1      }
+   94          void OLED_Refresh(unsigned char *buf)
+   95          {
+   96   1        //unsigned int data j; 
+   97   1        //OLED_WR_CMD(0xb0);    //设置页地址（0~7）
+   98   1        //OLED_WR_CMD(0x00);      //设置显示位置—列低地址
+   99   1        //OLED_WR_CMD(0x10);      //设置显示位置—列高地址
+  100   1        //OLED_WR_CMD(0x21);
+  101   1        //OLED_WR_CMD(0x00);
+  102   1        //OLED_WR_CMD(127);
+  103   1        //OLED_WR_CMD(0x22);
+  104   1        //OLED_WR_CMD(0);
+  105   1        //OLED_WR_CMD(7);
+  106   1        OLED_CS_Clr();
+  107   1        OLED_DC_Set();
+  108   1        /*
+  109   1        for(j = 0; j < 1024; j++)
+  110   1        { 
+  111   1          SPI_WriteByte(buf[j]);
+  112   1        }
+  113   1        */
+  114   1        SPI_WriteMultiBytes(buf, 1024);
+  115   1        OLED_CS_Set();
+  116   1      }
+  117          //初始化SSD1315             
+  118          void OLED_Init()
+  119          {
+  120   1        OLED_RST_Set();
+  121   1        Delay1ms(20);
+  122   1        OLED_RST_Clr();
+  123   1        Delay1ms(10);
+C251 COMPILER V5.60.0,  oled                                                               23/08/22  22:51:20  PAGE 3   
+
+  124   1        OLED_RST_Set(); 
+  125   1        OLED_CS_Clr();
+  126   1        
+  127   1        OLED_WR_CMD(0xAE);//--turn off oled panel
+  128   1        OLED_WR_CMD(0x02);//---set low column address
+  129   1        OLED_WR_CMD(0x10);//---set high column address
+  130   1        OLED_WR_CMD(0x40);//--set start line address  Set Mapping RAM Display Start Line (0x00~0x3F)
+  131   1        OLED_WR_CMD(0x81);//--set contrast control register
+  132   1        OLED_WR_CMD(0x7f);// Set SEG Output Current Brightness
+  133   1        OLED_WR_CMD(0xC8);
+  134   1        OLED_WR_CMD(0xA1);
+  135   1        OLED_WR_CMD(0xA8);//--set multiplex ratio(1 to 64)
+  136   1        OLED_WR_CMD(0x3F);//--1/64 duty
+  137   1        OLED_WR_CMD(0xD3);//-set display offset Shift Mapping RAM Counter (0x00~0x3F)
+  138   1        OLED_WR_CMD(0x00);//-not offset
+  139   1        OLED_WR_CMD(0xd5);//--set display clock divide ratio/oscillator frequency
+  140   1        OLED_WR_CMD(0xf0);//--set divide ratio, Set Clock as 100 Frames/Sec
+  141   1        OLED_WR_CMD(0xD9);//--set pre-charge period
+  142   1        OLED_WR_CMD(0xF1);//Set Pre-Charge as 15 Clocks & Discharge as 1 Clock
+  143   1        OLED_WR_CMD(0xDA);//--set com pins hardware configuration
+  144   1        OLED_WR_CMD(0x12);
+  145   1        OLED_WR_CMD(0xDB);//--set vcomh
+  146   1        OLED_WR_CMD(0x40);//Set VCOM Deselect Level
+  147   1        OLED_WR_CMD(0x20);//-Set Page Addressing Mode (0x00/0x01/0x02)
+  148   1        OLED_WR_CMD(0x00);//
+  149   1        OLED_WR_CMD(0x21);
+  150   1        OLED_WR_CMD(0);
+  151   1        OLED_WR_CMD(127);
+  152   1        OLED_WR_CMD(0x22);
+  153   1        OLED_WR_CMD(0);
+  154   1        OLED_WR_CMD(7);
+  155   1        
+  156   1        OLED_WR_CMD(0x8D);//--set Charge Pump enable/disable
+  157   1        OLED_WR_CMD(0x14);//--set(0x10) disable
+  158   1        OLED_WR_CMD(0xA4);// Disable Entire Display On (0xa4/0xa5)
+  159   1        OLED_WR_CMD(0xA6);// Disable Inverse Display On (0xa6/a7) 
+  160   1        OLED_WR_CMD(0xAF);//--turn on oled panel
+  161   1        //OLED_WR_Byte(0xD6,OLED_CMD);
+  162   1        //OLED_WR_Byte(0x01,OLED_CMD);
+  163   1        //OLED_WR_Byte(0x23,OLED_CMD);
+  164   1        //OLED_WR_Byte(0x30,OLED_CMD);
+  165   1        
+  166   1        OLED_CS_Clr();
+  167   1        OLED_Clear();
+  168   1        //OLED_Set_Pos(0,0);  
+  169   1      }  
+  170          
+
+
+Module Information          Static   Overlayable
+------------------------------------------------
+  code size            =    ------     ------
+  ecode size           =       401     ------
+  data size            =    ------     ------
+  idata size           =    ------     ------
+  pdata size           =    ------     ------
+  xdata size           =    ------     ------
+  xdata-const size     =    ------     ------
+  edata size           =    ------     ------
+  bit size             =    ------     ------
+  ebit size            =    ------     ------
+  bitaddressable size  =    ------     ------
+  ebitaddressable size =    ------     ------
+  far data size        =    ------     ------
+  huge data size       =    ------     ------
+  const size           =    ------     ------
+  hconst size          =    ------     ------
+C251 COMPILER V5.60.0,  oled                                                               23/08/22  22:51:20  PAGE 4   
+
+End of Module Information.
+
+
+C251 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

@@ -1,0 +1,49 @@
+C251 COMPILER V5.60.0,  main                                                               24/08/22  19:19:15  PAGE 1   
+
+
+C251 COMPILER V5.60.0, COMPILATION OF MODULE main
+OBJECT MODULE PLACED IN .\Objects\main.obj
+COMPILER INVOKED BY: D:\Application\keilC251_v560\C251\BIN\C251.EXE User\main.c XSMALL ROM(HUGE) OPTIMIZE(8,SPEED) BROWS
+                    -E INCDIR(.\User;.\User\oled_gui;.\User\oled_gui\oled_core;.\User\oled_gui\oled_widget;.\User\PageManage;.\User\Sensor;.\
+                    -User\System;.\User\Bluetooth) DEBUG PRINT(.\Listings\main.lst) TABS(2) OBJECT(.\Objects\main.obj) 
+
+stmt  level    source
+
+    1          #include "iWatch.h"
+    2          
+    3          void main()
+    4          {
+    5   1        iWatchInit();
+    6   1        while(1)
+    7   1        {
+    8   2          FeedWatchDog();
+    9   2          og_run();
+   10   2          pageRun();
+   11   2          iWatchStatusHandle(); //×´Ì¬´¦Àí
+   12   2          
+   13   2        }
+   14   1      }
+
+
+Module Information          Static   Overlayable
+------------------------------------------------
+  code size            =    ------     ------
+  ecode size           =        22     ------
+  data size            =    ------     ------
+  idata size           =    ------     ------
+  pdata size           =    ------     ------
+  xdata size           =    ------     ------
+  xdata-const size     =    ------     ------
+  edata size           =    ------     ------
+  bit size             =    ------     ------
+  ebit size            =    ------     ------
+  bitaddressable size  =    ------     ------
+  ebitaddressable size =    ------     ------
+  far data size        =    ------     ------
+  huge data size       =    ------     ------
+  const size           =    ------     ------
+  hconst size          =    ------     ------
+End of Module Information.
+
+
+C251 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

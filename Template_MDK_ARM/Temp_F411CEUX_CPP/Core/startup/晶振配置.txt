@@ -1,0 +1,28 @@
+//Fvco:VCO频率
+//Fsys:系统时钟频率
+//Fusb:USB,SDIO,RNG等的时钟频率
+//Fs:PLL输入时钟频率,可以是HSI,HSE等.
+//plln:主PLL倍频系数(PLL倍频),取值范围:64~432.
+//pllm:主PLL和音频PLL分频系数(PLL之前的分频),取值范围:2~63.
+//pllp:系统时钟的主PLL分频系数(PLL之后的分频),取值范围:2,4,6,8.(仅限这4个值!)
+//pllq:USB/SDIO/随机数产生器等的主PLL分频系数(PLL之后的分频),取值范围:2~15.
+
+//100Mhz推荐
+//外部晶振为25M的时候,推荐值:plln=400,pllm=25,pllp=4,pllq=8.
+//得到:Fvco=25*(400/25)=400Mhz
+//     Fsys=40/4=100Mhz
+//     Fusb=400/8=50Mhz（使用USB时，需设置plln=384，即可得到48Mhz频率）
+
+//168Mhz推荐
+//外部晶振为25M的时候,推荐值:plln=336,pllm=25,pllp=2,pllq=8.
+//得到:Fvco=25*(336/25)=336Mhz
+//     Fsys=336/2=168Mhz
+//     Fusb=336/8=42Mhz（使用USB时，需设置plln=384，即可得到48Mhz频率）
+
+//180Mhz推荐
+//外部晶振为25M的时候,推荐值:plln=360,pllm=25,pllp=2,pllq=8.
+//得到:Fvco=25*(380/25)=360Mhz
+//     Fsys=360/2=180Mhz
+//     Fusb=360/8=45Mhz（使用USB时，需设置plln=384，即可得到48Mhz频率）
+
+//修改频率 PLL=PLL_M(25Mhz)*N(400)/(M*P(4))=25*400/(25*4)=100

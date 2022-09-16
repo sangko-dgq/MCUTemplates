@@ -1,0 +1,187 @@
+C251 COMPILER V5.60.0,  page_btspp                                                         24/08/22  19:19:21  PAGE 1   
+
+
+C251 COMPILER V5.60.0, COMPILATION OF MODULE page_btspp
+OBJECT MODULE PLACED IN .\Objects\page_btspp.obj
+COMPILER INVOKED BY: D:\Application\keilC251_v560\C251\BIN\C251.EXE User\PageManage\page_btspp.c XSMALL ROM(HUGE) OPTIMI
+                    -ZE(8,SPEED) BROWSE INCDIR(.\User;.\User\oled_gui;.\User\oled_gui\oled_core;.\User\oled_gui\oled_widget;.\User\PageManage
+                    -;.\User\Sensor;.\User\System;.\User\Bluetooth) DEBUG PRINT(.\Listings\page_btspp.lst) TABS(2) OBJECT(.\Objects\page_btsp
+                    -p.obj) 
+
+stmt  level    source
+
+    1          #include "iWatch.h"
+    2          #include "Bluetooth.h"
+    3          
+    4          static unsigned char CODE Icon[] = {
+    5            48, 48,
+    6            0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+    7            0x00,0x00,0x00,0xF0,0xF8,0xF8,0xF0,0xE0,0xE0,0xC0,0x80,0x00,0x00,0x00,0x00,0x00,
+    8            0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+    9            0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0xC0,0xC0,0xC0,0xC0,0x80,0x00,
+   10            0x00,0x00,0x00,0xFF,0xFF,0xFF,0xFF,0x07,0x0F,0x1F,0x1F,0x3F,0xFE,0xFE,0xFC,0xF8,
+   11            0xF0,0xE0,0xE0,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+   12            0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x03,0x07,0x0F,0x0F,0x1F,0x3F,
+   13            0x7F,0xFE,0xFC,0xFF,0xFF,0xFF,0xFF,0xF8,0xF8,0xFC,0x7E,0x7F,0x3F,0x1F,0x0F,0x07,
+   14            0x07,0x03,0x01,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+   15            0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0xC0,0xE0,0xF0,0xF8,0xF8,0xFC,
+   16            0x7E,0x7F,0x3F,0xFF,0xFF,0xFF,0xFF,0x0F,0x1F,0x3F,0x7F,0xFE,0xFC,0xF8,0xF0,0xE0,
+   17            0xE0,0xC0,0x80,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+   18            0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x03,0x03,0x03,0x03,0x01,0x00,
+   19            0x00,0x00,0x00,0xFF,0xFF,0xFF,0xFF,0xE0,0xF0,0xF8,0xF8,0xFC,0x7F,0x7F,0x3F,0x1F,
+   20            0x0F,0x07,0x07,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+   21            0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+   22            0x00,0x00,0x00,0x0F,0x0F,0x0F,0x0F,0x07,0x07,0x03,0x01,0x00,0x00,0x00,0x00,0x00,
+   23            0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00
+   24            /* (48 X 48 )*/
+   25          };
+   26          
+   27          static t_psWidget lable1;
+   28          
+   29          static unsigned char xdata is_bluetooth_connected = 0;
+   30          static unsigned char xdata rx_data[64];
+   31          
+   32          void lableAppendTextWithRoll(char * text)
+   33          {
+   34   1        int16_t temp;
+   35   1        og_label_appendText(lable1, text);
+   36   1        temp = lable1->y + lable1->h - 64;
+   37   1        if(temp > 0)
+   38   1          og_anim_create_offset(lable1, 0, -temp, ANIM_TIME_NORM, ANIM_NULL_CB);
+   39   1        
+   40   1      }
+   41          void lableRollUp(void)
+   42          {
+   43   1        if(lable1->y <= -32)
+   44   1          og_anim_create_offset(lable1, 0, 32, ANIM_TIME_NORM, ANIM_NULL_CB);
+   45   1        else
+   46   1          og_anim_create_offset(lable1, 0, -lable1->y, ANIM_TIME_NORM, ANIM_NULL_CB);
+   47   1      }
+   48          void lableRollDown(void)
+   49          {
+   50   1        if(lable1->y + lable1->h >= 96)
+   51   1          og_anim_create_offset(lable1, 0, -32, ANIM_TIME_NORM, ANIM_NULL_CB);
+   52   1        else
+   53   1          og_anim_create_offset(lable1, 0, 64 - (lable1->y + lable1->h), ANIM_TIME_NORM, ANIM_NULL_CB);
+   54   1      }
+   55          /**
+   56            * @brief  页面初始化事件
+C251 COMPILER V5.60.0,  page_btspp                                                         24/08/22  19:19:21  PAGE 2   
+
+   57            * @param  无
+   58            * @retval 无
+   59            */
+   60          static void Setup(unsigned char condition)
+   61          {
+   62   1        lable1 = og_label_create(FONT_ASCII_5X7, 0, 64);
+   63   1        og_anim_create(lable1, 0, 0, ANIM_TIME_NORM, ANIM_NULL_CB);
+   64   1        BtOn();
+   65   1      }
+*** WARNING C47 IN LINE 60 OF User\PageManage\page_btspp.c: 'condition': unreferenced parameter
+   66          static void delet(void)
+   67          {
+   68   1        og_widget_delet(lable1);
+   69   1        pageSetStatus(page_bluetooth_serial, PAGE_IDLE);
+   70   1      }
+   71          /**
+   72            * @brief  页面退出事件
+   73            * @param  无
+   74            * @retval 无
+   75            */
+   76          static void Exit(unsigned char condition)
+   77          {
+   78   1        BtOff();
+   79   1        is_bluetooth_connected = 0;
+   80   1        og_anim_create(lable1, 0, 64, ANIM_TIME_NORM, delet);
+   81   1      }
+*** WARNING C47 IN LINE 76 OF User\PageManage\page_btspp.c: 'condition': unreferenced parameter
+   82          /**
+   83            * @brief  页面循环执行的内容
+   84            * @param  无
+   85            * @retval 无
+   86            */
+   87          static void Loop()
+   88          {
+   89   1        if(pageExecuteRate(&Rate10Hz))
+   90   1        {
+   91   2          iWatchKeepActive();
+   92   2          if(is_bluetooth_connected == 0)
+   93   2          {
+   94   3            if(BtCheckConnection())
+   95   3            {
+   96   4              is_bluetooth_connected = 1;
+   97   4              lableAppendTextWithRoll("BT connected\n");
+   98   4            }
+   99   3          }
+  100   2          else
+  101   2          {
+  102   3            if(BtCheckConnection() == 0)
+  103   3            {
+  104   4              is_bluetooth_connected = 0;
+  105   4              lableAppendTextWithRoll("BT disconnected\n");
+  106   4            }
+  107   3          }
+  108   2          if(BtReceiveString(rx_data))
+  109   2          {
+  110   3            lableAppendTextWithRoll(rx_data);
+  111   3          }
+  112   2        }
+  113   1      }
+  114          /**
+  115            * @brief  页面事件
+  116            * @param  btn:发出事件的按键
+  117            * @param  event:事件编号
+  118            * @retval 无
+  119            */
+  120          static void Event(unsigned char event)
+C251 COMPILER V5.60.0,  page_btspp                                                         24/08/22  19:19:21  PAGE 3   
+
+  121          {
+  122   1        if(event == KEY1_PRESSED)
+  123   1          pageShift(page_menu, PAGE_RETURN);
+  124   1        else if(event == KEY2_PRESSED)
+  125   1        {
+  126   2          lableRollUp();
+  127   2        }
+  128   1        else if(event == KEY3_PRESSED)
+  129   1        {
+  130   2          og_label_clear(lable1);
+  131   2          og_widget_setPos(lable1, 0, 0);
+  132   2        }
+  133   1        else if(event == KEY4_PRESSED)
+  134   1        {
+  135   2          lableRollDown();
+  136   2        }
+  137   1        else if(event == AWT)
+  138   1        {
+  139   2          og_anim_create(lable1, 0, 64 - lable1->h, ANIM_TIME_NORM, ANIM_NULL_CB);
+  140   2        }
+  141   1      }
+  142          void pageRegister_page_bluetooth_serial(unsigned char pageID)
+  143          {
+  144   1        pageRegister(pageID, "Bluetooth SPP", Icon, Setup, Loop, Exit, Event);
+  145   1      }
+
+
+Module Information          Static   Overlayable
+------------------------------------------------
+  code size            =       290     ------
+  ecode size           =       573     ------
+  data size            =    ------     ------
+  idata size           =    ------     ------
+  pdata size           =    ------     ------
+  xdata size           =        65     ------
+  xdata-const size     =    ------     ------
+  edata size           =         4     ------
+  bit size             =    ------     ------
+  ebit size            =    ------     ------
+  bitaddressable size  =    ------     ------
+  ebitaddressable size =    ------     ------
+  far data size        =    ------     ------
+  huge data size       =    ------     ------
+  const size           =    ------     ------
+  hconst size          =        51     ------
+End of Module Information.
+
+
+C251 COMPILATION COMPLETE.  2 WARNING(S),  0 ERROR(S)

@@ -1,0 +1,253 @@
+C251 COMPILER V5.60.0,  oled_anim                                                          23/08/22  22:51:16  PAGE 1   
+
+
+C251 COMPILER V5.60.0, COMPILATION OF MODULE oled_anim
+OBJECT MODULE PLACED IN .\Objects\oled_anim.obj
+COMPILER INVOKED BY: D:\Application\keilC251_v560\C251\BIN\C251.EXE User\oled_gui\oled_core\oled_anim.c XSMALL ROM(HUGE)
+                    - OPTIMIZE(8,SPEED) BROWSE INCDIR(.\User;.\User\oled_gui;.\User\oled_gui\oled_core;.\User\oled_gui\oled_widget;.\User\Pag
+                    -eManage;.\User\Sensor;.\User\System;.\User\Bluetooth) DEBUG PRINT(.\Listings\oled_anim.lst) TABS(2) OBJECT(.\Objects\ole
+                    -d_anim.obj) 
+
+stmt  level    source
+
+    1          #define _OLED_ANIM_C
+    2          #include "oled_anim.h"
+    3          #include "oled_gui.h"
+    4          #include "math.h"
+    5          
+    6          static t_psAnim pFirst, pLast;
+    7          static uint8_t ucSum;
+    8          static uint16_t anim_timestamp = 0;
+    9          
+   10          void og_anim_init(void)
+   11          {
+   12   1        pFirst = NULL;
+   13   1        pLast = NULL;
+   14   1        ucSum = 0;
+   15   1      }
+   16          #ifdef ANIM_BOUNCE
+               float CODE anim_bounce_table[32] = {
+               1.025757715,1.083824649,1.134734632,1.176754659,
+               1.208646412,1.22969821,1.239731069,1.239079506,
+               1.228548931,1.209352456,1.183030912,1.151360499,
+               1.116252999,1.07965368,1.043441987,1.009339863,
+               0.978831999,0.953101659,0.932984822,0.918944418,
+               0.911065396,0.909070257,0.912353713,0.920034112,
+               0.931018519,0.944077655,0.957926451,0.971305756,
+               0.983060726,0.992211633,0.998013307,1.0
+               };
+               #endif
+   28          float animate_fx(float t)
+   29          {
+   30   1        #if ANIM_TYPE == 0  //ANIM_EASE_IN_EASE_OUT
+                 if(t <= 0.5)
+                   return(4*t*t*t);
+                 else
+                   return(4*(t-1)*(t-1)*(t-1)+1);
+                 #elif ANIM_TYPE == 1  //ANIM_EASE_IN
+                 return(t*t*t);
+                 #elif ANIM_TYPE == 2  //ANIM_EASE_OUT
+   38   1        return((t-1)*(t-1)*(t-1)+1);
+   39   1        #elif ANIM_TYPE == 3  //ANIM_LINEAR
+                 return(t);
+                 #elif ANIM_TYPE == 4  //ANIM_BOUNCE
+                 if(t <= 0.68584)
+                   return(3.099775*t*t*t);
+                 else
+                 {
+                   return(-(t-1)*sin(20*(t-1))+1);
+                   //return(anim_bounce_table[(unsigned char)((t-0.68584)*100)]);
+                 }
+                 #endif
+   50   1      }
+   51          void og_anim_create(t_psWidget pWidget, int16_t end_x, int16_t end_y, uint16_t duration, t_anim_end_cb an
+             -im_end_cb)
+   52          {
+   53   1        t_psAnim pAnim = pFirst;;
+   54   1        #ifdef OLED_DEBUG
+                 if(pWidget == NULL)
+C251 COMPILER V5.60.0,  oled_anim                                                          23/08/22  22:51:16  PAGE 2   
+
+                 {
+                   OG_PRINTERROR("try to set a null widget");  
+                   return;
+                 }
+                 #endif
+   61   1        while(pAnim != NULL)  //遍历动画列表检查当前控件是否在动画列表里
+   62   1        {
+   63   2          if(pAnim->pWidget == pWidget) //当前控件在动画列表里
+   64   2            goto anim_overwrite;        //直接重写动画参数，不用重新申请内存
+   65   2          pAnim = (t_psAnim)pAnim->pNext;
+   66   2        }
+   67   1        pAnim = malloc(T_ANIM_SIZE);    //为动画参数申请一部分内存
+   68   1        #ifdef OLED_DEBUG
+                 if(pAnim == NULL)               //内存分配失败，直接返回
+                 {
+                   OG_PRINTERROR("animation create fail");
+                   return;
+                 }
+                 #endif
+   75   1        if(ucSum == 0)
+   76   1        {
+   77   2          pAnim->pPrev = NULL;
+   78   2          pAnim->pNext = NULL;
+   79   2          pFirst = pAnim;
+   80   2          pLast = pAnim;
+   81   2        }
+   82   1        else
+   83   1        {
+   84   2          pAnim->pPrev = pLast;
+   85   2          pAnim->pNext = NULL;
+   86   2          pLast->pNext = pAnim;
+   87   2          pLast = pAnim;
+   88   2        }
+   89   1        ucSum++;
+   90   1        
+   91   1        pAnim->pWidget = pWidget;
+   92   1      anim_overwrite:
+   93   1        pAnim->start_x = pWidget->x;
+   94   1        pAnim->start_y = pWidget->y;
+   95   1        pAnim->distance_x = end_x - pWidget->x;
+   96   1        pAnim->distance_y = end_y - pWidget->y;
+   97   1        pAnim->act_time = 0;
+   98   1        pAnim->duration = duration;
+   99   1        pAnim->anim_end_cb = anim_end_cb;
+  100   1      }
+  101          
+  102          void og_anim_create_offset(t_psWidget pWidget, int16_t delta_x, int16_t delta_y, uint16_t duration, t_ani
+             -m_end_cb anim_end_cb)
+  103          {
+  104   1        t_psAnim pAnim;
+  105   1        #ifdef OLED_DEBUG
+                 if(pWidget == NULL)
+                 {
+                   OG_PRINTERROR("try to add animation to a NULL widget");
+                   return;
+                 }
+                 #endif
+  112   1        pAnim = pFirst;
+  113   1        while(pAnim != NULL)  //遍历动画列表检查当前控件是否在动画列表里
+  114   1        {
+  115   2          if(pAnim->pWidget == pWidget) //当前控件在动画列表里
+  116   2            goto anim_overwrite;        //直接重写动画参数，不用重新申请内存
+  117   2          pAnim = (t_psAnim)pAnim->pNext;
+  118   2        }
+  119   1        pAnim = malloc(T_ANIM_SIZE);    //为动画申请一部分内存
+  120   1        #ifdef OLED_DEBUG
+C251 COMPILER V5.60.0,  oled_anim                                                          23/08/22  22:51:16  PAGE 3   
+
+                 if(pAnim == NULL)               //内存分配失败，直接返回
+                 {
+                   OG_PRINTERROR("animation create fail");
+                   return;
+                 }
+                 #endif
+  127   1        if(ucSum == 0)
+  128   1        {
+  129   2          pAnim->pPrev = NULL;
+  130   2          pAnim->pNext = NULL;
+  131   2          pFirst = pAnim;
+  132   2          pLast = pAnim;
+  133   2        }
+  134   1        else
+  135   1        {
+  136   2          pAnim->pPrev = pLast;
+  137   2          pAnim->pNext = NULL;
+  138   2          pLast->pNext = pAnim;
+  139   2          pLast = pAnim;
+  140   2        }
+  141   1        ucSum++;
+  142   1        
+  143   1        pAnim->pWidget = pWidget;
+  144   1        pAnim->distance_x = delta_x;
+  145   1        pAnim->distance_y = delta_y;
+  146   1        goto anim_end;
+  147   1        anim_overwrite:
+  148   1        pAnim->distance_x = delta_x + pAnim->distance_x - (pWidget->x - pAnim->start_x);
+  149   1        pAnim->distance_y = delta_y + pAnim->distance_y - (pWidget->y - pAnim->start_y);
+  150   1        anim_end:
+  151   1        pAnim->start_x = pWidget->x;
+  152   1        pAnim->start_y = pWidget->y;
+  153   1        pAnim->act_time = 0;
+  154   1        pAnim->duration = duration;
+  155   1        pAnim->anim_end_cb = anim_end_cb;
+  156   1      }
+  157          void anim_delet(t_psAnim pAnim)
+  158          {
+  159   1        if(pAnim == pFirst)
+  160   1        {
+  161   2          if(pAnim->pNext != NULL)
+  162   2          {
+  163   3            ((t_psAnim)pAnim->pNext)->pPrev = NULL;
+  164   3            pFirst = (t_psAnim)pAnim->pNext;
+  165   3          }
+  166   2          else
+  167   2          {
+  168   3            pFirst = NULL;
+  169   3            pLast = NULL;
+  170   3          }
+  171   2        }
+  172   1        else if(pAnim == pLast)
+  173   1        {
+  174   2          ((t_psAnim)pAnim->pPrev)->pNext = NULL; 
+  175   2          pLast = (t_psAnim)pAnim->pPrev;
+  176   2        }
+  177   1        else
+  178   1        {
+  179   2          ((t_psAnim)pAnim->pPrev)->pNext = pAnim->pNext;
+  180   2          ((t_psAnim)pAnim->pNext)->pPrev = pAnim->pPrev;
+  181   2        }
+  182   1        ucSum--;
+  183   1        free(pAnim);
+  184   1      }
+  185          void og_anim_run()
+  186          {
+C251 COMPILER V5.60.0,  oled_anim                                                          23/08/22  22:51:16  PAGE 4   
+
+  187   1        t_psAnim pAnim = pFirst; //获取动画链表中的第一个元素
+  188   1        
+  189   1        uint16_t elaps = og_tickElaps(anim_timestamp);//计算两次更新动画之间的时间
+  190   1        anim_timestamp = og_getTimestamp();
+  191   1        while(pAnim != NULL)
+  192   1        {
+  193   2          float p;
+  194   2          pAnim->act_time += elaps;
+  195   2          if(pAnim->act_time > pAnim->duration)
+  196   2            pAnim->act_time = pAnim->duration;
+  197   2          p = animate_fx((float)pAnim->act_time / pAnim->duration);
+  198   2          pAnim->pWidget->x = pAnim->start_x + pAnim->distance_x * p;
+  199   2          pAnim->pWidget->y = pAnim->start_y + pAnim->distance_y * p;
+  200   2          if(pAnim->act_time == pAnim->duration)
+  201   2          {
+  202   3            t_anim_end_cb anim_end_cb = pAnim->anim_end_cb;
+  203   3            anim_delet(pAnim);
+  204   3            if(pAnim->anim_end_cb != ANIM_NULL_CB)
+  205   3              anim_end_cb();
+  206   3          }
+  207   2          pAnim = (t_psAnim)pAnim->pNext;
+  208   2        }
+  209   1      }
+
+
+Module Information          Static   Overlayable
+------------------------------------------------
+  code size            =    ------     ------
+  ecode size           =       925     ------
+  data size            =    ------     ------
+  idata size           =    ------     ------
+  pdata size           =    ------     ------
+  xdata size           =    ------     ------
+  xdata-const size     =    ------     ------
+  edata size           =        11         30
+  bit size             =    ------     ------
+  ebit size            =    ------     ------
+  bitaddressable size  =    ------     ------
+  ebitaddressable size =    ------     ------
+  far data size        =    ------     ------
+  huge data size       =    ------     ------
+  const size           =    ------     ------
+  hconst size          =         6     ------
+End of Module Information.
+
+
+C251 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

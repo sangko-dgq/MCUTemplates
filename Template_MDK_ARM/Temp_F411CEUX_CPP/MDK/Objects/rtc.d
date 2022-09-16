@@ -3,7 +3,7 @@
 .\objects\rtc.o: ..\Libs\Quick_STD\mcu_type.h
 .\objects\rtc.o: ..\Core\core_basic_driver\stm32f4xx.h
 .\objects\rtc.o: ..\Core\core_cm\core_cm4.h
-.\objects\rtc.o: E:\Keil_MDK5.35\Core\ARM\ARMCC\Bin\..\include\stdint.h
+.\objects\rtc.o: D:\Application\Keil\ARM\ARMCC\Bin\..\include\stdint.h
 .\objects\rtc.o: ..\Core\core_cm\core_cmInstr.h
 .\objects\rtc.o: ..\Core\core_cm\core_cmFunc.h
 .\objects\rtc.o: ..\Core\core_cm\core_cmSimd.h

@@ -1,0 +1,159 @@
+C251 COMPILER V5.60.0,  page_flashlight                                                    24/08/22  19:19:17  PAGE 1   
+
+
+C251 COMPILER V5.60.0, COMPILATION OF MODULE page_flashlight
+OBJECT MODULE PLACED IN .\Objects\page_flashlight.obj
+COMPILER INVOKED BY: D:\Application\keilC251_v560\C251\BIN\C251.EXE User\PageManage\page_flashlight.c XSMALL ROM(HUGE) O
+                    -PTIMIZE(8,SPEED) BROWSE INCDIR(.\User;.\User\oled_gui;.\User\oled_gui\oled_core;.\User\oled_gui\oled_widget;.\User\PageM
+                    -anage;.\User\Sensor;.\User\System;.\User\Bluetooth) DEBUG PRINT(.\Listings\page_flashlight.lst) TABS(2) OBJECT(.\Objects
+                    -\page_flashlight.obj) 
+
+stmt  level    source
+
+    1          #include "iWatch.h"
+    2          
+    3          static unsigned char CODE Icon[] = {
+    4            48, 48,
+    5            0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+    6            0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x80,0xC0,0xC0,0x80,0x00,0x00,0x00,
+    7            0xFF,0xFF,0xFF,0x80,0x00,0x00,0x80,0xC0,0xE0,0xF0,0xF8,0x70,0x20,0x00,0x00,0x00,
+    8            0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+    9            0x00,0x00,0xE0,0xF0,0xF8,0x78,0x3C,0x7E,0xFF,0xE7,0xC3,0x87,0x0F,0x1F,0x1E,0x3C,
+   10            0x78,0xF1,0xE1,0xC0,0x80,0x03,0x07,0x67,0xF3,0xE1,0xE0,0xE0,0xE0,0xE0,0xE0,0xE0,
+   11            0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x80,0xC0,0xE0,0xF0,0x78,0x78,0xF0,0xE0,0xC0,
+   12            0xE0,0xF0,0x7F,0x3F,0x1F,0x00,0x00,0x00,0x00,0x01,0x03,0x07,0x0F,0x1E,0x3C,0x78,
+   13            0xF0,0xE0,0xC1,0x87,0x8F,0xDF,0xFE,0xFC,0x78,0x30,0x00,0x00,0x00,0x00,0x00,0x00,
+   14            0x00,0x00,0x00,0x00,0x0C,0x1E,0xBF,0xFF,0xFB,0xF1,0x78,0x3C,0x1E,0x0F,0x07,0x03,
+   15            0x01,0x00,0x00,0x00,0x00,0x00,0x00,0x80,0xC0,0xE0,0xF0,0x78,0x38,0x38,0x38,0x38,
+   16            0x38,0x3D,0x3F,0x1F,0x0F,0x03,0x01,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+   17            0x20,0x70,0xF8,0xFC,0xFE,0x8F,0x07,0x03,0x01,0x00,0x00,0x00,0x00,0x00,0x00,0x80,
+   18            0xC0,0xE0,0xF0,0x78,0x3C,0x1E,0x0F,0x07,0x03,0x01,0x00,0x00,0x00,0x00,0x00,0x00,
+   19            0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+   20            0x00,0x00,0x00,0x01,0x03,0x07,0x0F,0x1E,0x3C,0x78,0xF8,0x78,0x3C,0x1E,0x0F,0x07,
+   21            0x03,0x01,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+   22            0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00
+   23            /* (48 X 48 )*/
+   24          };
+   25          static t_psWidget text1;
+   26          static unsigned char fq = 0;
+   27          static t_sPageRate flashRate = {0, 0};
+   28          
+   29          
+   30          /**
+   31            * @brief  页面初始化事件
+   32            * @param  无
+   33            * @retval 无
+   34            */
+   35          static void Setup(unsigned char condition)
+   36          {
+   37   1        text1 = og_label_create(FONT_ASCII_8X16, 32, 88);
+   38   1        og_label_setText(text1, "0Hz");
+   39   1        og_widget_setPos(text1, 64 - text1->w/2, text1->y);
+   40   1        og_anim_create_offset(text1, 0, -64, ANIM_TIME_NORM, ANIM_NULL_CB);
+   41   1        OLED_Inverse(1);
+   42   1        OLED_Set_Brightness(0XFF);
+   43   1      }
+*** WARNING C47 IN LINE 35 OF User\PageManage\page_flashlight.c: 'condition': unreferenced parameter
+   44          static void delet(void)
+   45          {
+   46   1        og_widget_delet(text1);
+   47   1        pageSetStatus(page_flashlight, PAGE_IDLE);
+   48   1      }
+   49          /**
+   50            * @brief  页面退出事件
+   51            * @param  无
+   52            * @retval 无
+   53            */
+   54          static void Exit(unsigned char condition)
+   55          {
+C251 COMPILER V5.60.0,  page_flashlight                                                    24/08/22  19:19:17  PAGE 2   
+
+   56   1        OLED_setBreathing(0, 0);
+   57   1        OLED_Inverse(config.screen_inverse);
+   58   1        OLED_Set_Brightness((config.screen_brightness - 1) * 50 + 1);
+*** WARNING C188 IN LINE 58 OF User\PageManage\page_flashlight.c: 'parameter 1': value truncated
+   59   1        og_anim_create_offset(text1, 0, 64, ANIM_TIME_NORM, delet);
+   60   1      }
+*** WARNING C47 IN LINE 54 OF User\PageManage\page_flashlight.c: 'condition': unreferenced parameter
+   61          /**
+   62            * @brief  页面循环执行的内容
+   63            * @param  无
+   64            * @retval 无
+   65            */
+   66          static void Loop()
+   67          {
+   68   1        static unsigned char k = 0;
+   69   1        iWatchKeepActive();
+   70   1        if(fq != 0)
+   71   1        {
+   72   2          if(pageExecuteRate(&flashRate))
+   73   2          {
+   74   3            OLED_Inverse(k);
+   75   3            k = ~k;
+   76   3          }
+   77   2        }
+   78   1      }
+   79          /**
+   80            * @brief  页面事件
+   81            * @param  btn:发出事件的按键
+   82            * @param  event:事件编号
+   83            * @retval 无
+   84            */
+   85          static void Event(unsigned char event)
+   86          {
+   87   1        if(event == KEY1_PRESSED)
+   88   1          pageShift(page_menu, PAGE_RETURN);
+   89   1        else
+   90   1        {
+   91   2          if(event == KEY2_PRESSED)
+   92   2          {
+   93   3            if(++fq == 11)
+   94   3            {
+   95   4              fq = 0;
+   96   4              OLED_Inverse(1);
+   97   4            }
+   98   3          }
+   99   2          else if(event == KEY4_PRESSED)
+  100   2          { 
+  101   3            if(--fq == 0xff)
+  102   3                fq = 10;
+  103   3          }
+  104   2          lablel_printf(text1, "%uHz", fq);
+  105   2          og_widget_setPos(text1, 64 - text1->w/2, text1->y);
+  106   2          if(fq != 0)
+  107   2          {
+  108   3            flashRate.executeT = 1000/fq/2;
+  109   3          }
+  110   2        }
+  111   1        
+  112   1      }
+  113          void pageRegister_page_flashlight(unsigned char pageID)
+  114          {
+  115   1        pageRegister(pageID, "FLASH LIGHT", Icon, Setup, Loop, Exit, Event);
+  116   1      }
+
+
+Module Information          Static   Overlayable
+------------------------------------------------
+C251 COMPILER V5.60.0,  page_flashlight                                                    24/08/22  19:19:17  PAGE 3   
+
+  code size            =       290     ------
+  ecode size           =       466     ------
+  data size            =    ------     ------
+  idata size           =    ------     ------
+  pdata size           =    ------     ------
+  xdata size           =    ------     ------
+  xdata-const size     =    ------     ------
+  edata size           =        10     ------
+  bit size             =    ------     ------
+  ebit size            =    ------     ------
+  bitaddressable size  =    ------     ------
+  ebitaddressable size =    ------     ------
+  far data size        =    ------     ------
+  huge data size       =    ------     ------
+  const size           =    ------     ------
+  hconst size          =        39     ------
+End of Module Information.
+
+
+C251 COMPILATION COMPLETE.  3 WARNING(S),  0 ERROR(S)

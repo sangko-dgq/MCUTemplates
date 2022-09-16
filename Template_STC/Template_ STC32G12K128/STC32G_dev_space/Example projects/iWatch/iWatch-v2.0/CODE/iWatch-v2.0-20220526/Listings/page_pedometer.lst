@@ -1,0 +1,192 @@
+C251 COMPILER V5.60.0,  page_pedometer                                                     24/08/22  19:19:19  PAGE 1   
+
+
+C251 COMPILER V5.60.0, COMPILATION OF MODULE page_pedometer
+OBJECT MODULE PLACED IN .\Objects\page_pedometer.obj
+COMPILER INVOKED BY: D:\Application\keilC251_v560\C251\BIN\C251.EXE User\PageManage\page_pedometer.c XSMALL ROM(HUGE) OP
+                    -TIMIZE(8,SPEED) BROWSE INCDIR(.\User;.\User\oled_gui;.\User\oled_gui\oled_core;.\User\oled_gui\oled_widget;.\User\PageMa
+                    -nage;.\User\Sensor;.\User\System;.\User\Bluetooth) DEBUG PRINT(.\Listings\page_pedometer.lst) TABS(2) OBJECT(.\Objects\p
+                    -age_pedometer.obj) 
+
+stmt  level    source
+
+    1          #include "iWatch.h"
+    2          
+    3          static unsigned char CODE Icon[] = {
+    4            48, 48,
+    5            0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x80,0xC0,0x60,0x30,0x10,0x18,0x08,0x0C,0x04,
+    6            0x06,0x06,0x02,0x02,0x03,0x03,0x03,0x03,0x03,0x03,0x03,0x03,0x02,0x02,0x06,0x06,
+    7            0x04,0x0C,0x08,0x18,0x10,0x30,0x60,0xC0,0x80,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+    8            0x00,0x00,0xC0,0x70,0x1C,0x06,0x03,0x01,0x00,0x00,0x00,0x00,0x00,0x00,0xC0,0xC0,
+    9            0xE0,0xE0,0x70,0x70,0x78,0x38,0x78,0x70,0xF0,0xE0,0xE0,0xEC,0xFE,0x3F,0x3F,0x3F,
+   10            0x3E,0x1C,0x00,0x00,0x00,0x00,0x00,0x00,0x01,0x03,0x06,0x1C,0x70,0xE0,0x00,0x00,
+   11            0xF0,0xFF,0x03,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0xB0,0xB0,0xB0,0xB0,0xB0,
+   12            0xB0,0x10,0x00,0xE0,0xF0,0xF8,0xFC,0xFE,0xFF,0x7F,0x3F,0x1F,0x1F,0x3F,0x7E,0x78,
+   13            0x70,0x70,0x38,0x38,0x38,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x01,0xFF,0xF0,
+   14            0x0F,0xFF,0xC0,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x0D,0x0D,0x0D,0x0D,0x0D,
+   15            0x0D,0x0D,0x8C,0xC9,0xC3,0xC7,0xC7,0xEF,0xFF,0xFF,0xFC,0xF8,0x70,0x00,0x00,0x00,
+   16            0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0xC0,0xFF,0x0F,
+   17            0x00,0x00,0x03,0x0E,0x38,0x60,0xC0,0x80,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+   18            0x00,0x00,0x01,0x01,0x01,0xE1,0xF9,0x7C,0x3E,0x0E,0x06,0x03,0x00,0x00,0x00,0x00,
+   19            0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x80,0xC0,0x60,0x38,0x0E,0x07,0x00,0x00,
+   20            0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x01,0x03,0x06,0x0C,0x08,0x18,0x10,0x30,0x20,
+   21            0x60,0x60,0x40,0x40,0xC0,0xC0,0xC0,0xC0,0xC0,0xC0,0xC0,0xC0,0x40,0x40,0x60,0x60,
+   22            0x20,0x30,0x30,0x18,0x08,0x0C,0x06,0x03,0x01,0x00,0x00,0x00,0x00,0x00,0x00,0x00
+   23            /* (48 X 48 )*/
+   24          };
+   25          static t_psWidget text1, text2, text3;
+   26          static t_psWidget canvas1;
+   27          static t_psGroup group1;
+   28          //static unsigned int code ch1[] = "今日步数";
+   29          static unsigned int code ch1[] = {0xbdf1, 0xc8d5, 0xb2bd, 0xcafd, 0xA3BA, '\0'};  //测试发现，keil5不能把
+             -一些中文字符转正确的转译成GB2312编码
+   30          static unsigned int code ch2[] = {0xc0fa, 0xcab7, 0xb2bd, 0xcafd, 0xA3BA, '\0'};  //所以这里直接输入查表后
+             -的GB2312编码，分别是字符串“今日步数”，“历史步数”
+   31          static float a = 0;
+   32          static unsigned char page = 0;
+   33          
+   34          /**
+   35            * @brief  页面初始化事件
+   36            * @param  无
+   37            * @retval 无
+   38            */
+   39          static void Setup(unsigned char condition)
+   40          {
+   41   1        text1 = og_label_create(FONT_GB2312_15X16, 0, 0);
+   42   1        og_label_setText(text1, (char *)ch1);
+   43   1        text2 = og_label_create(FONT_ASCII_8X16, 120, 0);
+   44   1        text3 = og_label_create(FONT_GB2312_15X16, 0, 16);
+   45   1        og_label_setText(text3, (char *)ch2);
+   46   1        canvas1 = og_canvas_create(128, 56, 0, 36);
+   47   1        group1 = og_group_create(4);
+   48   1        og_group_addWidget(group1, text1, 0);
+   49   1        og_group_addWidget(group1, text2, 0);
+   50   1        og_group_addWidget(group1, text3, 0);
+   51   1        og_group_addWidget(group1, canvas1, 0);
+   52   1        og_group_setPosOffset(group1, 0, 64);
+   53   1        og_group_addAnimOffset(group1, 0, -64, ANIM_TIME_NORM, ANIM_NULL_CB);
+   54   1        a = 0;
+C251 COMPILER V5.60.0,  page_pedometer                                                     24/08/22  19:19:19  PAGE 2   
+
+   55   1        page = 0;
+   56   1      }
+*** WARNING C47 IN LINE 39 OF User\PageManage\page_pedometer.c: 'condition': unreferenced parameter
+   57          static void delet(void)
+   58          {
+   59   1        og_group_delet(group1);
+   60   1        pageSetStatus(page_pedometer, PAGE_IDLE);
+   61   1      }
+   62          /**
+   63            * @brief  页面退出事件
+   64            * @param  无
+   65            * @retval 无
+   66            */
+   67          static void Exit(unsigned char condition)
+   68          {
+   69   1        og_group_hideOffScreenWidget(group1);
+   70   1        og_group_addAnimOffset(group1, 0, 64, ANIM_TIME_NORM, delet);
+   71   1      }
+*** WARNING C47 IN LINE 67 OF User\PageManage\page_pedometer.c: 'condition': unreferenced parameter
+   72          /**
+   73            * @brief  页面循环执行的内容
+   74            * @param  无
+   75            * @retval 无
+   76            */
+   77          static void Loop()
+   78          {
+   79   1        if(pageExecuteRate(&Rate20Hz))
+   80   1        {
+   81   2          lablel_printf(text2, "%u", LSM6DSMGetCurrentStep());
+   82   2          og_widget_setPos(text2, 128 - text2->w, text2->y);
+   83   2        }
+   84   1        if(pageExecuteRate(&Rate50Hz))
+   85   1        {
+   86   2          if(a < 1)
+   87   2          {   
+   88   3            unsigned char i = 0, y = 0;
+   89   3            unsigned int max_step = 0;
+   90   3            float scale, w;
+   91   3            unsigned char str[6];
+   92   3            og_canvas_clear(canvas1);
+   93   3            for(i = 0; i < 7; i++)
+   94   3            {
+   95   4              if(config.step_data[i].month == 0)
+   96   4                continue;
+   97   4              sprintf(str, "% 2u/%u", config.step_data[i].month, config.step_data[i].day);
+   98   4              og_canvas_drawText(canvas1, str, 0, y);
+   99   4              if(config.step_data[i].step > max_step)
+  100   4                max_step = config.step_data[i].step;
+  101   4              y += 8;
+  102   4            }
+  103   3            scale = 67.0 / max_step;
+  104   3            for(i = 0, y = 0; i < 7; i++)
+  105   3            {
+  106   4              if(config.step_data[i].month == 0)
+  107   4                continue;
+  108   4              w = config.step_data[i].step * scale * a;
+  109   4              og_canvas_drawRectangle(canvas1, w, 8, 30, y);
+  110   4              sprintf(str, "%u", config.step_data[i].step);
+  111   4              og_canvas_drawText(canvas1, str, w + 32, y);
+  112   4              y += 8;
+  113   4            }
+  114   3            a += 0.02;
+  115   3          }     
+  116   2        }
+  117   1      }
+  118          /**
+C251 COMPILER V5.60.0,  page_pedometer                                                     24/08/22  19:19:19  PAGE 3   
+
+  119            * @brief  页面事件
+  120            * @param  btn:发出事件的按键
+  121            * @param  event:事件编号
+  122            * @retval 无
+  123            */
+  124          static void Event(unsigned char event)
+  125          {
+  126   1        if(event == KEY1_PRESSED || event == AWT)
+  127   1          pageShift(page_menu, PAGE_RETURN);
+  128   1        else if(event == KEY4_PRESSED)
+  129   1        {
+  130   2          if(page == 0)
+  131   2          {
+  132   3            page = 1;
+  133   3            og_group_addAnimOffset(group1, 0, -28, ANIM_TIME_NORM, ANIM_NULL_CB);
+  134   3          }
+  135   2        }
+  136   1        else if(event == KEY2_PRESSED)
+  137   1        {
+  138   2          if(page == 1)
+  139   2          {
+  140   3            page = 0;
+  141   3            og_group_addAnimOffset(group1, 0, 28, ANIM_TIME_NORM, ANIM_NULL_CB);
+  142   3          }
+  143   2        }
+  144   1      }
+  145          void pageRegister_page_pedometer(unsigned char pageID)
+  146          {
+  147   1        pageRegister(pageID, "PEDOMETER", Icon, Setup, Loop, Exit, Event);
+  148   1      }
+
+
+Module Information          Static   Overlayable
+------------------------------------------------
+  code size            =       314     ------
+  ecode size           =       970     ------
+  data size            =    ------     ------
+  idata size           =    ------     ------
+  pdata size           =    ------     ------
+  xdata size           =    ------     ------
+  xdata-const size     =    ------     ------
+  edata size           =        25         12
+  bit size             =    ------     ------
+  ebit size            =    ------     ------
+  bitaddressable size  =    ------     ------
+  ebitaddressable size =    ------     ------
+  far data size        =    ------     ------
+  huge data size       =    ------     ------
+  const size           =    ------     ------
+  hconst size          =        34     ------
+End of Module Information.
+
+
+C251 COMPILATION COMPLETE.  2 WARNING(S),  0 ERROR(S)

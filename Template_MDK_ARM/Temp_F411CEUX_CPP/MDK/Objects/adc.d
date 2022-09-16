@@ -3,7 +3,7 @@
 .\objects\adc.o: ..\Libs\Quick_STD\mcu_type.h
 .\objects\adc.o: ..\Core\core_basic_driver\stm32f4xx.h
 .\objects\adc.o: ..\Core\core_cm\core_cm4.h
-.\objects\adc.o: E:\Keil_MDK5.35\Core\ARM\ARMCC\Bin\..\include\stdint.h
+.\objects\adc.o: D:\Application\Keil\ARM\ARMCC\Bin\..\include\stdint.h
 .\objects\adc.o: ..\Core\core_cm\core_cmInstr.h
 .\objects\adc.o: ..\Core\core_cm\core_cmFunc.h
 .\objects\adc.o: ..\Core\core_cm\core_cmSimd.h
@@ -31,11 +31,11 @@
 .\objects\adc.o: ..\Core\STM32F4xx_StdPeriph_Driver\inc\misc.h
 .\objects\adc.o: ..\Core\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_flash_ramfunc.h
 .\objects\adc.o: ..\Libs\ArduinoAPI\Arduino.h
-.\objects\adc.o: E:\Keil_MDK5.35\Core\ARM\ARMCC\Bin\..\include\stdlib.h
-.\objects\adc.o: E:\Keil_MDK5.35\Core\ARM\ARMCC\Bin\..\include\stdbool.h
+.\objects\adc.o: D:\Application\Keil\ARM\ARMCC\Bin\..\include\stdlib.h
+.\objects\adc.o: D:\Application\Keil\ARM\ARMCC\Bin\..\include\stdbool.h
 .\objects\adc.o: ..\Libs\ArduinoAPI\binary.h
 .\objects\adc.o: ..\Libs\ArduinoAPI\avr/pgmspace.h
-.\objects\adc.o: E:\Keil_MDK5.35\Core\ARM\ARMCC\Bin\..\include\inttypes.h
+.\objects\adc.o: D:\Application\Keil\ARM\ARMCC\Bin\..\include\inttypes.h
 .\objects\adc.o: ..\Libs\Quick_STD\delay.h
 .\objects\adc.o: ..\Libs\Quick_STD\exti.h
 .\objects\adc.o: ..\Libs\ArduinoAPI\Arduino.h
