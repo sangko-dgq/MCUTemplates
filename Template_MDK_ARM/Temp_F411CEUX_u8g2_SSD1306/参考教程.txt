@@ -1,0 +1,12 @@
+https://zhuanlan.zhihu.com/p/489251923
+
+https://www.cnblogs.com/frozencandles/p/16358483.html
+
+实现us级别的delay：
+https://blog.csdn.net/u010779035/article/details/104102469
+
+u8g2:
+https://github.com/olikraus/u8g2
+
+Arduino实现Stm32+u8g2(已验证):
+https://blog.csdn.net/leotian966/article/details/106448237
