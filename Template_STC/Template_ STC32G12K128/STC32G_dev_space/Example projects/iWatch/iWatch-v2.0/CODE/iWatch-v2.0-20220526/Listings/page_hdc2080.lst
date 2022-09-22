@@ -1,12 +1,12 @@
-C251 COMPILER V5.60.0,  page_hdc2080                                                       24/08/22  19:19:17  PAGE 1   
+C251 COMPILER V5.60.0,  page_hdc2080                                                       22/09/22  11:45:03  PAGE 1   
 
 
 C251 COMPILER V5.60.0, COMPILATION OF MODULE page_hdc2080
 OBJECT MODULE PLACED IN .\Objects\page_hdc2080.obj
-COMPILER INVOKED BY: D:\Application\keilC251_v560\C251\BIN\C251.EXE User\PageManage\page_hdc2080.c XSMALL ROM(HUGE) OPTI
-                    -MIZE(8,SPEED) BROWSE INCDIR(.\User;.\User\oled_gui;.\User\oled_gui\oled_core;.\User\oled_gui\oled_widget;.\User\PageMana
-                    -ge;.\User\Sensor;.\User\System;.\User\Bluetooth) DEBUG PRINT(.\Listings\page_hdc2080.lst) TABS(2) OBJECT(.\Objects\page_
-                    -hdc2080.obj) 
+COMPILER INVOKED BY: D:\Application\Keil_C251\C251\BIN\C251.EXE User\PageManage\page_hdc2080.c XSMALL ROM(HUGE) OPTIMIZE
+                    -(8,SPEED) BROWSE INCDIR(.\User;.\User\oled_gui;.\User\oled_gui\oled_core;.\User\oled_gui\oled_widget;.\User\PageManage;.
+                    -\User\Sensor;.\User\System;.\User\Bluetooth) DEBUG PRINT(.\Listings\page_hdc2080.lst) TABS(2) OBJECT(.\Objects\page_hdc2
+                    -080.obj) 
 
 stmt  level    source
 
@@ -66,7 +66,7 @@ stmt  level    source
    54   1        og_group_addAnimOffset(group1, 0, -64, ANIM_TIME_NORM, ANIM_NULL_CB);
    55   1        #if (TH_SENSOR_SELECT == 1)
                  HDC2080SetMode(7);
-C251 COMPILER V5.60.0,  page_hdc2080                                                       24/08/22  19:19:17  PAGE 2   
+C251 COMPILER V5.60.0,  page_hdc2080                                                       22/09/22  11:45:03  PAGE 2   
 
                  HDC2080StartConversion();
                  #elif (TH_SENSOR_SELECT == 2)
@@ -134,7 +134,7 @@ stmt  level    source
   118   4              lablel_printf(text[3], "%2.1f", HTU21D.temperature);
   119   4              step = 1;
   120   4            }
-C251 COMPILER V5.60.0,  page_hdc2080                                                       24/08/22  19:19:17  PAGE 3   
+C251 COMPILER V5.60.0,  page_hdc2080                                                       22/09/22  11:45:03  PAGE 3   
 
   121   3          }
   122   2          else if(step == 1)

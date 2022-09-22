@@ -1,12 +1,12 @@
-C251 COMPILER V5.60.0,  GT20L16S1Y                                                         23/08/22  22:51:17  PAGE 1   
+C251 COMPILER V5.60.0,  GT20L16S1Y                                                         22/09/22  11:45:00  PAGE 1   
 
 
 C251 COMPILER V5.60.0, COMPILATION OF MODULE GT20L16S1Y
 OBJECT MODULE PLACED IN .\Objects\GT20L16S1Y.obj
-COMPILER INVOKED BY: D:\Application\keilC251_v560\C251\BIN\C251.EXE User\oled_gui\GT20L16S1Y.c XSMALL ROM(HUGE) OPTIMIZE
-                    -(8,SPEED) BROWSE INCDIR(.\User;.\User\oled_gui;.\User\oled_gui\oled_core;.\User\oled_gui\oled_widget;.\User\PageManage;.
-                    -\User\Sensor;.\User\System;.\User\Bluetooth) DEBUG PRINT(.\Listings\GT20L16S1Y.lst) TABS(2) OBJECT(.\Objects\GT20L16S1Y.
-                    -obj) 
+COMPILER INVOKED BY: D:\Application\Keil_C251\C251\BIN\C251.EXE User\oled_gui\GT20L16S1Y.c XSMALL ROM(HUGE) OPTIMIZE(8,S
+                    -PEED) BROWSE INCDIR(.\User;.\User\oled_gui;.\User\oled_gui\oled_core;.\User\oled_gui\oled_widget;.\User\PageManage;.\Use
+                    -r\Sensor;.\User\System;.\User\Bluetooth) DEBUG PRINT(.\Listings\GT20L16S1Y.lst) TABS(2) OBJECT(.\Objects\GT20L16S1Y.obj)
+                    - 
 
 stmt  level    source
 
@@ -66,7 +66,7 @@ stmt  level    source
    53   1          addr = font_addr[GB2312_15X16] + ((unsigned long)((s >> 8) - 0xA1) * 94 + (s & 0x00ff) - 0xA1) << 5;
    54   1        GT20L16S1YClrCS();
    55   1        SPI_WriteByte(0x03);
-C251 COMPILER V5.60.0,  GT20L16S1Y                                                         23/08/22  22:51:17  PAGE 2   
+C251 COMPILER V5.60.0,  GT20L16S1Y                                                         22/09/22  11:45:00  PAGE 2   
 
    56   1        SPI_WriteMultiBytes((unsigned char *)&addr + 1, 3);
    57   1        SPI_ReadMultiBytes(ptr, 16);

@@ -1,12 +1,12 @@
-C251 COMPILER V5.60.0,  page_settime                                                       24/08/22  19:19:19  PAGE 1   
+C251 COMPILER V5.60.0,  page_settime                                                       22/09/22  11:45:03  PAGE 1   
 
 
 C251 COMPILER V5.60.0, COMPILATION OF MODULE page_settime
 OBJECT MODULE PLACED IN .\Objects\page_settime.obj
-COMPILER INVOKED BY: D:\Application\keilC251_v560\C251\BIN\C251.EXE User\PageManage\page_settime.c XSMALL ROM(HUGE) OPTI
-                    -MIZE(8,SPEED) BROWSE INCDIR(.\User;.\User\oled_gui;.\User\oled_gui\oled_core;.\User\oled_gui\oled_widget;.\User\PageMana
-                    -ge;.\User\Sensor;.\User\System;.\User\Bluetooth) DEBUG PRINT(.\Listings\page_settime.lst) TABS(2) OBJECT(.\Objects\page_
-                    -settime.obj) 
+COMPILER INVOKED BY: D:\Application\Keil_C251\C251\BIN\C251.EXE User\PageManage\page_settime.c XSMALL ROM(HUGE) OPTIMIZE
+                    -(8,SPEED) BROWSE INCDIR(.\User;.\User\oled_gui;.\User\oled_gui\oled_core;.\User\oled_gui\oled_widget;.\User\PageManage;.
+                    -\User\Sensor;.\User\System;.\User\Bluetooth) DEBUG PRINT(.\Listings\page_settime.lst) TABS(2) OBJECT(.\Objects\page_sett
+                    -ime.obj) 
 
 stmt  level    source
 
@@ -66,7 +66,7 @@ stmt  level    source
    53   1      }
 *** WARNING C47 IN LINE 23 OF User\PageManage\page_settime.c: 'condition': unreferenced parameter
    54          static void delet(void)
-C251 COMPILER V5.60.0,  page_settime                                                       24/08/22  19:19:19  PAGE 2   
+C251 COMPILER V5.60.0,  page_settime                                                       22/09/22  11:45:03  PAGE 2   
 
    55          {
    56   1        og_group_delet(group1);
@@ -134,7 +134,7 @@ stmt  level    source
   117   3            case 4:
   118   3              if(++set_time.month == 13)
   119   3                set_time.month = 1;
-C251 COMPILER V5.60.0,  page_settime                                                       24/08/22  19:19:19  PAGE 3   
+C251 COMPILER V5.60.0,  page_settime                                                       22/09/22  11:45:03  PAGE 3   
 
   120   3              break;
   121   3            case 5:
@@ -203,7 +203,7 @@ Module Information          Static   Overlayable
   xdata-const size     =    ------     ------
   edata size           =        48     ------
   bit size             =    ------     ------
-C251 COMPILER V5.60.0,  page_settime                                                       24/08/22  19:19:19  PAGE 4   
+C251 COMPILER V5.60.0,  page_settime                                                       22/09/22  11:45:03  PAGE 4   
 
   ebit size            =    ------     ------
   bitaddressable size  =    ------     ------

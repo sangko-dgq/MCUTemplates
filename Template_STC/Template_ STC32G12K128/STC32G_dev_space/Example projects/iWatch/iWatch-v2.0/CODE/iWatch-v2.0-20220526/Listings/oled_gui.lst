@@ -1,12 +1,12 @@
-C251 COMPILER V5.60.0,  oled_gui                                                           24/08/22  14:13:57  PAGE 1   
+C251 COMPILER V5.60.0,  oled_gui                                                           22/09/22  11:45:00  PAGE 1   
 
 
 C251 COMPILER V5.60.0, COMPILATION OF MODULE oled_gui
 OBJECT MODULE PLACED IN .\Objects\oled_gui.obj
-COMPILER INVOKED BY: D:\Application\keilC251_v560\C251\BIN\C251.EXE User\oled_gui\oled_core\oled_gui.c XSMALL ROM(HUGE) 
-                    -OPTIMIZE(8,SPEED) BROWSE INCDIR(.\User;.\User\oled_gui;.\User\oled_gui\oled_core;.\User\oled_gui\oled_widget;.\User\Page
-                    -Manage;.\User\Sensor;.\User\System;.\User\Bluetooth) DEBUG PRINT(.\Listings\oled_gui.lst) TABS(2) OBJECT(.\Objects\oled_
-                    -gui.obj) 
+COMPILER INVOKED BY: D:\Application\Keil_C251\C251\BIN\C251.EXE User\oled_gui\oled_core\oled_gui.c XSMALL ROM(HUGE) OPTI
+                    -MIZE(8,SPEED) BROWSE INCDIR(.\User;.\User\oled_gui;.\User\oled_gui\oled_core;.\User\oled_gui\oled_widget;.\User\PageMana
+                    -ge;.\User\Sensor;.\User\System;.\User\Bluetooth) DEBUG PRINT(.\Listings\oled_gui.lst) TABS(2) OBJECT(.\Objects\oled_gui.
+                    -obj) 
 
 stmt  level    source
 
@@ -66,7 +66,7 @@ stmt  level    source
    54          
    55          
 
-C251 COMPILER V5.60.0,  oled_gui                                                           24/08/22  14:13:57  PAGE 2   
+C251 COMPILER V5.60.0,  oled_gui                                                           22/09/22  11:45:00  PAGE 2   
 
 
 Module Information          Static   Overlayable

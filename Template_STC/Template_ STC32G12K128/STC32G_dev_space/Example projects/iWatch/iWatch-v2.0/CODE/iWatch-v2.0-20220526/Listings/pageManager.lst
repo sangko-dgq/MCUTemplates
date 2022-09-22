@@ -1,12 +1,12 @@
-C251 COMPILER V5.60.0,  pageManager                                                        24/08/22  19:19:16  PAGE 1   
+C251 COMPILER V5.60.0,  pageManager                                                        22/09/22  11:45:02  PAGE 1   
 
 
 C251 COMPILER V5.60.0, COMPILATION OF MODULE pageManager
 OBJECT MODULE PLACED IN .\Objects\pageManager.obj
-COMPILER INVOKED BY: D:\Application\keilC251_v560\C251\BIN\C251.EXE User\PageManage\pageManager.c XSMALL ROM(HUGE) OPTIM
-                    -IZE(8,SPEED) BROWSE INCDIR(.\User;.\User\oled_gui;.\User\oled_gui\oled_core;.\User\oled_gui\oled_widget;.\User\PageManag
-                    -e;.\User\Sensor;.\User\System;.\User\Bluetooth) DEBUG PRINT(.\Listings\pageManager.lst) TABS(2) OBJECT(.\Objects\pageMan
-                    -ager.obj) 
+COMPILER INVOKED BY: D:\Application\Keil_C251\C251\BIN\C251.EXE User\PageManage\pageManager.c XSMALL ROM(HUGE) OPTIMIZE(
+                    -8,SPEED) BROWSE INCDIR(.\User;.\User\oled_gui;.\User\oled_gui\oled_core;.\User\oled_gui\oled_widget;.\User\PageManage;.\
+                    -User\Sensor;.\User\System;.\User\Bluetooth) DEBUG PRINT(.\Listings\pageManager.lst) TABS(2) OBJECT(.\Objects\pageManager
+                    -.obj) 
 
 stmt  level    source
 
@@ -66,7 +66,7 @@ stmt  level    source
    54   1          pagelist[pageID].LoopCallback = loopCallback;
    55   1          pagelist[pageID].ExitCallback = exitCallback;
    56   1          pagelist[pageID].EventCallback = eventCallback;
-C251 COMPILER V5.60.0,  pageManager                                                        24/08/22  19:19:16  PAGE 2   
+C251 COMPILER V5.60.0,  pageManager                                                        22/09/22  11:45:02  PAGE 2   
 
    57   1      }
    58          /**
@@ -135,7 +135,7 @@ Module Information          Static   Overlayable
 ------------------------------------------------
   code size            =    ------     ------
   ecode size           =       502     ------
-C251 COMPILER V5.60.0,  pageManager                                                        24/08/22  19:19:16  PAGE 3   
+C251 COMPILER V5.60.0,  pageManager                                                        22/09/22  11:45:02  PAGE 3   
 
   data size            =    ------     ------
   idata size           =    ------     ------

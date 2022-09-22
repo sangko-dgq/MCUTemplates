@@ -1,12 +1,12 @@
-C251 COMPILER V5.60.0,  oled_slider                                                        23/08/22  22:51:18  PAGE 1   
+C251 COMPILER V5.60.0,  oled_slider                                                        22/09/22  11:45:00  PAGE 1   
 
 
 C251 COMPILER V5.60.0, COMPILATION OF MODULE oled_slider
 OBJECT MODULE PLACED IN .\Objects\oled_slider.obj
-COMPILER INVOKED BY: D:\Application\keilC251_v560\C251\BIN\C251.EXE User\oled_gui\oled_widget\oled_slider.c XSMALL ROM(H
-                    -UGE) OPTIMIZE(8,SPEED) BROWSE INCDIR(.\User;.\User\oled_gui;.\User\oled_gui\oled_core;.\User\oled_gui\oled_widget;.\User
-                    -\PageManage;.\User\Sensor;.\User\System;.\User\Bluetooth) DEBUG PRINT(.\Listings\oled_slider.lst) TABS(2) OBJECT(.\Objec
-                    -ts\oled_slider.obj) 
+COMPILER INVOKED BY: D:\Application\Keil_C251\C251\BIN\C251.EXE User\oled_gui\oled_widget\oled_slider.c XSMALL ROM(HUGE)
+                    - OPTIMIZE(8,SPEED) BROWSE INCDIR(.\User;.\User\oled_gui;.\User\oled_gui\oled_core;.\User\oled_gui\oled_widget;.\User\Pag
+                    -eManage;.\User\Sensor;.\User\System;.\User\Bluetooth) DEBUG PRINT(.\Listings\oled_slider.lst) TABS(2) OBJECT(.\Objects\o
+                    -led_slider.obj) 
 
 stmt  level    source
 
@@ -66,7 +66,7 @@ stmt  level    source
    53   1        pSlider = malloc(sizeof(t_sSlider));
    54   1        #ifdef OLED_DEBUG
                  if(max <= min)
-C251 COMPILER V5.60.0,  oled_slider                                                        23/08/22  22:51:18  PAGE 2   
+C251 COMPILER V5.60.0,  oled_slider                                                        22/09/22  11:45:00  PAGE 2   
 
                  {
                    OG_PRINTERROR("the maximum value of slider is smaller than its minimum value");
@@ -134,7 +134,7 @@ stmt  level    source
   119   1        return pSlider->value;
   120   1      }
   121          void og_slider_draw(t_psWidget pWidget)
-C251 COMPILER V5.60.0,  oled_slider                                                        23/08/22  22:51:18  PAGE 3   
+C251 COMPILER V5.60.0,  oled_slider                                                        22/09/22  11:45:00  PAGE 3   
 
   122          {
   123   1        t_sSlider *pSlider = (t_sSlider *)pWidget->pFeature;
@@ -203,7 +203,7 @@ Module Information          Static   Overlayable
   far data size        =    ------     ------
   huge data size       =    ------     ------
   const size           =    ------     ------
-C251 COMPILER V5.60.0,  oled_slider                                                        23/08/22  22:51:18  PAGE 4   
+C251 COMPILER V5.60.0,  oled_slider                                                        22/09/22  11:45:00  PAGE 4   
 
   hconst size          =    ------     ------
 End of Module Information.

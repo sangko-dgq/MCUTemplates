@@ -1,11 +1,11 @@
-C251 COMPILER V5.60.0,  EEPROM                                                             23/08/22  22:51:19  PAGE 1   
+C251 COMPILER V5.60.0,  EEPROM                                                             22/09/22  11:45:00  PAGE 1   
 
 
 C251 COMPILER V5.60.0, COMPILATION OF MODULE EEPROM
 OBJECT MODULE PLACED IN .\Objects\EEPROM.obj
-COMPILER INVOKED BY: D:\Application\keilC251_v560\C251\BIN\C251.EXE User\System\EEPROM.C XSMALL ROM(HUGE) OPTIMIZE(8,SPE
-                    -ED) BROWSE INCDIR(.\User;.\User\oled_gui;.\User\oled_gui\oled_core;.\User\oled_gui\oled_widget;.\User\PageManage;.\User\
-                    -Sensor;.\User\System;.\User\Bluetooth) DEBUG PRINT(.\Listings\EEPROM.lst) TABS(2) OBJECT(.\Objects\EEPROM.obj) 
+COMPILER INVOKED BY: D:\Application\Keil_C251\C251\BIN\C251.EXE User\System\EEPROM.C XSMALL ROM(HUGE) OPTIMIZE(8,SPEED) 
+                    -BROWSE INCDIR(.\User;.\User\oled_gui;.\User\oled_gui\oled_core;.\User\oled_gui\oled_widget;.\User\PageManage;.\User\Sens
+                    -or;.\User\System;.\User\Bluetooth) DEBUG PRINT(.\Listings\EEPROM.lst) TABS(2) OBJECT(.\Objects\EEPROM.obj) 
 
 stmt  level    source
 
@@ -66,7 +66,7 @@ stmt  level    source
    55          /******************** 扇区擦除函数 *****************/
    56          //========================================================================
    57          // 函数: void EEPROM_SectorErase(u16 EE_address)
-C251 COMPILER V5.60.0,  EEPROM                                                             23/08/22  22:51:19  PAGE 2   
+C251 COMPILER V5.60.0,  EEPROM                                                             22/09/22  11:45:00  PAGE 2   
 
    58          // 描述: 把指定地址的EEPROM扇区擦除.
    59          // 参数: EE_address:  要擦除的扇区EEPROM的地址.
@@ -135,7 +135,7 @@ Module Information          Static   Overlayable
   data size            =    ------     ------
   idata size           =    ------     ------
   pdata size           =    ------     ------
-C251 COMPILER V5.60.0,  EEPROM                                                             23/08/22  22:51:19  PAGE 3   
+C251 COMPILER V5.60.0,  EEPROM                                                             22/09/22  11:45:00  PAGE 3   
 
   xdata size           =    ------     ------
   xdata-const size     =    ------     ------

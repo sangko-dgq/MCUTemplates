@@ -1,11 +1,11 @@
-C251 COMPILER V5.60.0,  BMP390                                                             23/08/22  22:51:22  PAGE 1   
+C251 COMPILER V5.60.0,  BMP390                                                             22/09/22  11:45:02  PAGE 1   
 
 
 C251 COMPILER V5.60.0, COMPILATION OF MODULE BMP390
 OBJECT MODULE PLACED IN .\Objects\BMP390.obj
-COMPILER INVOKED BY: D:\Application\keilC251_v560\C251\BIN\C251.EXE User\Sensor\BMP390.c XSMALL ROM(HUGE) OPTIMIZE(8,SPE
-                    -ED) BROWSE INCDIR(.\User;.\User\oled_gui;.\User\oled_gui\oled_core;.\User\oled_gui\oled_widget;.\User\PageManage;.\User\
-                    -Sensor;.\User\System;.\User\Bluetooth) DEBUG PRINT(.\Listings\BMP390.lst) TABS(2) OBJECT(.\Objects\BMP390.obj) 
+COMPILER INVOKED BY: D:\Application\Keil_C251\C251\BIN\C251.EXE User\Sensor\BMP390.c XSMALL ROM(HUGE) OPTIMIZE(8,SPEED) 
+                    -BROWSE INCDIR(.\User;.\User\oled_gui;.\User\oled_gui\oled_core;.\User\oled_gui\oled_widget;.\User\PageManage;.\User\Sens
+                    -or;.\User\System;.\User\Bluetooth) DEBUG PRINT(.\Listings\BMP390.lst) TABS(2) OBJECT(.\Objects\BMP390.obj) 
 
 stmt  level    source
 
@@ -66,7 +66,7 @@ stmt  level    source
    55            * @param  addr: 寄存器的地址
    56            * @param  dat:  待写入的数据
    57            * @retval 无
-C251 COMPILER V5.60.0,  BMP390                                                             23/08/22  22:51:22  PAGE 2   
+C251 COMPILER V5.60.0,  BMP390                                                             22/09/22  11:45:02  PAGE 2   
 
    58            */
    59          void BMP390WriteByte(unsigned char addr, unsigned char dat)
@@ -134,7 +134,7 @@ stmt  level    source
   121   1        
   122   1        uint16_temp = (buf1[12] << 8) | buf1[11];
   123   1        calib_data.par_p5 = (float)uint16_temp / 0.125; //2^-3
-C251 COMPILER V5.60.0,  BMP390                                                             23/08/22  22:51:22  PAGE 3   
+C251 COMPILER V5.60.0,  BMP390                                                             22/09/22  11:45:02  PAGE 3   
 
   124   1        
   125   1        uint16_temp = (buf1[14] << 8) | buf1[13];
@@ -202,7 +202,7 @@ stmt  level    source
   187   1        
   188   1        partial_data1 = calib_data.par_p2 * calib_data.t_lin;
   189   1        partial_data2 = calib_data.par_p3 * (calib_data.t_lin * calib_data.t_lin);
-C251 COMPILER V5.60.0,  BMP390                                                             23/08/22  22:51:22  PAGE 4   
+C251 COMPILER V5.60.0,  BMP390                                                             22/09/22  11:45:02  PAGE 4   
 
   190   1        partial_data3 = calib_data.par_p4 * (calib_data.t_lin * calib_data.t_lin * calib_data.t_lin);
   191   1        partial_out2 = (float)uncomp_pressure * (calib_data.par_p1 + partial_data1 + partial_data2 + partial_dat
@@ -270,7 +270,7 @@ stmt  level    source
   251   2          Delay1ms(1);
   252   2          if(--time_out == 0)
   253   2            return 0;
-C251 COMPILER V5.60.0,  BMP390                                                             23/08/22  22:51:22  PAGE 5   
+C251 COMPILER V5.60.0,  BMP390                                                             22/09/22  11:45:02  PAGE 5   
 
   254   2        }
   255   1        BMP390SoftReset();

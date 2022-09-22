@@ -1,12 +1,12 @@
-C251 COMPILER V5.60.0,  page_flashlight                                                    24/08/22  19:19:17  PAGE 1   
+C251 COMPILER V5.60.0,  page_flashlight                                                    22/09/22  11:45:02  PAGE 1   
 
 
 C251 COMPILER V5.60.0, COMPILATION OF MODULE page_flashlight
 OBJECT MODULE PLACED IN .\Objects\page_flashlight.obj
-COMPILER INVOKED BY: D:\Application\keilC251_v560\C251\BIN\C251.EXE User\PageManage\page_flashlight.c XSMALL ROM(HUGE) O
-                    -PTIMIZE(8,SPEED) BROWSE INCDIR(.\User;.\User\oled_gui;.\User\oled_gui\oled_core;.\User\oled_gui\oled_widget;.\User\PageM
-                    -anage;.\User\Sensor;.\User\System;.\User\Bluetooth) DEBUG PRINT(.\Listings\page_flashlight.lst) TABS(2) OBJECT(.\Objects
-                    -\page_flashlight.obj) 
+COMPILER INVOKED BY: D:\Application\Keil_C251\C251\BIN\C251.EXE User\PageManage\page_flashlight.c XSMALL ROM(HUGE) OPTIM
+                    -IZE(8,SPEED) BROWSE INCDIR(.\User;.\User\oled_gui;.\User\oled_gui\oled_core;.\User\oled_gui\oled_widget;.\User\PageManag
+                    -e;.\User\Sensor;.\User\System;.\User\Bluetooth) DEBUG PRINT(.\Listings\page_flashlight.lst) TABS(2) OBJECT(.\Objects\pag
+                    -e_flashlight.obj) 
 
 stmt  level    source
 
@@ -66,7 +66,7 @@ stmt  level    source
    53            */
    54          static void Exit(unsigned char condition)
    55          {
-C251 COMPILER V5.60.0,  page_flashlight                                                    24/08/22  19:19:17  PAGE 2   
+C251 COMPILER V5.60.0,  page_flashlight                                                    22/09/22  11:45:02  PAGE 2   
 
    56   1        OLED_setBreathing(0, 0);
    57   1        OLED_Inverse(config.screen_inverse);
@@ -135,7 +135,7 @@ stmt  level    source
 
 Module Information          Static   Overlayable
 ------------------------------------------------
-C251 COMPILER V5.60.0,  page_flashlight                                                    24/08/22  19:19:17  PAGE 3   
+C251 COMPILER V5.60.0,  page_flashlight                                                    22/09/22  11:45:02  PAGE 3   
 
   code size            =       290     ------
   ecode size           =       466     ------

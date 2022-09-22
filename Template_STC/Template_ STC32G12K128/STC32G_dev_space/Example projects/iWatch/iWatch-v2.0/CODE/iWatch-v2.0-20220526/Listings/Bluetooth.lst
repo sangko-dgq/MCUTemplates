@@ -1,12 +1,11 @@
-C251 COMPILER V5.60.0,  Bluetooth                                                          23/08/22  22:51:27  PAGE 1   
+C251 COMPILER V5.60.0,  Bluetooth                                                          22/09/22  11:45:04  PAGE 1   
 
 
 C251 COMPILER V5.60.0, COMPILATION OF MODULE Bluetooth
 OBJECT MODULE PLACED IN .\Objects\Bluetooth.obj
-COMPILER INVOKED BY: D:\Application\keilC251_v560\C251\BIN\C251.EXE User\Bluetooth\Bluetooth.c XSMALL ROM(HUGE) OPTIMIZE
-                    -(8,SPEED) BROWSE INCDIR(.\User;.\User\oled_gui;.\User\oled_gui\oled_core;.\User\oled_gui\oled_widget;.\User\PageManage;.
-                    -\User\Sensor;.\User\System;.\User\Bluetooth) DEBUG PRINT(.\Listings\Bluetooth.lst) TABS(2) OBJECT(.\Objects\Bluetooth.ob
-                    -j) 
+COMPILER INVOKED BY: D:\Application\Keil_C251\C251\BIN\C251.EXE User\Bluetooth\Bluetooth.c XSMALL ROM(HUGE) OPTIMIZE(8,S
+                    -PEED) BROWSE INCDIR(.\User;.\User\oled_gui;.\User\oled_gui\oled_core;.\User\oled_gui\oled_widget;.\User\PageManage;.\Use
+                    -r\Sensor;.\User\System;.\User\Bluetooth) DEBUG PRINT(.\Listings\Bluetooth.lst) TABS(2) OBJECT(.\Objects\Bluetooth.obj) 
 
 stmt  level    source
 
@@ -66,9 +65,9 @@ stmt  level    source
    54   1        {
    55   2          unsigned char i;
    56   2          unsigned char temp = rx4_cnt;
-C251 COMPILER V5.60.0,  Bluetooth                                                          23/08/22  22:51:27  PAGE 2   
-
    57   2          rx4_cnt = 0;
+C251 COMPILER V5.60.0,  Bluetooth                                                          22/09/22  11:45:04  PAGE 2   
+
    58   2          for(i = 0; i < temp; i++)
    59   2          {
    60   3            dptr[i] = rx4_buf[i];

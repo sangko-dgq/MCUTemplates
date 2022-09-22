@@ -1,12 +1,12 @@
-C251 COMPILER V5.60.0,  page_setting                                                       24/08/22  19:19:19  PAGE 1   
+C251 COMPILER V5.60.0,  page_setting                                                       22/09/22  11:45:03  PAGE 1   
 
 
 C251 COMPILER V5.60.0, COMPILATION OF MODULE page_setting
 OBJECT MODULE PLACED IN .\Objects\page_setting.obj
-COMPILER INVOKED BY: D:\Application\keilC251_v560\C251\BIN\C251.EXE User\PageManage\page_setting.c XSMALL ROM(HUGE) OPTI
-                    -MIZE(8,SPEED) BROWSE INCDIR(.\User;.\User\oled_gui;.\User\oled_gui\oled_core;.\User\oled_gui\oled_widget;.\User\PageMana
-                    -ge;.\User\Sensor;.\User\System;.\User\Bluetooth) DEBUG PRINT(.\Listings\page_setting.lst) TABS(2) OBJECT(.\Objects\page_
-                    -setting.obj) 
+COMPILER INVOKED BY: D:\Application\Keil_C251\C251\BIN\C251.EXE User\PageManage\page_setting.c XSMALL ROM(HUGE) OPTIMIZE
+                    -(8,SPEED) BROWSE INCDIR(.\User;.\User\oled_gui;.\User\oled_gui\oled_core;.\User\oled_gui\oled_widget;.\User\PageManage;.
+                    -\User\Sensor;.\User\System;.\User\Bluetooth) DEBUG PRINT(.\Listings\page_setting.lst) TABS(2) OBJECT(.\Objects\page_sett
+                    -ing.obj) 
 
 stmt  level    source
 
@@ -66,7 +66,7 @@ stmt  level    source
    54   1        {
    55   2          text[i] = og_label_create(FONT_GB2312_15X16, 0, i * 16);
    56   2          og_label_setText(text[i], item[i]);
-C251 COMPILER V5.60.0,  page_setting                                                       24/08/22  19:19:19  PAGE 2   
+C251 COMPILER V5.60.0,  page_setting                                                       22/09/22  11:45:03  PAGE 2   
 
    57   2          og_group_addWidget(group1, text[i], 1);
    58   2        }
@@ -134,7 +134,7 @@ stmt  level    source
   118   3            else
   119   3              slider2->config &= ~WIDGET_FOCUS;
   120   3            nfocus = 0;
-C251 COMPILER V5.60.0,  page_setting                                                       24/08/22  19:19:19  PAGE 3   
+C251 COMPILER V5.60.0,  page_setting                                                       22/09/22  11:45:03  PAGE 3   
 
   121   3          }
   122   2          else
@@ -202,7 +202,7 @@ stmt  level    source
   184   4            }
   185   3          }
   186   2          else if(i == 5)
-C251 COMPILER V5.60.0,  page_setting                                                       24/08/22  19:19:19  PAGE 4   
+C251 COMPILER V5.60.0,  page_setting                                                       22/09/22  11:45:03  PAGE 4   
 
   187   2          {
   188   3            if((config.lsm6dsm_cfg & 0x02) != 0)
@@ -270,7 +270,7 @@ stmt  level    source
   249   2          {
   250   3            if(--config.t_inactive_max < 3)
   251   3              config.t_inactive_max = 3;
-C251 COMPILER V5.60.0,  page_setting                                                       24/08/22  19:19:19  PAGE 5   
+C251 COMPILER V5.60.0,  page_setting                                                       22/09/22  11:45:03  PAGE 5   
 
   252   3            og_slider_setValue(slider1, config.t_inactive_max);
   253   3          }

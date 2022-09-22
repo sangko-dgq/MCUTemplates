@@ -1,12 +1,12 @@
-C251 COMPILER V5.60.0,  oled_draw                                                          23/08/22  22:51:16  PAGE 1   
+C251 COMPILER V5.60.0,  oled_draw                                                          22/09/22  11:44:59  PAGE 1   
 
 
 C251 COMPILER V5.60.0, COMPILATION OF MODULE oled_draw
 OBJECT MODULE PLACED IN .\Objects\oled_draw.obj
-COMPILER INVOKED BY: D:\Application\keilC251_v560\C251\BIN\C251.EXE User\oled_gui\oled_core\oled_draw.c XSMALL ROM(HUGE)
-                    - OPTIMIZE(8,SPEED) BROWSE INCDIR(.\User;.\User\oled_gui;.\User\oled_gui\oled_core;.\User\oled_gui\oled_widget;.\User\Pag
-                    -eManage;.\User\Sensor;.\User\System;.\User\Bluetooth) DEBUG PRINT(.\Listings\oled_draw.lst) TABS(2) OBJECT(.\Objects\ole
-                    -d_draw.obj) 
+COMPILER INVOKED BY: D:\Application\Keil_C251\C251\BIN\C251.EXE User\oled_gui\oled_core\oled_draw.c XSMALL ROM(HUGE) OPT
+                    -IMIZE(8,SPEED) BROWSE INCDIR(.\User;.\User\oled_gui;.\User\oled_gui\oled_core;.\User\oled_gui\oled_widget;.\User\PageMan
+                    -age;.\User\Sensor;.\User\System;.\User\Bluetooth) DEBUG PRINT(.\Listings\oled_draw.lst) TABS(2) OBJECT(.\Objects\oled_dr
+                    -aw.obj) 
 
 stmt  level    source
 
@@ -66,7 +66,7 @@ stmt  level    source
    54   4              num3 = (i << 7) + x;
    55   4              num5 = num3 + 128;
    56   4              num4 = (i + ((-y) >> 3) + 1) * width + num2;
-C251 COMPILER V5.60.0,  oled_draw                                                          23/08/22  22:51:16  PAGE 2   
+C251 COMPILER V5.60.0,  oled_draw                                                          22/09/22  11:44:59  PAGE 2   
 
    57   4              for(j = 0; j < w_b; j++)
    58   4              {

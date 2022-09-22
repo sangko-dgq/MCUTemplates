@@ -1,11 +1,11 @@
-C251 COMPILER V5.60.0,  iWatch                                                             24/08/22  19:19:16  PAGE 1   
+C251 COMPILER V5.60.0,  iWatch                                                             22/09/22  11:45:01  PAGE 1   
 
 
 C251 COMPILER V5.60.0, COMPILATION OF MODULE iWatch
 OBJECT MODULE PLACED IN .\Objects\iWatch.obj
-COMPILER INVOKED BY: D:\Application\keilC251_v560\C251\BIN\C251.EXE User\iWatch.c XSMALL ROM(HUGE) OPTIMIZE(8,SPEED) BRO
-                    -WSE INCDIR(.\User;.\User\oled_gui;.\User\oled_gui\oled_core;.\User\oled_gui\oled_widget;.\User\PageManage;.\User\Sensor;
-                    -.\User\System;.\User\Bluetooth) DEBUG PRINT(.\Listings\iWatch.lst) TABS(2) OBJECT(.\Objects\iWatch.obj) 
+COMPILER INVOKED BY: D:\Application\Keil_C251\C251\BIN\C251.EXE User\iWatch.c XSMALL ROM(HUGE) OPTIMIZE(8,SPEED) BROWSE 
+                    -INCDIR(.\User;.\User\oled_gui;.\User\oled_gui\oled_core;.\User\oled_gui\oled_widget;.\User\PageManage;.\User\Sensor;.\Us
+                    -er\System;.\User\Bluetooth) DEBUG PRINT(.\Listings\iWatch.lst) TABS(2) OBJECT(.\Objects\iWatch.obj) 
 
 stmt  level    source
 
@@ -66,7 +66,7 @@ stmt  level    source
    55   2          iWatchStatusUpdate();   //每秒钟执行一次状态更新
    56   2        }
    57   1      }
-C251 COMPILER V5.60.0,  iWatch                                                             24/08/22  19:19:16  PAGE 2   
+C251 COMPILER V5.60.0,  iWatch                                                             22/09/22  11:45:01  PAGE 2   
 
    58          void INT0_Isr() interrupt 0  //电源线接入中断
    59          {
@@ -134,7 +134,7 @@ stmt  level    source
   121   4            }
   122   3            case IWATCH_KEYPRESSED:       //有按键被按下
   123   3            {
-C251 COMPILER V5.60.0,  iWatch                                                             24/08/22  19:19:16  PAGE 3   
+C251 COMPILER V5.60.0,  iWatch                                                             22/09/22  11:45:01  PAGE 3   
 
   124   4              if(config.key_sound)
   125   4                Bee();
@@ -202,7 +202,7 @@ stmt  level    source
   186   4            }
   187   3            case IWATCH_CABLEPLUGININT:   //充电线接入中断
   188   3              break;
-C251 COMPILER V5.60.0,  iWatch                                                             24/08/22  19:19:16  PAGE 4   
+C251 COMPILER V5.60.0,  iWatch                                                             22/09/22  11:45:01  PAGE 4   
 
   189   3            case IWATCH_CABLEUNPLUGINT:   //充电线断开中断
   190   3            {
@@ -270,7 +270,7 @@ stmt  level    source
   252   2          {
   253   3            OLED_Display_Off();
   254   3            iWatchClearStatus(IWATCH_SCREENON);
-C251 COMPILER V5.60.0,  iWatch                                                             24/08/22  19:19:16  PAGE 5   
+C251 COMPILER V5.60.0,  iWatch                                                             22/09/22  11:45:01  PAGE 5   
 
   255   3          }
   256   2          pageCloseCurrentPage();
@@ -338,7 +338,7 @@ stmt  level    source
   318   1        EEPROM_read_n(EE_ADDRESS1, (unsigned char *)config, CONFIG_SIZE);
   319   1        for(i; i < CONFIG_SIZE - 2; i++)        //对结构体中每一字节求和
   320   1          temp += ((unsigned char *)config)[i];
-C251 COMPILER V5.60.0,  iWatch                                                             24/08/22  19:19:16  PAGE 6   
+C251 COMPILER V5.60.0,  iWatch                                                             22/09/22  11:45:01  PAGE 6   
 
   321   1        
   322   1        if((temp == config->check_sum) && (temp != 0))        //检验数据是否正确完整，结构体最后两字节为检验求和字节
@@ -406,7 +406,7 @@ stmt  level    source
   384   1        for(i = WINDOW_WIDTH - 1; i > 0; i--)
   385   1        {
   386   2          queue[i] = queue[i - 1];
-C251 COMPILER V5.60.0,  iWatch                                                             24/08/22  19:19:16  PAGE 7   
+C251 COMPILER V5.60.0,  iWatch                                                             22/09/22  11:45:01  PAGE 7   
 
   387   2          queue_average += queue[i];
   388   2        }
@@ -474,7 +474,7 @@ stmt  level    source
   450   1        /*BMP气压传感器初始化*/
   451   1        #if (P_SENSOR_SELECT == 1)
   452   1        if(BMP390Init() != 0)
-C251 COMPILER V5.60.0,  iWatch                                                             24/08/22  19:19:16  PAGE 8   
+C251 COMPILER V5.60.0,  iWatch                                                             22/09/22  11:45:01  PAGE 8   
 
   453   1          sensor_status |= BMP390_ISPRESENTED;
   454   1        #endif

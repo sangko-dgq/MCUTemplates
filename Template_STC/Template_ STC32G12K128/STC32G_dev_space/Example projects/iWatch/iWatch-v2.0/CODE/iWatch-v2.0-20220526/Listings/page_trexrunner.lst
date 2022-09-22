@@ -1,12 +1,12 @@
-C251 COMPILER V5.60.0,  page_trexrunner                                                    24/08/22  19:19:20  PAGE 1   
+C251 COMPILER V5.60.0,  page_trexrunner                                                    22/09/22  11:45:04  PAGE 1   
 
 
 C251 COMPILER V5.60.0, COMPILATION OF MODULE page_trexrunner
 OBJECT MODULE PLACED IN .\Objects\page_trexrunner.obj
-COMPILER INVOKED BY: D:\Application\keilC251_v560\C251\BIN\C251.EXE User\PageManage\page_trexrunner.c XSMALL ROM(HUGE) O
-                    -PTIMIZE(8,SPEED) BROWSE INCDIR(.\User;.\User\oled_gui;.\User\oled_gui\oled_core;.\User\oled_gui\oled_widget;.\User\PageM
-                    -anage;.\User\Sensor;.\User\System;.\User\Bluetooth) DEBUG PRINT(.\Listings\page_trexrunner.lst) TABS(2) OBJECT(.\Objects
-                    -\page_trexrunner.obj) 
+COMPILER INVOKED BY: D:\Application\Keil_C251\C251\BIN\C251.EXE User\PageManage\page_trexrunner.c XSMALL ROM(HUGE) OPTIM
+                    -IZE(8,SPEED) BROWSE INCDIR(.\User;.\User\oled_gui;.\User\oled_gui\oled_core;.\User\oled_gui\oled_widget;.\User\PageManag
+                    -e;.\User\Sensor;.\User\System;.\User\Bluetooth) DEBUG PRINT(.\Listings\page_trexrunner.lst) TABS(2) OBJECT(.\Objects\pag
+                    -e_trexrunner.obj) 
 
 stmt  level    source
 
@@ -66,7 +66,7 @@ stmt  level    source
    52            0x80,0x80,0x80,0x80,0x80,0x80,0x80,0x80,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
    53            0x00,0x00,0x00,0x80,0x80,0x80,0x80,0x80,0x80,0x80,0xC0,0x60,0x30,0x10,0x10,0x10,
    54            0x18,0x08,0x38,0xE0,0x80,0x00,0x00,0x80,0x80,0x80,0x80,0x80,0x80,0x80,0x80,0x80,
-C251 COMPILER V5.60.0,  page_trexrunner                                                    24/08/22  19:19:20  PAGE 2   
+C251 COMPILER V5.60.0,  page_trexrunner                                                    22/09/22  11:45:04  PAGE 2   
 
    55            0x80,0x80,0x80,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x80,
    56            0x80,0xC0,0x40,0x40,0x40,0x40,0x40,0x40,0x40,0x40,0xC0,0x80,0x80,0x80,0x80,0x80,
@@ -134,7 +134,7 @@ stmt  level    source
   116   1        bg2 = og_bmp_create((t_psBMP)GROUND2, 128, 48);
   117   1        group1 = og_group_create(8);
   118   1        og_group_addWidget(group1, label_score, 0);
-C251 COMPILER V5.60.0,  page_trexrunner                                                    24/08/22  19:19:20  PAGE 3   
+C251 COMPILER V5.60.0,  page_trexrunner                                                    22/09/22  11:45:04  PAGE 3   
 
   119   1        og_group_addWidget(group1, label_game, 0);
   120   1        og_group_addWidget(group1, trex, 0);
@@ -202,7 +202,7 @@ stmt  level    source
   180   4              //Åö×²¼ì²â
   181   4              if((tree1->x - trex->x < trex->w) && (tree1->x - trex->x > -tree1->w))
   182   4              {
-C251 COMPILER V5.60.0,  page_trexrunner                                                    24/08/22  19:19:20  PAGE 4   
+C251 COMPILER V5.60.0,  page_trexrunner                                                    22/09/22  11:45:04  PAGE 4   
 
   183   5                if(tree1->y - trex->y < 20)//tree1->h
   184   5                  collided = 1;
@@ -270,7 +270,7 @@ stmt  level    source
   246          void anim_jump(void)
   247          {
   248   1        og_anim_create(trex, 20, 4, 300, anim_fall);
-C251 COMPILER V5.60.0,  page_trexrunner                                                    24/08/22  19:19:20  PAGE 5   
+C251 COMPILER V5.60.0,  page_trexrunner                                                    22/09/22  11:45:04  PAGE 5   
 
   249   1      }
   250          /**

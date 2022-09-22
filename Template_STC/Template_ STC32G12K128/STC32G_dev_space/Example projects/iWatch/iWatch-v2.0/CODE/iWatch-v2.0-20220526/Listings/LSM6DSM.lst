@@ -1,11 +1,11 @@
-C251 COMPILER V5.60.0,  LSM6DSM                                                            24/08/22  14:45:54  PAGE 1   
+C251 COMPILER V5.60.0,  LSM6DSM                                                            22/09/22  11:45:01  PAGE 1   
 
 
 C251 COMPILER V5.60.0, COMPILATION OF MODULE LSM6DSM
 OBJECT MODULE PLACED IN .\Objects\LSM6DSM.obj
-COMPILER INVOKED BY: D:\Application\keilC251_v560\C251\BIN\C251.EXE User\Sensor\LSM6DSM.c XSMALL ROM(HUGE) OPTIMIZE(8,SP
-                    -EED) BROWSE INCDIR(.\User;.\User\oled_gui;.\User\oled_gui\oled_core;.\User\oled_gui\oled_widget;.\User\PageManage;.\User
-                    -\Sensor;.\User\System;.\User\Bluetooth) DEBUG PRINT(.\Listings\LSM6DSM.lst) TABS(2) OBJECT(.\Objects\LSM6DSM.obj) 
+COMPILER INVOKED BY: D:\Application\Keil_C251\C251\BIN\C251.EXE User\Sensor\LSM6DSM.c XSMALL ROM(HUGE) OPTIMIZE(8,SPEED)
+                    - BROWSE INCDIR(.\User;.\User\oled_gui;.\User\oled_gui\oled_core;.\User\oled_gui\oled_widget;.\User\PageManage;.\User\Sen
+                    -sor;.\User\System;.\User\Bluetooth) DEBUG PRINT(.\Listings\LSM6DSM.lst) TABS(2) OBJECT(.\Objects\LSM6DSM.obj) 
 
 stmt  level    source
 
@@ -66,7 +66,7 @@ stmt  level    source
    55   1        p->acc_y = buf[4];
    56   1        p->acc_z = -buf[5];
    57   1      }
-C251 COMPILER V5.60.0,  LSM6DSM                                                            24/08/22  14:45:54  PAGE 2   
+C251 COMPILER V5.60.0,  LSM6DSM                                                            22/09/22  11:45:01  PAGE 2   
 
    58          /*
    59          int LSM6DSMReadTemperature(void)
@@ -134,7 +134,7 @@ stmt  level    source
   121   1        if(embedded_func_usage == 0)
   122   1        {
   123   2          LSM6DSMDisableEMbeddedFunc();
-C251 COMPILER V5.60.0,  LSM6DSM                                                            24/08/22  14:45:54  PAGE 3   
+C251 COMPILER V5.60.0,  LSM6DSM                                                            22/09/22  11:45:01  PAGE 3   
 
   124   2          LSM6DSMConfigAcc(ACC_POWER_DOWN, ACC_SCALE_4_G);
   125   2        }
@@ -202,7 +202,7 @@ stmt  level    source
   182          {
   183   1        /*³¬Ê±Ê±¼ä*/
   184   1        unsigned int time_out = 50; 
-C251 COMPILER V5.60.0,  LSM6DSM                                                            24/08/22  14:45:54  PAGE 4   
+C251 COMPILER V5.60.0,  LSM6DSM                                                            22/09/22  11:45:01  PAGE 4   
 
   185   1        
   186   1        Delay1ms(50);
@@ -270,7 +270,7 @@ stmt  level    source
   248   1        ex = (ay*vz - az*vy) ;
   249   1        ey = (az*vx - ax*vz) ;
   250   1        ez = (ax*vy - ay*vx) ;
-C251 COMPILER V5.60.0,  LSM6DSM                                                            24/08/22  14:45:54  PAGE 5   
+C251 COMPILER V5.60.0,  LSM6DSM                                                            22/09/22  11:45:01  PAGE 5   
 
   251   1      
   252   1        exInt = exInt + ex * Ki;

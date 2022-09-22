@@ -1,12 +1,12 @@
-C251 COMPILER V5.60.0,  oled_label                                                         23/08/22  22:51:18  PAGE 1   
+C251 COMPILER V5.60.0,  oled_label                                                         22/09/22  11:45:00  PAGE 1   
 
 
 C251 COMPILER V5.60.0, COMPILATION OF MODULE oled_label
 OBJECT MODULE PLACED IN .\Objects\oled_label.obj
-COMPILER INVOKED BY: D:\Application\keilC251_v560\C251\BIN\C251.EXE User\oled_gui\oled_widget\oled_label.c XSMALL ROM(HU
-                    -GE) OPTIMIZE(8,SPEED) BROWSE INCDIR(.\User;.\User\oled_gui;.\User\oled_gui\oled_core;.\User\oled_gui\oled_widget;.\User\
-                    -PageManage;.\User\Sensor;.\User\System;.\User\Bluetooth) DEBUG PRINT(.\Listings\oled_label.lst) TABS(2) OBJECT(.\Objects
-                    -\oled_label.obj) 
+COMPILER INVOKED BY: D:\Application\Keil_C251\C251\BIN\C251.EXE User\oled_gui\oled_widget\oled_label.c XSMALL ROM(HUGE) 
+                    -OPTIMIZE(8,SPEED) BROWSE INCDIR(.\User;.\User\oled_gui;.\User\oled_gui\oled_core;.\User\oled_gui\oled_widget;.\User\Page
+                    -Manage;.\User\Sensor;.\User\System;.\User\Bluetooth) DEBUG PRINT(.\Listings\oled_label.lst) TABS(2) OBJECT(.\Objects\ole
+                    -d_label.obj) 
 
 stmt  level    source
 
@@ -66,7 +66,7 @@ stmt  level    source
    54   1        pWidget->y = y;                   // 在屏幕上的纵坐标
    55   1        pWidget->config |= LABEL_WIDGET;  // 控件类型为label
    56   1        pWidget->pFeature = malloc(sizeof(t_sLabel));
-C251 COMPILER V5.60.0,  oled_label                                                         23/08/22  22:51:18  PAGE 2   
+C251 COMPILER V5.60.0,  oled_label                                                         22/09/22  11:45:00  PAGE 2   
 
    57   1        #ifdef OLED_DEBUG
                  if(pWidget->pFeature == NULL)
@@ -134,7 +134,7 @@ stmt  level    source
                    {
                      OG_PRINTERROR("label set text fail");
                      return;
-C251 COMPILER V5.60.0,  oled_label                                                         23/08/22  22:51:18  PAGE 3   
+C251 COMPILER V5.60.0,  oled_label                                                         22/09/22  11:45:00  PAGE 3   
 
                    }
                    #endif
@@ -202,7 +202,7 @@ stmt  level    source
   186   2          else
   187   2          {
   188   3            line_char_cnt++;
-C251 COMPILER V5.60.0,  oled_label                                                         23/08/22  22:51:18  PAGE 4   
+C251 COMPILER V5.60.0,  oled_label                                                         22/09/22  11:45:00  PAGE 4   
 
   189   3          }
   190   2          ptr++;
@@ -270,7 +270,7 @@ stmt  level    source
   252   2          uint8_t *pStr = (uint8_t *)&pLabel->Str;
   253   2          uint8_t *ptr;
   254   2          int16_t y = 0;
-C251 COMPILER V5.60.0,  oled_label                                                         23/08/22  22:51:18  PAGE 5   
+C251 COMPILER V5.60.0,  oled_label                                                         22/09/22  11:45:00  PAGE 5   
 
   255   2          uint16_t i = 0, ptr_size;
   256   2          #if (OLED_USE_BUILDIN_FONT == 1)
@@ -338,7 +338,7 @@ stmt  level    source
                              uint8_t *offset = ptr;
                              for(j = 0; j < i; j++)
                              {
-C251 COMPILER V5.60.0,  oled_label                                                         23/08/22  22:51:18  PAGE 6   
+C251 COMPILER V5.60.0,  oled_label                                                         22/09/22  11:45:00  PAGE 6   
 
                                font_getCharASCII_8X16(ptr2[j], offset, pWidget->w);
                                offset += 8;  
@@ -406,7 +406,7 @@ stmt  level    source
   384   3            case FONT_ASCII_5X7:
   385   3            {
   386   4              ptr_size = pWidget->w;
-C251 COMPILER V5.60.0,  oled_label                                                         23/08/22  22:51:18  PAGE 7   
+C251 COMPILER V5.60.0,  oled_label                                                         22/09/22  11:45:00  PAGE 7   
 
   387   4              ptr = calloc(ptr_size, 1);
   388   4              #ifdef OLED_DEBUG
@@ -474,7 +474,7 @@ stmt  level    source
   450   7                    for(j = 0; j < ptr_size; j++)
   451   7                      ptr[j] = 0x00;
   452   7                  }
-C251 COMPILER V5.60.0,  oled_label                                                         23/08/22  22:51:18  PAGE 8   
+C251 COMPILER V5.60.0,  oled_label                                                         22/09/22  11:45:00  PAGE 8   
 
   453   6                  if(*pStr == '\0')
   454   6                    break;
@@ -542,7 +542,7 @@ stmt  level    source
   516   4              {
   517   5                if(*pStr < ' ') 
   518   5                {
-C251 COMPILER V5.60.0,  oled_label                                                         23/08/22  22:51:18  PAGE 9   
+C251 COMPILER V5.60.0,  oled_label                                                         22/09/22  11:45:00  PAGE 9   
 
   519   6                  if(((pWidget->y + y + 16) >= 0) && (i != 0))
   520   6                  {
@@ -610,7 +610,7 @@ stmt  level    source
   582   6                  pStr += 2;
   583   6                }
   584   5              }
-C251 COMPILER V5.60.0,  oled_label                                                         23/08/22  22:51:18  PAGE 10  
+C251 COMPILER V5.60.0,  oled_label                                                         22/09/22  11:45:00  PAGE 10  
 
   585   4              break;
   586   4            }

@@ -1,12 +1,12 @@
-C251 COMPILER V5.60.0,  oled_canvas                                                        23/08/22  22:51:18  PAGE 1   
+C251 COMPILER V5.60.0,  oled_canvas                                                        22/09/22  11:45:00  PAGE 1   
 
 
 C251 COMPILER V5.60.0, COMPILATION OF MODULE oled_canvas
 OBJECT MODULE PLACED IN .\Objects\oled_canvas.obj
-COMPILER INVOKED BY: D:\Application\keilC251_v560\C251\BIN\C251.EXE User\oled_gui\oled_widget\oled_canvas.c XSMALL ROM(H
-                    -UGE) OPTIMIZE(8,SPEED) BROWSE INCDIR(.\User;.\User\oled_gui;.\User\oled_gui\oled_core;.\User\oled_gui\oled_widget;.\User
-                    -\PageManage;.\User\Sensor;.\User\System;.\User\Bluetooth) DEBUG PRINT(.\Listings\oled_canvas.lst) TABS(2) OBJECT(.\Objec
-                    -ts\oled_canvas.obj) 
+COMPILER INVOKED BY: D:\Application\Keil_C251\C251\BIN\C251.EXE User\oled_gui\oled_widget\oled_canvas.c XSMALL ROM(HUGE)
+                    - OPTIMIZE(8,SPEED) BROWSE INCDIR(.\User;.\User\oled_gui;.\User\oled_gui\oled_core;.\User\oled_gui\oled_widget;.\User\Pag
+                    -eManage;.\User\Sensor;.\User\System;.\User\Bluetooth) DEBUG PRINT(.\Listings\oled_canvas.lst) TABS(2) OBJECT(.\Objects\o
+                    -led_canvas.obj) 
 
 stmt  level    source
 
@@ -66,7 +66,7 @@ stmt  level    source
    54   2        }
    55   1      }
    56          #define DRAWDOT_FAST(x, y)  ((uint8_t *)pWidget->pFeature)[(y >> 3) * pWidget->w + x] |= (0x01 << (y % 8))
-C251 COMPILER V5.60.0,  oled_canvas                                                        23/08/22  22:51:18  PAGE 2   
+C251 COMPILER V5.60.0,  oled_canvas                                                        22/09/22  11:45:00  PAGE 2   
 
    57          void og_canvas_drawDot(t_psWidget pWidget, uint8_t x, uint8_t y)
    58          {
@@ -134,7 +134,7 @@ stmt  level    source
   120   5                DRAWDOT_FAST((uint8_t)((y1 - b)/k), y1);
   121   5                y1++;
   122   5              }
-C251 COMPILER V5.60.0,  oled_canvas                                                        23/08/22  22:51:18  PAGE 3   
+C251 COMPILER V5.60.0,  oled_canvas                                                        22/09/22  11:45:00  PAGE 3   
 
   123   4            }
   124   3            else
@@ -202,7 +202,7 @@ stmt  level    source
                  }
                  if((pWidget->config & 0x0f) != CANVAS_WIDGET)
                  {
-C251 COMPILER V5.60.0,  oled_canvas                                                        23/08/22  22:51:18  PAGE 4   
+C251 COMPILER V5.60.0,  oled_canvas                                                        22/09/22  11:45:00  PAGE 4   
 
                    OG_PRINTERROR("wrong type of widget for this method");
                    return;

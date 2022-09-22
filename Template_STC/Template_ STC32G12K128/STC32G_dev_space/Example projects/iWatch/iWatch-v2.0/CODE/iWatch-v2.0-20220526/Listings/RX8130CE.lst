@@ -1,11 +1,11 @@
-C251 COMPILER V5.60.0,  RX8130CE                                                           23/08/22  22:51:20  PAGE 1   
+C251 COMPILER V5.60.0,  RX8130CE                                                           22/09/22  11:45:01  PAGE 1   
 
 
 C251 COMPILER V5.60.0, COMPILATION OF MODULE RX8130CE
 OBJECT MODULE PLACED IN .\Objects\RX8130CE.obj
-COMPILER INVOKED BY: D:\Application\keilC251_v560\C251\BIN\C251.EXE User\RX8130CE.c XSMALL ROM(HUGE) OPTIMIZE(8,SPEED) B
-                    -ROWSE INCDIR(.\User;.\User\oled_gui;.\User\oled_gui\oled_core;.\User\oled_gui\oled_widget;.\User\PageManage;.\User\Senso
-                    -r;.\User\System;.\User\Bluetooth) DEBUG PRINT(.\Listings\RX8130CE.lst) TABS(2) OBJECT(.\Objects\RX8130CE.obj) 
+COMPILER INVOKED BY: D:\Application\Keil_C251\C251\BIN\C251.EXE User\RX8130CE.c XSMALL ROM(HUGE) OPTIMIZE(8,SPEED) BROWS
+                    -E INCDIR(.\User;.\User\oled_gui;.\User\oled_gui\oled_core;.\User\oled_gui\oled_widget;.\User\PageManage;.\User\Sensor;.\
+                    -User\System;.\User\Bluetooth) DEBUG PRINT(.\Listings\RX8130CE.lst) TABS(2) OBJECT(.\Objects\RX8130CE.obj) 
 
 stmt  level    source
 
@@ -66,7 +66,7 @@ stmt  level    source
    55   1        else if(a->mode == ALARM_WORKDAY)
    56   1        {
    57   2          alarm_week_day = 0x1f;
-C251 COMPILER V5.60.0,  RX8130CE                                                           23/08/22  22:51:20  PAGE 2   
+C251 COMPILER V5.60.0,  RX8130CE                                                           22/09/22  11:45:01  PAGE 2   
 
    58   2          RX8130RegSetBit(0x1C, 0x08, 0);   //clear WADA
    59   2        }
@@ -134,7 +134,7 @@ stmt  level    source
   119   1      }
   120          void RX8130CESetClockOuput(unsigned char clock_fq)
   121          {
-C251 COMPILER V5.60.0,  RX8130CE                                                           23/08/22  22:51:20  PAGE 3   
+C251 COMPILER V5.60.0,  RX8130CE                                                           22/09/22  11:45:01  PAGE 3   
 
   122   1        RX8130RegSetBit(0x1C, 0xC0, 0);
   123   1        RX8130RegSetBit(0x1C, (clock_fq << 6), 1);  

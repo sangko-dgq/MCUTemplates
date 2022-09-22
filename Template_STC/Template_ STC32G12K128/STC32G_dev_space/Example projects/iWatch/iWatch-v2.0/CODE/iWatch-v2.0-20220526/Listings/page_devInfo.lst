@@ -1,12 +1,12 @@
-C251 COMPILER V5.60.0,  page_devInfo                                                       24/08/22  19:19:17  PAGE 1   
+C251 COMPILER V5.60.0,  page_devInfo                                                       22/09/22  11:45:02  PAGE 1   
 
 
 C251 COMPILER V5.60.0, COMPILATION OF MODULE page_devInfo
 OBJECT MODULE PLACED IN .\Objects\page_devInfo.obj
-COMPILER INVOKED BY: D:\Application\keilC251_v560\C251\BIN\C251.EXE User\PageManage\page_devInfo.c XSMALL ROM(HUGE) OPTI
-                    -MIZE(8,SPEED) BROWSE INCDIR(.\User;.\User\oled_gui;.\User\oled_gui\oled_core;.\User\oled_gui\oled_widget;.\User\PageMana
-                    -ge;.\User\Sensor;.\User\System;.\User\Bluetooth) DEBUG PRINT(.\Listings\page_devInfo.lst) TABS(2) OBJECT(.\Objects\page_
-                    -devInfo.obj) 
+COMPILER INVOKED BY: D:\Application\Keil_C251\C251\BIN\C251.EXE User\PageManage\page_devInfo.c XSMALL ROM(HUGE) OPTIMIZE
+                    -(8,SPEED) BROWSE INCDIR(.\User;.\User\oled_gui;.\User\oled_gui\oled_core;.\User\oled_gui\oled_widget;.\User\PageManage;.
+                    -\User\Sensor;.\User\System;.\User\Bluetooth) DEBUG PRINT(.\Listings\page_devInfo.lst) TABS(2) OBJECT(.\Objects\page_devI
+                    -nfo.obj) 
 
 stmt  level    source
 
@@ -66,7 +66,7 @@ stmt  level    source
    54   1        uint8_t i;
    55   1        group1 = og_group_create(EN_TEXT_SUM * 2);
    56   1        for(i = 0; i < EN_TEXT_SUM; i++)
-C251 COMPILER V5.60.0,  page_devInfo                                                       24/08/22  19:19:17  PAGE 2   
+C251 COMPILER V5.60.0,  page_devInfo                                                       22/09/22  11:45:02  PAGE 2   
 
    57   1        {
    58   2          ch_text[i] = og_label_create(FONT_GB2312_15X16, 0, i * 32);
@@ -134,7 +134,7 @@ stmt  level    source
   117   3          }
   118   2        }
   119   1        else if(event == KEY4_PRESSED)
-C251 COMPILER V5.60.0,  page_devInfo                                                       24/08/22  19:19:17  PAGE 3   
+C251 COMPILER V5.60.0,  page_devInfo                                                       22/09/22  11:45:02  PAGE 3   
 
   120   1        {
   121   2          if(page != 2)

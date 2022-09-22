@@ -1,12 +1,12 @@
-C251 COMPILER V5.60.0,  page_snake                                                         24/08/22  19:19:20  PAGE 1   
+C251 COMPILER V5.60.0,  page_snake                                                         22/09/22  11:45:03  PAGE 1   
 
 
 C251 COMPILER V5.60.0, COMPILATION OF MODULE page_snake
 OBJECT MODULE PLACED IN .\Objects\page_snake.obj
-COMPILER INVOKED BY: D:\Application\keilC251_v560\C251\BIN\C251.EXE User\PageManage\page_snake.c XSMALL ROM(HUGE) OPTIMI
-                    -ZE(8,SPEED) BROWSE INCDIR(.\User;.\User\oled_gui;.\User\oled_gui\oled_core;.\User\oled_gui\oled_widget;.\User\PageManage
-                    -;.\User\Sensor;.\User\System;.\User\Bluetooth) DEBUG PRINT(.\Listings\page_snake.lst) TABS(2) OBJECT(.\Objects\page_snak
-                    -e.obj) 
+COMPILER INVOKED BY: D:\Application\Keil_C251\C251\BIN\C251.EXE User\PageManage\page_snake.c XSMALL ROM(HUGE) OPTIMIZE(8
+                    -,SPEED) BROWSE INCDIR(.\User;.\User\oled_gui;.\User\oled_gui\oled_core;.\User\oled_gui\oled_widget;.\User\PageManage;.\U
+                    -ser\Sensor;.\User\System;.\User\Bluetooth) DEBUG PRINT(.\Listings\page_snake.lst) TABS(2) OBJECT(.\Objects\page_snake.ob
+                    -j) 
 
 stmt  level    source
 
@@ -66,7 +66,7 @@ stmt  level    source
    54   1        og_label_setText(text1, "Score:");
    55   1        label_score = og_label_create(FONT_ASCII_5X7, 93, 8);
    56   1        text2 = og_label_create(FONT_ASCII_5X7, 93, 40);
-C251 COMPILER V5.60.0,  page_snake                                                         24/08/22  19:19:20  PAGE 2   
+C251 COMPILER V5.60.0,  page_snake                                                         22/09/22  11:45:03  PAGE 2   
 
    57   1        og_label_setText(text2, "Best:");
    58   1        label_best = og_label_create(FONT_ASCII_5X7, 93, 48);
@@ -134,7 +134,7 @@ stmt  level    source
   118   2          
   119   2          /* Fix
   120   2          LSM6DSMReadGYRAndACC(&LSM6DSM);
-C251 COMPILER V5.60.0,  page_snake                                                         24/08/22  19:19:20  PAGE 3   
+C251 COMPILER V5.60.0,  page_snake                                                         22/09/22  11:45:03  PAGE 3   
 
   121   2          IMUupdate(&LSM6DSM);
   122   2          */
@@ -202,7 +202,7 @@ stmt  level    source
   184   5                  break;
   185   5                case 3:   //ио
   186   5                  snake_head_y--;
-C251 COMPILER V5.60.0,  page_snake                                                         24/08/22  19:19:20  PAGE 4   
+C251 COMPILER V5.60.0,  page_snake                                                         22/09/22  11:45:03  PAGE 4   
 
   187   5                  break;
   188   5              }
@@ -270,7 +270,7 @@ stmt  level    source
   244   4              og_canvas_drawDot(canvas1, delicious_x-1,delicious_y+1);
 *** WARNING C188 IN LINE 244 OF User\PageManage\page_snake.c: 'parameter 2': value truncated
 *** WARNING C188 IN LINE 244 OF User\PageManage\page_snake.c: 'parameter 3': value truncated
-C251 COMPILER V5.60.0,  page_snake                                                         24/08/22  19:19:20  PAGE 5   
+C251 COMPILER V5.60.0,  page_snake                                                         22/09/22  11:45:03  PAGE 5   
 
   245   4              og_canvas_drawDot(canvas1, delicious_x,delicious_y-1);
 *** WARNING C188 IN LINE 245 OF User\PageManage\page_snake.c: 'parameter 3': value truncated
@@ -339,7 +339,7 @@ Module Information          Static   Overlayable
 ------------------------------------------------
   code size            =       296     ------
   ecode size           =      1830     ------
-C251 COMPILER V5.60.0,  page_snake                                                         24/08/22  19:19:20  PAGE 6   
+C251 COMPILER V5.60.0,  page_snake                                                         22/09/22  11:45:03  PAGE 6   
 
   data size            =    ------     ------
   idata size           =    ------     ------

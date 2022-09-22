@@ -1,19 +1,19 @@
-L251 LINKER/LOCATER V4.66.93.0                                                          08/24/2022  19:19:43  PAGE 1
+L251 LINKER/LOCATER V4.66.93.0                                                          09/22/2022  11:45:04  PAGE 1
 
 
 L251 LINKER/LOCATER V4.66.93.0, INVOKED BY:
-D:\APPLICATION\KEILC251_V560\C251\BIN\L251.EXE .\Objects\oled_anim.obj, .\Objects\oled_draw.obj, .\Objects\oled_font.obj
->> , .\Objects\oled_group.obj, .\Objects\oled_gui.obj, .\Objects\oled_widget.obj, .\Objects\GT20L16S1Y.obj, .\Objects\ol
->> ed_bmp.obj, .\Objects\oled_slider.obj, .\Objects\oled_switch.obj, .\Objects\oled_canvas.obj, .\Objects\oled_label.obj
->> , .\Objects\Buzzer.obj, .\Objects\Delay.obj, .\Objects\EEPROM.obj, .\Objects\IIC.obj, .\Objects\SPI.obj, .\Objects\Sy
->> stem.obj, .\Objects\RX8130CE.obj, .\Objects\oled.obj, .\Objects\main.obj, .\Objects\iWatch.obj, .\Objects\LSM6DSM.obj
->> , .\Objects\QMC5883L.obj, .\Objects\Ellipsoid fitting.obj, .\Objects\BMP390.obj, .\Objects\HDC2080.obj, .\Objects\HTU
->> 21D.obj, .\Objects\pageManager.obj, .\Objects\page_alarm.obj, .\Objects\page_compass.obj, .\Objects\page_devInfo.obj,
->>  .\Objects\page_flashlight.obj, .\Objects\page_hdc2080.obj, .\Objects\page_ilink.obj, .\Objects\page_lsm6dsl.obj, .\O
->> bjects\page_magcal.obj, .\Objects\page_menu.obj, .\Objects\page_pedometer.obj, .\Objects\page_settime.obj, .\Objects\
->> page_setting.obj, .\Objects\page_snake.obj, .\Objects\page_trexrunner.obj, .\Objects\page_watch.obj, .\Objects\page_b
->> tspp.obj, .\Objects\page_stopwatch.obj, .\Objects\Bluetooth.obj TO .\Objects\iWatch-v2.0 PRINT (.\Listings\iWatch-v2.
->> map) CASE CLASSES (EDATA (0X0-0XFFF), HDATA (0X0-0XFFF), HCONST (0XFE0400-0XFFFFFF), ECODE (0XFE0400-0XFFFFFF))
+D:\APPLICATION\KEIL_C251\C251\BIN\L251.EXE .\Objects\oled_anim.obj, .\Objects\oled_draw.obj, .\Objects\oled_font.obj, .\
+>> Objects\oled_group.obj, .\Objects\oled_gui.obj, .\Objects\oled_widget.obj, .\Objects\GT20L16S1Y.obj, .\Objects\oled_b
+>> mp.obj, .\Objects\oled_slider.obj, .\Objects\oled_switch.obj, .\Objects\oled_canvas.obj, .\Objects\oled_label.obj, .\
+>> Objects\Buzzer.obj, .\Objects\Delay.obj, .\Objects\EEPROM.obj, .\Objects\IIC.obj, .\Objects\SPI.obj, .\Objects\System
+>> .obj, .\Objects\RX8130CE.obj, .\Objects\oled.obj, .\Objects\main.obj, .\Objects\iWatch.obj, .\Objects\LSM6DSM.obj, .\
+>> Objects\QMC5883L.obj, .\Objects\Ellipsoid fitting.obj, .\Objects\BMP390.obj, .\Objects\HDC2080.obj, .\Objects\HTU21D.
+>> obj, .\Objects\pageManager.obj, .\Objects\page_alarm.obj, .\Objects\page_compass.obj, .\Objects\page_devInfo.obj, .\O
+>> bjects\page_flashlight.obj, .\Objects\page_hdc2080.obj, .\Objects\page_ilink.obj, .\Objects\page_lsm6dsl.obj, .\Objec
+>> ts\page_magcal.obj, .\Objects\page_menu.obj, .\Objects\page_pedometer.obj, .\Objects\page_settime.obj, .\Objects\page
+>> _setting.obj, .\Objects\page_snake.obj, .\Objects\page_trexrunner.obj, .\Objects\page_watch.obj, .\Objects\page_btspp
+>> .obj, .\Objects\page_stopwatch.obj, .\Objects\Bluetooth.obj TO .\Objects\iWatch-v2.0 PRINT (.\Listings\iWatch-v2.map)
+>>  CASE CLASSES (EDATA (0X0-0XFFF), HDATA (0X0-0XFFF), HCONST (0XFE0400-0XFFFFFF), ECODE (0XFE0400-0XFFFFFF))
 
 
 CPU MODE:     251 SOURCE MODE
@@ -67,7 +67,7 @@ INPUT MODULES INCLUDED:
   .\Objects\iWatch.obj (iWatch)
          COMMENT TYPE 0: C251 V5.60.0
   .\Objects\LSM6DSM.obj (LSM6DSM)
-L251 LINKER/LOCATER V4.66.93.0                                                        08/24/2022  19:19:43  PAGE 2
+L251 LINKER/LOCATER V4.66.93.0                                                        09/22/2022  11:45:04  PAGE 2
 
 
          COMMENT TYPE 0: C251 V5.60.0
@@ -119,91 +119,91 @@ INPUT MODULES INCLUDED:
          COMMENT TYPE 0: C251 V5.60.0
   .\Objects\Bluetooth.obj (Bluetooth)
          COMMENT TYPE 0: C251 V5.60.0
-  D:\APPLICATION\KEILC251_V560\C251\LIB\C2SFPXS.LIB (?C?FPADD?)
+  D:\APPLICATION\KEIL_C251\C251\LIB\C2SFPXS.LIB (?C?FPADD?)
          COMMENT TYPE 0: A251 V4.69.6.0
-  D:\APPLICATION\KEILC251_V560\C251\LIB\C2SFPXS.LIB (?C?FPMUL?)
+  D:\APPLICATION\KEIL_C251\C251\LIB\C2SFPXS.LIB (?C?FPMUL?)
          COMMENT TYPE 0: A251 V4.69.6.0
-  D:\APPLICATION\KEILC251_V560\C251\LIB\C2SFPXS.LIB (?C?FPDIV?)
+  D:\APPLICATION\KEIL_C251\C251\LIB\C2SFPXS.LIB (?C?FPDIV?)
          COMMENT TYPE 0: A251 V4.69.6.0
-  D:\APPLICATION\KEILC251_V560\C251\LIB\C2SFPXS.LIB (?C?FPCMP?)
+  D:\APPLICATION\KEIL_C251\C251\LIB\C2SFPXS.LIB (?C?FPCMP?)
          COMMENT TYPE 0: A251 V4.69.6.0
-  D:\APPLICATION\KEILC251_V560\C251\LIB\C2SFPXS.LIB (?C?FPNEG?)
+  D:\APPLICATION\KEIL_C251\C251\LIB\C2SFPXS.LIB (?C?FPNEG?)
          COMMENT TYPE 0: A251 V4.69.6.0
-  D:\APPLICATION\KEILC251_V560\C251\LIB\C2SFPXS.LIB (?C?FCAST?)
+  D:\APPLICATION\KEIL_C251\C251\LIB\C2SFPXS.LIB (?C?FCAST?)
          COMMENT TYPE 0: A251 V4.69.6.0
-  D:\APPLICATION\KEILC251_V560\C251\LIB\C2SFPXS.LIB (?C?CASTF?)
+  D:\APPLICATION\KEIL_C251\C251\LIB\C2SFPXS.LIB (?C?CASTF?)
          COMMENT TYPE 0: A251 V4.69.6.0
-  D:\APPLICATION\KEILC251_V560\C251\LIB\C2SFPXS.LIB (PRINTF?)
+  D:\APPLICATION\KEIL_C251\C251\LIB\C2SFPXS.LIB (PRINTF?)
          COMMENT TYPE 0: A251 V4.69.6.0
-L251 LINKER/LOCATER V4.66.93.0                                                        08/24/2022  19:19:43  PAGE 3
+L251 LINKER/LOCATER V4.66.93.0                                                        09/22/2022  11:45:04  PAGE 3
 
 
-  D:\APPLICATION\KEILC251_V560\C251\LIB\C2SFPXS.LIB (SPRINTF?)
+  D:\APPLICATION\KEIL_C251\C251\LIB\C2SFPXS.LIB (SPRINTF?)
          COMMENT TYPE 0: A251 V4.69.6.0
-  D:\APPLICATION\KEILC251_V560\C251\LIB\C2SFPXS.LIB (SQRT??)
+  D:\APPLICATION\KEIL_C251\C251\LIB\C2SFPXS.LIB (SQRT??)
          COMMENT TYPE 0: A251 V4.69.6.0
-  D:\APPLICATION\KEILC251_V560\C251\LIB\C2SFPXS.LIB (SIN??)
+  D:\APPLICATION\KEIL_C251\C251\LIB\C2SFPXS.LIB (SIN??)
          COMMENT TYPE 0: A251 V4.69.6.0
-  D:\APPLICATION\KEILC251_V560\C251\LIB\C2SFPXS.LIB (ATAN??)
+  D:\APPLICATION\KEIL_C251\C251\LIB\C2SFPXS.LIB (ATAN??)
          COMMENT TYPE 0: A251 V4.69.6.0
-  D:\APPLICATION\KEILC251_V560\C251\LIB\C2SFPXS.LIB (ASIN??)
+  D:\APPLICATION\KEIL_C251\C251\LIB\C2SFPXS.LIB (ASIN??)
          COMMENT TYPE 0: A251 V4.69.6.0
-  D:\APPLICATION\KEILC251_V560\C251\LIB\C2SFPXS.LIB (ATAN2?)
+  D:\APPLICATION\KEIL_C251\C251\LIB\C2SFPXS.LIB (ATAN2?)
          COMMENT TYPE 0: C251 V5.58.7
-  D:\APPLICATION\KEILC251_V560\C251\LIB\C2SFPXS.LIB (?C?FPGETOPN?)
+  D:\APPLICATION\KEIL_C251\C251\LIB\C2SFPXS.LIB (?C?FPGETOPN?)
          COMMENT TYPE 0: A251 V4.69.6.0
-  D:\APPLICATION\KEILC251_V560\C251\LIB\C2SFPXS.LIB (?C?PRNFMT?)
+  D:\APPLICATION\KEIL_C251\C251\LIB\C2SFPXS.LIB (?C?PRNFMT?)
          COMMENT TYPE 0: A251 V4.69.6.0
-  D:\APPLICATION\KEILC251_V560\C251\LIB\C2SFPXS.LIB (?C?FPSERIES?)
+  D:\APPLICATION\KEIL_C251\C251\LIB\C2SFPXS.LIB (?C?FPSERIES?)
          COMMENT TYPE 0: A251 V4.69.6.0
-  D:\APPLICATION\KEILC251_V560\C251\LIB\C2SFPXS.LIB (?C?FPCONVERT?)
+  D:\APPLICATION\KEIL_C251\C251\LIB\C2SFPXS.LIB (?C?FPCONVERT?)
          COMMENT TYPE 0: A251 V4.69.6.0
-  D:\APPLICATION\KEILC251_V560\C251\LIB\C2SFPXS.LIB (?C?FTNPWR?)
+  D:\APPLICATION\KEIL_C251\C251\LIB\C2SFPXS.LIB (?C?FTNPWR?)
          COMMENT TYPE 0: A251 V4.69.6.0
-  D:\APPLICATION\KEILC251_V560\C251\LIB\C2SXS.LIB (?C_START?)
+  D:\APPLICATION\KEIL_C251\C251\LIB\C2SXS.LIB (?C_START?)
          COMMENT TYPE 0: A251 V4.69.6.0
-  D:\APPLICATION\KEILC251_V560\C251\LIB\C2SXS.LIB (?C?INITEDATA)
+  D:\APPLICATION\KEIL_C251\C251\LIB\C2SXS.LIB (?C?INITEDATA)
          COMMENT TYPE 0: A251 V4.69.6.0
-  D:\APPLICATION\KEILC251_V560\C251\LIB\C2SXS.LIB (?C?INITHDATA)
+  D:\APPLICATION\KEIL_C251\C251\LIB\C2SXS.LIB (?C?INITHDATA)
          COMMENT TYPE 0: A251 V4.69.6.0
-  D:\APPLICATION\KEILC251_V560\C251\LIB\C2SXS.LIB (?C?SIDIV?)
+  D:\APPLICATION\KEIL_C251\C251\LIB\C2SXS.LIB (?C?SIDIV?)
          COMMENT TYPE 0: A251 V4.69.6.0
-  D:\APPLICATION\KEILC251_V560\C251\LIB\C2SXS.LIB (?C?ULDIV?)
+  D:\APPLICATION\KEIL_C251\C251\LIB\C2SXS.LIB (?C?ULDIV?)
          COMMENT TYPE 0: A251 V4.69.6.0
-  D:\APPLICATION\KEILC251_V560\C251\LIB\C2SXS.LIB (PUTCHAR?)
+  D:\APPLICATION\KEIL_C251\C251\LIB\C2SXS.LIB (PUTCHAR?)
          COMMENT TYPE 0: A251 V4.69.6.0
-  D:\APPLICATION\KEILC251_V560\C251\LIB\C2SXS.LIB (ATOI?)
+  D:\APPLICATION\KEIL_C251\C251\LIB\C2SXS.LIB (ATOI?)
          COMMENT TYPE 0: C251 V5.58.7
-  D:\APPLICATION\KEILC251_V560\C251\LIB\C2SXS.LIB (RAND?)
+  D:\APPLICATION\KEIL_C251\C251\LIB\C2SXS.LIB (RAND?)
          COMMENT TYPE 0: C251 V5.58.7
-  D:\APPLICATION\KEILC251_V560\C251\LIB\C2SXS.LIB (STRCMP??)
+  D:\APPLICATION\KEIL_C251\C251\LIB\C2SXS.LIB (STRCMP??)
          COMMENT TYPE 0: A251 V4.69.6.0
-  D:\APPLICATION\KEILC251_V560\C251\LIB\C2SXS.LIB (MEMCPY?)
+  D:\APPLICATION\KEIL_C251\C251\LIB\C2SXS.LIB (MEMCPY?)
          COMMENT TYPE 0: C251 V5.58.7
-  D:\APPLICATION\KEILC251_V560\C251\LIB\C2SXS.LIB (MALLOC?)
+  D:\APPLICATION\KEIL_C251\C251\LIB\C2SXS.LIB (MALLOC?)
          COMMENT TYPE 0: C251 V5.58.7
-  D:\APPLICATION\KEILC251_V560\C251\LIB\C2SXS.LIB (FREE?)
+  D:\APPLICATION\KEIL_C251\C251\LIB\C2SXS.LIB (FREE?)
          COMMENT TYPE 0: C251 V5.58.7
-  D:\APPLICATION\KEILC251_V560\C251\LIB\C2SXS.LIB (INIT_MEM?)
+  D:\APPLICATION\KEIL_C251\C251\LIB\C2SXS.LIB (INIT_MEM?)
          COMMENT TYPE 0: C251 V5.58.7
-  D:\APPLICATION\KEILC251_V560\C251\LIB\C2SXS.LIB (REALLOC?)
+  D:\APPLICATION\KEIL_C251\C251\LIB\C2SXS.LIB (REALLOC?)
          COMMENT TYPE 0: C251 V5.58.7
-  D:\APPLICATION\KEILC251_V560\C251\LIB\C2SXS.LIB (CALLOC?)
+  D:\APPLICATION\KEIL_C251\C251\LIB\C2SXS.LIB (CALLOC?)
          COMMENT TYPE 0: C251 V5.58.7
-  D:\APPLICATION\KEILC251_V560\C251\LIB\C2SXS.LIB (?C?INITEDATA_END)
+  D:\APPLICATION\KEIL_C251\C251\LIB\C2SXS.LIB (?C?INITEDATA_END)
          COMMENT TYPE 0: A251 V4.69.6.0
-  D:\APPLICATION\KEILC251_V560\C251\LIB\C2SXS.LIB (?C?INITHDATA_END)
+  D:\APPLICATION\KEIL_C251\C251\LIB\C2SXS.LIB (?C?INITHDATA_END)
          COMMENT TYPE 0: A251 V4.69.6.0
-  D:\APPLICATION\KEILC251_V560\C251\LIB\C2SXS.LIB (?C?LMUL?)
+  D:\APPLICATION\KEIL_C251\C251\LIB\C2SXS.LIB (?C?LMUL?)
          COMMENT TYPE 0: A251 V4.69.6.0
-  D:\APPLICATION\KEILC251_V560\C251\LIB\C2SXS.LIB (ISDIGIT?)
+  D:\APPLICATION\KEIL_C251\C251\LIB\C2SXS.LIB (ISDIGIT?)
          COMMENT TYPE 0: C251 V5.58.7
-  D:\APPLICATION\KEILC251_V560\C251\LIB\C2SXS.LIB (ISSPACE?)
+  D:\APPLICATION\KEIL_C251\C251\LIB\C2SXS.LIB (ISSPACE?)
          COMMENT TYPE 0: C251 V5.58.7
-  D:\APPLICATION\KEILC251_V560\C251\LIB\C2SXS.LIB (MEMSET?)
+  D:\APPLICATION\KEIL_C251\C251\LIB\C2SXS.LIB (MEMSET?)
          COMMENT TYPE 0: C251 V5.58.7
-  D:\APPLICATION\KEILC251_V560\C251\LIB\C2SXS.LIB (mdefine)
-L251 LINKER/LOCATER V4.66.93.0                                                        08/24/2022  19:19:43  PAGE 4
+  D:\APPLICATION\KEIL_C251\C251\LIB\C2SXS.LIB (mdefine)
+L251 LINKER/LOCATER V4.66.93.0                                                        09/22/2022  11:45:04  PAGE 4
 
 
          COMMENT TYPE 0: C251 V5.58.7
@@ -271,7 +271,7 @@ START     STOP      LENGTH    ALIGN  RELOC    MEMORY CLASS   SEGMENT NAME
 000AA3H   000AA6H   000004H   BYTE   UNIT     EDATA          ?ED?PAGE_BTSPP
 000AA7H   000AAAH   000004H   BYTE   UNIT     EDATA          ?ED?RAND_
 000AABH   000AADH   000003H   BYTE   UNIT     EDATA          ?ED?BUZZER
-L251 LINKER/LOCATER V4.66.93.0                                                        08/24/2022  19:19:43  PAGE 5
+L251 LINKER/LOCATER V4.66.93.0                                                        09/22/2022  11:45:04  PAGE 5
 
 
 000AAEH   000AB0H   000003H   BYTE   UNIT     EDATA          ?ED?SYSTEM
@@ -339,7 +339,7 @@ FEAE1AH   FEAE9AH   000081H   BYTE   INSEG    ECODE          ?PR?ATOI_
 FEAE9BH   FEAF0AH   000070H   BYTE   INSEG    ECODE          ?PR?SPI
 FEAF0BH   FEAF63H   000059H   BYTE   INSEG    ECODE          ?PR?MALLOC_
 FEAF64H   FEAFB5H   000052H   BYTE   INSEG    ECODE          ?PR?REALLOC_
-L251 LINKER/LOCATER V4.66.93.0                                                        08/24/2022  19:19:43  PAGE 6
+L251 LINKER/LOCATER V4.66.93.0                                                        09/22/2022  11:45:04  PAGE 6
 
 
 FEAFB6H   FEAFFEH   000049H   BYTE   INSEG    ECODE          ?PR?ATAN2_
@@ -407,7 +407,7 @@ FF0FC3H   FF1100H   00013EH   BYTE   UNIT     CODE           ?CO?PAGE_SETTING
 FF1101H   FF123AH   00013AH   BYTE   UNIT     CODE           ?CO?PAGE_PEDOMETER
 FF123BH   FF1368H   00012EH   BYTE   UNIT     CODE           ?CO?PAGE_HDC2080
 FF1369H   FF148AH   000122H   BYTE   UNIT     CODE           ?CO?PAGE_FLASHLIGHT
-L251 LINKER/LOCATER V4.66.93.0                                                        08/24/2022  19:19:43  PAGE 7
+L251 LINKER/LOCATER V4.66.93.0                                                        09/22/2022  11:45:04  PAGE 7
 
 
 FF148BH   FF15ACH   000122H   BYTE   UNIT     CODE           ?CO?PAGE_LSM6DSL
@@ -475,7 +475,7 @@ INT1_Isr?/iWatch                            ----- -----
 
 INT2_Isr?/iWatch                            ----- -----
 
-L251 LINKER/LOCATER V4.66.93.0                                                        08/24/2022  19:19:43  PAGE 8
+L251 LINKER/LOCATER V4.66.93.0                                                        09/22/2022  11:45:04  PAGE 8
 
 
 *** NEW ROOT ******************************
@@ -543,7 +543,7 @@ UartInit?/System                            ----- -----
 
 Uart4Init?/System                           ----- -----
 
-L251 LINKER/LOCATER V4.66.93.0                                                        08/24/2022  19:19:43  PAGE 9
+L251 LINKER/LOCATER V4.66.93.0                                                        09/22/2022  11:45:04  PAGE 9
 
 
 IIC_Init?/IIC                               ----- -----
@@ -611,7 +611,7 @@ RX8130CEInit?/RX8130CE                      ----- -----
   +--> RX8130CEClearAlarmFlag?/RX8130CE
   +--> RX8130CESetTimer?/RX8130CE
 
-L251 LINKER/LOCATER V4.66.93.0                                                        08/24/2022  19:19:43  PAGE 10
+L251 LINKER/LOCATER V4.66.93.0                                                        09/22/2022  11:45:04  PAGE 10
 
 
 RX8130CESetClockOuput?/RX8130CE             ----- -----
@@ -679,7 +679,7 @@ LSM6DSMInit?/LSM6DSM                        ----- -----
   +--> LSM6DSMSoftReset?/LSM6DSM
   +--> LSM6DSMRSetRegisterBits?/LSM6DSM
 
-L251 LINKER/LOCATER V4.66.93.0                                                        08/24/2022  19:19:43  PAGE 11
+L251 LINKER/LOCATER V4.66.93.0                                                        09/22/2022  11:45:04  PAGE 11
 
 
 LSM6DSMCheckConnection?/LSM6DSM             ----- -----
@@ -747,7 +747,7 @@ BMP390Init?/BMP390                          ----- -----
 BMP390CheckConnection?/BMP390               ----- -----
   +--> BMP390ReadByte?/BMP390
 
-L251 LINKER/LOCATER V4.66.93.0                                                        08/24/2022  19:19:43  PAGE 12
+L251 LINKER/LOCATER V4.66.93.0                                                        09/22/2022  11:45:04  PAGE 12
 
 
 BMP390ReadByte?/BMP390                      ----- -----
@@ -815,7 +815,7 @@ pageRegister_page_watch?/page_watch         ----- -----
 Setup?/page_watch                           ----- -----
   +--> RX8130CEReadTime?/RX8130CE
   +--> SPRINTF?/SPRINTF?
-L251 LINKER/LOCATER V4.66.93.0                                                        08/24/2022  19:19:43  PAGE 13
+L251 LINKER/LOCATER V4.66.93.0                                                        09/22/2022  11:45:04  PAGE 13
 
 
   +--> og_bmp_create?/oled_bmp
@@ -883,7 +883,7 @@ Loop?/page_watch                            ----- -----
   +--> og_bmp_setBmp?/oled_bmp
   +--> DisplayTimeInAnim?/page_watch
 
-L251 LINKER/LOCATER V4.66.93.0                                                        08/24/2022  19:19:43  PAGE 14
+L251 LINKER/LOCATER V4.66.93.0                                                        09/22/2022  11:45:04  PAGE 14
 
 
 pageExecuteRate?/pageManager                ----- -----
@@ -951,7 +951,7 @@ pageRegister?/pageManager                   07A7H 07B6H
 
 pageRegister_page_menu?/page_menu           ----- -----
   +--> Setup?/page_menu
-L251 LINKER/LOCATER V4.66.93.0                                                        08/24/2022  19:19:43  PAGE 15
+L251 LINKER/LOCATER V4.66.93.0                                                        09/22/2022  11:45:04  PAGE 15
 
 
   +--> Loop?/page_menu
@@ -1019,7 +1019,7 @@ Loop?/page_stopwatch                        ----- -----
   +--> ?C?ULIDIV?/?C?ULDIV?
   +--> SPRINTF?/SPRINTF?
   +--> og_label_setText?/oled_label
-L251 LINKER/LOCATER V4.66.93.0                                                        08/24/2022  19:19:43  PAGE 16
+L251 LINKER/LOCATER V4.66.93.0                                                        09/22/2022  11:45:04  PAGE 16
 
 
 
@@ -1087,7 +1087,7 @@ HTU21DSendCommand?/HTU21D                   ----- -----
   +--> I2C_Stop?/IIC
 
 HTU21DReadData?/HTU21D                      ----- -----
-L251 LINKER/LOCATER V4.66.93.0                                                        08/24/2022  19:19:43  PAGE 17
+L251 LINKER/LOCATER V4.66.93.0                                                        09/22/2022  11:45:04  PAGE 17
 
 
   +--> I2C_Start?/IIC
@@ -1155,7 +1155,7 @@ calloc?/CALLOC?                             07BFH 07C2H
 memset??/MEMSET?                            ----- -----
 
 Loop?/page_pedometer                        07A7H 07B2H
-L251 LINKER/LOCATER V4.66.93.0                                                        08/24/2022  19:19:43  PAGE 18
+L251 LINKER/LOCATER V4.66.93.0                                                        09/22/2022  11:45:04  PAGE 18
 
 
   +--> pageExecuteRate?/pageManager
@@ -1223,7 +1223,7 @@ BtOn?/Bluetooth                             ----- -----
 Loop?/page_btspp                            ----- -----
   +--> pageExecuteRate?/pageManager
   +--> iWatchKeepActive?/iWatch
-L251 LINKER/LOCATER V4.66.93.0                                                        08/24/2022  19:19:43  PAGE 19
+L251 LINKER/LOCATER V4.66.93.0                                                        09/22/2022  11:45:04  PAGE 19
 
 
   +--> BtCheckConnection?/Bluetooth
@@ -1291,7 +1291,7 @@ Setup?/page_compass                         ----- -----
   +--> og_bmp_create?/oled_bmp
   +--> og_canvas_create?/oled_canvas
   +--> og_group_setPosOffset?/oled_group
-L251 LINKER/LOCATER V4.66.93.0                                                        08/24/2022  19:19:43  PAGE 20
+L251 LINKER/LOCATER V4.66.93.0                                                        09/22/2022  11:45:04  PAGE 20
 
 
   +--> og_group_addAnimOffset?/oled_group
@@ -1359,7 +1359,7 @@ Setup?/page_setting                         ----- -----
   +--> og_slider_create?/oled_slider
   +--> og_switch_create?/oled_switch
   +--> og_group_setPosOffset?/oled_group
-L251 LINKER/LOCATER V4.66.93.0                                                        08/24/2022  19:19:43  PAGE 21
+L251 LINKER/LOCATER V4.66.93.0                                                        09/22/2022  11:45:04  PAGE 21
 
 
   +--> og_group_addAnimOffset?/oled_group
@@ -1427,7 +1427,7 @@ LSM6DSMDisablePedometer?/LSM6DSM            ----- -----
 Bee?/Buzzer                                 ----- -----
   +--> PWMOn?/Buzzer
 
-L251 LINKER/LOCATER V4.66.93.0                                                        08/24/2022  19:19:43  PAGE 22
+L251 LINKER/LOCATER V4.66.93.0                                                        09/22/2022  11:45:04  PAGE 22
 
 
 og_group_focusWidget?/oled_group            07A7H 07A8H
@@ -1495,7 +1495,7 @@ Setup?/page_alarm                           ----- -----
   +--> og_group_addAnimOffset?/oled_group
 
 Loop?/page_alarm                            ----- -----
-L251 LINKER/LOCATER V4.66.93.0                                                        08/24/2022  19:19:43  PAGE 23
+L251 LINKER/LOCATER V4.66.93.0                                                        09/22/2022  11:45:04  PAGE 23
 
 
   +--> pageExecuteRate?/pageManager
@@ -1563,7 +1563,7 @@ OLED_setBreathing?/oled                     ----- -----
 delet?/page_flashlight                      ----- -----
   +--> og_widget_delet?/oled_widget
   +--> pageSetStatus?/pageManager
-L251 LINKER/LOCATER V4.66.93.0                                                        08/24/2022  19:19:43  PAGE 24
+L251 LINKER/LOCATER V4.66.93.0                                                        09/22/2022  11:45:04  PAGE 24
 
 
 
@@ -1631,7 +1631,7 @@ Setup?/page_ilink                           ----- -----
   +--> LSM6DSMConfigGyr?/LSM6DSM
   +--> Uart1Reset?/page_ilink
   +--> BtOn?/Bluetooth
-L251 LINKER/LOCATER V4.66.93.0                                                        08/24/2022  19:19:43  PAGE 25
+L251 LINKER/LOCATER V4.66.93.0                                                        09/22/2022  11:45:04  PAGE 25
 
 
 
@@ -1699,7 +1699,7 @@ Exit?/page_ilink                            ----- -----
   +--> delet?/page_ilink
   +--> og_group_addAnimOffset?/oled_group
 
-L251 LINKER/LOCATER V4.66.93.0                                                        08/24/2022  19:19:43  PAGE 26
+L251 LINKER/LOCATER V4.66.93.0                                                        09/22/2022  11:45:04  PAGE 26
 
 
 delet?/page_ilink                           ----- -----
@@ -1767,7 +1767,7 @@ anim_fall?/page_trexrunner                  ----- -----
 pageRegister_page_snake?/page_snake         ----- -----
   +--> Setup?/page_snake
   +--> Loop?/page_snake
-L251 LINKER/LOCATER V4.66.93.0                                                        08/24/2022  19:19:43  PAGE 27
+L251 LINKER/LOCATER V4.66.93.0                                                        09/22/2022  11:45:04  PAGE 27
 
 
   +--> Exit?/page_snake
@@ -1835,7 +1835,7 @@ Setup?/page_magcal                          ----- -----
 QMC5883LClearCaliValue?/QMC5883L            ----- -----
 
 ResetMatrix?/Ellipsoid fitting              ----- -----
-L251 LINKER/LOCATER V4.66.93.0                                                        08/24/2022  19:19:43  PAGE 28
+L251 LINKER/LOCATER V4.66.93.0                                                        09/22/2022  11:45:04  PAGE 28
 
 
 
@@ -1903,7 +1903,7 @@ Matrix_RowSimplify?/Ellipsoid fitting       07C3H 07C6H
 
 k_muiltply_Row?/Ellipsoid fitting           ----- -----
 
-L251 LINKER/LOCATER V4.66.93.0                                                        08/24/2022  19:19:43  PAGE 29
+L251 LINKER/LOCATER V4.66.93.0                                                        09/22/2022  11:45:04  PAGE 29
 
 
 Matrix_Solve?/Ellipsoid fitting             ----- -----
@@ -1971,7 +1971,7 @@ GT20L16S1YGetCharASCII_7X8?/GT20L16S1Y      07BFH 07C2H
   +--> SPI_ReadMultiBytes?/SPI
 
 GT20L16S1YGetCharASCII_8X16?/GT20L16S1Y     07BFH 07C4H
-L251 LINKER/LOCATER V4.66.93.0                                                        08/24/2022  19:19:43  PAGE 30
+L251 LINKER/LOCATER V4.66.93.0                                                        09/22/2022  11:45:04  PAGE 30
 
 
   +--> SPI_WriteByte?/SPI
@@ -2039,7 +2039,7 @@ iWatchStatusHandle?/iWatch                  ----- -----
 pageEventTransmit?/pageManager              ----- -----
 
 RX8130CEReadIntSrc?/RX8130CE                ----- -----
-L251 LINKER/LOCATER V4.66.93.0                                                        08/24/2022  19:19:43  PAGE 31
+L251 LINKER/LOCATER V4.66.93.0                                                        09/22/2022  11:45:04  PAGE 31
 
 
   +--> Single_ReadIIC?/IIC
@@ -2107,7 +2107,7 @@ PUBLIC SYMBOLS OF MODULE:  .\Objects\iWatch-v2.0 (oled_anim)
       00FE0633H   ECODE    FAR LAB   ?C?FCASTL?
       00FE0E7CH   ECODE    ---       ?C?FP2SERIES?
       00FE0406H   ECODE    ---       ?C?FPADD?
-L251 LINKER/LOCATER V4.66.93.0                                                        08/24/2022  19:19:43  PAGE 32
+L251 LINKER/LOCATER V4.66.93.0                                                        09/22/2022  11:45:04  PAGE 32
 
 
       00FE05DFH   ECODE    ---       ?C?FPCMP3?
@@ -2175,7 +2175,7 @@ PUBLIC SYMBOLS OF MODULE:  .\Objects\iWatch-v2.0 (oled_anim)
       00000AACH   EDATA    WORD      bee_time
       00FEA5ACH   ECODE    ---       Beebeebee?
       00011507H   XDATA    ---       BMP390
-L251 LINKER/LOCATER V4.66.93.0                                                        08/24/2022  19:19:43  PAGE 33
+L251 LINKER/LOCATER V4.66.93.0                                                        09/22/2022  11:45:04  PAGE 33
 
 
       00FE52E2H   ECODE    ---       BMP390CheckConnection?
@@ -2243,7 +2243,7 @@ PUBLIC SYMBOLS OF MODULE:  .\Objects\iWatch-v2.0 (oled_anim)
       00FEA16DH   ECODE    ---       GPIOInit?
       00FE9B8CH   ECODE    ---       GT20L16S1YGetCharASCII_5X7?
       00FE9BDCH   ECODE    ---       GT20L16S1YGetCharASCII_7X8?
-L251 LINKER/LOCATER V4.66.93.0                                                        08/24/2022  19:19:43  PAGE 34
+L251 LINKER/LOCATER V4.66.93.0                                                        09/22/2022  11:45:04  PAGE 34
 
 
       00FE9C2EH   ECODE    ---       GT20L16S1YGetCharASCII_8X16?
@@ -2311,7 +2311,7 @@ PUBLIC SYMBOLS OF MODULE:  .\Objects\iWatch-v2.0 (oled_anim)
       00FE159BH   ECODE    ---       iWatchSleep?
       00FE12B4H   ECODE    ---       iWatchStatusHandle?
       00FE1221H   ECODE    ---       iWatchStatusUpdate?
-L251 LINKER/LOCATER V4.66.93.0                                                        08/24/2022  19:19:43  PAGE 35
+L251 LINKER/LOCATER V4.66.93.0                                                        09/22/2022  11:45:04  PAGE 35
 
 
       00FE5969H   ECODE    ---       k_muiltply_Row?
@@ -2379,7 +2379,7 @@ PUBLIC SYMBOLS OF MODULE:  .\Objects\iWatch-v2.0 (oled_anim)
       00FEADA1H   ECODE    ---       og_getTimestamp?
       00FE7791H   ECODE    ---       og_group_addAnimOffset?
       00FE76E4H   ECODE    ---       og_group_addWidget?
-L251 LINKER/LOCATER V4.66.93.0                                                        08/24/2022  19:19:43  PAGE 36
+L251 LINKER/LOCATER V4.66.93.0                                                        09/22/2022  11:45:04  PAGE 36
 
 
       00FE76C7H   ECODE    ---       og_group_create?
@@ -2447,7 +2447,7 @@ PUBLIC SYMBOLS OF MODULE:  .\Objects\iWatch-v2.0 (oled_anim)
 *SFR* 00000096H   DATA     BYTE      P2M0
 *SFR* 00000095H   DATA     BYTE      P2M1
 *SFR* 000000B0H   DATA     BYTE      P3
-L251 LINKER/LOCATER V4.66.93.0                                                        08/24/2022  19:19:43  PAGE 37
+L251 LINKER/LOCATER V4.66.93.0                                                        09/22/2022  11:45:04  PAGE 37
 
 
 *SFR* 000000B0H.2 DATA     BIT       P32
@@ -2515,7 +2515,7 @@ PUBLIC SYMBOLS OF MODULE:  .\Objects\iWatch-v2.0 (oled_anim)
       00FE88F0H   ECODE    ---       QMC5883LClearCaliValue?
       00FE892EH   ECODE    ---       QMC5883LInit?
       00FE8802H   ECODE    ---       QMC5883LRead?
-L251 LINKER/LOCATER V4.66.93.0                                                        08/24/2022  19:19:43  PAGE 38
+L251 LINKER/LOCATER V4.66.93.0                                                        09/22/2022  11:45:04  PAGE 38
 
 
       00FE88AAH   ECODE    ---       QMC5883LSetCaliValue?
@@ -2583,7 +2583,7 @@ PUBLIC SYMBOLS OF MODULE:  .\Objects\iWatch-v2.0 (oled_anim)
       00FEA2EAH   ECODE    ---       SystemWake?
 *SFR* 000000D6H   DATA     BYTE      T2H
 *SFR* 000000D7H   DATA     BYTE      T2L
-L251 LINKER/LOCATER V4.66.93.0                                                        08/24/2022  19:19:43  PAGE 39
+L251 LINKER/LOCATER V4.66.93.0                                                        09/22/2022  11:45:04  PAGE 39
 
 
 *SFR* 000000D4H   DATA     BYTE      T3H
@@ -2651,7 +2651,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\iWatch-v2.0 (oled_anim)
 
       00FE7E03H   BLOCK     ECODE    ---       LVL=0
       00FE7E03H   LINE      ECODE    ---       #10
-L251 LINKER/LOCATER V4.66.93.0                                                        08/24/2022  19:19:43  PAGE 40
+L251 LINKER/LOCATER V4.66.93.0                                                        09/22/2022  11:45:04  PAGE 40
 
 
       00FE7E03H   LINE      ECODE    ---       #12
@@ -2719,7 +2719,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\iWatch-v2.0 (oled_anim)
       REG=0       REGSYM    ---      ---       pAnim
       00FE7FA2H   SYMBOL    ECODE    NEAR LAB  anim_overwrite?341
       00FE7FD1H   SYMBOL    ECODE    NEAR LAB  anim_end?342
-L251 LINKER/LOCATER V4.66.93.0                                                        08/24/2022  19:19:43  PAGE 41
+L251 LINKER/LOCATER V4.66.93.0                                                        09/22/2022  11:45:04  PAGE 41
 
 
       ---         BLOCKEND  ---      ---       LVL=1
@@ -2787,7 +2787,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\iWatch-v2.0 (oled_anim)
       00FE809EH   BLOCK     ECODE    NEAR LAB  LVL=1
       REG=3       REGSYM    ---      ---       pAnim
       000007A7H   SYMBOL    EDATA    WORD      elaps
-L251 LINKER/LOCATER V4.66.93.0                                                        08/24/2022  19:19:43  PAGE 42
+L251 LINKER/LOCATER V4.66.93.0                                                        09/22/2022  11:45:04  PAGE 42
 
 
       00FE80B9H   BLOCK     ECODE    NEAR LAB  LVL=2
@@ -2855,7 +2855,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\iWatch-v2.0 (oled_anim)
       R10         REGSYM    ---      BYTE      y_b
       R14         REGSYM    ---      BYTE      w_b
       000007C3H   SYMBOL    EDATA    BYTE      h_b
-L251 LINKER/LOCATER V4.66.93.0                                                        08/24/2022  19:19:43  PAGE 43
+L251 LINKER/LOCATER V4.66.93.0                                                        09/22/2022  11:45:04  PAGE 43
 
 
       R13         REGSYM    ---      BYTE      offset1
@@ -2923,7 +2923,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\iWatch-v2.0 (oled_anim)
       00FE8D02H   LINE      ECODE    ---       #85
       00FE8D0AH   LINE      ECODE    ---       #86
       00FE8D0EH   LINE      ECODE    ---       #88
-L251 LINKER/LOCATER V4.66.93.0                                                        08/24/2022  19:19:43  PAGE 44
+L251 LINKER/LOCATER V4.66.93.0                                                        09/22/2022  11:45:04  PAGE 44
 
 
       00FE8D38H   LINE      ECODE    ---       #89
@@ -2991,7 +2991,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\iWatch-v2.0 (oled_anim)
       00FE774FH   LINE      ECODE    ---       #39
       00FE774FH   LINE      ECODE    ---       #41
       00FE7757H   LINE      ECODE    ---       #42
-L251 LINKER/LOCATER V4.66.93.0                                                        08/24/2022  19:19:43  PAGE 45
+L251 LINKER/LOCATER V4.66.93.0                                                        09/22/2022  11:45:04  PAGE 45
 
 
       00FE775AH   LINE      ECODE    ---       #44
@@ -3059,7 +3059,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\iWatch-v2.0 (oled_anim)
       00FE78C1H   LINE      ECODE    ---       #86
       00FE78C1H   LINE      ECODE    ---       #87
       00FE78CAH   LINE      ECODE    ---       #88
-L251 LINKER/LOCATER V4.66.93.0                                                        08/24/2022  19:19:43  PAGE 46
+L251 LINKER/LOCATER V4.66.93.0                                                        09/22/2022  11:45:04  PAGE 46
 
 
       00FE78CEH   LINE      ECODE    ---       #89
@@ -3127,7 +3127,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\iWatch-v2.0 (oled_anim)
       00FE7A47H   LINE      ECODE    ---       #156
       00FE7A50H   LINE      ECODE    ---       #157
       00FE7A62H   LINE      ECODE    ---       #158
-L251 LINKER/LOCATER V4.66.93.0                                                        08/24/2022  19:19:43  PAGE 47
+L251 LINKER/LOCATER V4.66.93.0                                                        09/22/2022  11:45:04  PAGE 47
 
 
       ---         BLOCKEND  ---      ---       LVL=0
@@ -3195,7 +3195,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\iWatch-v2.0 (oled_anim)
       00FE84E7H   PUBLIC    ECODE    ---       og_widget_create?
       00FE863AH   PUBLIC    ECODE    ---       og_widget_setPos?
       00FE8550H   PUBLIC    ECODE    ---       og_widget_delet?
-L251 LINKER/LOCATER V4.66.93.0                                                        08/24/2022  19:19:43  PAGE 48
+L251 LINKER/LOCATER V4.66.93.0                                                        09/22/2022  11:45:04  PAGE 48
 
 
       00FE8500H   PUBLIC    ECODE    ---       og_widget_add?
@@ -3263,7 +3263,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\iWatch-v2.0 (oled_anim)
       00FE85E2H   LINE      ECODE    ---       #108
       00FE85E2H   LINE      ECODE    ---       #109
       00FE85EBH   LINE      ECODE    ---       #110
-L251 LINKER/LOCATER V4.66.93.0                                                        08/24/2022  19:19:43  PAGE 49
+L251 LINKER/LOCATER V4.66.93.0                                                        09/22/2022  11:45:04  PAGE 49
 
 
       00FE85FDH   LINE      ECODE    ---       #112
@@ -3331,7 +3331,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\iWatch-v2.0 (oled_anim)
       00FE86A3H   LINE      ECODE    ---       #188
       00FE86A5H   LINE      ECODE    ---       #189
       00FE86A5H   LINE      ECODE    ---       #190
-L251 LINKER/LOCATER V4.66.93.0                                                        08/24/2022  19:19:43  PAGE 50
+L251 LINKER/LOCATER V4.66.93.0                                                        09/22/2022  11:45:04  PAGE 50
 
 
       00FE86BAH   LINE      ECODE    ---       #191
@@ -3399,7 +3399,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\iWatch-v2.0 (oled_anim)
       00FE87C1H   LINE      ECODE    ---       #282
       00FE87C7H   LINE      ECODE    ---       #283
       00FE87C7H   LINE      ECODE    ---       #286
-L251 LINKER/LOCATER V4.66.93.0                                                        08/24/2022  19:19:43  PAGE 51
+L251 LINKER/LOCATER V4.66.93.0                                                        09/22/2022  11:45:04  PAGE 51
 
 
       00FE87C7H   LINE      ECODE    ---       #287
@@ -3467,7 +3467,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\iWatch-v2.0 (oled_anim)
 
       00FE9C2EH   BLOCK     ECODE    ---       LVL=0
       R11         REGSYM    ---      BYTE      s
-L251 LINKER/LOCATER V4.66.93.0                                                        08/24/2022  19:19:43  PAGE 52
+L251 LINKER/LOCATER V4.66.93.0                                                        09/22/2022  11:45:04  PAGE 52
 
 
       REG=3       REGSYM    ---      ---       ptr
@@ -3535,7 +3535,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\iWatch-v2.0 (oled_anim)
       00FEAD6FH   PUBLIC    ECODE    ---       og_bmp_draw?
       00FEAD4DH   PUBLIC    ECODE    ---       og_bmp_setBmp?
       00FEACECH   PUBLIC    ECODE    ---       og_bmp_create?
-L251 LINKER/LOCATER V4.66.93.0                                                        08/24/2022  19:19:43  PAGE 53
+L251 LINKER/LOCATER V4.66.93.0                                                        09/22/2022  11:45:04  PAGE 53
 
 
 
@@ -3603,7 +3603,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\iWatch-v2.0 (oled_anim)
       00FE81BBH   LINE      ECODE    ---       #12
       00FE81BBH   LINE      ECODE    ---       #13
       00FE81C1H   LINE      ECODE    ---       #15
-L251 LINKER/LOCATER V4.66.93.0                                                        08/24/2022  19:19:43  PAGE 54
+L251 LINKER/LOCATER V4.66.93.0                                                        09/22/2022  11:45:04  PAGE 54
 
 
       00FE81DEH   LINE      ECODE    ---       #16
@@ -3671,7 +3671,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\iWatch-v2.0 (oled_anim)
       REG=0       REGSYM    ---      ---       pSlider
       ---         BLOCKEND  ---      ---       LVL=1
       00FE833BH   LINE      ECODE    ---       #84
-L251 LINKER/LOCATER V4.66.93.0                                                        08/24/2022  19:19:43  PAGE 55
+L251 LINKER/LOCATER V4.66.93.0                                                        09/22/2022  11:45:04  PAGE 55
 
 
       00FE833FH   LINE      ECODE    ---       #85
@@ -3739,7 +3739,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\iWatch-v2.0 (oled_anim)
       R14         REGSYM    ---      BYTE      ucSize
       R15         REGSYM    ---      BYTE      ucStatus
       000007A7H   SYMBOL    EDATA    INT       x
-L251 LINKER/LOCATER V4.66.93.0                                                        08/24/2022  19:19:43  PAGE 56
+L251 LINKER/LOCATER V4.66.93.0                                                        09/22/2022  11:45:04  PAGE 56
 
 
       WR12        REGSYM    ---      INT       y
@@ -3807,7 +3807,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\iWatch-v2.0 (oled_anim)
       ---         BLOCKEND  ---      ---       LVL=0
 
       ---         MODULE    ---      ---       oled_canvas
-L251 LINKER/LOCATER V4.66.93.0                                                        08/24/2022  19:19:43  PAGE 57
+L251 LINKER/LOCATER V4.66.93.0                                                        09/22/2022  11:45:04  PAGE 57
 
 
       00FE4D9BH   PUBLIC    ECODE    ---       og_canvas_create?
@@ -3875,7 +3875,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\iWatch-v2.0 (oled_anim)
       00FE4EB4H   BLOCK     ECODE    ---       LVL=0
       REG=6       REGSYM    ---      ---       pWidget
       000007B7H   SYMBOL    EDATA    BYTE      x1
-L251 LINKER/LOCATER V4.66.93.0                                                        08/24/2022  19:19:43  PAGE 58
+L251 LINKER/LOCATER V4.66.93.0                                                        09/22/2022  11:45:04  PAGE 58
 
 
       R13         REGSYM    ---      BYTE      y1
@@ -3943,7 +3943,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\iWatch-v2.0 (oled_anim)
       ---         BLOCKEND  ---      ---       LVL=1
       00FE518DH   LINE      ECODE    ---       #154
       00FE519BH   LINE      ECODE    ---       #155
-L251 LINKER/LOCATER V4.66.93.0                                                        08/24/2022  19:19:43  PAGE 59
+L251 LINKER/LOCATER V4.66.93.0                                                        09/22/2022  11:45:04  PAGE 59
 
 
       00FE519BH   LINE      ECODE    ---       #169
@@ -4011,7 +4011,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\iWatch-v2.0 (oled_anim)
       00FE1BA5H   LINE      ECODE    ---       #15
       ---         BLOCKEND  ---      ---       LVL=0
 
-L251 LINKER/LOCATER V4.66.93.0                                                        08/24/2022  19:19:43  PAGE 60
+L251 LINKER/LOCATER V4.66.93.0                                                        09/22/2022  11:45:04  PAGE 60
 
 
       00FE1BA6H   BLOCK     ECODE    ---       LVL=0
@@ -4079,7 +4079,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\iWatch-v2.0 (oled_anim)
       00FE1C55H   LINE      ECODE    ---       #72
       00FE1C55H   LINE      ECODE    ---       #73
       00FE1C61H   LINE      ECODE    ---       #74
-L251 LINKER/LOCATER V4.66.93.0                                                        08/24/2022  19:19:43  PAGE 61
+L251 LINKER/LOCATER V4.66.93.0                                                        09/22/2022  11:45:04  PAGE 61
 
 
       00FE1C66H   LINE      ECODE    ---       #75
@@ -4147,7 +4147,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\iWatch-v2.0 (oled_anim)
       00FE1DE7H   LINE      ECODE    ---       #165
       00FE1DFDH   LINE      ECODE    ---       #173
       00FE1E05H   LINE      ECODE    ---       #174
-L251 LINKER/LOCATER V4.66.93.0                                                        08/24/2022  19:19:43  PAGE 62
+L251 LINKER/LOCATER V4.66.93.0                                                        09/22/2022  11:45:04  PAGE 62
 
 
       00FE1E11H   LINE      ECODE    ---       #175
@@ -4215,7 +4215,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\iWatch-v2.0 (oled_anim)
       000007B9H   SYMBOL    EDATA    WORD      j
       000007BBH   SYMBOL    EDATA    ---       offset
       ---         BLOCKEND  ---      ---       LVL=3
-L251 LINKER/LOCATER V4.66.93.0                                                        08/24/2022  19:19:43  PAGE 63
+L251 LINKER/LOCATER V4.66.93.0                                                        09/22/2022  11:45:04  PAGE 63
 
 
       00FE22D1H   BLOCK     ECODE    NEAR LAB  LVL=3
@@ -4283,7 +4283,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\iWatch-v2.0 (oled_anim)
       00FE210FH   LINE      ECODE    ---       #450
       00FE2117H   LINE      ECODE    ---       #451
       00FE2137H   LINE      ECODE    ---       #452
-L251 LINKER/LOCATER V4.66.93.0                                                        08/24/2022  19:19:43  PAGE 64
+L251 LINKER/LOCATER V4.66.93.0                                                        09/22/2022  11:45:04  PAGE 64
 
 
       00FE2137H   LINE      ECODE    ---       #453
@@ -4351,7 +4351,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\iWatch-v2.0 (oled_anim)
       00FE23A7H   LINE      ECODE    ---       #546
       00FE23B1H   LINE      ECODE    ---       #547
       00FE23BDH   LINE      ECODE    ---       #555
-L251 LINKER/LOCATER V4.66.93.0                                                        08/24/2022  19:19:43  PAGE 65
+L251 LINKER/LOCATER V4.66.93.0                                                        09/22/2022  11:45:04  PAGE 65
 
 
       00FE23BDH   LINE      ECODE    ---       #557
@@ -4419,7 +4419,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\iWatch-v2.0 (oled_anim)
       00FEA4C2H   BLOCK     ECODE    ---       LVL=0
       00FEA4C2H   LINE      ECODE    ---       #7
       00FEA4C2H   LINE      ECODE    ---       #9
-L251 LINKER/LOCATER V4.66.93.0                                                        08/24/2022  19:19:43  PAGE 66
+L251 LINKER/LOCATER V4.66.93.0                                                        09/22/2022  11:45:04  PAGE 66
 
 
       00FEA4C5H   LINE      ECODE    ---       #11
@@ -4487,7 +4487,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\iWatch-v2.0 (oled_anim)
       00FEA5BCH   LINE      ECODE    ---       #76
       00FEA5BFH   LINE      ECODE    ---       #77
       ---         BLOCKEND  ---      ---       LVL=0
-L251 LINKER/LOCATER V4.66.93.0                                                        08/24/2022  19:19:43  PAGE 67
+L251 LINKER/LOCATER V4.66.93.0                                                        09/22/2022  11:45:04  PAGE 67
 
 
 
@@ -4555,7 +4555,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\iWatch-v2.0 (oled_anim)
       00FEAC7DH   PUBLIC    ECODE    ---       EEPROM_SectorErase?
       00FEAC3BH   PUBLIC    ECODE    ---       EEPROM_read_n?
       00FEACAAH   PUBLIC    ECODE    ---       EEPROM_write_n?
-L251 LINKER/LOCATER V4.66.93.0                                                        08/24/2022  19:19:43  PAGE 68
+L251 LINKER/LOCATER V4.66.93.0                                                        09/22/2022  11:45:04  PAGE 68
 
 
       000000D0H   SFRSYM    DATA     BYTE      PSW
@@ -4623,7 +4623,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\iWatch-v2.0 (oled_anim)
 
       00FEAC7DH   BLOCK     ECODE    ---       LVL=0
       WR6         REGSYM    ---      WORD      EE_address
-L251 LINKER/LOCATER V4.66.93.0                                                        08/24/2022  19:19:43  PAGE 69
+L251 LINKER/LOCATER V4.66.93.0                                                        09/22/2022  11:45:04  PAGE 69
 
 
       00FEAC7DH   LINE      ECODE    ---       #63
@@ -4691,7 +4691,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\iWatch-v2.0 (oled_anim)
       00000010H   PUBLIC    DATA     WORD      timeout
       000000D0H   SFRSYM    DATA     BYTE      PSW
       00000088H   SFRSYM    DATA     BYTE      TCON
-L251 LINKER/LOCATER V4.66.93.0                                                        08/24/2022  19:19:43  PAGE 70
+L251 LINKER/LOCATER V4.66.93.0                                                        09/22/2022  11:45:04  PAGE 70
 
 
       00000098H   SFRSYM    DATA     BYTE      SCON
@@ -4759,7 +4759,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\iWatch-v2.0 (oled_anim)
       00FE9319H   BLOCK     ECODE    ---       LVL=0
       00FE9319H   LINE      ECODE    ---       #47
       00FE9319H   LINE      ECODE    ---       #49
-L251 LINKER/LOCATER V4.66.93.0                                                        08/24/2022  19:19:43  PAGE 71
+L251 LINKER/LOCATER V4.66.93.0                                                        09/22/2022  11:45:04  PAGE 71
 
 
       00FE9326H   LINE      ECODE    ---       #50
@@ -4827,7 +4827,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\iWatch-v2.0 (oled_anim)
       00FE93F0H   LINE      ECODE    ---       #103
       00FE93F4H   LINE      ECODE    ---       #104
       00FE93F7H   LINE      ECODE    ---       #105
-L251 LINKER/LOCATER V4.66.93.0                                                        08/24/2022  19:19:43  PAGE 72
+L251 LINKER/LOCATER V4.66.93.0                                                        09/22/2022  11:45:04  PAGE 72
 
 
       00FE93F9H   LINE      ECODE    ---       #106
@@ -4895,7 +4895,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\iWatch-v2.0 (oled_anim)
       00FEAEE8H   PUBLIC    ECODE    ---       SPI_ReadMultiBytes?
       00FEAEAEH   PUBLIC    ECODE    ---       SPI_WriteByte?
       00FEAEC8H   PUBLIC    ECODE    ---       SPI_WriteMultiBytes?
-L251 LINKER/LOCATER V4.66.93.0                                                        08/24/2022  19:19:43  PAGE 73
+L251 LINKER/LOCATER V4.66.93.0                                                        09/22/2022  11:45:04  PAGE 73
 
 
       000000CFH   SFRSYM    DATA     BYTE      SPDAT
@@ -4963,7 +4963,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\iWatch-v2.0 (oled_anim)
       00FEAEE1H   LINE      ECODE    ---       #41
       00FEAEE7H   LINE      ECODE    ---       #42
       ---         BLOCKEND  ---      ---       LVL=0
-L251 LINKER/LOCATER V4.66.93.0                                                        08/24/2022  19:19:43  PAGE 74
+L251 LINKER/LOCATER V4.66.93.0                                                        09/22/2022  11:45:04  PAGE 74
 
 
 
@@ -5031,7 +5031,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\iWatch-v2.0 (oled_anim)
       000000A8H.1 SFRSYM    DATA     BIT       ET0
       000000C7H   SFRSYM    DATA     BYTE      IAP_CONTR
       0000008EH   SFRSYM    DATA     BYTE      AUXR
-L251 LINKER/LOCATER V4.66.93.0                                                        08/24/2022  19:19:43  PAGE 75
+L251 LINKER/LOCATER V4.66.93.0                                                        09/22/2022  11:45:04  PAGE 75
 
 
       000000B0H.7 SFRSYM    DATA     BIT       P37
@@ -5099,7 +5099,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\iWatch-v2.0 (oled_anim)
       00FEA1A7H   LINE      ECODE    ---       #33
       00FEA1AAH   LINE      ECODE    ---       #34
       00FEA1ADH   LINE      ECODE    ---       #36
-L251 LINKER/LOCATER V4.66.93.0                                                        08/24/2022  19:19:43  PAGE 76
+L251 LINKER/LOCATER V4.66.93.0                                                        09/22/2022  11:45:04  PAGE 76
 
 
       00FEA1B0H   LINE      ECODE    ---       #37
@@ -5167,7 +5167,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\iWatch-v2.0 (oled_anim)
       00FEA214H   LINE      ECODE    ---       #93
       00FEA216H   LINE      ECODE    ---       #94
       00FEA218H   LINE      ECODE    ---       #95
-L251 LINKER/LOCATER V4.66.93.0                                                        08/24/2022  19:19:43  PAGE 77
+L251 LINKER/LOCATER V4.66.93.0                                                        09/22/2022  11:45:04  PAGE 77
 
 
       00FEA21AH   LINE      ECODE    ---       #96
@@ -5235,7 +5235,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\iWatch-v2.0 (oled_anim)
       00FEA289H   LINE      ECODE    ---       #153
       ---         BLOCKEND  ---      ---       LVL=0
 
-L251 LINKER/LOCATER V4.66.93.0                                                        08/24/2022  19:19:43  PAGE 78
+L251 LINKER/LOCATER V4.66.93.0                                                        09/22/2022  11:45:04  PAGE 78
 
 
       00FEA29CH   BLOCK     ECODE    ---       LVL=0
@@ -5303,7 +5303,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\iWatch-v2.0 (oled_anim)
       00FEA32DH   LINE      ECODE    ---       #288
       ---         BLOCKEND  ---      ---       LVL=0
 
-L251 LINKER/LOCATER V4.66.93.0                                                        08/24/2022  19:19:43  PAGE 79
+L251 LINKER/LOCATER V4.66.93.0                                                        09/22/2022  11:45:04  PAGE 79
 
 
       ---         MODULE    ---      ---       RX8130CE
@@ -5371,7 +5371,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\iWatch-v2.0 (oled_anim)
       ---         BLOCKEND  ---      ---       LVL=1
       00FE702CH   LINE      ECODE    ---       #34
       00FE702EH   LINE      ECODE    ---       #35
-L251 LINKER/LOCATER V4.66.93.0                                                        08/24/2022  19:19:43  PAGE 80
+L251 LINKER/LOCATER V4.66.93.0                                                        09/22/2022  11:45:04  PAGE 80
 
 
       00FE702EH   LINE      ECODE    ---       #37
@@ -5439,7 +5439,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\iWatch-v2.0 (oled_anim)
 
       00FE721FH   BLOCK     ECODE    ---       LVL=0
       R13         REGSYM    ---      BYTE      timer_clk
-L251 LINKER/LOCATER V4.66.93.0                                                        08/24/2022  19:19:43  PAGE 81
+L251 LINKER/LOCATER V4.66.93.0                                                        09/22/2022  11:45:04  PAGE 81
 
 
       WR14        REGSYM    ---      WORD      down_cnt_value
@@ -5507,7 +5507,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\iWatch-v2.0 (oled_anim)
       000000C0H.7 SFRSYM    DATA     BIT       P47
       00000088H   SFRSYM    DATA     BYTE      TCON
       00000098H   SFRSYM    DATA     BYTE      SCON
-L251 LINKER/LOCATER V4.66.93.0                                                        08/24/2022  19:19:43  PAGE 82
+L251 LINKER/LOCATER V4.66.93.0                                                        09/22/2022  11:45:04  PAGE 82
 
 
       00000090H.1 SFRSYM    DATA     BIT       P11
@@ -5575,7 +5575,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\iWatch-v2.0 (oled_anim)
       00FEA38AH   LINE      ECODE    ---       #51
       00FEA390H   LINE      ECODE    ---       #52
       00FEA394H   LINE      ECODE    ---       #53
-L251 LINKER/LOCATER V4.66.93.0                                                        08/24/2022  19:19:43  PAGE 83
+L251 LINKER/LOCATER V4.66.93.0                                                        09/22/2022  11:45:04  PAGE 83
 
 
       00FEA39CH   LINE      ECODE    ---       #55
@@ -5643,7 +5643,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\iWatch-v2.0 (oled_anim)
       00FEA453H   LINE      ECODE    ---       #142
       00FEA459H   LINE      ECODE    ---       #143
       00FEA45FH   LINE      ECODE    ---       #144
-L251 LINKER/LOCATER V4.66.93.0                                                        08/24/2022  19:19:43  PAGE 84
+L251 LINKER/LOCATER V4.66.93.0                                                        09/22/2022  11:45:04  PAGE 84
 
 
       00FEA465H   LINE      ECODE    ---       #145
@@ -5711,7 +5711,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\iWatch-v2.0 (oled_anim)
       00FE1B49H   PUBLIC    ECODE    ---       DisplayInit?
       00FE1B69H   PUBLIC    ECODE    ---       iWatchInit?
       00FE1A72H   PUBLIC    ECODE    ---       DrawBatteryIcon?
-L251 LINKER/LOCATER V4.66.93.0                                                        08/24/2022  19:19:43  PAGE 85
+L251 LINKER/LOCATER V4.66.93.0                                                        09/22/2022  11:45:04  PAGE 85
 
 
       0001146BH   PUBLIC    XDATA    ---       battery
@@ -5779,7 +5779,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\iWatch-v2.0 (oled_anim)
       ---         BLOCKEND  ---      ---       LVL=0
 
       00FE1138H   BLOCK     ECODE    ---       LVL=0
-L251 LINKER/LOCATER V4.66.93.0                                                        08/24/2022  19:19:43  PAGE 86
+L251 LINKER/LOCATER V4.66.93.0                                                        09/22/2022  11:45:04  PAGE 86
 
 
       00FE114CH   BLOCK     ECODE    NEAR LAB  LVL=1
@@ -5847,7 +5847,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\iWatch-v2.0 (oled_anim)
       00FE1280H   LINE      ECODE    ---       #99
       00FE128EH   LINE      ECODE    ---       #101
       00FE1299H   LINE      ECODE    ---       #103
-L251 LINKER/LOCATER V4.66.93.0                                                        08/24/2022  19:19:43  PAGE 87
+L251 LINKER/LOCATER V4.66.93.0                                                        09/22/2022  11:45:04  PAGE 87
 
 
       00FE12A2H   LINE      ECODE    ---       #104
@@ -5915,7 +5915,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\iWatch-v2.0 (oled_anim)
       00FE13BBH   LINE      ECODE    ---       #173
       00FE13DFH   LINE      ECODE    ---       #174
       00FE13E7H   LINE      ECODE    ---       #175
-L251 LINKER/LOCATER V4.66.93.0                                                        08/24/2022  19:19:43  PAGE 88
+L251 LINKER/LOCATER V4.66.93.0                                                        09/22/2022  11:45:04  PAGE 88
 
 
       00FE13EFH   LINE      ECODE    ---       #176
@@ -5983,7 +5983,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\iWatch-v2.0 (oled_anim)
       00FE1572H   LINE      ECODE    ---       #271
       00FE1576H   LINE      ECODE    ---       #272
       00FE1582H   LINE      ECODE    ---       #273
-L251 LINKER/LOCATER V4.66.93.0                                                        08/24/2022  19:19:43  PAGE 89
+L251 LINKER/LOCATER V4.66.93.0                                                        09/22/2022  11:45:04  PAGE 89
 
 
       00FE1586H   LINE      ECODE    ---       #274
@@ -6051,7 +6051,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\iWatch-v2.0 (oled_anim)
       00FE1661H   LINE      ECODE    ---       #318
       00FE1669H   LINE      ECODE    ---       #319
       00FE1669H   LINE      ECODE    ---       #320
-L251 LINKER/LOCATER V4.66.93.0                                                        08/24/2022  19:19:43  PAGE 90
+L251 LINKER/LOCATER V4.66.93.0                                                        09/22/2022  11:45:04  PAGE 90
 
 
       00FE168CH   LINE      ECODE    ---       #322
@@ -6119,7 +6119,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\iWatch-v2.0 (oled_anim)
       00FE1A4FH   LINE      ECODE    ---       #389
       00FE1A5DH   LINE      ECODE    ---       #390
       00FE1A6BH   LINE      ECODE    ---       #391
-L251 LINKER/LOCATER V4.66.93.0                                                        08/24/2022  19:19:43  PAGE 91
+L251 LINKER/LOCATER V4.66.93.0                                                        09/22/2022  11:45:04  PAGE 91
 
 
       00FE1A6FH   LINE      ECODE    ---       #392
@@ -6187,7 +6187,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\iWatch-v2.0 (oled_anim)
       00FE2F9EH   PUBLIC    ECODE    ---       LSM6DSMEnablePedometer?
       00FE2E22H   PUBLIC    ECODE    ---       LSM6DSMCheckConnection?
       00FE3025H   PUBLIC    ECODE    ---       LSM6DSMResetStepCounter?
-L251 LINKER/LOCATER V4.66.93.0                                                        08/24/2022  19:19:43  PAGE 92
+L251 LINKER/LOCATER V4.66.93.0                                                        09/22/2022  11:45:04  PAGE 92
 
 
       00FE2E3AH   PUBLIC    ECODE    ---       LSM6DSMConfigGyr?
@@ -6255,7 +6255,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\iWatch-v2.0 (oled_anim)
       R11         REGSYM    ---      BYTE      temp
       00FE2E22H   LINE      ECODE    ---       #30
       00FE2E22H   LINE      ECODE    ---       #31
-L251 LINKER/LOCATER V4.66.93.0                                                        08/24/2022  19:19:43  PAGE 93
+L251 LINKER/LOCATER V4.66.93.0                                                        09/22/2022  11:45:04  PAGE 93
 
 
       00FE2E22H   LINE      ECODE    ---       #33
@@ -6323,7 +6323,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\iWatch-v2.0 (oled_anim)
       00FE2EC3H   LINE      ECODE    ---       #82
       00FE2EC3H   LINE      ECODE    ---       #85
       00FE2ECFH   LINE      ECODE    ---       #86
-L251 LINKER/LOCATER V4.66.93.0                                                        08/24/2022  19:19:43  PAGE 94
+L251 LINKER/LOCATER V4.66.93.0                                                        09/22/2022  11:45:04  PAGE 94
 
 
       00FE2F01H   LINE      ECODE    ---       #87
@@ -6391,7 +6391,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\iWatch-v2.0 (oled_anim)
       00FE3044H   BLOCK     ECODE    ---       LVL=0
       00FE3044H   LINE      ECODE    ---       #169
       00FE3044H   LINE      ECODE    ---       #171
-L251 LINKER/LOCATER V4.66.93.0                                                        08/24/2022  19:19:43  PAGE 95
+L251 LINKER/LOCATER V4.66.93.0                                                        09/22/2022  11:45:04  PAGE 95
 
 
       00FE304FH   LINE      ECODE    ---       #172
@@ -6459,7 +6459,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\iWatch-v2.0 (oled_anim)
       00FE32D5H   LINE      ECODE    ---       #252
       00FE32F1H   LINE      ECODE    ---       #253
       00FE3305H   LINE      ECODE    ---       #254
-L251 LINKER/LOCATER V4.66.93.0                                                        08/24/2022  19:19:43  PAGE 96
+L251 LINKER/LOCATER V4.66.93.0                                                        09/22/2022  11:45:04  PAGE 96
 
 
       00FE3319H   LINE      ECODE    ---       #256
@@ -6527,7 +6527,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\iWatch-v2.0 (oled_anim)
       00FE8806H   BLOCK     ECODE    NEAR LAB  LVL=1
       000007ABH   SYMBOL    EDATA    ---       temp
       ---         BLOCKEND  ---      ---       LVL=1
-L251 LINKER/LOCATER V4.66.93.0                                                        08/24/2022  19:19:43  PAGE 97
+L251 LINKER/LOCATER V4.66.93.0                                                        09/22/2022  11:45:04  PAGE 97
 
 
       00FE8802H   LINE      ECODE    ---       #61
@@ -6595,7 +6595,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\iWatch-v2.0 (oled_anim)
       ---         BLOCKEND  ---      ---       LVL=0
 
       00FE8991H   BLOCK     ECODE    ---       LVL=0
-L251 LINKER/LOCATER V4.66.93.0                                                        08/24/2022  19:19:43  PAGE 98
+L251 LINKER/LOCATER V4.66.93.0                                                        09/22/2022  11:45:04  PAGE 98
 
 
       000007ABH   SYMBOL    EDATA    ---       mag_data
@@ -6663,7 +6663,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\iWatch-v2.0 (oled_anim)
       DR28        REGSYM    ---      FLOAT     y
       000007A7H   SYMBOL    EDATA    FLOAT     z
       00FE5847H   BLOCK     ECODE    NEAR LAB  LVL=1
-L251 LINKER/LOCATER V4.66.93.0                                                        08/24/2022  19:19:43  PAGE 99
+L251 LINKER/LOCATER V4.66.93.0                                                        09/22/2022  11:45:04  PAGE 99
 
 
       000007ABH   SYMBOL    EDATA    ---       V
@@ -6731,7 +6731,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\iWatch-v2.0 (oled_anim)
       00FE5971H   LINE      ECODE    ---       #99
       00FE599EH   LINE      ECODE    ---       #100
       ---         BLOCKEND  ---      ---       LVL=0
-L251 LINKER/LOCATER V4.66.93.0                                                        08/24/2022  19:19:43  PAGE 100
+L251 LINKER/LOCATER V4.66.93.0                                                        09/22/2022  11:45:04  PAGE 100
 
 
 
@@ -6799,7 +6799,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\iWatch-v2.0 (oled_anim)
       00FE5AEBH   LINE      ECODE    ---       #154
       00FE5AF1H   LINE      ECODE    ---       #155
       00FE5AF8H   LINE      ECODE    ---       #157
-L251 LINKER/LOCATER V4.66.93.0                                                        08/24/2022  19:19:43  PAGE 101
+L251 LINKER/LOCATER V4.66.93.0                                                        09/22/2022  11:45:04  PAGE 101
 
 
       ---         BLOCKEND  ---      ---       LVL=0
@@ -6867,7 +6867,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\iWatch-v2.0 (oled_anim)
       00FE5CCAH   LINE      ECODE    ---       #224
       00FE5CD2H   LINE      ECODE    ---       #230
       00FE5CD4H   LINE      ECODE    ---       #231
-L251 LINKER/LOCATER V4.66.93.0                                                        08/24/2022  19:19:43  PAGE 102
+L251 LINKER/LOCATER V4.66.93.0                                                        09/22/2022  11:45:04  PAGE 102
 
 
       00FE5CD4H   LINE      ECODE    ---       #232
@@ -6935,7 +6935,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\iWatch-v2.0 (oled_anim)
       00FE5377H   LINE      ECODE    ---       #111
       00FE539DH   LINE      ECODE    ---       #113
       00FE53A7H   LINE      ECODE    ---       #114
-L251 LINKER/LOCATER V4.66.93.0                                                        08/24/2022  19:19:43  PAGE 103
+L251 LINKER/LOCATER V4.66.93.0                                                        09/22/2022  11:45:04  PAGE 103
 
 
       00FE53C7H   LINE      ECODE    ---       #116
@@ -7003,7 +7003,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\iWatch-v2.0 (oled_anim)
       00FE567BH   LINE      ECODE    ---       #191
       00FE56B0H   LINE      ECODE    ---       #193
       00FE56BAH   LINE      ECODE    ---       #194
-L251 LINKER/LOCATER V4.66.93.0                                                        08/24/2022  19:19:43  PAGE 104
+L251 LINKER/LOCATER V4.66.93.0                                                        09/22/2022  11:45:04  PAGE 104
 
 
       00FE56E2H   LINE      ECODE    ---       #195
@@ -7071,7 +7071,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\iWatch-v2.0 (oled_anim)
       00FF0009H   PUBLIC    CODE     BYTE      MEAS_CFG
 
       00FEA90DH   BLOCK     ECODE    ---       LVL=0
-L251 LINKER/LOCATER V4.66.93.0                                                        08/24/2022  19:19:43  PAGE 105
+L251 LINKER/LOCATER V4.66.93.0                                                        09/22/2022  11:45:04  PAGE 105
 
 
       R7          REGSYM    ---      BYTE      addr
@@ -7139,7 +7139,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\iWatch-v2.0 (oled_anim)
       ---         BLOCKEND  ---      ---       LVL=1
       00FEA9F0H   LINE      ECODE    ---       #79
       00FEA9F2H   LINE      ECODE    ---       #80
-L251 LINKER/LOCATER V4.66.93.0                                                        08/24/2022  19:19:43  PAGE 106
+L251 LINKER/LOCATER V4.66.93.0                                                        09/22/2022  11:45:04  PAGE 106
 
 
       00FEA9F2H   LINE      ECODE    ---       #81
@@ -7207,7 +7207,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\iWatch-v2.0 (oled_anim)
       00FEA7FBH   LINE      ECODE    ---       #26
       00FEA803H   LINE      ECODE    ---       #27
       00FEA807H   LINE      ECODE    ---       #28
-L251 LINKER/LOCATER V4.66.93.0                                                        08/24/2022  19:19:43  PAGE 107
+L251 LINKER/LOCATER V4.66.93.0                                                        09/22/2022  11:45:04  PAGE 107
 
 
       00FEA80BH   LINE      ECODE    ---       #29
@@ -7275,7 +7275,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\iWatch-v2.0 (oled_anim)
       00FEA8EAH   LINE      ECODE    ---       #77
       00FEA8F0H   LINE      ECODE    ---       #78
       00FEA8F4H   LINE      ECODE    ---       #79
-L251 LINKER/LOCATER V4.66.93.0                                                        08/24/2022  19:19:43  PAGE 108
+L251 LINKER/LOCATER V4.66.93.0                                                        09/22/2022  11:45:04  PAGE 108
 
 
       00FEA8FAH   LINE      ECODE    ---       #80
@@ -7343,7 +7343,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\iWatch-v2.0 (oled_anim)
       00FE9E2EH   LINE      ECODE    ---       #23
       00FE9E32H   LINE      ECODE    ---       #24
       00FE9E35H   LINE      ECODE    ---       #25
-L251 LINKER/LOCATER V4.66.93.0                                                        08/24/2022  19:19:43  PAGE 109
+L251 LINKER/LOCATER V4.66.93.0                                                        09/22/2022  11:45:04  PAGE 109
 
 
       00FE9E35H   LINE      ECODE    ---       #27
@@ -7411,7 +7411,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\iWatch-v2.0 (oled_anim)
       00FE9F6DH   BLOCK     ECODE    ---       LVL=0
       00FE9F6DH   LINE      ECODE    ---       #105
       00FE9F6DH   LINE      ECODE    ---       #107
-L251 LINKER/LOCATER V4.66.93.0                                                        08/24/2022  19:19:43  PAGE 110
+L251 LINKER/LOCATER V4.66.93.0                                                        09/22/2022  11:45:04  PAGE 110
 
 
       ---         BLOCKEND  ---      ---       LVL=0
@@ -7479,7 +7479,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\iWatch-v2.0 (oled_anim)
       00FE3E19H   LINE      ECODE    ---       #56
       00FE3E22H   LINE      ECODE    ---       #58
       00FE3E2BH   LINE      ECODE    ---       #59
-L251 LINKER/LOCATER V4.66.93.0                                                        08/24/2022  19:19:43  PAGE 111
+L251 LINKER/LOCATER V4.66.93.0                                                        09/22/2022  11:45:04  PAGE 111
 
 
       00FE3E2DH   LINE      ECODE    ---       #62
@@ -7547,7 +7547,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\iWatch-v2.0 (oled_anim)
       00FE4043H   LINE      ECODE    ---       #131
       00FE4046H   LINE      ECODE    ---       #132
       00FE404EH   LINE      ECODE    ---       #133
-L251 LINKER/LOCATER V4.66.93.0                                                        08/24/2022  19:19:43  PAGE 112
+L251 LINKER/LOCATER V4.66.93.0                                                        09/22/2022  11:45:04  PAGE 112
 
 
       00FE404EH   LINE      ECODE    ---       #134
@@ -7615,7 +7615,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\iWatch-v2.0 (oled_anim)
       00FE42A2H   LINE      ECODE    ---       #210
       ---         BLOCKEND  ---      ---       LVL=0
 
-L251 LINKER/LOCATER V4.66.93.0                                                        08/24/2022  19:19:43  PAGE 113
+L251 LINKER/LOCATER V4.66.93.0                                                        09/22/2022  11:45:04  PAGE 113
 
 
       00FE42A5H   BLOCK     ECODE    ---       LVL=0
@@ -7683,7 +7683,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\iWatch-v2.0 (oled_anim)
       00FE6BABH   LINE      ECODE    ---       #78
       00FE6BABH   LINE      ECODE    ---       #80
       00FE6BB3H   LINE      ECODE    ---       #81
-L251 LINKER/LOCATER V4.66.93.0                                                        08/24/2022  19:19:43  PAGE 114
+L251 LINKER/LOCATER V4.66.93.0                                                        09/22/2022  11:45:04  PAGE 114
 
 
       ---         BLOCKEND  ---      ---       LVL=0
@@ -7751,7 +7751,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\iWatch-v2.0 (oled_anim)
       R7          REGSYM    ---      BYTE      event
       00FE6EB0H   LINE      ECODE    ---       #169
       00FE6EB2H   LINE      ECODE    ---       #171
-L251 LINKER/LOCATER V4.66.93.0                                                        08/24/2022  19:19:43  PAGE 115
+L251 LINKER/LOCATER V4.66.93.0                                                        09/22/2022  11:45:04  PAGE 115
 
 
       00FE6EB6H   LINE      ECODE    ---       #172
@@ -7819,7 +7819,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\iWatch-v2.0 (oled_anim)
       00FE90EAH   BLOCK     ECODE    ---       LVL=0
       00FE90EAH   LINE      ECODE    ---       #70
       00FE90EAH   LINE      ECODE    ---       #72
-L251 LINKER/LOCATER V4.66.93.0                                                        08/24/2022  19:19:43  PAGE 116
+L251 LINKER/LOCATER V4.66.93.0                                                        09/22/2022  11:45:04  PAGE 116
 
 
       00FE90F2H   LINE      ECODE    ---       #73
@@ -7887,7 +7887,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\iWatch-v2.0 (oled_anim)
       00000080H   SFRSYM    DATA     BYTE      P0
       00FEA07FH   SYMBOL    ECODE    ---       Event?
       00FEA003H   SYMBOL    ECODE    ---       delet?
-L251 LINKER/LOCATER V4.66.93.0                                                        08/24/2022  19:19:43  PAGE 117
+L251 LINKER/LOCATER V4.66.93.0                                                        09/22/2022  11:45:04  PAGE 117
 
 
       00FE9F9BH   SYMBOL    ECODE    ---       Setup?
@@ -7955,7 +7955,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\iWatch-v2.0 (oled_anim)
       00FEA114H   LINE      ECODE    ---       #108
       00FEA128H   LINE      ECODE    ---       #109
       00FEA128H   LINE      ECODE    ---       #112
-L251 LINKER/LOCATER V4.66.93.0                                                        08/24/2022  19:19:43  PAGE 118
+L251 LINKER/LOCATER V4.66.93.0                                                        09/22/2022  11:45:04  PAGE 118
 
 
       ---         BLOCKEND  ---      ---       LVL=0
@@ -8023,7 +8023,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\iWatch-v2.0 (oled_anim)
       00FE9A37H   LINE      ECODE    ---       #78
       00FE9A37H   LINE      ECODE    ---       #86
       00FE9A3CH   LINE      ECODE    ---       #88
-L251 LINKER/LOCATER V4.66.93.0                                                        08/24/2022  19:19:43  PAGE 119
+L251 LINKER/LOCATER V4.66.93.0                                                        09/22/2022  11:45:04  PAGE 119
 
 
       ---         BLOCKEND  ---      ---       LVL=0
@@ -8091,7 +8091,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\iWatch-v2.0 (oled_anim)
       000000A0H   SFRSYM    DATA     BYTE      P2
       00000090H   SFRSYM    DATA     BYTE      P1
       00000080H   SFRSYM    DATA     BYTE      P0
-L251 LINKER/LOCATER V4.66.93.0                                                        08/24/2022  19:19:43  PAGE 120
+L251 LINKER/LOCATER V4.66.93.0                                                        09/22/2022  11:45:04  PAGE 120
 
 
       00FE2D12H   SYMBOL    ECODE    ---       Event?
@@ -8159,7 +8159,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\iWatch-v2.0 (oled_anim)
       00FE2579H   LINE      ECODE    ---       #76
       00FE257EH   LINE      ECODE    ---       #77
       ---         BLOCKEND  ---      ---       LVL=0
-L251 LINKER/LOCATER V4.66.93.0                                                        08/24/2022  19:19:43  PAGE 121
+L251 LINKER/LOCATER V4.66.93.0                                                        09/22/2022  11:45:04  PAGE 121
 
 
 
@@ -8227,7 +8227,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\iWatch-v2.0 (oled_anim)
       R14         REGSYM    ---      CHAR      ucRecByte
       00FE26C3H   BLOCK     ECODE    NEAR LAB  LVL=2
       R15         REGSYM    ---      BYTE      i
-L251 LINKER/LOCATER V4.66.93.0                                                        08/24/2022  19:19:43  PAGE 122
+L251 LINKER/LOCATER V4.66.93.0                                                        09/22/2022  11:45:04  PAGE 122
 
 
       00FE2915H   BLOCK     ECODE    NEAR LAB  LVL=3
@@ -8295,7 +8295,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\iWatch-v2.0 (oled_anim)
       00FE28D4H   LINE      ECODE    ---       #228
       00FE28D7H   LINE      ECODE    ---       #230
       00FE28D7H   LINE      ECODE    ---       #232
-L251 LINKER/LOCATER V4.66.93.0                                                        08/24/2022  19:19:43  PAGE 123
+L251 LINKER/LOCATER V4.66.93.0                                                        09/22/2022  11:45:04  PAGE 123
 
 
       00FE290FH   LINE      ECODE    ---       #233
@@ -8363,7 +8363,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\iWatch-v2.0 (oled_anim)
       00FE2AD4H   LINE      ECODE    ---       #359
       00FE2ADCH   LINE      ECODE    ---       #360
       00FE2ADEH   LINE      ECODE    ---       #361
-L251 LINKER/LOCATER V4.66.93.0                                                        08/24/2022  19:19:43  PAGE 124
+L251 LINKER/LOCATER V4.66.93.0                                                        09/22/2022  11:45:04  PAGE 124
 
 
       00FE2AE1H   LINE      ECODE    ---       #362
@@ -8431,7 +8431,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\iWatch-v2.0 (oled_anim)
       ---         BLOCKEND  ---      ---       LVL=0
 
       00FE2D12H   BLOCK     ECODE    ---       LVL=0
-L251 LINKER/LOCATER V4.66.93.0                                                        08/24/2022  19:19:43  PAGE 125
+L251 LINKER/LOCATER V4.66.93.0                                                        09/22/2022  11:45:04  PAGE 125
 
 
       R10         REGSYM    ---      BYTE      event
@@ -8499,7 +8499,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\iWatch-v2.0 (oled_anim)
       00FE94F3H   LINE      ECODE    ---       #42
       00FE9501H   LINE      ECODE    ---       #43
       00FE9511H   LINE      ECODE    ---       #44
-L251 LINKER/LOCATER V4.66.93.0                                                        08/24/2022  19:19:43  PAGE 126
+L251 LINKER/LOCATER V4.66.93.0                                                        09/22/2022  11:45:04  PAGE 126
 
 
       00FE9521H   LINE      ECODE    ---       #45
@@ -8567,7 +8567,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\iWatch-v2.0 (oled_anim)
       000000B8H   SFRSYM    DATA     BYTE      IP
       000000A8H   SFRSYM    DATA     BYTE      IE
       000000F8H   SFRSYM    DATA     BYTE      P7
-L251 LINKER/LOCATER V4.66.93.0                                                        08/24/2022  19:19:43  PAGE 127
+L251 LINKER/LOCATER V4.66.93.0                                                        09/22/2022  11:45:04  PAGE 127
 
 
       000000E8H   SFRSYM    DATA     BYTE      P6
@@ -8635,7 +8635,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\iWatch-v2.0 (oled_anim)
       00FE8FA6H   LINE      ECODE    ---       #93
       00FE8FAFH   LINE      ECODE    ---       #94
       00FE8FAFH   LINE      ECODE    ---       #96
-L251 LINKER/LOCATER V4.66.93.0                                                        08/24/2022  19:19:43  PAGE 128
+L251 LINKER/LOCATER V4.66.93.0                                                        09/22/2022  11:45:04  PAGE 128
 
 
       ---         BLOCKEND  ---      ---       LVL=0
@@ -8703,7 +8703,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\iWatch-v2.0 (oled_anim)
       00FE7B57H   LINE      ECODE    ---       #35
       00FE7B87H   LINE      ECODE    ---       #37
       00FE7B9DH   LINE      ECODE    ---       #39
-L251 LINKER/LOCATER V4.66.93.0                                                        08/24/2022  19:19:43  PAGE 129
+L251 LINKER/LOCATER V4.66.93.0                                                        09/22/2022  11:45:04  PAGE 129
 
 
       00FE7BA7H   LINE      ECODE    ---       #40
@@ -8771,7 +8771,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\iWatch-v2.0 (oled_anim)
       00FE7D5DH   LINE      ECODE    ---       #118
       00FE7D75H   LINE      ECODE    ---       #119
       00FE7DA6H   LINE      ECODE    ---       #120
-L251 LINKER/LOCATER V4.66.93.0                                                        08/24/2022  19:19:43  PAGE 130
+L251 LINKER/LOCATER V4.66.93.0                                                        09/22/2022  11:45:04  PAGE 130
 
 
       00FE7DC8H   LINE      ECODE    ---       #121
@@ -8839,7 +8839,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\iWatch-v2.0 (oled_anim)
       00FE73CAH   LINE      ECODE    ---       #57
       00FE73CAH   LINE      ECODE    ---       #59
       00FE73D2H   LINE      ECODE    ---       #60
-L251 LINKER/LOCATER V4.66.93.0                                                        08/24/2022  19:19:43  PAGE 131
+L251 LINKER/LOCATER V4.66.93.0                                                        09/22/2022  11:45:04  PAGE 131
 
 
       ---         BLOCKEND  ---      ---       LVL=0
@@ -8907,7 +8907,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\iWatch-v2.0 (oled_anim)
       00FE7657H   LINE      ECODE    ---       #136
       00FE765CH   LINE      ECODE    ---       #138
       00FE7663H   LINE      ECODE    ---       #140
-L251 LINKER/LOCATER V4.66.93.0                                                        08/24/2022  19:19:43  PAGE 132
+L251 LINKER/LOCATER V4.66.93.0                                                        09/22/2022  11:45:04  PAGE 132
 
 
       00FE7668H   LINE      ECODE    ---       #141
@@ -8975,7 +8975,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\iWatch-v2.0 (oled_anim)
       00FE671BH   LINE      ECODE    ---       #43
       00FE672BH   LINE      ECODE    ---       #44
       00FE673BH   LINE      ECODE    ---       #45
-L251 LINKER/LOCATER V4.66.93.0                                                        08/24/2022  19:19:43  PAGE 133
+L251 LINKER/LOCATER V4.66.93.0                                                        09/22/2022  11:45:04  PAGE 133
 
 
       00FE674BH   LINE      ECODE    ---       #46
@@ -9043,7 +9043,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\iWatch-v2.0 (oled_anim)
       00FE699EH   LINE      ECODE    ---       #121
       00FE699EH   LINE      ECODE    ---       #122
       00FE69A7H   LINE      ECODE    ---       #123
-L251 LINKER/LOCATER V4.66.93.0                                                        08/24/2022  19:19:43  PAGE 134
+L251 LINKER/LOCATER V4.66.93.0                                                        09/22/2022  11:45:04  PAGE 134
 
 
       00FE69ADH   LINE      ECODE    ---       #124
@@ -9111,7 +9111,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\iWatch-v2.0 (oled_anim)
       000000B0H   SFRSYM    DATA     BYTE      P3
       000000A0H   SFRSYM    DATA     BYTE      P2
       00000090H   SFRSYM    DATA     BYTE      P1
-L251 LINKER/LOCATER V4.66.93.0                                                        08/24/2022  19:19:43  PAGE 135
+L251 LINKER/LOCATER V4.66.93.0                                                        09/22/2022  11:45:04  PAGE 135
 
 
       00000080H   SFRSYM    DATA     BYTE      P0
@@ -9179,7 +9179,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\iWatch-v2.0 (oled_anim)
       ---         BLOCKEND  ---      ---       LVL=0
 
       00FE4A8FH   BLOCK     ECODE    ---       LVL=0
-L251 LINKER/LOCATER V4.66.93.0                                                        08/24/2022  19:19:43  PAGE 136
+L251 LINKER/LOCATER V4.66.93.0                                                        09/22/2022  11:45:04  PAGE 136
 
 
       00FE4A8FH   LINE      ECODE    ---       #96
@@ -9247,7 +9247,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\iWatch-v2.0 (oled_anim)
       00FE4BA1H   LINE      ECODE    ---       #162
       00FE4BA4H   LINE      ECODE    ---       #164
       00FE4BAAH   LINE      ECODE    ---       #165
-L251 LINKER/LOCATER V4.66.93.0                                                        08/24/2022  19:19:43  PAGE 137
+L251 LINKER/LOCATER V4.66.93.0                                                        09/22/2022  11:45:04  PAGE 137
 
 
       00FE4BADH   LINE      ECODE    ---       #167
@@ -9315,7 +9315,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\iWatch-v2.0 (oled_anim)
       00FE4D32H   LINE      ECODE    ---       #258
       00FE4D40H   LINE      ECODE    ---       #259
       00FE4D54H   LINE      ECODE    ---       #260
-L251 LINKER/LOCATER V4.66.93.0                                                        08/24/2022  19:19:43  PAGE 138
+L251 LINKER/LOCATER V4.66.93.0                                                        09/22/2022  11:45:04  PAGE 138
 
 
       00FE4D54H   LINE      ECODE    ---       #262
@@ -9383,7 +9383,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\iWatch-v2.0 (oled_anim)
       00FE3690H   LINE      ECODE    ---       #58
       00FE36A1H   LINE      ECODE    ---       #59
       00FE36B3H   LINE      ECODE    ---       #60
-L251 LINKER/LOCATER V4.66.93.0                                                        08/24/2022  19:19:43  PAGE 139
+L251 LINKER/LOCATER V4.66.93.0                                                        09/22/2022  11:45:04  PAGE 139
 
 
       00FE36C1H   LINE      ECODE    ---       #61
@@ -9451,7 +9451,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\iWatch-v2.0 (oled_anim)
       00FE388AH   LINE      ECODE    ---       #138
       00FE389BH   LINE      ECODE    ---       #139
       00FE38C1H   LINE      ECODE    ---       #140
-L251 LINKER/LOCATER V4.66.93.0                                                        08/24/2022  19:19:43  PAGE 140
+L251 LINKER/LOCATER V4.66.93.0                                                        09/22/2022  11:45:04  PAGE 140
 
 
       00FE38CBH   LINE      ECODE    ---       #141
@@ -9519,7 +9519,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\iWatch-v2.0 (oled_anim)
       00FE3B12H   LINE      ECODE    ---       #218
       00FE3B22H   LINE      ECODE    ---       #221
       00FE3B62H   LINE      ECODE    ---       #223
-L251 LINKER/LOCATER V4.66.93.0                                                        08/24/2022  19:19:43  PAGE 141
+L251 LINKER/LOCATER V4.66.93.0                                                        09/22/2022  11:45:04  PAGE 141
 
 
       00FE3B6BH   LINE      ECODE    ---       #224
@@ -9587,7 +9587,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\iWatch-v2.0 (oled_anim)
       00FE3D25H   LINE      ECODE    ---       #299
       ---         BLOCKEND  ---      ---       LVL=0
 
-L251 LINKER/LOCATER V4.66.93.0                                                        08/24/2022  19:19:43  PAGE 142
+L251 LINKER/LOCATER V4.66.93.0                                                        09/22/2022  11:45:04  PAGE 142
 
 
       ---         MODULE    ---      ---       page_trexrunner
@@ -9655,7 +9655,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\iWatch-v2.0 (oled_anim)
       00FE440DH   LINE      ECODE    ---       #124
       00FE441AH   LINE      ECODE    ---       #125
       00FE4427H   LINE      ECODE    ---       #126
-L251 LINKER/LOCATER V4.66.93.0                                                        08/24/2022  19:19:43  PAGE 143
+L251 LINKER/LOCATER V4.66.93.0                                                        09/22/2022  11:45:04  PAGE 143
 
 
       00FE4435H   LINE      ECODE    ---       #127
@@ -9723,7 +9723,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\iWatch-v2.0 (oled_anim)
       00FE4682H   LINE      ECODE    ---       #209
       00FE468DH   LINE      ECODE    ---       #210
       00FE468DH   LINE      ECODE    ---       #211
-L251 LINKER/LOCATER V4.66.93.0                                                        08/24/2022  19:19:43  PAGE 144
+L251 LINKER/LOCATER V4.66.93.0                                                        09/22/2022  11:45:04  PAGE 144
 
 
       00FE4694H   LINE      ECODE    ---       #213
@@ -9791,7 +9791,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\iWatch-v2.0 (oled_anim)
       00000088H   SFRSYM    DATA     BYTE      TCON
       00000098H   SFRSYM    DATA     BYTE      SCON
       000000B8H   SFRSYM    DATA     BYTE      IP
-L251 LINKER/LOCATER V4.66.93.0                                                        08/24/2022  19:19:43  PAGE 145
+L251 LINKER/LOCATER V4.66.93.0                                                        09/22/2022  11:45:04  PAGE 145
 
 
       000000A8H   SFRSYM    DATA     BYTE      IE
@@ -9859,7 +9859,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\iWatch-v2.0 (oled_anim)
       ---         BLOCKEND  ---      ---       LVL=0
 
       00FE638AH   BLOCK     ECODE    ---       LVL=0
-L251 LINKER/LOCATER V4.66.93.0                                                        08/24/2022  19:19:43  PAGE 146
+L251 LINKER/LOCATER V4.66.93.0                                                        09/22/2022  11:45:04  PAGE 146
 
 
       00FE638AH   LINE      ECODE    ---       #67
@@ -9927,7 +9927,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\iWatch-v2.0 (oled_anim)
       R7          REGSYM    ---      BYTE      j
       R7          REGSYM    ---      BYTE      num3
       00FE6567H   BLOCK     ECODE    NEAR LAB  LVL=1
-L251 LINKER/LOCATER V4.66.93.0                                                        08/24/2022  19:19:43  PAGE 147
+L251 LINKER/LOCATER V4.66.93.0                                                        09/22/2022  11:45:04  PAGE 147
 
 
       REG=7       REGSYM    ---      ---       ptr
@@ -9995,7 +9995,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\iWatch-v2.0 (oled_anim)
       00FE9751H   LINE      ECODE    ---       #37
       00FE9757H   LINE      ECODE    ---       #38
       00FE9771H   LINE      ECODE    ---       #40
-L251 LINKER/LOCATER V4.66.93.0                                                        08/24/2022  19:19:43  PAGE 148
+L251 LINKER/LOCATER V4.66.93.0                                                        09/22/2022  11:45:04  PAGE 148
 
 
       ---         BLOCKEND  ---      ---       LVL=0
@@ -10063,7 +10063,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\iWatch-v2.0 (oled_anim)
       00FE98DDH   LINE      ECODE    ---       #124
       00FE98E1H   LINE      ECODE    ---       #126
       00FE98E5H   LINE      ECODE    ---       #127
-L251 LINKER/LOCATER V4.66.93.0                                                        08/24/2022  19:19:43  PAGE 149
+L251 LINKER/LOCATER V4.66.93.0                                                        09/22/2022  11:45:04  PAGE 149
 
 
       00FE98E5H   LINE      ECODE    ---       #128
@@ -10131,7 +10131,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\iWatch-v2.0 (oled_anim)
       00FE5CD7H   LINE      ECODE    ---       #64
       00FE5CDAH   LINE      ECODE    ---       #66
       00FE5CE4H   LINE      ECODE    ---       #67
-L251 LINKER/LOCATER V4.66.93.0                                                        08/24/2022  19:19:43  PAGE 150
+L251 LINKER/LOCATER V4.66.93.0                                                        09/22/2022  11:45:04  PAGE 150
 
 
       ---         BLOCKEND  ---      ---       LVL=0
@@ -10199,7 +10199,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\iWatch-v2.0 (oled_anim)
       00FE5F99H   BLOCK     ECODE    ---       LVL=0
       R15         REGSYM    ---      BYTE      event
       00FE60F4H   BLOCK     ECODE    NEAR LAB  LVL=1
-L251 LINKER/LOCATER V4.66.93.0                                                        08/24/2022  19:19:43  PAGE 151
+L251 LINKER/LOCATER V4.66.93.0                                                        09/22/2022  11:45:04  PAGE 151
 
 
       R15         REGSYM    ---      BYTE      i
@@ -10267,7 +10267,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\iWatch-v2.0 (oled_anim)
       000115DBH   PUBLIC    XDATA    ---       rx4_buf
       0001161BH   PUBLIC    XDATA    BYTE      rx4_cnt
       000000D0H   SFRSYM    DATA     BYTE      PSW
-L251 LINKER/LOCATER V4.66.93.0                                                        08/24/2022  19:19:43  PAGE 152
+L251 LINKER/LOCATER V4.66.93.0                                                        09/22/2022  11:45:04  PAGE 152
 
 
       000000FDH   SFRSYM    DATA     BYTE      S4CON
@@ -10335,7 +10335,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\iWatch-v2.0 (oled_anim)
 
       00FEABCCH   BLOCK     ECODE    ---       LVL=0
       00FEABCCH   LINE      ECODE    ---       #47
-L251 LINKER/LOCATER V4.66.93.0                                                        08/24/2022  19:19:43  PAGE 153
+L251 LINKER/LOCATER V4.66.93.0                                                        09/22/2022  11:45:04  PAGE 153
 
 
       00FEABCCH   LINE      ECODE    ---       #49
@@ -10403,7 +10403,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\iWatch-v2.0 (oled_anim)
       00FE06ADH   PUBLIC    ECODE    FAR LAB   PRINTF?
 
       ---         MODULE    ---      ---       SPRINTF?
-L251 LINKER/LOCATER V4.66.93.0                                                        08/24/2022  19:19:43  PAGE 154
+L251 LINKER/LOCATER V4.66.93.0                                                        09/22/2022  11:45:04  PAGE 154
 
 
       000007DBH   PUBLIC    EDATA    ---       ?SPRINTF??BYTE
@@ -10471,7 +10471,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\iWatch-v2.0 (oled_anim)
       ---         MODULE    ---      ---       ATOI?
       00FEAE1AH   PUBLIC    ECODE    ---       atoi??
 
-L251 LINKER/LOCATER V4.66.93.0                                                        08/24/2022  19:19:43  PAGE 155
+L251 LINKER/LOCATER V4.66.93.0                                                        09/22/2022  11:45:04  PAGE 155
 
 
       ---         MODULE    ---      ---       RAND?
@@ -10539,7 +10539,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\iWatch-v2.0 (oled_anim)
 
 *** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
     NAME:    IMUupdate?/LSM6DSM
-L251 LINKER/LOCATER V4.66.93.0                                                        08/24/2022  19:19:43  PAGE 156
+L251 LINKER/LOCATER V4.66.93.0                                                        09/22/2022  11:45:04  PAGE 156
 
 
 
@@ -10558,5 +10558,45 @@ SYMBOL TABLE OF MODULE:  .\Objects\iWatch-v2.0 (oled_anim)
 *** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
     NAME:    pageRegister_page_lsm6dsl?/page_lsm6dsl
 
+******************************************************************************
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: BE1FH BYTE (2376%) *
+******************************************************************************
+
 Program Size: data=38.4 edata+hdata=2957 xdata=5738 const=2121 code=50801
-L251 RUN COMPLETE.  11 WARNING(S),  0 ERROR(S)
+
+
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    NAME:    og_slider_getValue?/oled_slider
+
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    NAME:    og_switch_getStatus?/oled_switch
+
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    NAME:    SPI_ReadByte?/SPI
+
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    NAME:    RX8130CEDisableTimer?/RX8130CE
+
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    NAME:    iWatchPowerDown?/iWatch
+
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    NAME:    IMUupdate?/LSM6DSM
+
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    NAME:    HDC2080StartConversion?/HDC2080
+
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    NAME:    HDC2080GetTH?/HDC2080
+
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    NAME:    HDC2080Init?/HDC2080
+
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    NAME:    HTU21DReset?/HTU21D
+
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    NAME:    pageRegister_page_lsm6dsl?/page_lsm6dsl
+
+*** ERROR L250: CODE SIZE LIMIT IN RESTRICTED VERSION EXCEEDED
+    LIMIT:   0800H BYTES

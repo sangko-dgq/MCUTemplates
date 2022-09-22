@@ -1,12 +1,12 @@
-C251 COMPILER V5.60.0,  page_lsm6dsl                                                       24/08/22  19:19:43  PAGE 1   
+C251 COMPILER V5.60.0,  page_lsm6dsl                                                       22/09/22  11:45:03  PAGE 1   
 
 
 C251 COMPILER V5.60.0, COMPILATION OF MODULE page_lsm6dsl
 OBJECT MODULE PLACED IN .\Objects\page_lsm6dsl.obj
-COMPILER INVOKED BY: D:\Application\keilC251_v560\C251\BIN\C251.EXE User\PageManage\page_lsm6dsl.c XSMALL ROM(HUGE) OPTI
-                    -MIZE(8,SPEED) BROWSE INCDIR(.\User;.\User\oled_gui;.\User\oled_gui\oled_core;.\User\oled_gui\oled_widget;.\User\PageMana
-                    -ge;.\User\Sensor;.\User\System;.\User\Bluetooth) DEBUG PRINT(.\Listings\page_lsm6dsl.lst) TABS(2) OBJECT(.\Objects\page_
-                    -lsm6dsl.obj) 
+COMPILER INVOKED BY: D:\Application\Keil_C251\C251\BIN\C251.EXE User\PageManage\page_lsm6dsl.c XSMALL ROM(HUGE) OPTIMIZE
+                    -(8,SPEED) BROWSE INCDIR(.\User;.\User\oled_gui;.\User\oled_gui\oled_core;.\User\oled_gui\oled_widget;.\User\PageManage;.
+                    -\User\Sensor;.\User\System;.\User\Bluetooth) DEBUG PRINT(.\Listings\page_lsm6dsl.lst) TABS(2) OBJECT(.\Objects\page_lsm6
+                    -dsl.obj) 
 
 stmt  level    source
 
@@ -66,7 +66,7 @@ stmt  level    source
    54   1        og_group_addAnimOffset(group1, 0, -OLED_HEIGHT, ANIM_TIME_NORM, ANIM_NULL_CB);
    55   1        LSM6DSMConfigAcc(ACC_ODR_208_HZ, ACC_SCALE_4_G);
    56   1        LSM6DSMConfigGyr(GYR_ODR_208_HZ, GYR_SCALE_500_DPS);
-C251 COMPILER V5.60.0,  page_lsm6dsl                                                       24/08/22  19:19:43  PAGE 2   
+C251 COMPILER V5.60.0,  page_lsm6dsl                                                       22/09/22  11:45:03  PAGE 2   
 
    57   1      }
 *** WARNING C47 IN LINE 40 OF User\PageManage\page_lsm6dsl.c: 'condition': unreferenced parameter
@@ -134,7 +134,7 @@ stmt  level    source
   118   1      }
   119          void pageRegister_page_lsm6dsl(unsigned char pageID)
   120          {
-C251 COMPILER V5.60.0,  page_lsm6dsl                                                       24/08/22  19:19:43  PAGE 3   
+C251 COMPILER V5.60.0,  page_lsm6dsl                                                       22/09/22  11:45:03  PAGE 3   
 
   121   1        pageRegister(pageID, "LSM6DSL", Icon, Setup, Loop, Exit, Event);
   122   1      }

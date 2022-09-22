@@ -1,12 +1,12 @@
-C251 COMPILER V5.60.0,  oled_widget                                                        24/08/22  13:53:41  PAGE 1   
+C251 COMPILER V5.60.0,  oled_widget                                                        22/09/22  11:45:00  PAGE 1   
 
 
 C251 COMPILER V5.60.0, COMPILATION OF MODULE oled_widget
 OBJECT MODULE PLACED IN .\Objects\oled_widget.obj
-COMPILER INVOKED BY: D:\Application\keilC251_v560\C251\BIN\C251.EXE User\oled_gui\oled_core\oled_widget.c XSMALL ROM(HUG
-                    -E) OPTIMIZE(8,SPEED) BROWSE INCDIR(.\User;.\User\oled_gui;.\User\oled_gui\oled_core;.\User\oled_gui\oled_widget;.\User\P
-                    -ageManage;.\User\Sensor;.\User\System;.\User\Bluetooth) DEBUG PRINT(.\Listings\oled_widget.lst) TABS(2) OBJECT(.\Objects
-                    -\oled_widget.obj) 
+COMPILER INVOKED BY: D:\Application\Keil_C251\C251\BIN\C251.EXE User\oled_gui\oled_core\oled_widget.c XSMALL ROM(HUGE) O
+                    -PTIMIZE(8,SPEED) BROWSE INCDIR(.\User;.\User\oled_gui;.\User\oled_gui\oled_core;.\User\oled_gui\oled_widget;.\User\PageM
+                    -anage;.\User\Sensor;.\User\System;.\User\Bluetooth) DEBUG PRINT(.\Listings\oled_widget.lst) TABS(2) OBJECT(.\Objects\ole
+                    -d_widget.obj) 
 
 stmt  level    source
 
@@ -66,7 +66,7 @@ stmt  level    source
                  if(pWidget == NULL)
                  {
                    OG_PRINTERROR("try to add a null widget to widget_list");
-C251 COMPILER V5.60.0,  oled_widget                                                        24/08/22  13:53:41  PAGE 2   
+C251 COMPILER V5.60.0,  oled_widget                                                        22/09/22  11:45:00  PAGE 2   
 
                    return;
                  }
@@ -134,7 +134,7 @@ stmt  level    source
   120   2          case BMP_WIDGET:
   121   2          case CHECKBOX_WIDGET:
   122   2          case SWITCH_WIDGET:
-C251 COMPILER V5.60.0,  oled_widget                                                        24/08/22  13:53:41  PAGE 3   
+C251 COMPILER V5.60.0,  oled_widget                                                        22/09/22  11:45:00  PAGE 3   
 
   123   2            break;
   124   2        }
@@ -202,7 +202,7 @@ stmt  level    source
   186   2          case ALIGN_RIGHT:
   187   2            pWidget->x = OLED_WIDTH - pWidget->w;
   188   2            break;
-C251 COMPILER V5.60.0,  oled_widget                                                        24/08/22  13:53:41  PAGE 4   
+C251 COMPILER V5.60.0,  oled_widget                                                        22/09/22  11:45:00  PAGE 4   
 
   189   2          case ALIGN_HORIZONMID:
   190   2            pWidget->x = (OLED_WIDTH - pWidget->w) / 2;
@@ -270,7 +270,7 @@ stmt  level    source
   252   4            }
   253   3            #endif
   254   3            
-C251 COMPILER V5.60.0,  oled_widget                                                        24/08/22  13:53:41  PAGE 5   
+C251 COMPILER V5.60.0,  oled_widget                                                        22/09/22  11:45:00  PAGE 5   
 
   255   3            #if OLED_USE_CHECKBOX == 1
                      case CHECKBOX_WIDGET:

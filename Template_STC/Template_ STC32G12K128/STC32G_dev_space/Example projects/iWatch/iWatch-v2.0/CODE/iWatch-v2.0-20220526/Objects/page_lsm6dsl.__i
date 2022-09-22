@@ -1,1 +1,0 @@
-"User\PageManage\page_lsm6dsl.c" XSMALL ROM(HUGE) OPTIMIZE (8,SPEED) BROWSE INCDIR(.\User;.\User\oled_gui;.\User\oled_gui\oled_core;.\User\oled_gui\oled_widget;.\User\PageManage;.\User\Sensor;.\User\System;.\User\Bluetooth) DEBUG PRINT(.\Listings\page_lsm6dsl.lst) TABS (2) OBJECT(.\Objects\page_lsm6dsl.obj)

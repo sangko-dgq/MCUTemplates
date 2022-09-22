@@ -1,12 +1,12 @@
-C251 COMPILER V5.60.0,  page_stopwatch                                                     24/08/22  19:19:21  PAGE 1   
+C251 COMPILER V5.60.0,  page_stopwatch                                                     22/09/22  11:45:04  PAGE 1   
 
 
 C251 COMPILER V5.60.0, COMPILATION OF MODULE page_stopwatch
 OBJECT MODULE PLACED IN .\Objects\page_stopwatch.obj
-COMPILER INVOKED BY: D:\Application\keilC251_v560\C251\BIN\C251.EXE User\PageManage\page_stopwatch.c XSMALL ROM(HUGE) OP
-                    -TIMIZE(8,SPEED) BROWSE INCDIR(.\User;.\User\oled_gui;.\User\oled_gui\oled_core;.\User\oled_gui\oled_widget;.\User\PageMa
-                    -nage;.\User\Sensor;.\User\System;.\User\Bluetooth) DEBUG PRINT(.\Listings\page_stopwatch.lst) TABS(2) OBJECT(.\Objects\p
-                    -age_stopwatch.obj) 
+COMPILER INVOKED BY: D:\Application\Keil_C251\C251\BIN\C251.EXE User\PageManage\page_stopwatch.c XSMALL ROM(HUGE) OPTIMI
+                    -ZE(8,SPEED) BROWSE INCDIR(.\User;.\User\oled_gui;.\User\oled_gui\oled_core;.\User\oled_gui\oled_widget;.\User\PageManage
+                    -;.\User\Sensor;.\User\System;.\User\Bluetooth) DEBUG PRINT(.\Listings\page_stopwatch.lst) TABS(2) OBJECT(.\Objects\page_
+                    -stopwatch.obj) 
 
 stmt  level    source
 
@@ -66,7 +66,7 @@ stmt  level    source
    54            /* (16 X 16 )*/
    55          };
    56          
-C251 COMPILER V5.60.0,  page_stopwatch                                                     24/08/22  19:19:21  PAGE 2   
+C251 COMPILER V5.60.0,  page_stopwatch                                                     22/09/22  11:45:04  PAGE 2   
 
    57          
    58          unsigned char record_cnt = 0;
@@ -134,7 +134,7 @@ stmt  level    source
   119            */
   120          static void Exit(unsigned char condition)
   121          {
-C251 COMPILER V5.60.0,  page_stopwatch                                                     24/08/22  19:19:21  PAGE 3   
+C251 COMPILER V5.60.0,  page_stopwatch                                                     22/09/22  11:45:04  PAGE 3   
 
   122   1        og_group_addAnimOffset(group1, 0, 64, ANIM_TIME_NORM, delet);
   123   1      }
@@ -202,7 +202,7 @@ stmt  level    source
   184   1        else if(event == KEY4_PRESSED)
   185   1        {
   186   2          unsigned char i;
-C251 COMPILER V5.60.0,  page_stopwatch                                                     24/08/22  19:19:21  PAGE 4   
+C251 COMPILER V5.60.0,  page_stopwatch                                                     22/09/22  11:45:04  PAGE 4   
 
   187   2          record_cnt = 0;
   188   2          for(i = 0; i < 3; i++)

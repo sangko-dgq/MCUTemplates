@@ -1,11 +1,11 @@
-C251 COMPILER V5.60.0,  main                                                               24/08/22  19:19:15  PAGE 1   
+C251 COMPILER V5.60.0,  main                                                               22/09/22  11:45:01  PAGE 1   
 
 
 C251 COMPILER V5.60.0, COMPILATION OF MODULE main
 OBJECT MODULE PLACED IN .\Objects\main.obj
-COMPILER INVOKED BY: D:\Application\keilC251_v560\C251\BIN\C251.EXE User\main.c XSMALL ROM(HUGE) OPTIMIZE(8,SPEED) BROWS
-                    -E INCDIR(.\User;.\User\oled_gui;.\User\oled_gui\oled_core;.\User\oled_gui\oled_widget;.\User\PageManage;.\User\Sensor;.\
-                    -User\System;.\User\Bluetooth) DEBUG PRINT(.\Listings\main.lst) TABS(2) OBJECT(.\Objects\main.obj) 
+COMPILER INVOKED BY: D:\Application\Keil_C251\C251\BIN\C251.EXE User\main.c XSMALL ROM(HUGE) OPTIMIZE(8,SPEED) BROWSE IN
+                    -CDIR(.\User;.\User\oled_gui;.\User\oled_gui\oled_core;.\User\oled_gui\oled_widget;.\User\PageManage;.\User\Sensor;.\User
+                    -\System;.\User\Bluetooth) DEBUG PRINT(.\Listings\main.lst) TABS(2) OBJECT(.\Objects\main.obj) 
 
 stmt  level    source
 

@@ -1,12 +1,12 @@
-C251 COMPILER V5.60.0,  oled_bmp                                                           23/08/22  22:51:17  PAGE 1   
+C251 COMPILER V5.60.0,  oled_bmp                                                           22/09/22  11:45:00  PAGE 1   
 
 
 C251 COMPILER V5.60.0, COMPILATION OF MODULE oled_bmp
 OBJECT MODULE PLACED IN .\Objects\oled_bmp.obj
-COMPILER INVOKED BY: D:\Application\keilC251_v560\C251\BIN\C251.EXE User\oled_gui\oled_widget\oled_bmp.c XSMALL ROM(HUGE
-                    -) OPTIMIZE(8,SPEED) BROWSE INCDIR(.\User;.\User\oled_gui;.\User\oled_gui\oled_core;.\User\oled_gui\oled_widget;.\User\Pa
-                    -geManage;.\User\Sensor;.\User\System;.\User\Bluetooth) DEBUG PRINT(.\Listings\oled_bmp.lst) TABS(2) OBJECT(.\Objects\ole
-                    -d_bmp.obj) 
+COMPILER INVOKED BY: D:\Application\Keil_C251\C251\BIN\C251.EXE User\oled_gui\oled_widget\oled_bmp.c XSMALL ROM(HUGE) OP
+                    -TIMIZE(8,SPEED) BROWSE INCDIR(.\User;.\User\oled_gui;.\User\oled_gui\oled_core;.\User\oled_gui\oled_widget;.\User\PageMa
+                    -nage;.\User\Sensor;.\User\System;.\User\Bluetooth) DEBUG PRINT(.\Listings\oled_bmp.lst) TABS(2) OBJECT(.\Objects\oled_bm
+                    -p.obj) 
 
 stmt  level    source
 
@@ -66,7 +66,7 @@ stmt  level    source
    54            #endif
    55            pWidget->config &= ~0xC0;
    56            pWidget->config |= (rotation << 6);
-C251 COMPILER V5.60.0,  oled_bmp                                                           23/08/22  22:51:17  PAGE 2   
+C251 COMPILER V5.60.0,  oled_bmp                                                           22/09/22  11:45:00  PAGE 2   
 
    57          }
    58          uint8_t aabb(uint8_t x, uint8_t y, t_psWidget pWidget)
@@ -134,7 +134,7 @@ stmt  level    source
   118   1            ptr1 = malloc(temp);
   119   1            for(i = 0; i < temp; i++)
   120   1            {
-C251 COMPILER V5.60.0,  oled_bmp                                                           23/08/22  22:51:17  PAGE 3   
+C251 COMPILER V5.60.0,  oled_bmp                                                           22/09/22  11:45:00  PAGE 3   
 
   121   1              ptr1[i] = 0;
   122   1              for(j = 0; j < 8; j++)

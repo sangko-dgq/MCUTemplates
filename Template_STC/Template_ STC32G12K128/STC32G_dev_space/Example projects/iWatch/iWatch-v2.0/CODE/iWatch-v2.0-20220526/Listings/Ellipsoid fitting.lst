@@ -1,12 +1,12 @@
-C251 COMPILER V5.60.0,  Ellipsoid fitting                                                  23/08/22  22:51:21  PAGE 1   
+C251 COMPILER V5.60.0,  Ellipsoid fitting                                                  22/09/22  11:45:02  PAGE 1   
 
 
 C251 COMPILER V5.60.0, COMPILATION OF MODULE Ellipsoid fitting
 OBJECT MODULE PLACED IN .\Objects\Ellipsoid fitting.obj
-COMPILER INVOKED BY: D:\Application\keilC251_v560\C251\BIN\C251.EXE User\Sensor\Ellipsoid fitting.c XSMALL ROM(HUGE) OPT
-                    -IMIZE(8,SPEED) BROWSE INCDIR(.\User;.\User\oled_gui;.\User\oled_gui\oled_core;.\User\oled_gui\oled_widget;.\User\PageMan
-                    -age;.\User\Sensor;.\User\System;.\User\Bluetooth) DEBUG PRINT(.\Listings\Ellipsoid fitting.lst) TABS(2) OBJECT(.\Objects
-                    -\Ellipsoid fitting.obj) 
+COMPILER INVOKED BY: D:\Application\Keil_C251\C251\BIN\C251.EXE User\Sensor\Ellipsoid fitting.c XSMALL ROM(HUGE) OPTIMIZ
+                    -E(8,SPEED) BROWSE INCDIR(.\User;.\User\oled_gui;.\User\oled_gui\oled_core;.\User\oled_gui\oled_widget;.\User\PageManage;
+                    -.\User\Sensor;.\User\System;.\User\Bluetooth) DEBUG PRINT(.\Listings\Ellipsoid fitting.lst) TABS(2) OBJECT(.\Objects\Ell
+                    -ipsoid fitting.obj) 
 
 stmt  level    source
 
@@ -66,7 +66,7 @@ stmt  level    source
    54          //化简系数矩阵，把除以N带上
    55          void CalcData_Input_average()
    56          {
-C251 COMPILER V5.60.0,  Ellipsoid fitting                                                  23/08/22  22:51:21  PAGE 2   
+C251 COMPILER V5.60.0,  Ellipsoid fitting                                                  22/09/22  11:45:02  PAGE 2   
 
    57   1        unsigned char row, column;
    58   1        for (row = 0; row < MATRIX_SIZE; row++)
@@ -134,7 +134,7 @@ stmt  level    source
   120   3          }
   121   2        }
   122   1      }
-C251 COMPILER V5.60.0,  Ellipsoid fitting                                                  23/08/22  22:51:21  PAGE 3   
+C251 COMPILER V5.60.0,  Ellipsoid fitting                                                  22/09/22  11:45:02  PAGE 3   
 
   123          
   124          //高斯消元法，求行阶梯型矩阵
@@ -202,7 +202,7 @@ stmt  level    source
   185   1        CalcData_Input(274, 4088, -303);
   186   1        CalcData_Input(312, -4109, -305);
   187   1        CalcData_Input(-3805, -24, -390);
-C251 COMPILER V5.60.0,  Ellipsoid fitting                                                  23/08/22  22:51:21  PAGE 4   
+C251 COMPILER V5.60.0,  Ellipsoid fitting                                                  22/09/22  11:45:02  PAGE 4   
 
   188   1        CalcData_Input(4389, 6, -228);
   189   1        CalcData_Input(261, 2106, -3848);
@@ -272,7 +272,7 @@ Module Information          Static   Overlayable
   hconst size          =        66     ------
 End of Module Information.
 
-C251 COMPILER V5.60.0,  Ellipsoid fitting                                                  23/08/22  22:51:21  PAGE 5   
+C251 COMPILER V5.60.0,  Ellipsoid fitting                                                  22/09/22  11:45:02  PAGE 5   
 
 
 C251 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

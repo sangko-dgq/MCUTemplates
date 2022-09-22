@@ -1,12 +1,12 @@
-C251 COMPILER V5.60.0,  page_magcal                                                        24/08/22  19:19:18  PAGE 1   
+C251 COMPILER V5.60.0,  page_magcal                                                        22/09/22  11:45:03  PAGE 1   
 
 
 C251 COMPILER V5.60.0, COMPILATION OF MODULE page_magcal
 OBJECT MODULE PLACED IN .\Objects\page_magcal.obj
-COMPILER INVOKED BY: D:\Application\keilC251_v560\C251\BIN\C251.EXE User\PageManage\page_magcal.c XSMALL ROM(HUGE) OPTIM
-                    -IZE(8,SPEED) BROWSE INCDIR(.\User;.\User\oled_gui;.\User\oled_gui\oled_core;.\User\oled_gui\oled_widget;.\User\PageManag
-                    -e;.\User\Sensor;.\User\System;.\User\Bluetooth) DEBUG PRINT(.\Listings\page_magcal.lst) TABS(2) OBJECT(.\Objects\page_ma
-                    -gcal.obj) 
+COMPILER INVOKED BY: D:\Application\Keil_C251\C251\BIN\C251.EXE User\PageManage\page_magcal.c XSMALL ROM(HUGE) OPTIMIZE(
+                    -8,SPEED) BROWSE INCDIR(.\User;.\User\oled_gui;.\User\oled_gui\oled_core;.\User\oled_gui\oled_widget;.\User\PageManage;.\
+                    -User\Sensor;.\User\System;.\User\Bluetooth) DEBUG PRINT(.\Listings\page_magcal.lst) TABS(2) OBJECT(.\Objects\page_magcal
+                    -.obj) 
 
 stmt  level    source
 
@@ -66,7 +66,7 @@ stmt  level    source
    53   1        pageSetStatus(page_magcal, PAGE_IDLE);
    54   1      }
 *** WARNING C47 IN LINE 38 OF User\PageManage\page_magcal.c: 'condition': unreferenced parameter
-C251 COMPILER V5.60.0,  page_magcal                                                        24/08/22  19:19:18  PAGE 2   
+C251 COMPILER V5.60.0,  page_magcal                                                        22/09/22  11:45:03  PAGE 2   
 
    55          /**
    56            * @brief  页面循环执行的内容
@@ -135,7 +135,7 @@ Module Information          Static   Overlayable
   idata size           =    ------     ------
   pdata size           =    ------     ------
   xdata size           =    ------     ------
-C251 COMPILER V5.60.0,  page_magcal                                                        24/08/22  19:19:18  PAGE 3   
+C251 COMPILER V5.60.0,  page_magcal                                                        22/09/22  11:45:03  PAGE 3   
 
   xdata-const size     =    ------     ------
   edata size           =        10     ------

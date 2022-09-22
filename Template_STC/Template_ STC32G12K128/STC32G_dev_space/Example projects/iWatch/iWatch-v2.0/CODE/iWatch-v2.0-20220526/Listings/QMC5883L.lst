@@ -1,11 +1,11 @@
-C251 COMPILER V5.60.0,  QMC5883L                                                           23/08/22  22:51:21  PAGE 1   
+C251 COMPILER V5.60.0,  QMC5883L                                                           22/09/22  11:45:02  PAGE 1   
 
 
 C251 COMPILER V5.60.0, COMPILATION OF MODULE QMC5883L
 OBJECT MODULE PLACED IN .\Objects\QMC5883L.obj
-COMPILER INVOKED BY: D:\Application\keilC251_v560\C251\BIN\C251.EXE User\Sensor\QMC5883L.c XSMALL ROM(HUGE) OPTIMIZE(8,S
-                    -PEED) BROWSE INCDIR(.\User;.\User\oled_gui;.\User\oled_gui\oled_core;.\User\oled_gui\oled_widget;.\User\PageManage;.\Use
-                    -r\Sensor;.\User\System;.\User\Bluetooth) DEBUG PRINT(.\Listings\QMC5883L.lst) TABS(2) OBJECT(.\Objects\QMC5883L.obj) 
+COMPILER INVOKED BY: D:\Application\Keil_C251\C251\BIN\C251.EXE User\Sensor\QMC5883L.c XSMALL ROM(HUGE) OPTIMIZE(8,SPEED
+                    -) BROWSE INCDIR(.\User;.\User\oled_gui;.\User\oled_gui\oled_core;.\User\oled_gui\oled_widget;.\User\PageManage;.\User\Se
+                    -nsor;.\User\System;.\User\Bluetooth) DEBUG PRINT(.\Listings\QMC5883L.lst) TABS(2) OBJECT(.\Objects\QMC5883L.obj) 
 
 stmt  level    source
 
@@ -66,7 +66,7 @@ stmt  level    source
    55   1      }
    56          /**
    57            * @brief  从QMC5883L中读取读传感器原始数据
-C251 COMPILER V5.60.0,  QMC5883L                                                           23/08/22  22:51:21  PAGE 2   
+C251 COMPILER V5.60.0,  QMC5883L                                                           22/09/22  11:45:02  PAGE 2   
 
    58            * @param  buf：原始数据数组的指针，int*型
    59            * @retval 无
@@ -134,7 +134,7 @@ stmt  level    source
   121   1        unsigned char time_out = 200;
   122   1        while(QMC5883LCheckConnection() == 0)
   123   1        {
-C251 COMPILER V5.60.0,  QMC5883L                                                           23/08/22  22:51:21  PAGE 3   
+C251 COMPILER V5.60.0,  QMC5883L                                                           22/09/22  11:45:02  PAGE 3   
 
   124   2          Delay1ms(1);
   125   2          if(--time_out == 0)

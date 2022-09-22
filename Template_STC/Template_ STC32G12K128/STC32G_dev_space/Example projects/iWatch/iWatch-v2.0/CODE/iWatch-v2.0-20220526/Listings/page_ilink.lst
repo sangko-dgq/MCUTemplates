@@ -1,12 +1,12 @@
-C251 COMPILER V5.60.0,  page_ilink                                                         24/08/22  19:19:18  PAGE 1   
+C251 COMPILER V5.60.0,  page_ilink                                                         22/09/22  11:45:03  PAGE 1   
 
 
 C251 COMPILER V5.60.0, COMPILATION OF MODULE page_ilink
 OBJECT MODULE PLACED IN .\Objects\page_ilink.obj
-COMPILER INVOKED BY: D:\Application\keilC251_v560\C251\BIN\C251.EXE User\PageManage\page_ilink.c XSMALL ROM(HUGE) OPTIMI
-                    -ZE(8,SPEED) BROWSE INCDIR(.\User;.\User\oled_gui;.\User\oled_gui\oled_core;.\User\oled_gui\oled_widget;.\User\PageManage
-                    -;.\User\Sensor;.\User\System;.\User\Bluetooth) DEBUG PRINT(.\Listings\page_ilink.lst) TABS(2) OBJECT(.\Objects\page_ilin
-                    -k.obj) 
+COMPILER INVOKED BY: D:\Application\Keil_C251\C251\BIN\C251.EXE User\PageManage\page_ilink.c XSMALL ROM(HUGE) OPTIMIZE(8
+                    -,SPEED) BROWSE INCDIR(.\User;.\User\oled_gui;.\User\oled_gui\oled_core;.\User\oled_gui\oled_widget;.\User\PageManage;.\U
+                    -ser\Sensor;.\User\System;.\User\Bluetooth) DEBUG PRINT(.\Listings\page_ilink.lst) TABS(2) OBJECT(.\Objects\page_ilink.ob
+                    -j) 
 
 stmt  level    source
 
@@ -66,7 +66,7 @@ stmt  level    source
    54          {
    55   1        if(TI)
    56   1        {
-C251 COMPILER V5.60.0,  page_ilink                                                         24/08/22  19:19:18  PAGE 2   
+C251 COMPILER V5.60.0,  page_ilink                                                         22/09/22  11:45:03  PAGE 2   
 
    57   2          TI = 0;
    58   2          uart1_busy_flag = 0;
@@ -134,7 +134,7 @@ stmt  level    source
   120   3                *pInput >= 'a' && *pInput <= 'z' ||
   121   3                *pInput == '-' || *pInput == '.')
   122   3            {
-C251 COMPILER V5.60.0,  page_ilink                                                         24/08/22  19:19:18  PAGE 3   
+C251 COMPILER V5.60.0,  page_ilink                                                         22/09/22  11:45:03  PAGE 3   
 
   123   4              if (argv[i] == NULL)
   124   4              {
@@ -202,7 +202,7 @@ stmt  level    source
   186   5                time.day = atoi(pVaList[3]);
   187   5                time.hour = atoi(pVaList[4]);
   188   5                time.minute = atoi(pVaList[5]);
-C251 COMPILER V5.60.0,  page_ilink                                                         24/08/22  19:19:18  PAGE 4   
+C251 COMPILER V5.60.0,  page_ilink                                                         22/09/22  11:45:03  PAGE 4   
 
   189   5                time.second = atoi(pVaList[6]);
   190   5                time.weekday = atoi(pVaList[7]) + 1;
@@ -270,7 +270,7 @@ stmt  level    source
   250   2          else
   251   2          {
   252   3            com_buf[com_index++] = ucRecByte;
-C251 COMPILER V5.60.0,  page_ilink                                                         24/08/22  19:19:18  PAGE 5   
+C251 COMPILER V5.60.0,  page_ilink                                                         22/09/22  11:45:03  PAGE 5   
 
   253   3            if(com_index >= COM_BUF_SIZE)
   254   3              com_index = 0;
@@ -338,7 +338,7 @@ stmt  level    source
   316   1        #endif
   317   1        #if (MAG_SENSOR_SELECT == 1)
   318   1        QMC5883LSetMode(1);
-C251 COMPILER V5.60.0,  page_ilink                                                         24/08/22  19:19:18  PAGE 6   
+C251 COMPILER V5.60.0,  page_ilink                                                         22/09/22  11:45:03  PAGE 6   
 
   319   1        #endif
   320   1        LSM6DSMConfigAcc(ACC_ODR_208_HZ, ACC_SCALE_4_G);
@@ -406,7 +406,7 @@ stmt  level    source
   380   4              #if (TH_SENSOR_SELECT == 0)
                        sprintf(temp, "TH#%.2f#%.2f\r\n", 0, 0);
                        MuxSendString(temp);
-C251 COMPILER V5.60.0,  page_ilink                                                         24/08/22  19:19:18  PAGE 7   
+C251 COMPILER V5.60.0,  page_ilink                                                         22/09/22  11:45:03  PAGE 7   
 
                        #elif (TH_SENSOR_SELECT == 1)
                        HDC2080GetTH(&HDC2080);
@@ -474,7 +474,7 @@ stmt  level    source
   446   1        else  //蓝牙设置模式，将USB串口接收到的内容转发到蓝牙串口，蓝牙串口接收到的内容转发到USB串口
   447   1        {
   448   2          if(pageExecuteRate(&Rate10Hz))
-C251 COMPILER V5.60.0,  page_ilink                                                         24/08/22  19:19:18  PAGE 8   
+C251 COMPILER V5.60.0,  page_ilink                                                         22/09/22  11:45:03  PAGE 8   
 
   449   2          {
   450   3            if(BtReceiveString(temp))
@@ -543,7 +543,7 @@ Module Information          Static   Overlayable
   ecode size           =      2318     ------
   data size            =    ------     ------
   idata size           =    ------     ------
-C251 COMPILER V5.60.0,  page_ilink                                                         24/08/22  19:19:18  PAGE 9   
+C251 COMPILER V5.60.0,  page_ilink                                                         22/09/22  11:45:03  PAGE 9   
 
   pdata size           =    ------     ------
   xdata size           =       134     ------

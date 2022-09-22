@@ -1,11 +1,11 @@
-C251 COMPILER V5.60.0,  oled                                                               23/08/22  22:51:20  PAGE 1   
+C251 COMPILER V5.60.0,  oled                                                               22/09/22  11:45:01  PAGE 1   
 
 
 C251 COMPILER V5.60.0, COMPILATION OF MODULE oled
 OBJECT MODULE PLACED IN .\Objects\oled.obj
-COMPILER INVOKED BY: D:\Application\keilC251_v560\C251\BIN\C251.EXE User\oled.c XSMALL ROM(HUGE) OPTIMIZE(8,SPEED) BROWS
-                    -E INCDIR(.\User;.\User\oled_gui;.\User\oled_gui\oled_core;.\User\oled_gui\oled_widget;.\User\PageManage;.\User\Sensor;.\
-                    -User\System;.\User\Bluetooth) DEBUG PRINT(.\Listings\oled.lst) TABS(2) OBJECT(.\Objects\oled.obj) 
+COMPILER INVOKED BY: D:\Application\Keil_C251\C251\BIN\C251.EXE User\oled.c XSMALL ROM(HUGE) OPTIMIZE(8,SPEED) BROWSE IN
+                    -CDIR(.\User;.\User\oled_gui;.\User\oled_gui\oled_core;.\User\oled_gui\oled_widget;.\User\PageManage;.\User\Sensor;.\User
+                    -\System;.\User\Bluetooth) DEBUG PRINT(.\Listings\oled.lst) TABS(2) OBJECT(.\Objects\oled.obj) 
 
 stmt  level    source
 
@@ -66,7 +66,7 @@ stmt  level    source
    55   1          OLED_WR_CMD(0x00);
    56   1        OLED_CS_Set();
    57   1      }
-C251 COMPILER V5.60.0,  oled                                                               23/08/22  22:51:20  PAGE 2   
+C251 COMPILER V5.60.0,  oled                                                               22/09/22  11:45:01  PAGE 2   
 
    58          /*
    59          void OLED_Horizental_Reverse(unsigned char reverse) //Ë®Æ½·­×ª
@@ -134,7 +134,7 @@ stmt  level    source
   121   1        Delay1ms(20);
   122   1        OLED_RST_Clr();
   123   1        Delay1ms(10);
-C251 COMPILER V5.60.0,  oled                                                               23/08/22  22:51:20  PAGE 3   
+C251 COMPILER V5.60.0,  oled                                                               22/09/22  11:45:01  PAGE 3   
 
   124   1        OLED_RST_Set(); 
   125   1        OLED_CS_Clr();
@@ -203,7 +203,7 @@ Module Information          Static   Overlayable
   huge data size       =    ------     ------
   const size           =    ------     ------
   hconst size          =    ------     ------
-C251 COMPILER V5.60.0,  oled                                                               23/08/22  22:51:20  PAGE 4   
+C251 COMPILER V5.60.0,  oled                                                               22/09/22  11:45:01  PAGE 4   
 
 End of Module Information.
 

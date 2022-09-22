@@ -1,11 +1,11 @@
-C251 COMPILER V5.60.0,  System                                                             23/08/22  22:51:20  PAGE 1   
+C251 COMPILER V5.60.0,  System                                                             22/09/22  11:45:01  PAGE 1   
 
 
 C251 COMPILER V5.60.0, COMPILATION OF MODULE System
 OBJECT MODULE PLACED IN .\Objects\System.obj
-COMPILER INVOKED BY: D:\Application\keilC251_v560\C251\BIN\C251.EXE User\System\System.c XSMALL ROM(HUGE) OPTIMIZE(8,SPE
-                    -ED) BROWSE INCDIR(.\User;.\User\oled_gui;.\User\oled_gui\oled_core;.\User\oled_gui\oled_widget;.\User\PageManage;.\User\
-                    -Sensor;.\User\System;.\User\Bluetooth) DEBUG PRINT(.\Listings\System.lst) TABS(2) OBJECT(.\Objects\System.obj) 
+COMPILER INVOKED BY: D:\Application\Keil_C251\C251\BIN\C251.EXE User\System\System.c XSMALL ROM(HUGE) OPTIMIZE(8,SPEED) 
+                    -BROWSE INCDIR(.\User;.\User\oled_gui;.\User\oled_gui\oled_core;.\User\oled_gui\oled_widget;.\User\PageManage;.\User\Sens
+                    -or;.\User\System;.\User\Bluetooth) DEBUG PRINT(.\Listings\System.lst) TABS(2) OBJECT(.\Objects\System.obj) 
 
 stmt  level    source
 
@@ -66,7 +66,7 @@ stmt  level    source
    55   1        AUXR |= 0x04;   //定时器时钟1T模式
    56   1        T2L = 0xB4;   //设置定时初始值
    57   1        T2H = 0xFF;   //设置定时初始值
-C251 COMPILER V5.60.0,  System                                                             23/08/22  22:51:20  PAGE 2   
+C251 COMPILER V5.60.0,  System                                                             22/09/22  11:45:01  PAGE 2   
 
    58   1        AUXR |= 0x10;   //定时器2开始计时
    59   1        TI = 1;
@@ -134,7 +134,7 @@ stmt  level    source
   121          {
   122   1        P_SW2 |= 0x80;
   123   1        ADCTIM = 0x3f;    
-C251 COMPILER V5.60.0,  System                                                             23/08/22  22:51:20  PAGE 3   
+C251 COMPILER V5.60.0,  System                                                             22/09/22  11:45:01  PAGE 3   
 
   124   1        P_SW2 &= 0x7f;
   125   1        ADCCFG = 0x20 | 0x08;  //ADC_RES保存结果高4位，ADC_RESL保存结果后8位
@@ -202,7 +202,7 @@ stmt  level    source
   187   1        ET0 = 0;
   188   1        ET1 = 0;
   189   1      
-C251 COMPILER V5.60.0,  System                                                             23/08/22  22:51:20  PAGE 4   
+C251 COMPILER V5.60.0,  System                                                             22/09/22  11:45:01  PAGE 4   
 
   190   1        IIC_Deinit();
   191   1        SPI_Deinit();
@@ -270,7 +270,7 @@ stmt  level    source
   253   1        
   254   1        /*GPIO配置*/
   255   1        GPIOInit(); 
-C251 COMPILER V5.60.0,  System                                                             23/08/22  22:51:20  PAGE 5   
+C251 COMPILER V5.60.0,  System                                                             22/09/22  11:45:01  PAGE 5   
 
   256   1        
   257   1        /*串口配置*/

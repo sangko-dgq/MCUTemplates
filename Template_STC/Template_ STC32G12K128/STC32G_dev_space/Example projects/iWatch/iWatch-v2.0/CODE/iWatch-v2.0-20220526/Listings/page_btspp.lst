@@ -1,12 +1,12 @@
-C251 COMPILER V5.60.0,  page_btspp                                                         24/08/22  19:19:21  PAGE 1   
+C251 COMPILER V5.60.0,  page_btspp                                                         22/09/22  11:45:04  PAGE 1   
 
 
 C251 COMPILER V5.60.0, COMPILATION OF MODULE page_btspp
 OBJECT MODULE PLACED IN .\Objects\page_btspp.obj
-COMPILER INVOKED BY: D:\Application\keilC251_v560\C251\BIN\C251.EXE User\PageManage\page_btspp.c XSMALL ROM(HUGE) OPTIMI
-                    -ZE(8,SPEED) BROWSE INCDIR(.\User;.\User\oled_gui;.\User\oled_gui\oled_core;.\User\oled_gui\oled_widget;.\User\PageManage
-                    -;.\User\Sensor;.\User\System;.\User\Bluetooth) DEBUG PRINT(.\Listings\page_btspp.lst) TABS(2) OBJECT(.\Objects\page_btsp
-                    -p.obj) 
+COMPILER INVOKED BY: D:\Application\Keil_C251\C251\BIN\C251.EXE User\PageManage\page_btspp.c XSMALL ROM(HUGE) OPTIMIZE(8
+                    -,SPEED) BROWSE INCDIR(.\User;.\User\oled_gui;.\User\oled_gui\oled_core;.\User\oled_gui\oled_widget;.\User\PageManage;.\U
+                    -ser\Sensor;.\User\System;.\User\Bluetooth) DEBUG PRINT(.\Listings\page_btspp.lst) TABS(2) OBJECT(.\Objects\page_btspp.ob
+                    -j) 
 
 stmt  level    source
 
@@ -66,7 +66,7 @@ stmt  level    source
    54   1      }
    55          /**
    56            * @brief  页面初始化事件
-C251 COMPILER V5.60.0,  page_btspp                                                         24/08/22  19:19:21  PAGE 2   
+C251 COMPILER V5.60.0,  page_btspp                                                         22/09/22  11:45:04  PAGE 2   
 
    57            * @param  无
    58            * @retval 无
@@ -134,7 +134,7 @@ stmt  level    source
   118            * @retval 无
   119            */
   120          static void Event(unsigned char event)
-C251 COMPILER V5.60.0,  page_btspp                                                         24/08/22  19:19:21  PAGE 3   
+C251 COMPILER V5.60.0,  page_btspp                                                         22/09/22  11:45:04  PAGE 3   
 
   121          {
   122   1        if(event == KEY1_PRESSED)

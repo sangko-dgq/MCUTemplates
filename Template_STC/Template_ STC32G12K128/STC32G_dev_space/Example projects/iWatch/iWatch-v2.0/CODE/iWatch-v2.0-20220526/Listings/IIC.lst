@@ -1,11 +1,11 @@
-C251 COMPILER V5.60.0,  IIC                                                                23/08/22  22:51:19  PAGE 1   
+C251 COMPILER V5.60.0,  IIC                                                                22/09/22  11:45:01  PAGE 1   
 
 
 C251 COMPILER V5.60.0, COMPILATION OF MODULE IIC
 OBJECT MODULE PLACED IN .\Objects\IIC.obj
-COMPILER INVOKED BY: D:\Application\keilC251_v560\C251\BIN\C251.EXE User\System\IIC.c XSMALL ROM(HUGE) OPTIMIZE(8,SPEED)
-                    - BROWSE INCDIR(.\User;.\User\oled_gui;.\User\oled_gui\oled_core;.\User\oled_gui\oled_widget;.\User\PageManage;.\User\Sen
-                    -sor;.\User\System;.\User\Bluetooth) DEBUG PRINT(.\Listings\IIC.lst) TABS(2) OBJECT(.\Objects\IIC.obj) 
+COMPILER INVOKED BY: D:\Application\Keil_C251\C251\BIN\C251.EXE User\System\IIC.c XSMALL ROM(HUGE) OPTIMIZE(8,SPEED) BRO
+                    -WSE INCDIR(.\User;.\User\oled_gui;.\User\oled_gui\oled_core;.\User\oled_gui\oled_widget;.\User\PageManage;.\User\Sensor;
+                    -.\User\System;.\User\Bluetooth) DEBUG PRINT(.\Listings\IIC.lst) TABS(2) OBJECT(.\Objects\IIC.obj) 
 
 stmt  level    source
 
@@ -66,7 +66,7 @@ stmt  level    source
    55   1        I2CMSCR = 0x03;                             //∑¢ÀÕ∂¡ACK√¸¡Ó
    56   1        Wait();
    57   1      }
-C251 COMPILER V5.60.0,  IIC                                                                23/08/22  22:51:19  PAGE 2   
+C251 COMPILER V5.60.0,  IIC                                                                22/09/22  11:45:01  PAGE 2   
 
    58          void I2C_SendACK()
    59          {
@@ -134,7 +134,7 @@ stmt  level    source
   120   1        {
   121   2          buf[i] = I2C_RecvByte();
   122   2          I2C_SendACK();  
-C251 COMPILER V5.60.0,  IIC                                                                23/08/22  22:51:19  PAGE 3   
+C251 COMPILER V5.60.0,  IIC                                                                22/09/22  11:45:01  PAGE 3   
 
   123   2        }
   124   1        buf[i] = I2C_RecvByte();

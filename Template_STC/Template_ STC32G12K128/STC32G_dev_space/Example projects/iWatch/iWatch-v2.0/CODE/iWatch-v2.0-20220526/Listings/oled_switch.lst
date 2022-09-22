@@ -1,12 +1,12 @@
-C251 COMPILER V5.60.0,  oled_switch                                                        23/08/22  22:51:18  PAGE 1   
+C251 COMPILER V5.60.0,  oled_switch                                                        22/09/22  11:45:00  PAGE 1   
 
 
 C251 COMPILER V5.60.0, COMPILATION OF MODULE oled_switch
 OBJECT MODULE PLACED IN .\Objects\oled_switch.obj
-COMPILER INVOKED BY: D:\Application\keilC251_v560\C251\BIN\C251.EXE User\oled_gui\oled_widget\oled_switch.c XSMALL ROM(H
-                    -UGE) OPTIMIZE(8,SPEED) BROWSE INCDIR(.\User;.\User\oled_gui;.\User\oled_gui\oled_core;.\User\oled_gui\oled_widget;.\User
-                    -\PageManage;.\User\Sensor;.\User\System;.\User\Bluetooth) DEBUG PRINT(.\Listings\oled_switch.lst) TABS(2) OBJECT(.\Objec
-                    -ts\oled_switch.obj) 
+COMPILER INVOKED BY: D:\Application\Keil_C251\C251\BIN\C251.EXE User\oled_gui\oled_widget\oled_switch.c XSMALL ROM(HUGE)
+                    - OPTIMIZE(8,SPEED) BROWSE INCDIR(.\User;.\User\oled_gui;.\User\oled_gui\oled_core;.\User\oled_gui\oled_widget;.\User\Pag
+                    -eManage;.\User\Sensor;.\User\System;.\User\Bluetooth) DEBUG PRINT(.\Listings\oled_switch.lst) TABS(2) OBJECT(.\Objects\o
+                    -led_switch.obj) 
 
 stmt  level    source
 
@@ -66,7 +66,7 @@ stmt  level    source
                    return;
                  }
                  #endif
-C251 COMPILER V5.60.0,  oled_switch                                                        23/08/22  22:51:18  PAGE 2   
+C251 COMPILER V5.60.0,  oled_switch                                                        22/09/22  11:45:00  PAGE 2   
 
    57   1        if(ucStatus)
    58   1        {

@@ -1,12 +1,12 @@
-C251 COMPILER V5.60.0,  oled_group                                                         23/08/22  22:51:17  PAGE 1   
+C251 COMPILER V5.60.0,  oled_group                                                         22/09/22  11:44:59  PAGE 1   
 
 
 C251 COMPILER V5.60.0, COMPILATION OF MODULE oled_group
 OBJECT MODULE PLACED IN .\Objects\oled_group.obj
-COMPILER INVOKED BY: D:\Application\keilC251_v560\C251\BIN\C251.EXE User\oled_gui\oled_core\oled_group.c XSMALL ROM(HUGE
-                    -) OPTIMIZE(8,SPEED) BROWSE INCDIR(.\User;.\User\oled_gui;.\User\oled_gui\oled_core;.\User\oled_gui\oled_widget;.\User\Pa
-                    -geManage;.\User\Sensor;.\User\System;.\User\Bluetooth) DEBUG PRINT(.\Listings\oled_group.lst) TABS(2) OBJECT(.\Objects\o
-                    -led_group.obj) 
+COMPILER INVOKED BY: D:\Application\Keil_C251\C251\BIN\C251.EXE User\oled_gui\oled_core\oled_group.c XSMALL ROM(HUGE) OP
+                    -TIMIZE(8,SPEED) BROWSE INCDIR(.\User;.\User\oled_gui;.\User\oled_gui\oled_core;.\User\oled_gui\oled_widget;.\User\PageMa
+                    -nage;.\User\Sensor;.\User\System;.\User\Bluetooth) DEBUG PRINT(.\Listings\oled_group.lst) TABS(2) OBJECT(.\Objects\oled_
+                    -group.obj) 
 
 stmt  level    source
 
@@ -66,7 +66,7 @@ stmt  level    source
    53   1        {
    54   2          og_anim_create_offset(pItem[i].pWidget, delta_x, delta_y, duration, (i==(pGroup->ucSum-1)?anim_end_cb:A
              -NIM_NULL_CB));
-C251 COMPILER V5.60.0,  oled_group                                                         23/08/22  22:51:17  PAGE 2   
+C251 COMPILER V5.60.0,  oled_group                                                         22/09/22  11:44:59  PAGE 2   
 
    55   2        }
    56   1      }
@@ -134,7 +134,7 @@ stmt  level    source
   118   1        if(bias_x != 0 || bias_y != 0)
   119   1        {
   120   2          #if OLED_USE_ANIM == 1
-C251 COMPILER V5.60.0,  oled_group                                                         23/08/22  22:51:17  PAGE 3   
+C251 COMPILER V5.60.0,  oled_group                                                         22/09/22  11:44:59  PAGE 3   
 
   121   2          og_group_addAnimOffset(pGroup, bias_x , bias_y, ANIM_TIME_NORM, ANIM_NULL_CB);
   122   2          #else

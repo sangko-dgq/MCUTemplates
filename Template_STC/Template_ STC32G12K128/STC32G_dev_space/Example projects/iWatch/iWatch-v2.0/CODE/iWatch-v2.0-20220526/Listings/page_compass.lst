@@ -1,12 +1,12 @@
-C251 COMPILER V5.60.0,  page_compass                                                       24/08/22  19:19:16  PAGE 1   
+C251 COMPILER V5.60.0,  page_compass                                                       22/09/22  11:45:02  PAGE 1   
 
 
 C251 COMPILER V5.60.0, COMPILATION OF MODULE page_compass
 OBJECT MODULE PLACED IN .\Objects\page_compass.obj
-COMPILER INVOKED BY: D:\Application\keilC251_v560\C251\BIN\C251.EXE User\PageManage\page_compass.c XSMALL ROM(HUGE) OPTI
-                    -MIZE(8,SPEED) BROWSE INCDIR(.\User;.\User\oled_gui;.\User\oled_gui\oled_core;.\User\oled_gui\oled_widget;.\User\PageMana
-                    -ge;.\User\Sensor;.\User\System;.\User\Bluetooth) DEBUG PRINT(.\Listings\page_compass.lst) TABS(2) OBJECT(.\Objects\page_
-                    -compass.obj) 
+COMPILER INVOKED BY: D:\Application\Keil_C251\C251\BIN\C251.EXE User\PageManage\page_compass.c XSMALL ROM(HUGE) OPTIMIZE
+                    -(8,SPEED) BROWSE INCDIR(.\User;.\User\oled_gui;.\User\oled_gui\oled_core;.\User\oled_gui\oled_widget;.\User\PageManage;.
+                    -\User\Sensor;.\User\System;.\User\Bluetooth) DEBUG PRINT(.\Listings\page_compass.lst) TABS(2) OBJECT(.\Objects\page_comp
+                    -ass.obj) 
 
 stmt  level    source
 
@@ -66,7 +66,7 @@ stmt  level    source
    54          static void Setup(unsigned char condition)
    55          {
    56   1        unsigned char i;
-C251 COMPILER V5.60.0,  page_compass                                                       24/08/22  19:19:16  PAGE 2   
+C251 COMPILER V5.60.0,  page_compass                                                       22/09/22  11:45:02  PAGE 2   
 
    57   1        group1 = og_group_create(11);
    58   1        for(i = 0; i < 8; i++)
@@ -134,7 +134,7 @@ stmt  level    source
   118   2          int angle_from_north;
   119   2          int cosA, sinA;
   120   2          unsigned char i, j;
-C251 COMPILER V5.60.0,  page_compass                                                       24/08/22  19:19:16  PAGE 3   
+C251 COMPILER V5.60.0,  page_compass                                                       22/09/22  11:45:02  PAGE 3   
 
   121   2          #if (MAG_SENSOR_SELECT == 1)
   122   2          QMC5883LRead(mag);
@@ -202,7 +202,7 @@ stmt  level    source
   176          void pageRegister_page_compass(unsigned char pageID)
   177          {
   178   1        pageRegister(pageID, "COMPASS", Icon, Setup, Loop, Exit, Event);
-C251 COMPILER V5.60.0,  page_compass                                                       24/08/22  19:19:16  PAGE 4   
+C251 COMPILER V5.60.0,  page_compass                                                       22/09/22  11:45:02  PAGE 4   
 
   179   1      }
 

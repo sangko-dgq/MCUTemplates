@@ -1,12 +1,11 @@
-C251 COMPILER V5.60.0,  page_menu                                                          24/08/22  19:19:18  PAGE 1   
+C251 COMPILER V5.60.0,  page_menu                                                          22/09/22  11:45:03  PAGE 1   
 
 
 C251 COMPILER V5.60.0, COMPILATION OF MODULE page_menu
 OBJECT MODULE PLACED IN .\Objects\page_menu.obj
-COMPILER INVOKED BY: D:\Application\keilC251_v560\C251\BIN\C251.EXE User\PageManage\page_menu.c XSMALL ROM(HUGE) OPTIMIZ
-                    -E(8,SPEED) BROWSE INCDIR(.\User;.\User\oled_gui;.\User\oled_gui\oled_core;.\User\oled_gui\oled_widget;.\User\PageManage;
-                    -.\User\Sensor;.\User\System;.\User\Bluetooth) DEBUG PRINT(.\Listings\page_menu.lst) TABS(2) OBJECT(.\Objects\page_menu.o
-                    -bj) 
+COMPILER INVOKED BY: D:\Application\Keil_C251\C251\BIN\C251.EXE User\PageManage\page_menu.c XSMALL ROM(HUGE) OPTIMIZE(8,
+                    -SPEED) BROWSE INCDIR(.\User;.\User\oled_gui;.\User\oled_gui\oled_core;.\User\oled_gui\oled_widget;.\User\PageManage;.\Us
+                    -er\Sensor;.\User\System;.\User\Bluetooth) DEBUG PRINT(.\Listings\page_menu.lst) TABS(2) OBJECT(.\Objects\page_menu.obj) 
 
 stmt  level    source
 
@@ -66,9 +65,9 @@ stmt  level    source
    53            * @brief  页面退出事件
    54            * @param  无
    55            * @retval 无
-C251 COMPILER V5.60.0,  page_menu                                                          24/08/22  19:19:18  PAGE 2   
-
    56            */
+C251 COMPILER V5.60.0,  page_menu                                                          22/09/22  11:45:03  PAGE 2   
+
    57          static void Exit(unsigned char condition)
    58          {
    59   1        og_group_addAnimOffset(group1, 0, condition == PAGE_ENTER?-64:64, ANIM_TIME_NORM, ANIM_NULL_CB);
@@ -134,9 +133,9 @@ stmt  level    source
   118   2          og_group_addAnimOffset(group2, icon_move, 0, ANIM_TIME_FAST, ANIM_NULL_CB);
   119   2          lablel_printf(title, "%s", pagelist[page_index].Title);
   120   2          og_widget_setPos(title, 64 - title->w/2, 56);
-C251 COMPILER V5.60.0,  page_menu                                                          24/08/22  19:19:18  PAGE 3   
-
   121   2        }
+C251 COMPILER V5.60.0,  page_menu                                                          22/09/22  11:45:03  PAGE 3   
+
   122   1      }
   123          void pageRegister_page_menu(unsigned char pageID)
   124          {

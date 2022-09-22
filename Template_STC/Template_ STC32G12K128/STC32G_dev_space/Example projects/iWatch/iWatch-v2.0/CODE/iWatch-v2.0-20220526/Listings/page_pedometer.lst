@@ -1,12 +1,12 @@
-C251 COMPILER V5.60.0,  page_pedometer                                                     24/08/22  19:19:19  PAGE 1   
+C251 COMPILER V5.60.0,  page_pedometer                                                     22/09/22  11:45:03  PAGE 1   
 
 
 C251 COMPILER V5.60.0, COMPILATION OF MODULE page_pedometer
 OBJECT MODULE PLACED IN .\Objects\page_pedometer.obj
-COMPILER INVOKED BY: D:\Application\keilC251_v560\C251\BIN\C251.EXE User\PageManage\page_pedometer.c XSMALL ROM(HUGE) OP
-                    -TIMIZE(8,SPEED) BROWSE INCDIR(.\User;.\User\oled_gui;.\User\oled_gui\oled_core;.\User\oled_gui\oled_widget;.\User\PageMa
-                    -nage;.\User\Sensor;.\User\System;.\User\Bluetooth) DEBUG PRINT(.\Listings\page_pedometer.lst) TABS(2) OBJECT(.\Objects\p
-                    -age_pedometer.obj) 
+COMPILER INVOKED BY: D:\Application\Keil_C251\C251\BIN\C251.EXE User\PageManage\page_pedometer.c XSMALL ROM(HUGE) OPTIMI
+                    -ZE(8,SPEED) BROWSE INCDIR(.\User;.\User\oled_gui;.\User\oled_gui\oled_core;.\User\oled_gui\oled_widget;.\User\PageManage
+                    -;.\User\Sensor;.\User\System;.\User\Bluetooth) DEBUG PRINT(.\Listings\page_pedometer.lst) TABS(2) OBJECT(.\Objects\page_
+                    -pedometer.obj) 
 
 stmt  level    source
 
@@ -66,7 +66,7 @@ stmt  level    source
    52   1        og_group_setPosOffset(group1, 0, 64);
    53   1        og_group_addAnimOffset(group1, 0, -64, ANIM_TIME_NORM, ANIM_NULL_CB);
    54   1        a = 0;
-C251 COMPILER V5.60.0,  page_pedometer                                                     24/08/22  19:19:19  PAGE 2   
+C251 COMPILER V5.60.0,  page_pedometer                                                     22/09/22  11:45:03  PAGE 2   
 
    55   1        page = 0;
    56   1      }
@@ -134,7 +134,7 @@ stmt  level    source
   116   2        }
   117   1      }
   118          /**
-C251 COMPILER V5.60.0,  page_pedometer                                                     24/08/22  19:19:19  PAGE 3   
+C251 COMPILER V5.60.0,  page_pedometer                                                     22/09/22  11:45:03  PAGE 3   
 
   119            * @brief  页面事件
   120            * @param  btn:发出事件的按键

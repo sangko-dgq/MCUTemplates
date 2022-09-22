@@ -1,12 +1,12 @@
-C251 COMPILER V5.60.0,  page_alarm                                                         24/08/22  19:19:16  PAGE 1   
+C251 COMPILER V5.60.0,  page_alarm                                                         22/09/22  11:45:02  PAGE 1   
 
 
 C251 COMPILER V5.60.0, COMPILATION OF MODULE page_alarm
 OBJECT MODULE PLACED IN .\Objects\page_alarm.obj
-COMPILER INVOKED BY: D:\Application\keilC251_v560\C251\BIN\C251.EXE User\PageManage\page_alarm.c XSMALL ROM(HUGE) OPTIMI
-                    -ZE(8,SPEED) BROWSE INCDIR(.\User;.\User\oled_gui;.\User\oled_gui\oled_core;.\User\oled_gui\oled_widget;.\User\PageManage
-                    -;.\User\Sensor;.\User\System;.\User\Bluetooth) DEBUG PRINT(.\Listings\page_alarm.lst) TABS(2) OBJECT(.\Objects\page_alar
-                    -m.obj) 
+COMPILER INVOKED BY: D:\Application\Keil_C251\C251\BIN\C251.EXE User\PageManage\page_alarm.c XSMALL ROM(HUGE) OPTIMIZE(8
+                    -,SPEED) BROWSE INCDIR(.\User;.\User\oled_gui;.\User\oled_gui\oled_core;.\User\oled_gui\oled_widget;.\User\PageManage;.\U
+                    -ser\Sensor;.\User\System;.\User\Bluetooth) DEBUG PRINT(.\Listings\page_alarm.lst) TABS(2) OBJECT(.\Objects\page_alarm.ob
+                    -j) 
 
 stmt  level    source
 
@@ -66,7 +66,7 @@ stmt  level    source
    54   1        text5 = og_label_create(FONT_ASCII_8X16, 64, 20);
    55   1        text6 = og_label_create(FONT_ASCII_8X16, 80, 20);
    56   1        if(config.alarm.mode != ALARM_SPECIFIC_DAY)
-C251 COMPILER V5.60.0,  page_alarm                                                         24/08/22  19:19:16  PAGE 2   
+C251 COMPILER V5.60.0,  page_alarm                                                         22/09/22  11:45:02  PAGE 2   
 
    57   1        {
    58   2          og_widget_setShow(text6, 0);
@@ -134,7 +134,7 @@ stmt  level    source
   118            */
   119          static void Event(unsigned char event)
   120          {
-C251 COMPILER V5.60.0,  page_alarm                                                         24/08/22  19:19:16  PAGE 3   
+C251 COMPILER V5.60.0,  page_alarm                                                         22/09/22  11:45:02  PAGE 3   
 
   121   1        if(event == KEY1_PRESSED || event == AWT)
   122   1          pageShift(page_menu, PAGE_RETURN);
@@ -202,7 +202,7 @@ stmt  level    source
   184   3            if(--config.alarm.mode == 255)
   185   3              config.alarm.mode = ALARM_SPECIFIC_DAY;
   186   3            if(config.alarm.mode == ALARM_SPECIFIC_DAY)
-C251 COMPILER V5.60.0,  page_alarm                                                         24/08/22  19:19:16  PAGE 4   
+C251 COMPILER V5.60.0,  page_alarm                                                         22/09/22  11:45:02  PAGE 4   
 
   187   3            {
   188   4              og_label_setText(text3, ch3);

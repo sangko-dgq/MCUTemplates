@@ -1,11 +1,11 @@
-C251 COMPILER V5.60.0,  Buzzer                                                             23/08/22  22:51:18  PAGE 1   
+C251 COMPILER V5.60.0,  Buzzer                                                             22/09/22  11:45:00  PAGE 1   
 
 
 C251 COMPILER V5.60.0, COMPILATION OF MODULE Buzzer
 OBJECT MODULE PLACED IN .\Objects\Buzzer.obj
-COMPILER INVOKED BY: D:\Application\keilC251_v560\C251\BIN\C251.EXE User\System\Buzzer.c XSMALL ROM(HUGE) OPTIMIZE(8,SPE
-                    -ED) BROWSE INCDIR(.\User;.\User\oled_gui;.\User\oled_gui\oled_core;.\User\oled_gui\oled_widget;.\User\PageManage;.\User\
-                    -Sensor;.\User\System;.\User\Bluetooth) DEBUG PRINT(.\Listings\Buzzer.lst) TABS(2) OBJECT(.\Objects\Buzzer.obj) 
+COMPILER INVOKED BY: D:\Application\Keil_C251\C251\BIN\C251.EXE User\System\Buzzer.c XSMALL ROM(HUGE) OPTIMIZE(8,SPEED) 
+                    -BROWSE INCDIR(.\User;.\User\oled_gui;.\User\oled_gui\oled_core;.\User\oled_gui\oled_widget;.\User\PageManage;.\User\Sens
+                    -or;.\User\System;.\User\Bluetooth) DEBUG PRINT(.\Listings\Buzzer.lst) TABS(2) OBJECT(.\Objects\Buzzer.obj) 
 
 stmt  level    source
 
@@ -66,7 +66,7 @@ stmt  level    source
    55   1      }
    56          void BuzzerOff(void)
    57          {
-C251 COMPILER V5.60.0,  Buzzer                                                             23/08/22  22:51:18  PAGE 2   
+C251 COMPILER V5.60.0,  Buzzer                                                             22/09/22  11:45:00  PAGE 2   
 
    58   1        T4T3M &= ~0x08;
    59   1        PWMOff();
@@ -135,7 +135,7 @@ Module Information          Static   Overlayable
   edata size           =         3     ------
   bit size             =    ------     ------
   ebit size            =    ------     ------
-C251 COMPILER V5.60.0,  Buzzer                                                             23/08/22  22:51:18  PAGE 3   
+C251 COMPILER V5.60.0,  Buzzer                                                             22/09/22  11:45:00  PAGE 3   
 
   bitaddressable size  =    ------     ------
   ebitaddressable size =    ------     ------
