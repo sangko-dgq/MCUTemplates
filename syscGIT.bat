@@ -64,9 +64,27 @@ if "%commit_message%"=="" (
 echo.
 echo 正在推送更改到远程仓库...
 
-git push
+git branch
+git branch > branch_list.txt
+
 echo.
-echo 更改已成功推送到远程仓库。
+set branch_options=""
+for /f "tokens=1" %%i in (branch_list.txt) do (
+    set branch_options=!branch_options! %%i
+    echo %%i
+)
+
+set /p branch_name="请选择或输入分支名称 [%branch_options%]: "
+
+if "%branch_name%"=="" (
+    echo 未选择或输入分支名称，请重新输入。
+    pause
+    goto :push_files
+)
+
+git push origin %branch_name%
+echo.
+echo 更改已成功推送到远程仓库的分支 %branch_name%。
 pause
 goto :menu
 
