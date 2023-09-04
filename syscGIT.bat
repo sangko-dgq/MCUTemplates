@@ -84,10 +84,16 @@ goto :push_files
 
 git branch | findstr /i /c:"%branch_name%"
 if %errorlevel%==1 (
-echo 分支 %branch_name% 不存在，正在创建新分支...
+set /p create_new_branch="分支 %branch_name% 不存在，是否创建新分支？ [Y/N]: "
+if /i "%create_new_branch%"=="Y" (
 git checkout -b %branch_name%
 echo.
 echo 分支 %branch_name% 创建成功。
+) else (
+echo 未创建新分支。
+pause
+goto :push_files
+)
 )
 
 git push origin %branch_name%
