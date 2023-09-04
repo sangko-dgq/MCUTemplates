@@ -95,6 +95,7 @@ if %errorlevel%==1 (
 git push origin %branch_name%
 echo.
 echo 更改已成功推送到远程仓库的分支 %branch_name%.
+pause
 goto :eof
 
 :one_key_push
@@ -105,6 +106,7 @@ call :add_files
 call :commit_files
 call :push_files
 
+pause
 goto :eof
 
 :exit
