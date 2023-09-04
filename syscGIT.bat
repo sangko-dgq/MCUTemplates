@@ -20,17 +20,17 @@ echo =======================================================
 set /p choice="请选择操作："
 
 if "%choice%"=="1" (
-    call :add_files
+call :add_files
 ) else if "%choice%"=="2" (
-    call :commit_files
+call :commit_files
 ) else if "%choice%"=="3" (
-    call :push_files
+call :push_files
 ) else if "%choice%"=="4" (
-    goto :exit
+goto :exit
 ) else (
-    echo 无效的选择，请重新输入。
-    pause
-    goto :menu
+echo 无效的选择，请重新输入。
+pause
+goto :menu
 )
 
 :add_files
@@ -49,15 +49,15 @@ echo 正在提交更改到本地仓库...
 
 set /p commit_message="请输入提交消息: "
 if "%commit_message%"=="" (
-    echo 未输入提交消息，请重新输入。
-    pause
-    goto :commit_files
+echo 未输入提交消息，请重新输入。
+pause
+goto :commit_files
 ) else (
-    git commit -m "%commit_message%"
-    echo.
-    echo 更改已成功提交到本地仓库。
-    pause
-    goto :menu
+git commit -m "%commit_message%"
+echo.
+echo 更改已成功提交到本地仓库。
+pause
+goto :menu
 )
 
 :push_files
@@ -70,16 +70,24 @@ git branch > branch_list.txt
 echo.
 set branch_options=""
 for /f "tokens=1" %%i in (branch_list.txt) do (
-    set branch_options=!branch_options! %%i
-    echo %%i
+set branch_options=!branch_options! %%i
+echo %%i
 )
 
 set /p branch_name="请选择或输入分支名称 [%branch_options%]: "
 
 if "%branch_name%"=="" (
-    echo 未选择或输入分支名称，请重新输入。
-    pause
-    goto :push_files
+echo 未选择或输入分支名称，请重新输入。
+pause
+goto :push_files
+)
+
+git branch | findstr /i /c:"%branch_name%"
+if %errorlevel%==1 (
+echo 分支 %branch_name% 不存在，正在创建新分支...
+git checkout -b %branch_name%
+echo.
+echo 分支 %branch_name% 创建成功。
 )
 
 git push origin %branch_name%
