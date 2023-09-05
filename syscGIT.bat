@@ -23,36 +23,12 @@ echo =======================================================
 set /p choice="请选择操作："
 
 if "%choice%"=="1" (
-    call :check_git_repo
-    if !git_repo!==false (
-        echo 当前目录不是一个 Git 仓库，请进入正确的目录后再试.
-        pause
-        goto :menu
-    )
     call :add_files
 ) else if "%choice%"=="2" (
-    call :check_git_repo
-    if !git_repo!==false (
-        echo 当前目录不是一个 Git 仓库，请进入正确的目录后再试.
-        pause
-        goto :menu
-    )
     call :commit_files
 ) else if "%choice%"=="3" (
-    call :check_git_repo
-    if !git_repo!==false (
-        echo 当前目录不是一个 Git 仓库，请进入正确的目录后再试.
-        pause
-        goto :menu
-    )
     call :push_files
 ) else if "%choice%"=="4" (
-    call :check_git_repo
-    if !git_repo!==false (
-        echo 当前目录不是一个 Git 仓库，请进入正确的目录后再试.
-        pause
-        goto :menu
-    )
     call :one_key_push
 ) else if "%choice%"=="5" (
     goto :exit
@@ -62,11 +38,6 @@ if "%choice%"=="1" (
     goto :menu
 )
 
-:check_git_repo
-set git_repo=false
-if exist "%cd%\.git" set git_repo=true
-goto :eof
-
 :add_files
 echo.
 echo 正在添加文件到暂存区...
@@ -74,7 +45,8 @@ echo 正在添加文件到暂存区...
 git add .
 echo.
 echo 文件已成功添加到暂存区.
-goto :eof
+pause
+    goto :menu
 
 :commit_files
 echo.
@@ -88,12 +60,15 @@ if "%commit_message%"=="" (
     git commit -m "%commit_message%"
     echo.
     echo 更改已成功提交到本地仓库.
-    goto :eof
+    pause
+    goto :menu
 )
 
 :push_files
 echo.
 echo 正在推送更改到远程仓库...
+
+rem git remote update origin --prune
 
 echo.
 setlocal enabledelayedexpansion
@@ -129,7 +104,7 @@ git push -f origin %branch_name%
 echo.
 echo 更改已成功推送到远程仓库的分支 %branch_name%.
 pause
-goto :eof
+    goto :menu
 
 :one_key_push
 echo.
@@ -140,7 +115,7 @@ call :commit_files
 call :push_files
 
 pause
-goto :eof
+    goto :menu
 
 :exit
 exit /b
