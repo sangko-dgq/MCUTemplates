@@ -145,10 +145,7 @@ git checkout %branch_name%
 git push -f origin %branch_name%
 echo.
 echo 更改已成功推送到远程仓库的分支 %branch_name%.
-
-for /f "delims=" %%i in ('git config --get remote.origin.url') do set repo_url=%%i
-start "" %repo_url%
-
+goto :GoToGithubRepoOfCurrent
 pause
     goto :menu
 
@@ -216,6 +213,17 @@ if %errorlevel% neq 0 (
 echo 代码拉取完成！
 
 goto :eof
+
+
+
+
+:GoToGithubRepoOfCurrent
+echo.
+for /f "delims=" %%i in ('git config --get remote.origin.url') do set repo_url=%%i
+start "" %repo_url%
+goto :eof
+
+
 
 :exit
 exit /b
