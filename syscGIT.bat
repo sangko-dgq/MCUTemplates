@@ -5,7 +5,7 @@ setlocal enabledelayedexpansion
 :menu
 cls
 
-echo ================== Git 管理工具 ==================
+echo ================== 对当前仓库进行Git操作 ==================
 echo.
 echo 1. 添加文件到暂存区
 echo.
@@ -18,7 +18,11 @@ echo.
 echo 5. 退出
 echo.
 echo =======================================================
-
+echo ================== 拉取个人远程仓库 ==================
+echo.
+echo 6. 拉取仓库到当前目录
+echo.
+echo =======================================================
 
 
 set /p choice="请选择操作："
@@ -57,7 +61,15 @@ if "%choice%"=="1" (
     call :one_key_push
 ) else if "%choice%"=="5" (
     goto :exit
-) else (
+) else if "%choice%"=="0" (
+    
+    
+    call :Clone_Res
+     pause
+     goto :menu
+   
+)
+else (
     echo 无效的选择，请重新输入.
     pause
     goto :menu
@@ -140,16 +152,64 @@ pause
 echo.
 echo 正在执行一键推送...
 
-call :add_files
-call :commit_files
+rem call :add_files
+rem call :commit_files
+rem call :push_files
+
+
+echo 正在添加文件到暂存区...
+git add .
+echo.
+echo 文件已成功添加到暂存区.
+call :Delay_1s
+
+echo.
+echo 正在提交更改到本地仓库...
+set /p commit_message="请输入提交消息: "
+if "%commit_message%"=="" (
+    echo 未输入提交消息，请重新输入.
+    goto :commit_files
+) else (
+    git commit -m "%commit_message%"
+    echo.
+    echo 更改已成功提交到本地仓库.
+call :Delay_1s
+)
 call :push_files
 
 pause
     goto :menu
 
+
 :Delay_1s
 echo.
 timeout /t 1 /nobreak >nul
+goto :eof
+
+:Clone_Res
+echo.
+@echo off
+set /p repo_url="请输入远程仓库的URL: "
+for %%i in ("%repo_url:/=" "%") do set repo_name=%%~ni
+
+set target_dir="%cd%\%repo_name%"
+
+if not exist "%repo_name%" (
+    mkdir "%repo_name%"
+)
+
+cd %target_dir%
+
+echo 正在拉取代码到目标目录 %target_dir% ...
+git clone %repo_url% .
+
+if %errorlevel% neq 0 (
+    echo 代码拉取失败！
+    exit /b
+)
+
+echo 代码拉取完成！
+
 goto :eof
 
 :exit
