@@ -8,6 +8,7 @@ echo ================== 拉取仓库 ==================
 echo.
 echo 0. 拉取仓库到指定目录
 echo.
+echo P. 打开对应的远程仓库地址
 
 echo ================== 仓库操作 ==================
 echo.
@@ -68,7 +69,14 @@ if "%choice%"=="1" (
      pause
      goto :menu
    
-)
+) else if "%choice%"=="P" (
+    
+    
+     call :ToGithub
+     pause
+     goto :menu
+   
+) 
 else (
     echo 无效的选择，请重新输入.
     pause
@@ -145,7 +153,7 @@ git checkout %branch_name%
 git push -f origin %branch_name%
 echo.
 echo 更改已成功推送到远程仓库的分支 %branch_name%.
-goto :GoToGithubRepoOfCurrent
+goto :ToGithub
 pause
     goto :menu
 
@@ -215,10 +223,9 @@ echo 代码拉取完成！
 goto :eof
 
 
-
-
-:GoToGithubRepoOfCurrent
+:ToGithub
 echo.
+echo 打开对应的远程仓库地址
 for /f "delims=" %%i in ('git config --get remote.origin.url') do set repo_url=%%i
 start "" %repo_url%
 goto :eof
