@@ -161,7 +161,7 @@ echo 正在添加文件到暂存区...
 git add .
 echo.
 echo 文件已成功添加到暂存区.
-call :Delay_1s
+rem call :Delay_1s
 
 echo.
 echo 正在提交更改到本地仓库...
@@ -173,7 +173,7 @@ if "%commit_message%"=="" (
     git commit -m "%commit_message%"
     echo.
     echo 更改已成功提交到本地仓库.
-call :Delay_1s
+rem call :Delay_1s
 )
 call :push_files
 
