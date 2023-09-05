@@ -4,8 +4,12 @@ setlocal enabledelayedexpansion
 
 :menu
 cls
+echo ================== 拉取仓库 ==================
+echo.
+echo 0. 拉取仓库到指定目录
+echo.
 
-echo ================== 对当前仓库进行Git操作 ==================
+echo ================== 仓库操作 ==================
 echo.
 echo 1. 添加文件到暂存区
 echo.
@@ -18,11 +22,7 @@ echo.
 echo 5. 退出
 echo.
 echo =======================================================
-echo ================== 拉取个人远程仓库 ==================
-echo.
-echo 6. 拉取仓库到当前目录
-echo.
-echo =======================================================
+
 
 
 set /p choice="请选择操作："
@@ -191,23 +191,24 @@ echo.
 @echo off
 set /p repo_url="请输入远程仓库的URL: "
 for %%i in ("%repo_url:/=" "%") do set repo_name=%%~ni
-
 set target_dir="%cd%\%repo_name%"
-
 if not exist "%repo_name%" (
     mkdir "%repo_name%"
+) else (
+    echo 【错误！】目录下已经存在 %repo_name% 文件夹，无法拉取，请检查！
+    pause
+    goto :menu
+    
 )
-
 cd %target_dir%
-
 echo 正在拉取代码到目标目录 %target_dir% ...
 git clone %repo_url% .
 
 if %errorlevel% neq 0 (
     echo 代码拉取失败！
-    exit /b
+     pause
+    goto :menu
 )
-
 echo 代码拉取完成！
 
 goto :eof
